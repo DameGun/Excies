@@ -5,7 +5,6 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,
   port: dbConfig.port,
   dialect: dbConfig.dialect,
-  operatorsAliases: false,
 
   pool: {
     max: dbConfig.pool.max,
@@ -22,7 +21,7 @@ async function connectDb() {
         console.log("Database connected and synchronized successfully")
     }
     catch (error) {
-        return error;
+        throw new Error(error);
     }
 }
 
@@ -31,7 +30,7 @@ async function sync() {
         await sequelize.sync();
     }
     catch (error) {
-        return "Failed to synchronize database: " + error.message;
+        throw new Error("Failed to synchronize database: " + error.message);
     }
 }
 
@@ -40,7 +39,7 @@ async function auth() {
         await sequelize.authenticate();
     }
     catch (error) {
-        return "Unable to connect to database: " + error.message; 
+        throw new Error("Unable to connect to database: " + error.message); 
     }
 }
 

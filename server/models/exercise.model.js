@@ -1,5 +1,5 @@
-import { DataTypes, Deferrable } from 'sequelize';
-import { db } from '../config/db.js';
+import { DataTypes } from 'sequelize';
+import { db } from '../config/connectDb.js';
 import Muscles from './muscles.model.js';
 
 const Exercise = db.define('exercise', {
@@ -11,11 +11,6 @@ const Exercise = db.define('exercise', {
     },
     muscles_id: {
         type: DataTypes.INTEGER,
-        references: {
-            model: Muscles,
-            key: 'id',
-            deferrable: Deferrable.INITIALLY_IMMEDIATE
-        }
     },
     name: {
         type: DataTypes.TEXT,
@@ -32,6 +27,10 @@ const Exercise = db.define('exercise', {
 });
 
 Exercise.belongsTo(Muscles, {
+    foreignKey: 'muscles_id'
+});
+
+Muscles.hasMany(Exercise, {
     foreignKey: 'muscles_id'
 });
 

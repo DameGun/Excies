@@ -7,7 +7,7 @@ router.route("/").get(musclesController.findAll).post(musclesController.create);
 router
   .route("/:id")
   .get(musclesController.findByPk)
-  .put(musclesController.update)
+  .patch(musclesController.update)
   .delete(musclesController.destroy);
 
 export default router;

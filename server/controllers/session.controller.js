@@ -1,8 +1,10 @@
-import musclesService from '../services/muscles.service.js';
+import sessionService from '../services/session.service.js';
 
 async function findAll(req, res, next) {
+    const username = req.params.username;
+
     try {
-        const data = await musclesService.findAll();
+        const data = await sessionService.findAll(username);
         res.status(200).json(data);
     }
     catch (err) {
@@ -11,10 +13,10 @@ async function findAll(req, res, next) {
 }
 
 async function findByPk(req, res, next) {
-    const id = req.params.id;
+    const session_id = req.params.session_id;
 
     try {
-        const data = await musclesService.findByPk(id);
+        const data = await sessionService.findByPk(session_id);
         res.status(200).json(data);
     }
     catch (err) {
@@ -23,11 +25,12 @@ async function findByPk(req, res, next) {
 }
 
 async function create(req, res, next) {
-    const reqMuscles = req.body;
+    const username = req.params.username;
+    const reqSession = req.body;
 
     try {
-        const data = await musclesService.create(reqMuscles);
-        res.status(201).json(data);
+        const data = await sessionService.create(username, reqSession);
+        res.status(201).json(data)
     }
     catch (err) {
         next(err);
@@ -35,11 +38,11 @@ async function create(req, res, next) {
 }
 
 async function update(req, res, next) {
-    const id = req.params.id;
-    const reqMuscles = req.body;
+    const session_id = req.params.session_id;
+    const reqSession = req.body;
 
     try {
-        const data = await musclesService.update(id, reqMuscles);
+        const data = await sessionService.update(session_id, reqSession);
         res.status(200).json(data);
     }
     catch (err) {
@@ -48,13 +51,13 @@ async function update(req, res, next) {
 }
 
 async function destroy(req, res, next) {
-    const id = req.params.id;
+    const session_id = req.params.session_id;
 
     try {
-        await musclesService.destroy(id);
+        await sessionService.destroy(session_id);
         res.status(200).json({ status: true });
     }
-    catch (err) {
+    catch {
         next(err);
     }
 }

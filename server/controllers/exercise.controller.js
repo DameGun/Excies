@@ -27,7 +27,7 @@ async function create(req, res, next) {
   
   try {
     const data = await exerciseService.create(reqExercise);
-    res.status(401).json(data);
+    res.status(201).json(data);
   }
   catch (err) {
     next(err);
@@ -51,8 +51,8 @@ async function destroy(req, res, next) {
   const id = req.params.id;
 
   try {
-    const data = await exerciseService.destroy(id);
-    res.status(200).json(data);
+    await exerciseService.destroy(id);
+    res.status(200).json({ status: true });
   }
   catch (err) {
     next(err);

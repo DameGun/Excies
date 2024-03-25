@@ -6,13 +6,13 @@ async function findAll() {
 }
 
 async function findByPk(id) {
-    const response = await Muscles.findByPk(id);
+    const entity = await Muscles.findByPk(id);
 
-    if(response === null) {
+    if(entity === null) {
         throw new NotFoundError('muscles', id);
     }
 
-    return response;
+    return entity;
 }
 
 async function create(data) {

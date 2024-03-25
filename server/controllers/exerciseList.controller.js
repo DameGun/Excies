@@ -1,8 +1,10 @@
-import musclesService from '../services/muscles.service.js';
+import exerciseListService from '../services/exerciseList.service.js';
 
 async function findAll(req, res, next) {
+    const username = req.params.username;
+
     try {
-        const data = await musclesService.findAll();
+        const data = await exerciseListService.findAll(username);
         res.status(200).json(data);
     }
     catch (err) {
@@ -11,10 +13,10 @@ async function findAll(req, res, next) {
 }
 
 async function findByPk(req, res, next) {
-    const id = req.params.id;
+    const list_id = req.params.list_id;
 
     try {
-        const data = await musclesService.findByPk(id);
+        const data = await exerciseListService.findByPk(list_id);
         res.status(200).json(data);
     }
     catch (err) {
@@ -23,10 +25,11 @@ async function findByPk(req, res, next) {
 }
 
 async function create(req, res, next) {
-    const reqMuscles = req.body;
+    const username = req.params.username;
+    const reqExerciseList = req.body;
 
     try {
-        const data = await musclesService.create(reqMuscles);
+        const data = await exerciseListService.create(username, reqExerciseList);
         res.status(201).json(data);
     }
     catch (err) {
@@ -35,11 +38,11 @@ async function create(req, res, next) {
 }
 
 async function update(req, res, next) {
-    const id = req.params.id;
-    const reqMuscles = req.body;
+    const list_id = req.params.list_id;
+    const reqExerciseList = req.body;
 
     try {
-        const data = await musclesService.update(id, reqMuscles);
+        const data = await exerciseListService.update(list_id, reqExerciseList);
         res.status(200).json(data);
     }
     catch (err) {
@@ -48,10 +51,10 @@ async function update(req, res, next) {
 }
 
 async function destroy(req, res, next) {
-    const id = req.params.id;
+    const list_id = req.params.list_id;
 
     try {
-        await musclesService.destroy(id);
+        await exerciseListService.destroy(list_id);
         res.status(200).json({ status: true });
     }
     catch (err) {

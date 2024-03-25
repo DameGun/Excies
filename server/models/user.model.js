@@ -1,5 +1,5 @@
-import { DataTypes, Deferrable } from 'sequelize';
-import { db } from '../config/db.js';
+import { DataTypes } from 'sequelize';
+import { db } from '../config/connectDb.js';
 import Role from './role.model.js';
 
 const User = db.define('user', {
@@ -25,18 +25,18 @@ const User = db.define('user', {
     role_id: {
         type: DataTypes.INTEGER,
         defaultValue: 2,
-        references: {
-            model: Role,
-            key: 'id',
-            deferrable: Deferrable.INITIALLY_IMMEDIATE
-        }
+        allowNull: false
     }
 }, {
     tableName: 'user',
     timestamps: false
-})
+});
 
 User.belongsTo(Role, {
+    foreignKey: 'role_id'
+});
+
+Role.hasMany(User, {
     foreignKey: 'role_id'
 });
 

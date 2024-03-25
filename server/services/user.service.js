@@ -6,24 +6,27 @@ async function findAll() {
     return await User.findAll();
 }
 
-async function findOne(username) {
-    const response = await User.findOne({ where: {
-        username: username
-    }});
+async function findOne(username, withInclude) {
+    const entity = await User.findOne({ 
+        where: { 
+            username: username
+        }, 
+        include: withInclude
+    });
 
-    if(response === null) {
+    if(entity === null) {
         throw new NotFoundError('user', username);
     }
 
-    return response;
+    return entity;
 }
 
 async function create(data) {
-    const response = await User.create({
+    const entity = await User.create({
         ...data, 
         password: await bcrypt.hash(data.password, 10)
     })
-    return await response;
+    return entity;
 }
 
 export default {

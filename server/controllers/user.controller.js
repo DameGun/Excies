@@ -27,7 +27,7 @@ async function create(req, res, next) {
 
     try {
         const data = await userService.create(reqUser);
-        res.status(401).json(data);
+        res.status(201).json(data);
     }
     catch (err) {
         next(err);

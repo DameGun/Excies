@@ -1,11 +1,11 @@
-import { DataTypes } from 'sequelize';
+import { DataTypes } from "sequelize";
 import { db } from '../config/connectDb.js';
 
-const Role = db.define('role', {
+const ActivityType = db.define('activity_type', {
     id: {
         type: DataTypes.INTEGER,
-        autoIncrement: true,
         primaryKey: true,
+        autoIncrement: true,
         allowNull: false
     },
     name: {
@@ -13,8 +13,8 @@ const Role = db.define('role', {
         allowNull: false
     }
 }, {
-    tableName: 'roles',
+    tableName: 'activity_type',
     timestamps: false
-})
+});
 
-export default Role;
+export default ActivityType;
