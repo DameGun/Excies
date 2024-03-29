@@ -23,7 +23,8 @@ async function findOne(username, withInclude) {
 
 async function create(data) {
     const entity = await User.create({
-        ...data, 
+        ...data,
+        role_id: 2, 
         password: await bcrypt.hash(data.password, 10)
     })
     return entity;

@@ -7,8 +7,10 @@ async function findAll(username) {
     return user.exercise_lists;
 }
 
-async function findByPk(id) {
-    const entity = await ExerciseList.findByPk(id);
+async function findByPk(id, withInclude) {
+    const entity = await ExerciseList.findByPk(id, {
+        include: withInclude
+    });
 
     if(entity === null) {
         throw new NotFoundError('exerciseList', id);

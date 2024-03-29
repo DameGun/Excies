@@ -2,7 +2,6 @@ import exerciseListService from '../services/exerciseList.service.js';
 
 async function findAll(req, res, next) {
     const username = req.params.username;
-
     try {
         const data = await exerciseListService.findAll(username);
         res.status(200).json(data);

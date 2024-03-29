@@ -1,14 +1,14 @@
 import { Router } from "express";
 import exerciseListController from "../controllers/exerciseList.controller.js";
 
-const router = Router();
+const router = Router({ mergeParams: true });
 
 router
-  .route("/:username")
+  .route("/")
   .get(exerciseListController.findAll)
   .post(exerciseListController.create);
 router
-  .route("/:username/lists/:list_id")
+  .route("/:list_id")
   .get(exerciseListController.findByPk)
   .patch(exerciseListController.update)
   .delete(exerciseListController.destroy);

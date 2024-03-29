@@ -20,7 +20,8 @@ const User = db.define('user', {
     },
     email: {
         type: DataTypes.TEXT,
-        allowNull: true
+        allowNull: true,
+        unique: true
     },
     role_id: {
         type: DataTypes.INTEGER,
