@@ -1,49 +1,49 @@
-import Exercise from '../models/exercise.model.js';
-import NotFoundError from '../utilities/errors/notFoundError.js';
+import Exercise from "../models/exercise.model.js";
+import NotFoundError from "../utilities/errors/notFoundError.js";
 
 async function findAll() {
-    return await Exercise.findAll();
+  return await Exercise.findAll();
 }
 
 async function findByPk(id) {
-    const entity = await Exercise.findByPk(id);
+  const entity = await Exercise.findByPk(id);
 
-    if(entity === null) {
-        throw new NotFoundError('exercise', id);
-    }
+  if (entity === null) {
+    throw new NotFoundError("exercise", id);
+  }
 
-    return entity;
+  return entity;
 }
 
 async function create(data) {
-    return await Exercise.create(data);
+  return await Exercise.create(data);
 }
 
 async function update(id, data) {
-    const entity = await Exercise.findByPk(id);
+  const entity = await Exercise.findByPk(id);
 
-    if(entity === null) {
-        throw new NotFoundError('exercise', id);
-    }
+  if (entity === null) {
+    throw new NotFoundError("exercise", id);
+  }
 
-    await entity.set(data);
-    return await entity.save();
+  await entity.set(data);
+  return await entity.save();
 }
 
 async function destroy(id) {
-    const entity = await Exercise.findByPk(id);
+  const entity = await Exercise.findByPk(id);
 
-    if(entity === null) {
-        throw new NotFoundError('exercise', id);
-    }
+  if (entity === null) {
+    throw new NotFoundError("exercise", id);
+  }
 
-    return await entity.destroy();
+  return await entity.destroy();
 }
 
 export default {
-    findAll,
-    findByPk,
-    create,
-    update,
-    destroy
-}
+  findAll,
+  findByPk,
+  create,
+  update,
+  destroy,
+};

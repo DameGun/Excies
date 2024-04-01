@@ -2,48 +2,48 @@ import Muscles from "../models/muscles.model.js";
 import NotFoundError from "../utilities/errors/notFoundError.js";
 
 async function findAll() {
-    return await Muscles.findAll();
+  return await Muscles.findAll();
 }
 
 async function findByPk(id) {
-    const entity = await Muscles.findByPk(id);
+  const entity = await Muscles.findByPk(id);
 
-    if(entity === null) {
-        throw new NotFoundError('muscles', id);
-    }
+  if (entity === null) {
+    throw new NotFoundError("muscles", id);
+  }
 
-    return entity;
+  return entity;
 }
 
 async function create(data) {
-    return await Muscles.create(data);
+  return await Muscles.create(data);
 }
 
 async function update(id, data) {
-    const entity = await Muscles.findByPk(id);
+  const entity = await Muscles.findByPk(id);
 
-    if(entity === null) {
-        throw new NotFoundError('muscles', id);
-    }
+  if (entity === null) {
+    throw new NotFoundError("muscles", id);
+  }
 
-    await entity.set(data);
-    return await entity.save();
+  await entity.set(data);
+  return await entity.save();
 }
 
 async function destroy(id) {
-    const entity = await Muscles.findByPk(id);
+  const entity = await Muscles.findByPk(id);
 
-    if(entity === null) {
-        throw new NotFoundError('muscles', id);
-    }
+  if (entity === null) {
+    throw new NotFoundError("muscles", id);
+  }
 
-    return entity.destroy();
+  return entity.destroy();
 }
 
 export default {
-    findAll,
-    findByPk,
-    create,
-    update,
-    destroy
-}
+  findAll,
+  findByPk,
+  create,
+  update,
+  destroy,
+};

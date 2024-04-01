@@ -15,35 +15,29 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
 });
 
 async function connectDb() {
-    try {
-        await auth();
-        await sync();
-        console.log("Database connected and synchronized successfully")
-    }
-    catch (error) {
-        throw new Error(error);
-    }
+  try {
+    await auth();
+    await sync();
+    console.log("Database connected and synchronized successfully");
+  } catch (error) {
+    throw new Error(error);
+  }
 }
 
 async function sync() {
-    try {
-        await sequelize.sync();
-    }
-    catch (error) {
-        throw new Error("Failed to synchronize database: " + error.message);
-    }
+  try {
+    await sequelize.sync();
+  } catch (error) {
+    throw new Error("Failed to synchronize database: " + error.message);
+  }
 }
 
 async function auth() {
-    try {
-        await sequelize.authenticate();
-    }
-    catch (error) {
-        throw new Error("Unable to connect to database: " + error.message); 
-    }
+  try {
+    await sequelize.authenticate();
+  } catch (error) {
+    throw new Error("Unable to connect to database: " + error.message);
+  }
 }
 
-export {
-    sequelize as db,
-    connectDb
-}
+export { sequelize as db, connectDb };
