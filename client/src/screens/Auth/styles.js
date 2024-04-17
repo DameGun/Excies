@@ -13,7 +13,12 @@ export const styles = StyleSheet.create({
         borderRadius: 8,
         padding: 10,
         marginTop: 15,
-        borderColor: '#aeaeb2',
+    },
+    buttonText: {
+        fontSize: 16
+    },
+    button: {
+        marginTop: 15,
     },
     error: {
         color: 'red',

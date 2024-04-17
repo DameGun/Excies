@@ -2,7 +2,7 @@ import { Pressable, Text } from "react-native";
 import { COMMON } from '../../constants/colors.js';
 import { styles as customStyles } from './styles.js';
 
-export default function Button({ text, textStyle, buttonStyle, onPress, disabled }) {
+export default function CustomButton({ text, textStyle, buttonStyle, onPress, disabled }) {
     return (
         <Pressable 
             style={({ pressed }) => [
