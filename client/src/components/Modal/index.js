@@ -1,11 +1,7 @@
 import { Modal, View } from "react-native";
 import { styles } from './styles.js';
-import { useSelector } from "react-redux";
 
-export default function CustomModal({ children }) {
-    const { status } = useSelector(state => state.loading);
-    const showModal = status == 'loading' || status == 'failed';
-
+export default function CustomModal({ showModal, children }) {
     return (
         <Modal 
             animationType="fade"
@@ -13,7 +9,7 @@ export default function CustomModal({ children }) {
             visible={showModal}
         >
             <View style={styles.centeredView}>
-                <View style={status == 'loading' && styles.modalView}>
+                <View style={styles.modalView}>
                     {children}
                 </View>
             </View>

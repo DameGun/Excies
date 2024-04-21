@@ -1,4 +1,4 @@
-const COMMON = {
+export const BASE_COLORS = {
     colors: {
         grey: '#aeaeb2',
         primary: '#E77917',
@@ -7,26 +7,20 @@ const COMMON = {
     }
 }
 
-const LIGHT_THEME = {
+export const LIGHT_THEME = {
     isDark: false,
     colors: {
         background: 'white',
         text: 'black',
-        ...COMMON.colors
+        ...BASE_COLORS.colors
     }
 }
 
-const DARK_THEME = {
+export const DARK_THEME = {
     isDark: true,
     colors: {
         background: 'black',
         text: 'white',
-        ...COMMON.colors
+        ...BASE_COLORS.colors
     }
-}
-
-export {
-    LIGHT_THEME,
-    DARK_THEME,
-    COMMON
 }

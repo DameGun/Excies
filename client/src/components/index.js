@@ -1,13 +1,15 @@
 import CustomButton from "./Button"
 import CustomTextInput from "./TextInput"
 import Logo from "./Logo"
-import Loading from "./Loading"
 import CustomModal from "./Modal"
+import Error from "./Error"
+import Loader from "./Loader"
 
 export {
     CustomButton,
     CustomTextInput,
     Logo,
-    Loading,
-    CustomModal
+    Loader,
+    CustomModal,
+    Error
 }

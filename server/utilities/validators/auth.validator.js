@@ -6,8 +6,8 @@ const registerValidator = {
     body("username", "Username should be provided").exists(),
     body(
       "password",
-      "Password must contain at least 8 symbols and 1 letter"
-    ).matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/),
+      "Password should be provided"
+    ).exists(),
     body("email", "Invalid email")
       .if((value) => value)
       .isEmail(),

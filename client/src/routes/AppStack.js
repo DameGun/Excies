@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { HomeScreen } from "../screens";
 import { Button } from "react-native";
 import { useDispatch } from "react-redux";
-import { onLogout } from "../redux/slices/authSlice";
+import { thunkLogout } from "../redux/slices/authSlice";
 
 const Tab = createBottomTabNavigator();
 
@@ -19,7 +19,7 @@ export default function AppStack({ screenOptions }) {
             headerLeft: () => (
               <Button 
                 title="logout"
-                onPress={() => dispatch(onLogout())}
+                onPress={() => dispatch(thunkLogout())}
               />
             )
           }}

@@ -14,6 +14,7 @@ async function register(req, res, next) {
         data: {
           accessToken: jwt,
           user_id: data.id,
+          username: data.username
         },
       })
     );
@@ -35,6 +36,7 @@ async function login(req, res, next) {
         data: {
           accessToken: jwt,
           user_id: data.id,
+          username: data.username
         },
       })
     );

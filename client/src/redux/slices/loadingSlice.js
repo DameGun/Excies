@@ -5,15 +5,23 @@ export const loadingSlice = createSlice({
     initialState: {
         status: 'idle',
         error: null,
+        showLoading: false
     },
     reducers: {
         setStatus: (state, action) => {
             state.status = action.payload.status;
             state.error = action.payload.error || 'Some error occured';
+            
+            if (action.payload.status == 'failed' || action.payload.status == 'idle') {
+                state.showLoading = false;
+            }
+        },
+        setShowLoading: (state, action) => {
+            state.showLoading = action.payload;
         }
     }
 })
 
-export const { setStatus } = loadingSlice.actions;
+export const { setStatus, setShowLoading } = loadingSlice.actions;
 
 export default loadingSlice.reducer;

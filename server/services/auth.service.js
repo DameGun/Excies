@@ -48,7 +48,7 @@ async function createJwt(user) {
     },
     process.env.JWT_SECRET,
     {
-      expiresIn: "3h",
+      expiresIn: process.env.JWT_LIFETIME,
     }
   );
 }
@@ -56,5 +56,5 @@ async function createJwt(user) {
 export default {
   register,
   login,
-  createJwt,
+  createJwt
 };

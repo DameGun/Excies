@@ -5,9 +5,13 @@ import { useEffect, useState } from 'react';
 import { registerSchema } from './validation.js';
 import validate from '../../helpers/customValidator.js';
 import { CustomButton, CustomTextInput } from '../../components';
+import { register } from '../../helpers/api.js';
+import { useDispatch } from 'react-redux';
+import { thunkRegister } from '../../redux/slices/authSlice.js';
 
 export default function RegisterScreen() {
     const theme = useTheme();
+    const dispatch = useDispatch();
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -21,7 +25,7 @@ export default function RegisterScreen() {
 
     useEffect(() => {
         if(errors.submit) {
-            console.log('submitting');
+            dispatch(thunkRegister({ apicall: register, payload: { username, password } }));
         }
     }, [errors])
 
@@ -73,7 +77,8 @@ export default function RegisterScreen() {
                 onChangeText={setConfirmPassword}
             />
             <Text style={styles.error}>{errors.messages.common}</Text>
-            <CustomButton 
+            <CustomButton
+                type='submit'  
                 textStyle={styles.buttonText} 
                 buttonStyle={{ ...styles.button, width: styles.input.width }} 
                 text='Register'

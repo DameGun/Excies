@@ -1,0 +1,5 @@
+// Loading
+
+export const MAX_REQUEST_WAITING_EXPIRE_TIME = 8000;
+
+export const MIN_REQUEST_WAITING_EXPIRE_TIME = 100;

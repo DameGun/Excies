@@ -1,13 +1,16 @@
 import { NavigationContainer } from "@react-navigation/native";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import AuthStack from './AuthStack.js';
 import AppStack from "./AppStack";
-import { Logo, CustomModal, Loading } from "../components";
+import { Loader, Logo, Error } from "../components";
 import { StatusBar, useColorScheme } from "react-native";
 import { DARK_THEME, LIGHT_THEME } from "../constants/colors.js";
+import { useEffect } from "react";
+import { thunkAppOpen } from "../redux/slices/authSlice.js";
 
 function Router({ isLoggedIn }) {
     const theme = useColorScheme() == 'dark' ? DARK_THEME : LIGHT_THEME;
+    const dispatch = useDispatch();
 
     const commonScreenOptions = {
         headerStyle: {
@@ -18,6 +21,10 @@ function Router({ isLoggedIn }) {
           },
         headerRight: () => <Logo />
     }
+
+    useEffect(() => {
+        dispatch(thunkAppOpen());
+    }, [])
 
     return (
         <NavigationContainer theme={theme}>
@@ -30,15 +37,15 @@ function Router({ isLoggedIn }) {
             ) : (
                 <AppStack screenOptions={commonScreenOptions}/>
             )}
-            <CustomModal>
-                <Loading/>
-            </CustomModal>
+
+            <Loader />
+            <Error />
         </NavigationContainer>
     )
 }
 
 const mapStateToProps = (state) => ({
-    isLoggedIn: state.auth.isLoggedIn
+    isLoggedIn: state.auth.isLoggedIn,
 })
 
 export default connect(mapStateToProps)(Router);

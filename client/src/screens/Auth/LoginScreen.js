@@ -54,7 +54,8 @@ export default function LoginScreen() {
                 onChangeText={setPassword}
             />
             <Text style={styles.error}>{errors.messages.common}</Text>
-            <CustomButton 
+            <CustomButton
+                type='submit' 
                 textStyle={styles.buttonText} 
                 buttonStyle={{ ...styles.button, width: styles.input.width }} 
                 text='Login'
