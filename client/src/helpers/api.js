@@ -80,12 +80,23 @@ export async function register({ username, password, email }) {
   }
 }
 
+
 // Exercise Lists requests
 
 export async function getExerciseLists({ username }) {
   try {
     const response = await axiosClient.get(`/${username}/exercise-lists`);
     return response.data;
+  }
+  catch (err) {
+    return err;
+  }
+}
+
+export async function getExerciseListItems({ id, username }) {
+  try {
+    const response = await axiosClient.get(`/${username}/exercise-lists/${id}/items`)
+    return response.data
   }
   catch (err) {
     return err;

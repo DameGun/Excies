@@ -1,8 +1,8 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { connect, useDispatch } from "react-redux";
-import AuthStack from './AuthStack.js';
-import AppStack from "./AppStack";
-import { Loader, Logo, Error } from "../components";
+import AuthTabs from './AuthTabs.js';
+import AppTabs from "./AppTabs.js";
+import { Loader, Error } from "../components";
 import { StatusBar, useColorScheme } from "react-native";
 import { DARK_THEME, LIGHT_THEME } from "../constants/colors.js";
 import { useEffect } from "react";
@@ -11,16 +11,6 @@ import { thunkAppOpen } from "../redux/slices/authSlice.js";
 function Router({ isLoggedIn }) {
     const theme = useColorScheme() == 'dark' ? DARK_THEME : LIGHT_THEME;
     const dispatch = useDispatch();
-
-    const commonScreenOptions = {
-        headerStyle: {
-            backgroundColor: theme.colors.background,
-          },
-          tabBarStyle: {
-            backgroundColor: theme.colors.background,
-          },
-        headerRight: () => <Logo />
-    }
 
     useEffect(() => {
         dispatch(thunkAppOpen());
@@ -33,9 +23,9 @@ function Router({ isLoggedIn }) {
                 backgroundColor={theme === DARK_THEME ? 'black' : 'white'}
             />
             {!isLoggedIn ? (
-                <AuthStack screenOptions={commonScreenOptions}/>
+                <AuthTabs/>
             ) : (
-                <AppStack screenOptions={commonScreenOptions}/>
+                <AppTabs/>
             )}
 
             <Loader />

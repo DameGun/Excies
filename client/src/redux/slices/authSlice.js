@@ -1,5 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { storeToken, removeToken, checkToken, storeJwtPayload, removeJwtPayload, getJwtPayload } from "../../helpers/api";
+import { storeToken, 
+    removeToken, 
+    checkToken, 
+    storeJwtPayload, 
+    removeJwtPayload, 
+    getJwtPayload, 
+    login, 
+    register } from "../../helpers/api";
 import { thunkHandler } from "../thunkHandler.js";
 
 export const thunkAppOpen = createAsyncThunk('appOpen', async (params, { dispatch, rejectWithValue }) => {
@@ -18,12 +25,13 @@ export const thunkAppOpen = createAsyncThunk('appOpen', async (params, { dispatc
 
 export const thunkLogin = createAsyncThunk('login', async (params, { dispatch, rejectWithValue }) => {
     try {
-        const response = await thunkHandler(params, { dispatch });
+        const response = await thunkHandler({ apicall: login, payload: params.payload}, { dispatch });
         const token = response.accessToken;
 
         await storeToken(token);
         await storeJwtPayload({ username: response.username, user_id: response.user_id})
         dispatch(onAuth({ username: response.username, user_id: response.user_id }));
+        console.log('dispatched');
     }
     catch (err) {
         return rejectWithValue(err.message);
@@ -32,7 +40,7 @@ export const thunkLogin = createAsyncThunk('login', async (params, { dispatch, r
 
 export const thunkRegister = createAsyncThunk('register', async (params, { dispatch, rejectWithValue }) => {
     try {
-        const response = await thunkHandler(params, { dispatch });
+        const response = await thunkHandler({ apicall: register, payload: params.payload}, { dispatch });
         const token = response.accessToken;
         
         await storeToken(token);

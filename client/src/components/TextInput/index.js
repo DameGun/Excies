@@ -2,8 +2,7 @@ import { TextInput } from "react-native";
 import { useTheme } from "@react-navigation/native";
 
 export default function CustomTextInput(props) {
-    const theme = useTheme();
-    const colors = theme.colors;
+    const { colors } = useTheme();
 
     return (
         <TextInput 

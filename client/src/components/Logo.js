@@ -1,7 +1,7 @@
-import { Button, Image } from "react-native";
+import { Image } from "react-native";
 
 export default function Logo({ navigation }) {
     return (
-        <Image source={require('../assets/icon.png')} style={{ height: 50, width: 50, marginRight: 15 }}/>
+        <Image source={require('../assets/icon.png')} style={{ height: 40, width: 40, }}/>
     )
 }

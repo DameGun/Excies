@@ -1,13 +1,15 @@
 import { Keyboard, Pressable, Text } from "react-native";
-import { BASE_COLORS } from '../../constants/colors.js';
 import { styles as customStyles } from './styles.js';
+import { useTheme } from '@react-navigation/native';
 
 export default function CustomButton({ type, text, textStyle, buttonStyle, onPress, disabled }) {
+    const { colors } = useTheme();
+    
     return (
         <Pressable 
             style={({ pressed }) => [
                 {
-                    backgroundColor: pressed || disabled ? BASE_COLORS.colors.primaryPressed : BASE_COLORS.colors.primary
+                    backgroundColor: pressed || disabled ? colors.primaryPressed : colors.primary
                 },
                 buttonStyle,
                 customStyles.button,
@@ -23,7 +25,7 @@ export default function CustomButton({ type, text, textStyle, buttonStyle, onPre
             {({ pressed }) => (
                 <Text style={[
                     {
-                        color: pressed || disabled ? BASE_COLORS.colors.whitePressed : 'white'
+                        color: pressed || disabled ? colors.whitePressed : 'white'
                     }, 
                     customStyles.text, 
                     textStyle

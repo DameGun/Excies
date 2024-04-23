@@ -3,14 +3,13 @@ import { styles } from './styles.js';
 import { useTheme } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
 import { registerSchema } from './validation.js';
-import validate from '../../helpers/customValidator.js';
 import { CustomButton, CustomTextInput } from '../../components';
-import { register } from '../../helpers/api.js';
 import { useDispatch } from 'react-redux';
 import { thunkRegister } from '../../redux/slices/authSlice.js';
+import { validate } from '../../helpers/utilities.js';
 
 export default function RegisterScreen() {
-    const theme = useTheme();
+    const { dark } = useTheme();
     const dispatch = useDispatch();
 
     const [username, setUsername] = useState('');
@@ -25,7 +24,7 @@ export default function RegisterScreen() {
 
     useEffect(() => {
         if(errors.submit) {
-            dispatch(thunkRegister({ apicall: register, payload: { username, password } }));
+            dispatch(thunkRegister({ payload: { username, password } }));
         }
     }, [errors])
 
@@ -47,7 +46,7 @@ export default function RegisterScreen() {
         <View style={styles.container}>
             <Image 
                 source={
-                    theme.isDark ? require('../../assets/auth-logo-white.png') : require('../../assets/auth-logo-black.png')
+                    dark ? require('../../assets/auth-logo-white.png') : require('../../assets/auth-logo-black.png')
                 }
                 style={styles.logo}
             />
