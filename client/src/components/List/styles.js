@@ -12,8 +12,9 @@ export const getStyles = (props) => StyleSheet.create({
     },
     header: {
         color: props.colors.text,
-        fontSize: 20,
+        fontSize: 22,
         marginBottom: 10,
-        marginLeft: 10
+        marginLeft: 10,
+        fontWeight: 'bold'
     }
 })

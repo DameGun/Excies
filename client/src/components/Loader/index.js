@@ -13,7 +13,7 @@ export default function Loader() {
     useEffect(() => {
         const expireTimeout = setTimeout(() => {
             if(stateRef.current == 'loading') {
-                dispatch(setStatus({ status: 'failed', error: 'Request waiting time exceeded' }));
+                dispatch(setStatus({ status: 'failed', error: { message: 'Request waiting time exceeded' }  }));
             }
         }, MAX_REQUEST_WAITING_EXPIRE_TIME);
 

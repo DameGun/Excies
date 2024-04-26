@@ -7,6 +7,7 @@ import { StatusBar, useColorScheme } from "react-native";
 import { DARK_THEME, LIGHT_THEME } from "../constants/colors.js";
 import { useEffect } from "react";
 import { thunkAppOpen } from "../redux/slices/authSlice.js";
+import { thunkGetExercises } from '../redux/slices/exercisesSlice.js';
 
 function Router({ isLoggedIn }) {
     const theme = useColorScheme() == 'dark' ? DARK_THEME : LIGHT_THEME;
@@ -14,6 +15,7 @@ function Router({ isLoggedIn }) {
 
     useEffect(() => {
         dispatch(thunkAppOpen());
+        dispatch(thunkGetExercises());
     }, [])
 
     return (

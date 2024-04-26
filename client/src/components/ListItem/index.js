@@ -56,7 +56,7 @@ export default function ListItem({
                     {infoRight && (
                         <View style={styles.infoRightContainer}>
                             <Text style={styles.infoRightText}>{infoRight}</Text>
-                            <Entypo name="chevron-right" size={10} color={colors.grey} />
+                            <Entypo name="chevron-right" size={18} color={colors.grey} />
                         </View>
                     )}
                 </View>

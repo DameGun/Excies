@@ -37,9 +37,19 @@ async function findAll(list_id) {
   return entity;
 }
 
-async function findByPk(id, withInclude) {
+async function findByPk(id) {
   const entity = await ExerciseListItem.findByPk(id, {
-    include: withInclude,
+    include: [
+      {
+        model: Exercise,
+        attributes: []
+      }
+    ],
+    attributes: {
+      include: [
+        [Sequelize.col('exercise.name'), 'name'],
+      ]
+    },
   });
 
   if (entity === null) {

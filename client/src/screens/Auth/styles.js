@@ -8,10 +8,7 @@ export const styles = StyleSheet.create({
     },
     input: {
         height: 40,
-        borderWidth: 1,
         width: 250,
-        borderRadius: 8,
-        padding: 10,
         marginTop: 15,
     },
     buttonText: {

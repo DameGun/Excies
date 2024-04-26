@@ -1,4 +1,5 @@
-import Logo from "../components/Logo.js"; 
+import Logo from "../components/Logo.js";
+import { Button } from "react-native"; 
 
 // Loading
 
@@ -19,5 +20,19 @@ export const getCommonHeaderScreenOptions = (props) => {
         },
         headerTitle: '',
         headerRight: () => <Logo />
+    }
+}
+
+export const getModalHeaderScreenOption = (props) => {
+    return {
+        headerRight: () => (
+            <Button
+                disabled={props.disabled}
+                title='Done' 
+                color={props.buttonColor} 
+                onPress={() => props.onPress()}
+            />),
+        headerTitle: props.title,
+        headerTitleAlign: 'center'
     }
 }

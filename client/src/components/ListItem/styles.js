@@ -7,7 +7,7 @@ export const getStyles = (props) => StyleSheet.create({
     },
     text: {
         flex: 1,
-        fontSize: 16
+        fontSize: 18
     },
     icon: {
         paddingHorizontal: 10
@@ -15,10 +15,10 @@ export const getStyles = (props) => StyleSheet.create({
     borderContainer: {
         flex: 1,
         flexDirection: 'row',
-        paddingVertical: 10
+        paddingVertical: 12
     },
     border: {
-        borderBottomWidth: 1, 
+        borderBottomWidth: 1,
         borderBottomColor: props.colors.grey
     },
     infoRightContainer: {
@@ -28,7 +28,7 @@ export const getStyles = (props) => StyleSheet.create({
         alignItems: 'center'
     },
     infoRightText: {
-        fontSize: 16,
+        fontSize: 18,
         color: props.colors.grey
     }
 })

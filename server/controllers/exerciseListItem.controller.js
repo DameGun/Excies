@@ -29,7 +29,8 @@ async function create(req, res, next) {
 
   try {
     const data = await exerciseListItemService.create(list_id, reqItem);
-    res.status(201).json(new ResponseObject({ success: true, data: data }));
+    const response = await exerciseListItemService.findByPk(data.id);
+    res.status(201).json(new ResponseObject({ success: true, data: response }));
   } catch (err) {
     next(err);
   }

@@ -1,18 +1,26 @@
-import { Keyboard, Pressable, Text } from "react-native";
-import { styles as customStyles } from './styles.js';
-import { useTheme } from '@react-navigation/native';
+import { Keyboard, Pressable, Text, View } from "react-native";
+import { getStyles } from './styles.js';
+import { useStyles } from "../../helpers/customHooks.js";
 
-export default function CustomButton({ type, text, textStyle, buttonStyle, onPress, disabled }) {
-    const { colors } = useTheme();
+export default function CustomButton({ 
+    type, 
+    text, 
+    textStyle, 
+    buttonStyle, 
+    onPress,
+    iconComponent, 
+    disabled 
+}) {
+    const customStyles = useStyles(getStyles);
     
     return (
         <Pressable 
             style={({ pressed }) => [
                 {
-                    backgroundColor: pressed || disabled ? colors.primaryPressed : colors.primary
+                    opacity: pressed ? 0.8 : 1
                 },
-                buttonStyle,
                 customStyles.button,
+                buttonStyle,
             ]}
             onPress={() => {
                 if (type == 'submit') {
@@ -22,17 +30,15 @@ export default function CustomButton({ type, text, textStyle, buttonStyle, onPre
             }}
             disabled={disabled}
         >
-            {({ pressed }) => (
+            <View style={{ ...customStyles.buttonContainer, flexDirection: iconComponent ? 'row' : 'column' }}>
+                {iconComponent}
                 <Text style={[
-                    {
-                        color: pressed || disabled ? colors.whitePressed : 'white'
-                    }, 
                     customStyles.text, 
                     textStyle
                 ]}>
-                {text}
+                    {text}
                 </Text>
-            )}
+            </View>
         </Pressable>
     )
 }

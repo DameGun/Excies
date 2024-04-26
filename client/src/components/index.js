@@ -7,6 +7,9 @@ import Loader from "./Loader"
 import List from "./List"
 import ListItem from "./ListItem"
 import EmptyList from './EmptyList/index.js'
+import EditIcon from "./EditIcon/index.js"
+import LargeList from "./LargeList/index.js"
+import Search from "./Search/index.js"
 
 export {
     CustomButton,
@@ -17,5 +20,8 @@ export {
     Error,
     List,
     ListItem,
-    EmptyList
+    EmptyList,
+    EditIcon,
+    LargeList,
+    Search
 }

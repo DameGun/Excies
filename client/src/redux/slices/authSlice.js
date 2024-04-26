@@ -6,7 +6,8 @@ import { storeToken,
     removeJwtPayload, 
     getJwtPayload, 
     login, 
-    register } from "../../helpers/api";
+    register, 
+} from "../../helpers/api";
 import { thunkHandler } from "../thunkHandler.js";
 
 export const thunkAppOpen = createAsyncThunk('appOpen', async (params, { dispatch, rejectWithValue }) => {
@@ -31,7 +32,6 @@ export const thunkLogin = createAsyncThunk('login', async (params, { dispatch, r
         await storeToken(token);
         await storeJwtPayload({ username: response.username, user_id: response.user_id})
         dispatch(onAuth({ username: response.username, user_id: response.user_id }));
-        console.log('dispatched');
     }
     catch (err) {
         return rejectWithValue(err.message);

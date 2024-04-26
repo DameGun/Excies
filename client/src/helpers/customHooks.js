@@ -1,6 +1,5 @@
 import { useTheme } from "@react-navigation/native";
 import React from "react";
-import { getCommonHeaderScreenOptions } from "../constants/common.js";
 
 export function useStyles(getStyles) {
     const { colors } = useTheme();
@@ -10,10 +9,10 @@ export function useStyles(getStyles) {
     return globalStyles;
 }
 
-export function useCommonHeaderScreenOption(params) {
+export function useHeaderScreenOptions(getHeaderOptions) {
     const { colors } = useTheme();
 
-    const screenOptions = React.useMemo(() => getCommonHeaderScreenOptions({ ...params, colors }), [colors]);
+    const screenOptions = React.useMemo(() => getHeaderOptions({ colors }), [colors]);
 
     return screenOptions;
 }

@@ -1,11 +1,12 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { LoginScreen, RegisterScreen } from "../screens";
-import { useCommonHeaderScreenOption } from "../helpers/customHooks";
+import { useHeaderScreenOptions } from "../helpers/customHooks";
+import { getCommonHeaderScreenOptions } from "../constants/common";
 
 const Tab = createBottomTabNavigator();
 
 export default function AppTabs() {
-  const commonScreenOptions = useCommonHeaderScreenOption();
+  const commonScreenOptions = useHeaderScreenOptions(getCommonHeaderScreenOptions);
 
     return (
         <Tab.Navigator screenOptions={commonScreenOptions}>

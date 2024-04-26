@@ -1,14 +1,17 @@
-import { TextInput } from "react-native";
-import { useTheme } from "@react-navigation/native";
+import { Keyboard, TextInput, TouchableWithoutFeedback } from "react-native";
+import { useStyles } from "../../helpers/customHooks";
+import { getStyles } from "./styles";
 
 export default function CustomTextInput(props) {
-    const { colors } = useTheme();
+    const styles = useStyles(getStyles);
 
     return (
-        <TextInput 
-            {...props} 
-            style={{ ...props.style, borderColor: colors.grey, color: colors.text }}
-            placeholderTextColor={colors.grey}
-        />
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} accessible={false}>
+            <TextInput 
+                {...props} 
+                style={{ ...props.style, ...styles.input }}
+                placeholderTextColor={styles.placeholderColor}
+            />
+        </TouchableWithoutFeedback>
     )
 }
