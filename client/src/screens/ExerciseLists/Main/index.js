@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { View } from "react-native";
 import { useDispatch, useSelector } from 'react-redux';
 import { thunkGetExerciseLists } from '../../../redux/slices/exerciseListsSlice.js';
-import { List, ListItem } from '../../../components/index.js';
+import { CustomFlatList, ListItem } from '../../../components/index.js';
 import { useIsFocused } from '@react-navigation/native';
 
 export default function ExerciseListsScreen({ navigation }) {
@@ -17,8 +17,8 @@ export default function ExerciseListsScreen({ navigation }) {
         }
     }, [isFocused])
 
-    function handleListClick(id, title) {
-        navigation.navigate('ExerciseListsDetails', { id, title })
+    function handleListClick(item) {
+        navigation.navigate('ExerciseListItemsScreen', { id: item.id, title: item.name })
     }
 
     function handleNewListClick() {
@@ -26,18 +26,19 @@ export default function ExerciseListsScreen({ navigation }) {
     }
     
     return (
-        <View>
+        <View style={{ flex: 1 }}>
             {data &&
-                <List 
+                <CustomFlatList 
                     title='Exercise lists' 
                     data={data} 
-                    renderItem={({ item, isLast }) => (
+                    renderItem={({ item, isLast, index }) => (
                         <ListItem 
                             item={item} 
                             infoRight={item.itemsCount}
                             isLast={isLast} 
                             onPress={handleListClick}
                             iconName='list'
+                            index={index}
                         />
                     )}
                     headerComponent={
@@ -46,6 +47,7 @@ export default function ExerciseListsScreen({ navigation }) {
                                 title='New List...'
                                 iconName='plus'
                                 onPress={handleNewListClick}
+                                index={0}
                             />
                         </View>)
                     }

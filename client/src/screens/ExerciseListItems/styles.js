@@ -8,6 +8,7 @@ export const getStyles = (props) => StyleSheet.create({
     addExerciseButton: {
         marginHorizontal: 20,
         marginBottom: 20,
+        marginTop: 5,
         height: 50,
         backgroundColor: props.colors.greyBackground
     },
@@ -15,9 +16,10 @@ export const getStyles = (props) => StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 16
     },
-    emptyListContainer: {
-        flex: 1, 
-        justifyContent: 'center'
-    },
-    iconColor: props.colors.primary
+    iconColor: props.colors.primary,
+    shadow: {
+        shadowColor: 'black',
+        shadowOpacity: 1,
+        shadowRadius: 15,
+    }
 })

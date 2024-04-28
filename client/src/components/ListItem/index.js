@@ -5,14 +5,17 @@ import { useTheme } from "@react-navigation/native";
 import { Entypo } from '@expo/vector-icons';
 
 export default function ListItem({ 
-    title = 'Empty title', 
+    title = 'Empty title',
+    titleStyle, 
     item, 
     iconName, 
     iconSize = 20, 
     iconColor, 
     infoRight, 
     isLast,
-    onPress 
+    index,
+    onPress,
+    children
 }) {
     const { colors } = useTheme();
     const styles = useStyles(getStyles);
@@ -21,13 +24,16 @@ export default function ListItem({
        <Pressable 
             style={({ pressed }) => [
                 {
-                    backgroundColor: pressed ? colors.greyPressed : colors.greyBackground,
-                }
+                    opacity: pressed ? 0.8 : 1,
+                    backgroundColor: colors.greyBackground,                    
+                },
+                isLast && styles.itemLastStyle,
+                index == 0 && styles.itemFirstStyle
             ]}
             onPress={() => {
                 if(onPress) {
                     if(item) {
-                        return onPress(item.id, item.name)
+                        return onPress(item)
                     }
                     else {
                         return onPress()
@@ -45,20 +51,20 @@ export default function ListItem({
                 )}
                 <View style={[styles.borderContainer, !isLast && styles.border]}>
                     <Text style={[
-                        styles.text,
                         {
-                            color: !item ? colors.primary : colors.text
-                        }
+                            color: !item ? colors.primary : colors.text,
+                        },
+                        styles.text,
+                        titleStyle
                     ]}>
-                        {item ? item.name : title}
+                        {item?.name || title}
                     </Text>
 
-                    {infoRight && (
-                        <View style={styles.infoRightContainer}>
-                            <Text style={styles.infoRightText}>{infoRight}</Text>
-                            <Entypo name="chevron-right" size={18} color={colors.grey} />
-                        </View>
-                    )}
+                    <View style={styles.infoRightContainer}>
+                        {children}
+                        {infoRight && (<Text style={styles.infoRightText}>{infoRight}</Text>)}
+                        <Entypo name="chevron-right" size={18} color={colors.grey} />
+                    </View>
                 </View>
             </View>
        </Pressable>

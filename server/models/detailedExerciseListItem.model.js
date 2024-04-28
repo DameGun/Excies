@@ -23,6 +23,10 @@ const DetailedExerciseListItem = db.define('detailed_exercise_list_item', {
         allowNull: false,
         defaultValue: DataTypes.NOW
     },
+    time: {
+        type: DataTypes.TIME,
+        allowNull: false
+    },
     rep: {
         type: DataTypes.INTEGER,
         allowNull: false

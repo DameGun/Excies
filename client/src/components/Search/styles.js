@@ -7,6 +7,7 @@ export const getStyles = (props) => StyleSheet.create({
         justifyContent: "flex-start",
         alignItems: "center",
         flexDirection: "row",
+        color: 'white'
     },
     input_clicked: {
         width: "100%",
@@ -14,6 +15,7 @@ export const getStyles = (props) => StyleSheet.create({
         justifyContent: "flex-start",
         alignItems: "center",
         flexDirection: "row",
+        color: 'white'
     },
     container: {
         justifyContent: 'center',

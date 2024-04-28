@@ -65,10 +65,10 @@ export default function ListInfoModalScreen({ route, navigation }) {
             navigation.goBack();
 
             if (actionType) {
-                navigation.navigate('ExerciseLists')
+                navigation.navigate('ExerciseListsScreen')
             }
             else {
-                navigation.navigate('ExerciseListsDetails', { id: currentList.id, title: currentList.name })
+                navigation.navigate('ExerciseListItemsScreen', { id: currentList.id, title: currentList.name })
             }
         }
     }, [currentList])

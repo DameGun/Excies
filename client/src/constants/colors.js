@@ -1,6 +1,7 @@
 export const BASE_COLORS = {
     colors: {
         grey: '#aeaeb2',
+        greyDark: '#171717',
         greyBackground: '#434344',
         greyPressed: '#646466',
         primary: '#E77917',

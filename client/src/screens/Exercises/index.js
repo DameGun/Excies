@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState, useMemo } from "react";
 import { getModalHeaderScreenOption } from "../../constants/common";
-import { View } from "react-native";
+import { ActivityIndicator, View } from "react-native";
 import { useTheme } from "@react-navigation/native";
-import { Search, LargeList } from "../../components/";
+import { Search, LargeList, Loader } from "../../components/";
 import { thunkGetExercises } from "../../redux/slices/exercisesSlice";
 import { thunkCreateExerciseListItem, thunkDeleteExerciseListItem } from '../../redux/slices/exerciseListItemsSlice';
 
@@ -26,7 +26,7 @@ export default function ExercisesModalScreen({ route, navigation }) {
         navigation.setOptions(getModalHeaderScreenOption({ 
             buttonColor: colors.primary,
             title: `Add to "${title}"`,
-            onPress: () => console.log('Execises button click')
+            onPress: () => navigation.goBack()
         }))
     }, [])
 
@@ -40,52 +40,56 @@ export default function ExercisesModalScreen({ route, navigation }) {
     }
 
     const filteredSections = useMemo(() => {
-        if (searchPhrase === "") {
+        if(data && list_items) {
+            if (searchPhrase === "") {
+                return [
+                    {
+                        title: 'Added Exercises',
+                        data: list_items,
+                        iconName: 'checkcircle'
+                    },
+                    {
+                        title: 'All Exercises',
+                        data: data.filter(item => !list_items.some(listItem => listItem.exercise_id === item.id)),
+                        iconName: 'pluscircleo'
+                    }
+                ];
+            }
+        
             return [
                 {
                     title: 'Added Exercises',
-                    data: list_items,
+                    data: list_items.filter(item => 
+                        item.name.toUpperCase().includes(searchPhrase.toUpperCase().trim().replace(/\s/g, ""))),
                     iconName: 'checkcircle'
                 },
                 {
                     title: 'All Exercises',
-                    data: data.filter(item => !list_items.some(listItem => listItem.exercise_id === item.id)),
+                    data: data.filter(item => 
+                        item.name.toUpperCase().includes(searchPhrase.toUpperCase().trim().replace(/\s/g, "")) 
+                        && !list_items.some(listItem => listItem.exercise_id === item.id)),
                     iconName: 'pluscircleo'
                 }
-            ];
+            ]
         }
-    
-        return [
-            {
-                title: 'Added Exercises',
-                data: list_items.filter(item => 
-                    item.name.toUpperCase().includes(searchPhrase.toUpperCase().trim().replace(/\s/g, ""))),
-                iconName: 'checkcircle'
-            },
-            {
-                title: 'All Exercises',
-                data: data.filter(item => 
-                    item.name.toUpperCase().includes(searchPhrase.toUpperCase().trim().replace(/\s/g, "")) 
-                    && !list_items.some(listItem => listItem.exercise_id === item.id)),
-                iconName: 'pluscircleo'
-            }
-        ];
     }, [list_items, data, searchPhrase]);
 
     return (
-        data && (
-            <View>
+        <View style={{ flex: 1 }}>
                 <Search
                     clicked={clicked}
                     setClicked={setClicked}
                     searchPhrase={searchPhrase}
                     setSearchPhrase={setSearchPhrase}
                 />
-                <LargeList 
-                    sections={filteredSections}
-                    onPress={handleExerciseButton}
-                />
+                <View style={{ flex: 1 }}>
+                    <LargeList
+                        sections={filteredSections}
+                        onPress={handleExerciseButton}
+                    />
+                </View>
+                
         </View>
-        )
+        
     )
 }

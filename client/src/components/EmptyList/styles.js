@@ -4,19 +4,23 @@ export const getStyles = (props) => StyleSheet.create({
     headerText: {
         color: props.colors.text,
         fontWeight: 'bold',
-        fontSize: 22
+        fontSize: 22,
+        marginTop: 10
     },
     commonText: {
         color: props.colors.grey,
         marginBottom: 15
     },
     container: {
-        width: '50%',
+        flex: 1, 
+        justifyContent: 'center',
         alignSelf: 'center',
         alignItems: 'center',
-        gap: 5
+        width: '100%',
+        gap: 5,
     },
     button: {
-        width: '80%'
+        padding: 10,
+        width: '40%'
     }
 })

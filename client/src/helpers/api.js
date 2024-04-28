@@ -168,3 +168,52 @@ export async function getExercises() {
     return err;
   }
 }
+
+
+// Detailed Exercise List Items Requests
+
+export async function getDetailedExerciseListItems({ username, list_id, list_item_id }) {
+  try {
+    const response = await axiosClient.get(`/${username}/exercise-lists/${list_id}/items/${list_item_id}/details`);
+    return response.data;
+  }
+  catch (err) {
+    return err;
+  }
+}
+
+export async function createDetailedExerciseListItem({ username, list_id, list_item_id, detailed_exercise_list_item }) {
+  try {
+    const response = await axiosClient.post(
+      `/${username}/exercise-lists/${list_id}/items/${list_item_id}/details`, 
+      detailed_exercise_list_item
+    );
+    return response.data;
+  }
+  catch (err) {
+    return err;
+  }
+}
+
+export async function updateDetailedExerciseListItem({ username, list_id, list_item_id, id, detailed_exercise_list_item }) {
+  try {
+    const response = await axiosClient.patch(
+      `/${username}/exercise-lists/${list_id}/items/${list_item_id}/details/${id}`, 
+      detailed_exercise_list_item
+    );
+    return response.data;
+  }
+  catch (err) {
+    return err;
+  }
+}
+
+export async function deleteDetailedExerciseListItem({ username, list_id, list_item_id, id }) {
+  try {
+    const response = await axiosClient.delete(`/${username}/exercise-lists/${list_id}/items/${list_item_id}/details/${id}`);
+    return response.data;
+  }
+  catch (err) {
+    return err;
+  }
+}

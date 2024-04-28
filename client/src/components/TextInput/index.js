@@ -9,7 +9,7 @@ export default function CustomTextInput(props) {
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} accessible={false}>
             <TextInput 
                 {...props} 
-                style={{ ...props.style, ...styles.input }}
+                style={{ ...styles.input, ...props.style }}
                 placeholderTextColor={styles.placeholderColor}
             />
         </TouchableWithoutFeedback>

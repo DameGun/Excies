@@ -1,6 +1,9 @@
 export { default as LoginScreen } from './Auth/LoginScreen.js';
 export { default as RegisterScreen } from './Auth/RegisterScreen.js';
 export { default as ExerciseListsScreen } from './ExerciseLists/Main';
-export { default as ExerciseListsDetailsScreen } from './ExerciseLists/Details';
+export { default as ExerciseListItemsScreen } from './ExerciseListItems';
 export { default as ListInfoModalScreen } from './ExerciseLists/ListInfo';
 export { default as ExercisesModalScreen } from './Exercises';
+export { default as DetailedExerciseListItemsScreen } from './DetailedExerciseListItems/Main';
+export { default as CreateDetailedItemModalScreen } from './DetailedExerciseListItems/Create';
+export { default as DetailedExerciseListItemInfoModalScreen } from './DetailedExerciseListItems/Info';

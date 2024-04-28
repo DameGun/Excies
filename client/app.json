@@ -18,7 +18,8 @@
       "supportsTablet": true,
       "config": {
         "usesNonExemptEncryption": false
-      }
+      },
+      "bundleIdentifier": "excies.dev"
     },
     "android": {
       "adaptiveIcon": {
@@ -32,6 +33,11 @@
     },
     "plugins": [
       "expo-secure-store"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "4893ac3e-8b0a-4b8e-bc04-15dc49ced702"
+      }
+    }
   }
 }

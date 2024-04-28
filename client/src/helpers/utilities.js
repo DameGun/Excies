@@ -16,17 +16,15 @@ export async function validate(fields, schema) {
     }    
 }
 
-export function convertTimeObjToString(last_time_edited) {
-    if (last_time_edited?.years) {
-        return `${last_time_edited.years}yr ago`;
-    }
-    if (last_time_edited?.months) {
-        return `${last_time_edited.months}mo ago`
-    }
-    if (last_time_edited?.days) {
-        return `${last_time_edited.days}d ago`
-    }
-    else {
-        return ' ';
-    }
+export function dateParser(date) {
+    const obj = new Date(date);
+
+    const options = {
+        weekday: 'short',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+    };
+
+    return obj.toLocaleDateString(undefined, options).toUpperCase();
 }

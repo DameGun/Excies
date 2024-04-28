@@ -29,7 +29,7 @@ async function findAll(list_id) {
     attributes: {
       include: [
         [Sequelize.col('exercise.name'), 'name'],
-        [Sequelize.fn('AGE', Sequelize.literal('CURRENT_DATE'), subQuery), 'last_time_updated'],
+        [Sequelize.fn('calculate_date_interval', subQuery), 'last_time_updated'],
       ]
     },
   });

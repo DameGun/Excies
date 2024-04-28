@@ -7,7 +7,6 @@ const createValidator = {
     body("session_id", "Reference field to session must be uuid")
       .if((value) => value)
       .isNumeric(),
-    body("date").isISO8601().isDate(),
     body(["rep", "weight"], "Value must be a number and greater than 0")
       .if((value) => value > 0)
       .isNumeric(),

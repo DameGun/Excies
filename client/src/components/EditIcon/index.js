@@ -6,7 +6,7 @@ export default function EditIcon({ onPress }) {
     const { colors } = useTheme();
 
     return (
-        <Pressable onPress={onPress}>
+        <Pressable onPress={onPress} style={{ marginRight: 20 }}>
             {({ pressed }) => 
                 <Feather 
                     name="edit" 

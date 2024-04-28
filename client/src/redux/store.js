@@ -4,6 +4,7 @@ import loadingSlice from "./slices/loadingSlice.js";
 import exerciseListsSlice from './slices/exerciseListsSlice.js';
 import exercisesSlice from './slices/exercisesSlice.js';
 import exerciseListItemsSlice from './slices/exerciseListItemsSlice.js';
+import detailedExerciseListItemsSlice from "./slices/detailedExerciseListItemsSlice.js";
 
 export default configureStore({
     reducer: {
@@ -12,5 +13,6 @@ export default configureStore({
         exerciseLists: exerciseListsSlice,
         exerciseListItems: exerciseListItemsSlice,
         exercises: exercisesSlice,
+        detailedExerciseListItems: detailedExerciseListItemsSlice
     },
 })

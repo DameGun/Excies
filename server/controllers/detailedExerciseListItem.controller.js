@@ -32,7 +32,8 @@ async function create(req, res, next) {
       list_item_id,
       reqDetailed
     );
-    res.status(201).json(new ResponseObject({ success: true, data: data }));
+    const response = await detailedExerciseListItemService.findByPk(data.id)
+    res.status(201).json(new ResponseObject({ success: true, data: response }));
   } catch (err) {
     next(err);
   }
@@ -47,7 +48,8 @@ async function update(req, res, next) {
       detailed_id,
       reqDetailed
     );
-    res.status(200).json(new ResponseObject({ success: true, data: data }));
+    const response = await detailedExerciseListItemService.findByPk(data.id);
+    res.status(200).json(new ResponseObject({ success: true, data: response }));
   } catch (err) {
     next(err);
   }

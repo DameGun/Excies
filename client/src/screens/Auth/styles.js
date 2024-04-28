@@ -16,6 +16,7 @@ export const styles = StyleSheet.create({
     },
     button: {
         marginTop: 15,
+        padding: 10
     },
     error: {
         color: 'red',

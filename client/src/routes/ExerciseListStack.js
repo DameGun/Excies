@@ -1,13 +1,21 @@
-import { ExerciseListsScreen, ExerciseListsDetailsScreen, ListInfoModalScreen, ExercisesModalScreen } from "../screens";
+import { 
+    ExerciseListsScreen, 
+    ExerciseListItemsScreen, 
+    ListInfoModalScreen, 
+    ExercisesModalScreen, 
+    DetailedExerciseListItemsScreen,
+    CreateDetailedItemModalScreen,
+    DetailedExerciseListItemInfoModalScreen
+} from "../screens";
 import { useHeaderScreenOptions } from "../helpers/customHooks";
 import { Button } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import { thunkLogout } from "../redux/slices/authSlice";
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { createStackNavigator, TransitionPresets   } from '@react-navigation/stack'
 import { getCommonHeaderScreenOptions } from "../constants/common";
 
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
 export default function ExerciseListStack() {
     const commonScreenOptions = useHeaderScreenOptions(getCommonHeaderScreenOptions);
@@ -18,20 +26,33 @@ export default function ExerciseListStack() {
         <Stack.Navigator screenOptions={commonScreenOptions}>
             <Stack.Group>
                 <Stack.Screen 
-                    name='ExerciseLists'
+                    name='ExerciseListsScreen'
                     component={ExerciseListsScreen}
                     options={{
                         headerLeft: () => (
-                            <Button title="Log out" color={colors.primary} onPress={() => dispatch(thunkLogout())}/>
-                        )
+                            <Button 
+                                title="Log out" 
+                                color={colors.primary} 
+                                onPress={() => dispatch(thunkLogout())}
+                            />
+                        ),
                     }}
                 />
                 <Stack.Screen
-                    name='ExerciseListsDetails'
-                    component={ExerciseListsDetailsScreen}
+                    name='ExerciseListItemsScreen'
+                    component={ExerciseListItemsScreen}
+                />
+                <Stack.Screen 
+                    name='DetailedExerciseListItemsScreen'
+                    component={DetailedExerciseListItemsScreen}
                 />
             </Stack.Group>
-            <Stack.Group screenOptions={{ presentation: 'modal', animation: 'slide_from_bottom' }}>
+            <Stack.Group screenOptions={{
+                presentation: 'modal',
+                gestureEnabled: true,
+                gestureDirection: 'vertical',
+                ...TransitionPresets.ModalPresentationIOS,
+            }}>
                 <Stack.Screen 
                     name='ListInfoModalScreen' 
                     component={ListInfoModalScreen}
@@ -39,6 +60,22 @@ export default function ExerciseListStack() {
                 <Stack.Screen
                     name='ExercisesModalScreen'
                     component={ExercisesModalScreen}
+                    options={{
+                        headerLeft: ''
+                    }}
+                />
+                <Stack.Screen
+                    name='CreateDetailedItemModalScreen'
+                    component={CreateDetailedItemModalScreen}
+                    options={{
+                        presentation: 'transparentModal',
+                        gestureResponseDistance: 500,
+                        headerShown: false,
+                    }}
+                />
+                <Stack.Screen 
+                    name='DetailedExerciseListItemInfoModalScreen'
+                    component={DetailedExerciseListItemInfoModalScreen}
                 />
             </Stack.Group>
         </Stack.Navigator>

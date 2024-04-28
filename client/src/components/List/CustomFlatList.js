@@ -8,18 +8,22 @@ export default function List({ title, data, renderItem, headerComponent, searchP
     const renderItemWithSearch = ({ item, index }) => {
         let isLast = index == data.length - 1
 
+        if (index == 0 && headerComponent) {
+            index = index - 1;
+        }
+
         if (searchPhrase == "") {
-            return renderItem({ item, isLast })
+            return renderItem({ item, isLast, index })
         }
         if (item.name.toUpperCase().includes(searchPhrase.toUpperCase().trim().replace(/\s/g, ""))) {
-            return renderItem({ item, isLast })
+            return renderItem({ item, isLast, index })
         }
     }
 
     return (
         <View style={styles.container}>
             {title && (
-                <Text style={styles.header}>{title}</Text>
+                <Text style={styles.headerBold}>{title}</Text>
             )}
             <FlatList
                 ListHeaderComponent={headerComponent}

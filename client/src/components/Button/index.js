@@ -32,12 +32,14 @@ export default function CustomButton({
         >
             <View style={{ ...customStyles.buttonContainer, flexDirection: iconComponent ? 'row' : 'column' }}>
                 {iconComponent}
-                <Text style={[
-                    customStyles.text, 
-                    textStyle
-                ]}>
-                    {text}
-                </Text>
+                {text && (
+                    <Text style={[
+                        customStyles.text, 
+                        textStyle
+                    ]}>
+                        {text}
+                    </Text>
+                )}
             </View>
         </Pressable>
     )

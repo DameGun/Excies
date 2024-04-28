@@ -35,12 +35,12 @@ export const thunkDeleteExerciseListItem = createAsyncThunk('deleteExerciseListI
 const exerciseListItemsSlice = createSlice({
     name: 'exerciseListItems',
     initialState: {
-        data: null,
+        data: [],
         currentList: null
     },
     extraReducers(builder) {
         builder.addCase(thunkGetExerciseListItems.fulfilled, (state, action) => {
-            state.data = action.payload;
+            state.data = action.payload.length ? action.payload : [];
         }),
 
         builder.addCase(thunkCreateExerciseListItem.fulfilled, (state, action) => {

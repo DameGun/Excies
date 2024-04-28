@@ -50,7 +50,6 @@ export default function LargeList({ sections, onPress }) {
                     windowSize={10}
                     removeClippedSubviews={true}
                     stickySectionHeadersEnabled={true}
-                    legacyImplementation={true}
                 />
             </View>
         </SafeAreaView>

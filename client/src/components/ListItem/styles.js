@@ -9,12 +9,23 @@ export const getStyles = (props) => StyleSheet.create({
         flex: 1,
         fontSize: 18
     },
+    itemFirstStyle: {
+        borderTopWidth: 1,
+        borderTopLeftRadius: 15,
+        borderTopRightRadius: 15
+    },
+    itemLastStyle: {
+        borderBottomWidth: 1,
+        borderBottomLeftRadius: 15,
+        borderBottomRightRadius: 15
+    },
     icon: {
-        paddingHorizontal: 10
+        paddingHorizontal: 10,
     },
     borderContainer: {
         flex: 1,
         flexDirection: 'row',
+        alignItems: 'center',
         paddingVertical: 12
     },
     border: {

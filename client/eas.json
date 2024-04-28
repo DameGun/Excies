@@ -1,0 +1,28 @@
+{
+  "cli": {
+    "version": ">= 7.8.5"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "env": {
+        "EXPO_PUBLIC_DEV_API_URL_HOME": "http://192.168.100.4:8080/api"
+      }
+    },
+    "preview": {
+      "distribution": "internal",
+      "env": {
+        "EXPO_PUBLIC_DEV_API_URL_HOME": "http://192.168.100.4:8080/api"
+      }
+    },
+    "production": {
+      "env": {
+        "EXPO_PUBLIC_DEV_API_URL_HOME": "http://192.168.100.4:8080/api"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}
