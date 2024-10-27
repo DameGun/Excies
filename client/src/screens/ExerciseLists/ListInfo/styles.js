@@ -1,6 +1,8 @@
-import { StyleSheet } from "react-native";
-import { getInfoModalScreenStylesDefault } from "../../../constants/common";
+import { StyleSheet } from 'react-native';
 
-export const getStyles = (props) => StyleSheet.create({
-    ...getInfoModalScreenStylesDefault(props)
-})
+import { getInfoModalScreenStylesDefault } from '../../../constants/common';
+
+export const getStyles = (props) =>
+  StyleSheet.create({
+    ...getInfoModalScreenStylesDefault(props),
+  });
