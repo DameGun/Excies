@@ -36,19 +36,21 @@ export default function CreateDetailedItemModalScreen({ route, navigation }) {
     const [weight, setWeight] = useState(0);
 
     function handleSubmit() {
-        dispatch(thunkCreateDetailedExerciseListItem({ 
-            payload: { 
-                username, 
-                list_id, 
-                list_item_id, 
-                detailed_exercise_list_item: {
-                    time: new Date().toISOString(),
-                    rep, 
-                    weight
+        if(rep && weight) {
+            dispatch(thunkCreateDetailedExerciseListItem({ 
+                payload: { 
+                    username, 
+                    list_id, 
+                    list_item_id, 
+                    detailed_exercise_list_item: {
+                        time: new Date().toISOString(),
+                        rep, 
+                        weight
+                    }
                 }
-            }
-        }))
-        navigation.goBack();
+            }))
+            navigation.goBack();
+        }
     }
 
     function handleRepCount(value) {

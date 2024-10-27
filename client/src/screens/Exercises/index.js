@@ -82,13 +82,14 @@ export default function ExercisesModalScreen({ route, navigation }) {
                     searchPhrase={searchPhrase}
                     setSearchPhrase={setSearchPhrase}
                 />
-                <View style={{ flex: 1 }}>
-                    <LargeList
-                        sections={filteredSections}
-                        onPress={handleExerciseButton}
-                    />
-                </View>
-                
+                {(data && list_items) && (
+                    <View style={{ flex: 1 }}>
+                        <LargeList
+                            sections={filteredSections}
+                            onPress={handleExerciseButton}
+                        />
+                    </View>
+                )}
         </View>
         
     )

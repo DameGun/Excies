@@ -13,7 +13,7 @@ export default function DetailedExerciseListItemInfoModalScreen({ route, navigat
     const styles = useStyles(getStyles);
     const dispatch = useDispatch();
     
-    const [notes, setNotes] = useState();
+    const [notes, setNotes] = useState(item.notes || '');
     const [rep, setRep] = useState(item.rep.toString());
     const [weight, setWeight] = useState(item.weight.toString());
     const [repError, setRepError] = useState('');
@@ -101,7 +101,7 @@ export default function DetailedExerciseListItemInfoModalScreen({ route, navigat
                 <CustomTextInput 
                     placeholder='Comment'
                     style={styles.input}
-                    defaultValue={item.notes.toString()}
+                    defaultValue={notes}
                     onChangeText={newText => setNotes(newText)}
                 />
             </View>
@@ -109,7 +109,7 @@ export default function DetailedExerciseListItemInfoModalScreen({ route, navigat
                 <Text style={styles.text}>Repetitions</Text>
                 <CustomTextInput
                     style={styles.input}
-                    defaultValue={item.rep.toString()}
+                    defaultValue={rep}
                     onChangeText={newText => setRep(newText)}
                     keyboardType='number-pad'
                 />
@@ -119,7 +119,7 @@ export default function DetailedExerciseListItemInfoModalScreen({ route, navigat
                 <Text style={styles.text}>Weight (kg)</Text>
                 <CustomTextInput
                     style={styles.input}
-                    defaultValue={item.weight.toString()}
+                    defaultValue={weight}
                     onChangeText={newText => setWeight(newText)}
                     keyboardType='number-pad'
                 />
