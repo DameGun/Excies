@@ -1,12 +1,17 @@
-import { setStatus } from './slices/loadingSlice.js';
+import { setStatus } from './slices/loading';
+import store from './store.js';
 
-export const thunkHandler = async (params, { dispatch }) => {
+type ThunkAPICall<TParams, TReturn> = (params?: TParams) => Promise<TReturn>;
+
+export async function thunkHandler<TParams, TReturn>(
+  apiCall: ThunkAPICall<TParams, TReturn>,
+  payload?: TParams
+) {
+  const dispatch = store.dispatch;
+
   dispatch(setStatus({ status: 'loading' }));
 
-  const response = await params.apicall(params.payload);
-
-  // // Imitate long-time request
-  // await new Promise((resolve) => setTimeout(resolve, 1000));
+  const response = await apiCall(payload);
 
   if (typeof response === 'boolean') {
     dispatch(setStatus({ status: 'idle' }));
@@ -25,4 +30,4 @@ export const thunkHandler = async (params, { dispatch }) => {
     );
     throw new Error(response.response.status);
   }
-};
+}

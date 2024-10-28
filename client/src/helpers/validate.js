@@ -13,16 +13,3 @@ export async function validate(fields, schema) {
     };
   }
 }
-
-export function dateParser(date) {
-  const obj = new Date(date);
-
-  const options = {
-    weekday: 'short',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  };
-
-  return obj.toLocaleDateString(undefined, options).toUpperCase();
-}

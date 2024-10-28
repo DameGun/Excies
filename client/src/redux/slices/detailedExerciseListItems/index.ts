@@ -1,79 +1,26 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+
+import { dateParser } from '@/helpers/validate';
+import { DetailedExerciseListItem } from '@/types/detailedExerciseListItem';
 
 import {
-  createDetailedExerciseListItem,
-  deleteDetailedExerciseListItem,
-  getDetailedExerciseListItems,
-  updateDetailedExerciseListItem,
-} from '../../helpers/api.js';
-import { dateParser } from '../../helpers/utilities.js';
-import { thunkHandler } from '../thunkHandler.js';
+  thunkCreateDetailedExerciseListItem,
+  thunkDeleteDetailedExerciseListItem,
+  thunkGetDetailedExerciseListItems,
+  thunkUpdateDetailedExerciseListItem,
+} from '../detailedExerciseListItemsSlice';
 
-export const thunkGetDetailedExerciseListItems = createAsyncThunk(
-  'getDetailedExerciseListItems',
-  async (params, { dispatch, rejectWithValue }) => {
-    try {
-      const response = await thunkHandler(
-        { apicall: getDetailedExerciseListItems, payload: params.payload },
-        { dispatch }
-      );
-      return response;
-    } catch (err) {
-      return rejectWithValue(err.message);
-    }
-  }
-);
+type DetailedExerciseListItemSliceState = {
+  data: DetailedExerciseListItem[];
+};
 
-export const thunkCreateDetailedExerciseListItem = createAsyncThunk(
-  'createDetailedExerciseListItem',
-  async (params, { dispatch, rejectWithValue }) => {
-    try {
-      const response = await thunkHandler(
-        { apicall: createDetailedExerciseListItem, payload: params.payload },
-        { dispatch }
-      );
-      return response;
-    } catch (err) {
-      return rejectWithValue(err.message);
-    }
-  }
-);
-
-export const thunkUpdateDetailedExerciseListItem = createAsyncThunk(
-  'updateDetailedExerciseListItem',
-  async (params, { dispatch, rejectWithValue }) => {
-    try {
-      const response = await thunkHandler(
-        { apicall: updateDetailedExerciseListItem, payload: params.payload },
-        { dispatch }
-      );
-      return response;
-    } catch (err) {
-      return rejectWithValue(err.message);
-    }
-  }
-);
-
-export const thunkDeleteDetailedExerciseListItem = createAsyncThunk(
-  'deleteDetailedExerciseListItem',
-  async (params, { dispatch, rejectWithValue }) => {
-    try {
-      const response = await thunkHandler(
-        { apicall: deleteDetailedExerciseListItem, payload: params.payload },
-        { dispatch }
-      );
-      return response;
-    } catch (err) {
-      return rejectWithValue(err.message);
-    }
-  }
-);
+const initialState: DetailedExerciseListItemSliceState = {
+  data: [],
+};
 
 const detailedExerciseListItemsSlice = createSlice({
   name: 'detailedExerciseListItems',
-  initialState: {
-    data: [],
-  },
+  initialState,
   extraReducers(builder) {
     builder.addCase(thunkGetDetailedExerciseListItems.fulfilled, (state, action) => {
       if (action.payload.length) {
@@ -132,6 +79,7 @@ const detailedExerciseListItemsSlice = createSlice({
         }
       });
   },
+  reducers: {},
 });
 
 export default detailedExerciseListItemsSlice.reducer;

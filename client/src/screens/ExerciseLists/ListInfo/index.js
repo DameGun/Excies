@@ -12,7 +12,7 @@ import { listInfoSchema } from './validation.js';
 import { CustomButton, CustomTextInput } from '../../../components/index.js';
 import { getModalHeaderScreenOption } from '../../../constants/common.js';
 import { useStyles } from '../../../helpers/customHooks.js';
-import { validate } from '../../../helpers/utilities.js';
+import { validate } from '../../../helpers/validate.js';
 import {
   thunkCreateExerciseList,
   thunkDeleteExerciseList,

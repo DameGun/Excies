@@ -8,7 +8,7 @@ import { styles } from './styles.js';
 import { loginSchema } from './validation.js';
 
 import { CustomButton, CustomTextInput } from '../../components';
-import { validate } from '../../helpers/utilities.js';
+import { validate } from '../../helpers/validate.js';
 import { thunkLogin } from '../../redux/slices/authSlice.js';
 
 export default function LoginScreen() {
