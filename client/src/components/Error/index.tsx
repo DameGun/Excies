@@ -1,33 +1,27 @@
 import { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
 
-import { setStatus } from '@/redux/slices/loadingSlice.js';
+import { LoadingState } from '@/constants/loading';
+import { useAppDispatch, useAppSelector } from '@/hooks/redux';
+import { setStatus } from '@/redux/slices/loading';
 
 export function Error() {
-  const { status, error } = useSelector((state) => state.loading);
-  const [alerted, setAlerted] = useState(false);
-  const dispatch = useDispatch();
+  const { status, errorMessage } = useAppSelector((state) => state.loading);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (status == 'failed') {
-      setAlerted(true);
-    } else {
-      setAlerted(false);
+    if (status === LoadingState.Failed) {
+      Alert.alert('Error', errorMessage, [
+        {
+          text: 'Cancel',
+          onPress: () => {
+            dispatch(setStatus({ status: LoadingState.Idle }));
+          },
+          style: 'cancel',
+        },
+      ]);
     }
   }, [status]);
 
-  return (
-    status == 'failed' &&
-    alerted &&
-    Alert.alert('Error', error.message, [
-      {
-        text: 'Cancel',
-        onPress: () => {
-          dispatch(setStatus({ status: 'idle' }));
-        },
-        style: 'cancel',
-      },
-    ])
-  );
+  return null;
 }

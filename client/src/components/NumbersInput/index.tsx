@@ -9,7 +9,7 @@ import { Number } from './Number';
 import { getStyles } from './styles';
 
 type NumbersInputProps = {
-  onNumberPress: VoidFunction;
+  onNumberPress(value: number): void;
   onRemove: VoidFunction;
 };
 

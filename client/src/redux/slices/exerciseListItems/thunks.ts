@@ -4,41 +4,50 @@ import {
   createExerciseListItem,
   deleteExerciseListItem,
   getExerciseListItems,
-} from '@/helpers/api';
+} from '@/api/endpoints/exerciseListItem';
 import { thunkHandler } from '@/redux/thunkHandler';
+import { ApiError } from '@/types/api';
+import {
+  CreateExerciseListItemDTO,
+  DeleteExerciseListItemDTO,
+  ExerciseListItem,
+  GetExerciseListItemsDTO,
+} from '@/types/exerciseListItem';
 
-export const thunkGetExerciseListItems = createAsyncThunk(
-  'getExerciseListItems',
-  async ({ payload }, { dispatch, rejectWithValue }) => {
-    try {
-      const response = await thunkHandler(getExerciseListItems, payload);
-      return response;
-    } catch (err) {
-      return rejectWithValue(err.message);
-    }
+export const thunkGetExerciseListItems = createAsyncThunk<
+  ExerciseListItem[],
+  GetExerciseListItemsDTO
+>('getExerciseListItems', async (payload, { rejectWithValue }) => {
+  try {
+    const response = await thunkHandler(getExerciseListItems, payload);
+    return response;
+  } catch (err) {
+    const { message } = err as ApiError;
+    return rejectWithValue(message);
   }
-);
+});
 
-export const thunkCreateExerciseListItem = createAsyncThunk(
-  'createExerciseListItem',
-  async ({ payload }, { dispatch, rejectWithValue }) => {
-    try {
-      const response = await thunkHandler(createExerciseListItem, payload);
-      return response;
-    } catch (err) {
-      return rejectWithValue(err.message);
-    }
+export const thunkCreateExerciseListItem = createAsyncThunk<
+  ExerciseListItem,
+  CreateExerciseListItemDTO
+>('createExerciseListItem', async (payload, { rejectWithValue }) => {
+  try {
+    const response = await thunkHandler(createExerciseListItem, payload);
+    return response;
+  } catch (err) {
+    const { message } = err as ApiError;
+    return rejectWithValue(message);
   }
-);
+});
 
-export const thunkDeleteExerciseListItem = createAsyncThunk(
+export const thunkDeleteExerciseListItem = createAsyncThunk<void, DeleteExerciseListItemDTO>(
   'deleteExerciseListItem',
-  async ({ payload }, { dispatch, rejectWithValue }) => {
+  async (payload, { rejectWithValue }) => {
     try {
-      const response = await thunkHandler(deleteExerciseListItem, payload);
-      return response;
+      await thunkHandler(deleteExerciseListItem, payload);
     } catch (err) {
-      return rejectWithValue(err.message);
+      const { message } = err as ApiError;
+      return rejectWithValue(message);
     }
   }
 );

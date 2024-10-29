@@ -20,9 +20,15 @@ type DeleteExerciseListItemDTO = RequiredUsernameParameter & {
   list_item_id: string;
 };
 
+type ExerciseListItemState = {
+  data: ExerciseListItem[];
+  currentList: ExerciseListItem | null;
+};
+
 export type {
   CreateExerciseListItemDTO,
   DeleteExerciseListItemDTO,
   ExerciseListItem,
+  ExerciseListItemState,
   GetExerciseListItemsDTO,
 };

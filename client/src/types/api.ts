@@ -1,5 +1,7 @@
 import { AxiosError } from 'axios';
 
+import { ResponseStatus } from '@/constants/api';
+
 type RequiredUsernameParameter = {
   username: string;
 };
@@ -7,16 +9,29 @@ type RequiredUsernameParameter = {
 type CustomApiError = {
   message: string;
   code: number;
-  status: 'rejected';
+  status: ResponseStatus.Rejected;
 };
 
-type ApiResponse<T> = {
-  data: T;
-  status: 'fullfiled';
+type BaseApiResponse = {
+  status: ResponseStatus.Fullfiled;
 };
+
+type ApiResponseWithData<T> = BaseApiResponse & {
+  data: T;
+};
+
+type ApiResponse<T = undefined> = T extends undefined ? BaseApiResponse : ApiResponseWithData<T>;
 
 type ApiError = CustomApiError | AxiosError;
 
 type ApiResult<T = undefined> = Promise<ApiResponse<T> | ApiError>;
 
-export type { ApiError, ApiResponse, ApiResult, CustomApiError, RequiredUsernameParameter };
+export type {
+  ApiError,
+  ApiResponse,
+  ApiResponseWithData,
+  ApiResult,
+  BaseApiResponse,
+  CustomApiError,
+  RequiredUsernameParameter,
+};

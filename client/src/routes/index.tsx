@@ -1,40 +1,35 @@
 import { useEffect } from 'react';
 import { StatusBar, useColorScheme } from 'react-native';
-import { connect, useDispatch } from 'react-redux';
 
 import { NavigationContainer } from '@react-navigation/native';
 
-import AppTabs from './AppTabs.js';
-import AuthTabs from './AuthTabs.js';
+import { Error, Loader } from '@/components';
+import { DARK_THEME, LIGHT_THEME } from '@/constants/colors';
+import { useAppDispatch, useAppSelector } from '@/hooks/redux';
+import { selectIsLoggedIn } from '@/redux/slices/auth';
+import { thunkAppOpen } from '@/redux/slices/auth/thunks';
 
-import { Error, Loader } from '../components';
-import { DARK_THEME, LIGHT_THEME } from '../constants/colors.js';
-import { thunkAppOpen } from '../redux/slices/authSlice.js';
+import { AppTabs } from './AppTabs';
+import { AuthTabs } from './AuthTabs';
 
-function Router({ isLoggedIn }) {
+export function Router() {
   const theme = useColorScheme() == 'dark' ? DARK_THEME : LIGHT_THEME;
-  const dispatch = useDispatch();
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(thunkAppOpen());
   }, []);
 
   return (
-    <NavigationContainer theme={theme}>
+    <NavigationContainer theme={theme as any}>
       <StatusBar
         barStyle={theme === DARK_THEME ? 'light-content' : 'dark-content'}
         backgroundColor={theme === DARK_THEME ? 'black' : 'white'}
       />
       {!isLoggedIn ? <AuthTabs /> : <AppTabs />}
-
       <Loader />
       <Error />
     </NavigationContainer>
   );
 }
-
-const mapStateToProps = (state) => ({
-  isLoggedIn: state.auth.isLoggedIn,
-});
-
-export default connect(mapStateToProps)(Router);

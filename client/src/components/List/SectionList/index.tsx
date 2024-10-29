@@ -9,7 +9,7 @@ import { SectionHeader } from './Header';
 
 import { getStyles } from '../styles';
 
-type CustomSectionList<T> = {
+type CustomSectionListProps<T> = {
   sections: SectionListType<T>;
   renderItem: SectionListRenderItem<T>;
 };
@@ -17,10 +17,10 @@ type CustomSectionList<T> = {
 export function CustomSectionList<T extends EntityWithId>({
   sections,
   renderItem,
-}: CustomSectionList<T>) {
+}: CustomSectionListProps<T>) {
   const styles = useStyles(getStyles);
 
-  const sectionSeparator = useCallback(() => <View style={styles.separator} />, []);
+  const sectionSeparator = useCallback(() => <View style={styles.separator} />, [styles.separator]);
 
   return (
     <View style={styles.container}>

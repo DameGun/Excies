@@ -1,15 +1,18 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
+import { login, register } from '@/api/endpoints/auth';
 import {
   checkToken,
   getJwtPayload,
-  register,
   removeJwtPayload,
   removeToken,
   storeJwtPayload,
   storeToken,
-} from '@/helpers/api';
+} from '@/api/endpoints/token';
+import { ResponseStatus } from '@/constants/api';
 import { thunkHandler } from '@/redux/thunkHandler';
+import { ApiError } from '@/types/api';
+import { LoginDTO, RegisterDTO } from '@/types/auth';
 
 import { onAuth, onLogout } from '.';
 
@@ -17,52 +20,67 @@ export const thunkAppOpen = createAsyncThunk(
   'appOpen',
   async (_, { dispatch, rejectWithValue }) => {
     try {
-      const isTokenExists = await thunkHandler(checkToken);
+      await thunkHandler(checkToken);
 
-      if (isTokenExists) {
-        const { username, user_id } = await getJwtPayload();
-        dispatch(onAuth({ username, user_id }));
+      const response = await getJwtPayload();
+
+      if (response.status === ResponseStatus.Fullfiled) {
+        dispatch(onAuth(response.data));
       }
     } catch (err) {
-      return rejectWithValue(err.message);
+      const { message } = err as ApiError;
+      return rejectWithValue(message);
     }
   }
 );
 
-export const thunkLogin = createAsyncThunk('login', async (_, { dispatch, rejectWithValue }) => {
-  try {
-    const response = await thunkHandler(checkToken);
-    const token = response.accessToken;
+export const thunkLogin = createAsyncThunk<void, LoginDTO>(
+  'login',
+  async (payload, { dispatch, rejectWithValue }) => {
+    try {
+      const response = await thunkHandler(login, payload);
+      const token = response.accessToken;
 
-    await storeToken(token);
-    await storeJwtPayload({ username: response.username, user_id: response.user_id });
-    dispatch(onAuth({ username: response.username, user_id: response.user_id }));
-  } catch (err) {
-    return rejectWithValue(err.message);
+      await thunkHandler(storeToken, token);
+      await thunkHandler(storeJwtPayload, {
+        username: response.username,
+        user_id: response.user_id,
+      });
+      dispatch(onAuth({ username: response.username, user_id: response.user_id }));
+    } catch (err) {
+      const { message } = err as ApiError;
+      return rejectWithValue(message);
+    }
   }
-});
+);
 
-export const thunkRegister = createAsyncThunk(
+export const thunkRegister = createAsyncThunk<void, RegisterDTO>(
   'register',
-  async ({ payload }, { dispatch, rejectWithValue }) => {
+  async (payload, { dispatch, rejectWithValue }) => {
     try {
       const response = await thunkHandler(register, payload);
       const token = response.accessToken;
 
-      await storeToken(token);
+      await thunkHandler(storeToken, token);
+      await thunkHandler(storeJwtPayload, {
+        username: response.username,
+        user_id: response.user_id,
+      });
       dispatch(onAuth({ username: response.username, user_id: response.user_id }));
     } catch (err) {
-      return rejectWithValue(err.message);
+      const { message } = err as ApiError;
+      return rejectWithValue(message);
     }
   }
 );
 
 export const thunkLogout = createAsyncThunk('logout', async (_, { dispatch, rejectWithValue }) => {
   try {
-    await removeToken();
-    await removeJwtPayload();
+    await thunkHandler(removeToken);
+    await thunkHandler(removeJwtPayload);
     dispatch(onLogout());
   } catch (err) {
-    return rejectWithValue(err.message);
+    const { message } = err as ApiError;
+    return rejectWithValue(message);
   }
 });

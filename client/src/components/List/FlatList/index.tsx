@@ -31,9 +31,9 @@ export function CustomFlatList<T extends EntityWithIdAndName>({
 
   const renderItemWithSearch = useCallback<ListRenderItem<T>>(
     ({ item, index }) => {
-      const isLast = index == data.length - 1;
+      const isLast = index === data.length - 1;
 
-      if (index == 0 && headerComponent) {
+      if (index === 0 && headerComponent) {
         index = index - 1;
       }
 
@@ -47,7 +47,7 @@ export function CustomFlatList<T extends EntityWithIdAndName>({
 
       return renderItem({ item, isLast, index });
     },
-    [searchPhrase, headerComponent]
+    [searchPhrase, headerComponent, renderItem, data]
   );
 
   return (

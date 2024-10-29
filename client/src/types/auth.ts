@@ -17,4 +17,18 @@ type RegisterDTO = {
   email: string;
 };
 
-export type { LoginDTO, RegisterDTO, User };
+type AuthResponse = {
+  accessToken: string;
+  username: string;
+  user_id: string;
+};
+
+type AuthSliceState = {
+  isLoggedIn: boolean;
+  username: string | null;
+  user_id: string | null;
+};
+
+type OnAuthPayload = Omit<AuthResponse, 'accessToken'>;
+
+export type { AuthResponse, AuthSliceState, LoginDTO, OnAuthPayload, RegisterDTO, User };

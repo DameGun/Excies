@@ -52,7 +52,7 @@ export function ListItem<T extends EntityWithIdAndName>({
           backgroundColor: colors.greyBackground,
         },
         isLast && styles.itemLastStyle,
-        index == 0 && styles.itemFirstStyle,
+        index === 0 && styles.itemFirstStyle,
       ]}
       onPress={handlePress}
     >

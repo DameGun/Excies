@@ -9,5 +9,6 @@ export { Loader } from './Loader';
 export { Logo } from './Logo';
 export { CustomModal } from './Modal';
 export { NumbersInput } from './NumbersInput';
+export { NumberInputButton } from './NumbersInput/NumberInputButton';
 export { Search } from './Search';
 export { CustomTextInput } from './TextInput';

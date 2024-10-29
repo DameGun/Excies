@@ -5,10 +5,10 @@ import {
   CreateDetailedExerciseListItemDTO,
   DeleteDetailedExerciseListItemDTO,
   DetailedExerciseListItem,
+  DetailedExerciseListItemsGroup,
   GetDetailedExerciseListItemsDTO,
   UpdateDetailedExerciseListItemDTO,
 } from '@/types/detailedExerciseListItem';
-import { ExerciseListItem } from '@/types/exerciseListItem';
 
 import { axiosClient } from '..';
 
@@ -16,9 +16,9 @@ export async function getDetailedExerciseListItems({
   username,
   list_id,
   list_item_id,
-}: GetDetailedExerciseListItemsDTO): ApiResult<DetailedExerciseListItem[]> {
+}: GetDetailedExerciseListItemsDTO): ApiResult<DetailedExerciseListItemsGroup[]> {
   try {
-    const { data } = await axiosClient.get(
+    const { data } = await axiosClient.get<DetailedExerciseListItemsGroup[]>(
       `/${username}/exercise-lists/${list_id}/items/${list_item_id}/details`
     );
     return handleResult(data);
@@ -34,7 +34,7 @@ export async function createDetailedExerciseListItem({
   detailed_exercise_list_item,
 }: CreateDetailedExerciseListItemDTO): ApiResult<DetailedExerciseListItem> {
   try {
-    const { data } = await axiosClient.post(
+    const { data } = await axiosClient.post<DetailedExerciseListItem>(
       `/${username}/exercise-lists/${list_id}/items/${list_item_id}/details`,
       detailed_exercise_list_item
     );
@@ -50,9 +50,9 @@ export async function updateDetailedExerciseListItem({
   list_item_id,
   id,
   detailed_exercise_list_item,
-}: UpdateDetailedExerciseListItemDTO): ApiResult<ExerciseListItem> {
+}: UpdateDetailedExerciseListItemDTO): ApiResult<DetailedExerciseListItem> {
   try {
-    const { data } = await axiosClient.patch(
+    const { data } = await axiosClient.patch<DetailedExerciseListItem>(
       `/${username}/exercise-lists/${list_id}/items/${list_item_id}/details/${id}`,
       detailed_exercise_list_item
     );
@@ -69,10 +69,10 @@ export async function deleteDetailedExerciseListItem({
   id,
 }: DeleteDetailedExerciseListItemDTO): ApiResult {
   try {
-    const { data } = await axiosClient.delete(
+    await axiosClient.delete(
       `/${username}/exercise-lists/${list_id}/items/${list_item_id}/details/${id}`
     );
-    return handleResult(data);
+    return handleResult();
   } catch (err) {
     return handleError(err);
   }

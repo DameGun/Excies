@@ -14,4 +14,8 @@ export const getStyles = (colors: ThemeColors) =>
     placeholderColor: {
       color: colors.grey,
     },
+    error: {
+      color: 'red',
+      marginTop: 10,
+    },
   });

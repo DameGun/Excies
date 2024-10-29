@@ -1,39 +1,41 @@
 import { useEffect, useRef } from 'react';
 import { ActivityIndicator } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
 
 import {
+  LoadingState,
   MAX_REQUEST_WAITING_EXPIRE_TIME,
   MIN_REQUEST_WAITING_EXPIRE_TIME,
-} from '@/constants/common.js';
-import { setShowLoading, setStatus } from '@/redux/slices/loadingSlice.js';
+} from '@/constants/loading';
+import { useAppDispatch, useAppSelector } from '@/hooks/redux';
+import { setShowLoading, setStatus } from '@/redux/slices/loading';
 
 import { CustomModal } from '../Modal';
 
 export function Loader() {
-  const { status, showLoading } = useSelector((state) => state.loading);
-  const dispatch = useDispatch();
+  const { status, showLoading } = useAppSelector((state) => state.loading);
+  const dispatch = useAppDispatch();
   const stateRef = useRef(status);
 
   useEffect(() => {
     const expireTimeout = setTimeout(() => {
-      if (stateRef.current == 'loading') {
+      if (stateRef.current === 'loading') {
         dispatch(
-          setStatus({ status: 'failed', error: { message: 'Request waiting time exceeded' } })
+          setStatus({ status: LoadingState.Failed, errorMessage: 'Request waiting time exceeded' })
         );
       }
     }, MAX_REQUEST_WAITING_EXPIRE_TIME);
 
     const minTimeout = setTimeout(() => {
-      if (stateRef.current == 'loading') {
+      if (stateRef.current === 'loading') {
         dispatch(setShowLoading(true));
       }
     }, MIN_REQUEST_WAITING_EXPIRE_TIME);
 
     return () => {
       clearTimeout(expireTimeout);
+      clearTimeout(minTimeout);
     };
-  }, [status]);
+  }, [status, dispatch]);
 
   useEffect(() => {
     stateRef.current = status;

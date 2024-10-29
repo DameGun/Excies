@@ -1,33 +1,49 @@
-import { setStatus } from './slices/loading';
-import store from './store.js';
+import { ResponseStatus } from '@/constants/api';
+import { LoadingState } from '@/constants/loading';
+import { ApiResult, BaseApiResponse } from '@/types/api';
 
-type ThunkAPICall<TParams, TReturn> = (params?: TParams) => Promise<TReturn>;
+import { setStatus } from './slices/loading';
+import store from './store';
+
+type ThunkHandlerReturnType<TReturn> = Promise<
+  TReturn extends undefined ? BaseApiResponse : TReturn
+>;
 
 export async function thunkHandler<TParams, TReturn>(
-  apiCall: ThunkAPICall<TParams, TReturn>,
+  apiCall: (params: TParams) => ApiResult<TReturn>,
+  payload: TParams
+): ThunkHandlerReturnType<TReturn>;
+
+export async function thunkHandler<TParams, TReturn>(
+  apiCall: () => ApiResult<TReturn>,
+  payload?: TParams
+): ThunkHandlerReturnType<TReturn>;
+
+export async function thunkHandler<TParams, TReturn>(
+  apiCall: (params?: TParams) => ApiResult<TReturn>,
   payload?: TParams
 ) {
   const dispatch = store.dispatch;
 
-  dispatch(setStatus({ status: 'loading' }));
+  dispatch(setStatus({ status: LoadingState.Loading }));
 
-  const response = await apiCall(payload);
+  const response = payload !== undefined ? await apiCall(payload) : await apiCall();
 
-  if (typeof response === 'boolean') {
-    dispatch(setStatus({ status: 'idle' }));
+  if (response.status === ResponseStatus.Fullfiled) {
+    dispatch(setStatus({ status: LoadingState.Idle }));
+    if ('data' in response) {
+      return response.data;
+    }
+
     return response;
-  }
-
-  if (response.success) {
-    dispatch(setStatus({ status: 'idle' }));
-    return response.data;
   } else {
     dispatch(
       setStatus({
-        status: 'failed',
-        error: { code: response.response.status, message: response.message },
+        status: LoadingState.Failed,
+        errorMessage: response.message,
       })
     );
-    throw new Error(response.response.status);
+
+    throw new Error(response.message);
   }
 }

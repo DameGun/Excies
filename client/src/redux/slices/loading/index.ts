@@ -1,22 +1,28 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+import { LoadingState } from '@/constants/loading';
+import { LoadingSliceState, SetStatusPayload } from '@/types/loadingSlice';
+
+const initialState: LoadingSliceState = {
+  status: LoadingState.Idle,
+  errorMessage: undefined,
+  showLoading: false,
+};
 
 const loadingSlice = createSlice({
   name: 'loading',
-  initialState: {
-    status: 'idle',
-    error: null,
-    showLoading: false,
-  },
+  initialState,
   reducers: {
-    setStatus: (state, action) => {
-      state.status = action.payload.status;
-      state.error = action.payload.error || 'Some error occured';
+    setStatus: (state, action: PayloadAction<SetStatusPayload>) => {
+      const { status, errorMessage } = action.payload;
+      state.status = status;
+      state.errorMessage = errorMessage;
 
-      if (action.payload.status == 'failed' || action.payload.status == 'idle') {
+      if (status === LoadingState.Failed || status === LoadingState.Idle) {
         state.showLoading = false;
       }
     },
-    setShowLoading: (state, action) => {
+    setShowLoading: (state, action: PayloadAction<boolean>) => {
       state.showLoading = action.payload;
     },
   },

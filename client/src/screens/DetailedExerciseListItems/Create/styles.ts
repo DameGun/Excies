@@ -1,10 +1,12 @@
 import { StyleSheet } from 'react-native';
 
-export const getStyles = (props) =>
+import { ThemeColors } from '@/types/theme';
+
+export const getStyles = (colors: ThemeColors) =>
   StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: props.colors.greyDark,
+      backgroundColor: colors.greyDark,
       borderTopLeftRadius: 15,
       borderTopRightRadius: 15,
       padding: 20,
@@ -17,18 +19,22 @@ export const getStyles = (props) =>
       marginLeft: 10,
     },
     header: {
-      color: props.colors.grey,
+      color: colors.grey,
       textTransform: 'uppercase',
       fontSize: 12,
     },
-    primaryColor: props.colors.primary,
-    greyColor: props.colors.greyBackground,
+    primaryColor: {
+      color: colors.primary,
+    },
+    greyColor: {
+      color: colors.greyBackground,
+    },
     inputsContainer: {
       gap: 10,
     },
     input: {
       borderWidth: 2,
-      backgroundColor: props.colors.greyBackground,
+      backgroundColor: colors.greyBackground,
       borderRadius: 8,
       flexDirection: 'row',
       justifyContent: 'space-between',
@@ -37,26 +43,6 @@ export const getStyles = (props) =>
     },
     inputButtonsContainer: {
       flexDirection: 'row',
-    },
-    inputButton: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      gap: 5,
-      padding: 2,
-      paddingVertical: 10,
-    },
-    inputButtonText: {
-      color: props.colors.text,
-      fontSize: 18,
-    },
-    inputButtonNumber: {
-      color: props.colors.text,
-      backgroundColor: props.colors.greyPressed,
-      paddingVertical: 3,
-      paddingHorizontal: 10,
-      borderRadius: 8,
-      fontSize: 18,
-      overflow: 'hidden',
     },
     submitButton: {
       marginTop: 10,
@@ -68,7 +54,7 @@ export const getStyles = (props) =>
       color: 'black',
     },
     inputTitle: {
-      color: props.colors.text,
+      color: colors.text,
       fontSize: 20,
     },
     numberButtonsContainer: {

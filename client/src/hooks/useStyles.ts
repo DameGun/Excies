@@ -7,7 +7,7 @@ import { useCustomTheme } from './useCustomTheme';
 export function useStyles<T>(getStyles: StyleSheetFunc<T>) {
   const { colors, dark } = useCustomTheme();
 
-  const globalStyles = useMemo(() => getStyles(colors), [dark, colors]);
+  const globalStyles = useMemo(() => getStyles(colors), [dark, colors, getStyles]);
 
   return globalStyles;
 }

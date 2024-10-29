@@ -1,16 +1,16 @@
 import { PropsWithChildren, ReactNode } from 'react';
-import { Keyboard, Pressable, StyleProp, Text, View, ViewStyle } from 'react-native';
+import { Keyboard, Pressable, StyleProp, Text, TextStyle, View, ViewStyle } from 'react-native';
 
 import { useStyles } from '@/hooks/useStyles';
 import { PressableProps } from '@/types/pressable';
+import { StyleProps } from '@/types/styles';
 
 import { getStyles } from './styles';
 
-type CustomButtonProps = PropsWithChildren &
+type CustomButtonProps = StyleProps<'text' | 'button'> &
+  PropsWithChildren &
   PressableProps & {
     type?: 'submit';
-    textStyle?: StyleProp<ViewStyle>;
-    buttonStyle?: StyleProp<ViewStyle>;
     iconComponent?: ReactNode;
     disabled?: boolean;
   };
@@ -27,7 +27,7 @@ export function CustomButton({
   const customStyles = useStyles(getStyles);
 
   const handlePress = () => {
-    if (type == 'submit') {
+    if (type === 'submit') {
       Keyboard.dismiss();
     }
     onPress();

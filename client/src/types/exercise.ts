@@ -5,4 +5,8 @@ type Exercise = {
   description: string;
 };
 
-export type { Exercise };
+type ExerciseState = {
+  data: Exercise[];
+};
+
+export type { Exercise, ExerciseState };

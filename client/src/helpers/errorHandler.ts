@@ -1,5 +1,6 @@
 import { isAxiosError } from 'axios';
 
+import { ResponseStatus } from '@/constants/api';
 import { ApiError, CustomApiError } from '@/types/api';
 
 export function handleError(error: unknown): ApiError {
@@ -14,8 +15,8 @@ export function handleError(error: unknown): ApiError {
   }
 
   return {
-    message: 'Unkown error',
+    message: 'Unknown error',
     code: 520,
-    status: 'rejected',
+    status: ResponseStatus.Rejected,
   };
 }

@@ -1,16 +1,19 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { getExercises } from '@/helpers/api';
+import { getExercises } from '@/api/endpoints/exercise';
 import { thunkHandler } from '@/redux/thunkHandler';
+import { ApiError } from '@/types/api';
+import { Exercise } from '@/types/exercise';
 
-export const thunkGetExercises = createAsyncThunk(
+export const thunkGetExercises = createAsyncThunk<Exercise[]>(
   'getExercises',
   async (_, { rejectWithValue }) => {
     try {
       const response = await thunkHandler(getExercises);
       return response;
     } catch (err) {
-      return rejectWithValue(err.message);
+      const { message } = err as ApiError;
+      return rejectWithValue(message);
     }
   }
 );

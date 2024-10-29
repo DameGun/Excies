@@ -22,4 +22,15 @@ type DeleteExerciseListDTO = RequiredUsernameParameter & {
   id: string;
 };
 
-export type { CreateExerciseListDTO, DeleteExerciseListDTO, ExerciseList, UpdateExerciseListDTO };
+type ExerciseListState = {
+  data: ExerciseList[];
+  currentList: ExerciseList | null;
+};
+
+export type {
+  CreateExerciseListDTO,
+  DeleteExerciseListDTO,
+  ExerciseList,
+  ExerciseListState,
+  UpdateExerciseListDTO,
+};

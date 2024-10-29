@@ -14,7 +14,7 @@ export async function getExerciseLists({
   username,
 }: RequiredUsernameParameter): ApiResult<ExerciseList[]> {
   try {
-    const { data } = await axiosClient.get(`/${username}/exercise-lists`);
+    const { data } = await axiosClient.get<ExerciseList[]>(`/${username}/exercise-lists`);
     return handleResult(data);
   } catch (err) {
     return handleError(err);
@@ -27,7 +27,10 @@ export async function createExerciseList({
   description,
 }: CreateExerciseListDTO): ApiResult<ExerciseList> {
   try {
-    const { data } = await axiosClient.post(`/${username}/exercise-lists`, { name, description });
+    const { data } = await axiosClient.post<ExerciseList>(`/${username}/exercise-lists`, {
+      name,
+      description,
+    });
     return handleResult(data);
   } catch (err) {
     return handleError(err);
@@ -41,7 +44,7 @@ export async function updateExerciseList({
   description,
 }: UpdateExerciseListDTO): ApiResult<ExerciseList> {
   try {
-    const { data } = await axiosClient.patch(`/${username}/exercise-lists/${id}`, {
+    const { data } = await axiosClient.patch<ExerciseList>(`/${username}/exercise-lists/${id}`, {
       name,
       description,
     });
@@ -53,8 +56,8 @@ export async function updateExerciseList({
 
 export async function deleteExerciseList({ username, id }: DeleteExerciseListDTO): ApiResult {
   try {
-    const { data } = await axiosClient.delete(`/${username}/exercise-lists/${id}`);
-    return handleResult(data);
+    await axiosClient.delete(`/${username}/exercise-lists/${id}`);
+    return handleResult();
   } catch (err) {
     return handleError(err);
   }
