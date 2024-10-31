@@ -1,15 +1,15 @@
 import { Button, ButtonProps } from 'react-native';
 
-export const getModalHeaderScreenOption = ({ disabled, onPress, title }: ButtonProps) => {
+import { NativeStackNavigationOptions } from '@react-navigation/native-stack';
+
+export const getModalHeaderScreenOption = ({
+  disabled,
+  onPress,
+  title,
+  color,
+}: ButtonProps): Partial<NativeStackNavigationOptions> => {
   return {
-    headerRight: () => (
-      <Button
-        disabled={disabled}
-        title='Done'
-        //   color={buttonColor}
-        onPress={onPress}
-      />
-    ),
+    headerRight: () => <Button disabled={disabled} title='Done' color={color} onPress={onPress} />,
     headerTitle: title,
     headerTitleAlign: 'center',
   };

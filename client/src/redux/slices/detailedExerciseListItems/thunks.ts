@@ -16,13 +16,17 @@ import {
   GetDetailedExerciseListItemsDTO,
   UpdateDetailedExerciseListItemDTO,
 } from '@/types/detailedExerciseListItem';
+import { TypedThunkApi } from '@/types/redux';
+
+import { thunkGetExerciseListItemById } from '../exerciseListItems/thunks';
 
 export const thunkGetDetailedExerciseListItems = createAsyncThunk<
   DetailedExerciseListItemsGroup[],
-  GetDetailedExerciseListItemsDTO
->('getDetailedExerciseListItems', async (payload, { rejectWithValue }) => {
+  GetDetailedExerciseListItemsDTO,
+  TypedThunkApi
+>('getDetailedExerciseListItems', async (payload, { dispatch, rejectWithValue }) => {
   try {
-    const response = await thunkHandler(getDetailedExerciseListItems, payload);
+    const response = await thunkHandler(dispatch, getDetailedExerciseListItems, payload);
     return response;
   } catch (err) {
     const { message } = err as ApiError;
@@ -32,10 +36,14 @@ export const thunkGetDetailedExerciseListItems = createAsyncThunk<
 
 export const thunkCreateDetailedExerciseListItem = createAsyncThunk<
   DetailedExerciseListItem,
-  CreateDetailedExerciseListItemDTO
->('createDetailedExerciseListItem', async (payload, { rejectWithValue }) => {
+  CreateDetailedExerciseListItemDTO,
+  TypedThunkApi
+>('createDetailedExerciseListItem', async (payload, { dispatch, rejectWithValue }) => {
   try {
-    const response = await thunkHandler(createDetailedExerciseListItem, payload);
+    const response = await thunkHandler(dispatch, createDetailedExerciseListItem, payload);
+
+    await dispatch(thunkGetExerciseListItemById({ ...payload, id: payload.list_item_id }));
+
     return response;
   } catch (err) {
     const { message } = err as ApiError;
@@ -45,10 +53,11 @@ export const thunkCreateDetailedExerciseListItem = createAsyncThunk<
 
 export const thunkUpdateDetailedExerciseListItem = createAsyncThunk<
   DetailedExerciseListItem,
-  UpdateDetailedExerciseListItemDTO
->('updateDetailedExerciseListItem', async (payload, { rejectWithValue }) => {
+  UpdateDetailedExerciseListItemDTO,
+  TypedThunkApi
+>('updateDetailedExerciseListItem', async (payload, { dispatch, rejectWithValue }) => {
   try {
-    const response = await thunkHandler(updateDetailedExerciseListItem, payload);
+    const response = await thunkHandler(dispatch, updateDetailedExerciseListItem, payload);
     return response;
   } catch (err) {
     const { message } = err as ApiError;
@@ -58,10 +67,13 @@ export const thunkUpdateDetailedExerciseListItem = createAsyncThunk<
 
 export const thunkDeleteDetailedExerciseListItem = createAsyncThunk<
   void,
-  DeleteDetailedExerciseListItemDTO
->('deleteDetailedExerciseListItem', async (payload, { rejectWithValue }) => {
+  DeleteDetailedExerciseListItemDTO,
+  TypedThunkApi
+>('deleteDetailedExerciseListItem', async (payload, { dispatch, rejectWithValue }) => {
   try {
-    await thunkHandler(deleteDetailedExerciseListItem, payload);
+    await thunkHandler(dispatch, deleteDetailedExerciseListItem, payload);
+
+    await dispatch(thunkGetExerciseListItemById({ ...payload, id: payload.list_item_id }));
   } catch (err) {
     const { message } = err as ApiError;
     return rejectWithValue(message);

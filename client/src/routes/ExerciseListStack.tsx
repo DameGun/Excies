@@ -4,8 +4,9 @@ import { useTheme } from '@react-navigation/native';
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 
 import { ScreenNames } from '@/constants/navigation';
-import { useAppDispatch } from '@/hooks/redux';
+import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { useStyles } from '@/hooks/useStyles';
+import { selectUsername } from '@/redux/slices/auth';
 import { thunkLogout } from '@/redux/slices/auth/thunks';
 import { StackNavigationParams } from '@/types/navigation';
 import { getCommonHeaderScreenOptions } from '@/utils/getCommonHeaderScreenOptions';
@@ -25,6 +26,7 @@ const Stack = createStackNavigator<StackNavigationParams>();
 export function ExerciseListStack() {
   const commonScreenOptions = useStyles(getCommonHeaderScreenOptions);
   const { colors } = useTheme();
+  const username = useAppSelector(selectUsername) as NonNullable<string>;
   const dispatch = useAppDispatch();
 
   const handleLogout = () => {
@@ -41,6 +43,9 @@ export function ExerciseListStack() {
             headerLeft: () => (
               <Button title='Log out' color={colors.primary} onPress={handleLogout} />
             ),
+          }}
+          initialParams={{
+            username,
           }}
         />
         <Stack.Screen

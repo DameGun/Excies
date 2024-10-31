@@ -11,7 +11,7 @@ const registerSchema = yup.object().shape({
   username: yup.string().required(ValidationErrors.Required),
   password: yup.string().required(ValidationErrors.Required),
   confirmPassword: yup.string().oneOf([yup.ref('password')], ValidationErrors.PasswordConfirm),
-  email: yup.string().email().optional(),
+  email: yup.string().email(ValidationErrors.Email).optional(),
 });
 
 export { loginSchema, registerSchema };

@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 import { Modal, View } from 'react-native';
 
-import { styles } from './styles.js';
+import { styles } from './styles';
 
 type ModalProps = PropsWithChildren & {
   showModal: boolean;

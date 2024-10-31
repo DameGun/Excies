@@ -1,8 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
 
 import { ExerciseState } from '@/types/exercise';
+import { RootState } from '@/types/redux';
 
 import { thunkGetExercises } from './thunks';
+
+import { selectExerciseListItems } from '../exerciseListItems';
 
 const initialState: ExerciseState = {
   data: [],
@@ -14,9 +17,17 @@ const exercisesSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder.addCase(thunkGetExercises.fulfilled, (state, action) => {
-      state.data = action.payload;
+      if (state.data.length === 0) state.data = action.payload;
     });
   },
 });
+
+export const selectExercises = (state: RootState) => state.exercises.data;
+export const selectExercisesDiffSelector = createSelector(
+  [selectExerciseListItems, selectExercises],
+  (listItems, exercises) => {
+    return exercises.filter(({ id }) => !listItems.some(({ exercise_id }) => id === exercise_id));
+  }
+);
 
 export default exercisesSlice.reducer;

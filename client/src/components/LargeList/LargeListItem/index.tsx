@@ -5,18 +5,23 @@ import { AntDesign } from '@expo/vector-icons';
 
 import { useStyles } from '@/hooks/useStyles';
 import { Exercise } from '@/types/exercise';
+import { ExerciseListItem } from '@/types/exerciseListItem';
 import { AntIconNames } from '@/types/icons';
 import { PressableProps } from '@/types/pressable';
 
 import { getStyles } from '../styles';
 
-type LargeListItemProps = PressableProps & {
-  item: Exercise;
+type LargeListItemProps = PressableProps<Exercise | ExerciseListItem> & {
+  item: Exercise | ExerciseListItem;
   iconName: AntIconNames;
 };
 
 export const LargeListItem = memo(({ item, iconName, onPress }: LargeListItemProps) => {
   const styles = useStyles(getStyles);
+
+  const handlePress = () => {
+    onPress?.(item);
+  };
 
   return (
     <Pressable
@@ -25,7 +30,7 @@ export const LargeListItem = memo(({ item, iconName, onPress }: LargeListItemPro
           backgroundColor: pressed ? styles.listItemPressed.backgroundColor : 'black',
         },
       ]}
-      onPress={() => onPress(item)}
+      onPress={handlePress}
     >
       <View style={styles.itemContainer}>
         <AntDesign name={iconName} size={16} color={styles.iconColor.color} />

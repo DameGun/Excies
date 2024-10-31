@@ -1,6 +1,8 @@
 import { StyleSheet } from 'react-native';
 
-export const getStyles = (props) =>
+import { ThemeColors } from '@/types/theme';
+
+export const getStyles = (colors: ThemeColors) =>
   StyleSheet.create({
     container: {
       flex: 1,
@@ -26,7 +28,7 @@ export const getStyles = (props) =>
     },
     time: {
       fontSize: 14,
-      color: props.colors.grey,
+      color: colors.grey,
     },
     itemInfoSubContainer: {
       flexDirection: 'row',
@@ -34,23 +36,23 @@ export const getStyles = (props) =>
       justifyContent: 'center',
     },
     itemInfoNumberLeft: {
-      color: props.colors.primary,
+      color: colors.primary,
       fontWeight: 'bold',
       fontSize: 18,
     },
     itemInfoTextLeft: {
-      color: props.colors.primary,
+      color: colors.primary,
       fontSize: 12,
       paddingLeft: 2,
       paddingBottom: 2,
     },
     itemInfoNumberRight: {
-      color: props.colors.primary,
+      color: colors.primary,
       fontWeight: 'bold',
       fontSize: 18,
     },
     itemInfoTextRight: {
-      color: props.colors.primary,
+      color: colors.primary,
       fontSize: 12,
       paddingLeft: 2,
       paddingBottom: 2,

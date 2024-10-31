@@ -28,7 +28,7 @@ type CreateDetailedItemModalScreenProps = NativeStackScreenProps<
   ScreenNames.CreateDetailedItemModalScreen
 >;
 
-export default function CreateDetailedItemModalScreen({
+export function CreateDetailedItemModalScreen({
   route,
   navigation,
 }: CreateDetailedItemModalScreenProps) {
@@ -93,7 +93,7 @@ export default function CreateDetailedItemModalScreen({
         </View>
         <View style={styles.inputsContainer}>
           <RepetitionsNumbers
-            isActive={active === CreateDetailedExerciseListItemParameterType.Weight}
+            isActive={active === CreateDetailedExerciseListItemParameterType.Repetitions}
             handleRepetitions={setRep}
             rep={rep}
             setParameterType={setActive}

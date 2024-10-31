@@ -1,43 +1,67 @@
 import { useEffect } from 'react';
 import { Text, View } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
 
 import { Entypo, Ionicons } from '@expo/vector-icons';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-import { getStyles } from './styles.js';
+import { CustomButton, CustomSectionList, EmptyList, ListItem } from '@/components';
+import { ScreenNames } from '@/constants/navigation';
+import { useAppDispatch, useAppSelector } from '@/hooks/redux';
+import { useStyles } from '@/hooks/useStyles';
+import { selectDetailedExerciseListItems } from '@/redux/slices/detailedExerciseListItems';
+import { thunkGetDetailedExerciseListItems } from '@/redux/slices/detailedExerciseListItems/thunks';
+import {
+  DetailedExerciseListItem,
+  GetDetailedExerciseListItemsDTO,
+} from '@/types/detailedExerciseListItem';
+import { StackNavigationParams } from '@/types/navigation';
 
-import { CustomButton, CustomSectionList, EmptyList, ListItem } from '../../../components';
-import { useStyles } from '../../../helpers/customHooks.js';
-import { thunkGetDetailedExerciseListItems } from '../../../redux/slices/detailedExerciseListItemsSlice.js';
+import { getStyles } from './styles';
 
-export default function DetailedExerciseListItemsScreen({ route, navigation }) {
-  const { list_id, list_item_id } = route.params;
-  const { data } = useSelector((state) => state.detailedExerciseListItems);
-  const { username } = useSelector((state) => state.auth);
+type DetailedExerciseListItemsScreenProps = NativeStackScreenProps<
+  StackNavigationParams,
+  ScreenNames.DetailedExerciseListItemsScreen
+>;
 
-  const dispatch = useDispatch();
+export function DetailedExerciseListItemsScreen({
+  route,
+  navigation,
+}: DetailedExerciseListItemsScreenProps) {
+  const { list_id, list_item_id, name, username } = route.params;
+  const data = useAppSelector(selectDetailedExerciseListItems);
+
+  const dispatch = useAppDispatch();
   const styles = useStyles(getStyles);
 
   useEffect(() => {
-    dispatch(thunkGetDetailedExerciseListItems({ payload: { username, list_id, list_item_id } }));
+    const payload: GetDetailedExerciseListItemsDTO = {
+      username,
+      list_id,
+      list_item_id,
+    };
+    dispatch(thunkGetDetailedExerciseListItems(payload));
 
     navigation.setOptions({
-      headerTitle: route.params.name,
+      headerTitle: name,
     });
   }, []);
 
-  function handleNavigate() {
-    navigation.navigate('CreateDetailedItemModalScreen', { username, list_id, list_item_id });
-  }
+  const handleNavigate = () => {
+    navigation.navigate(ScreenNames.CreateDetailedItemModalScreen, {
+      username,
+      list_id,
+      list_item_id,
+    });
+  };
 
-  function handleInfo(item) {
-    navigation.navigate('DetailedExerciseListItemInfoModalScreen', {
+  const handleInfo = (item: DetailedExerciseListItem) => {
+    navigation.navigate(ScreenNames.DetailedExerciseListItemInfoModalScreen, {
       username,
       list_id,
       list_item_id,
       item,
     });
-  }
+  };
 
   return data.length ? (
     <View style={styles.container}>
@@ -49,7 +73,7 @@ export default function DetailedExerciseListItemsScreen({ route, navigation }) {
               title={item.time}
               item={item}
               onPress={handleInfo}
-              isLast={index == data.length - 1}
+              isLast={index === data.length - 1}
               index={index}
               titleStyle={styles.time}
             >

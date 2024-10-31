@@ -13,7 +13,7 @@ import { AppTabs } from './AppTabs';
 import { AuthTabs } from './AuthTabs';
 
 export function Router() {
-  const theme = useColorScheme() == 'dark' ? DARK_THEME : LIGHT_THEME;
+  const theme = useColorScheme() === 'dark' ? DARK_THEME : LIGHT_THEME;
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
   const dispatch = useAppDispatch();
 

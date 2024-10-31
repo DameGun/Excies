@@ -10,7 +10,7 @@ import { AuthLayout } from './AuthLayout';
 import { styles } from './styles';
 import { loginSchema } from './validation';
 
-export default function LoginScreen() {
+export function LoginScreen() {
   const dispatch = useAppDispatch();
 
   const { control, handleSubmit } = useForm({

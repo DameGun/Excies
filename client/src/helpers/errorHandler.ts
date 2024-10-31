@@ -14,6 +14,8 @@ export function handleError(error: unknown): ApiError {
     return errorObject as CustomApiError;
   }
 
+  console.log(error);
+
   return {
     message: 'Unknown error',
     code: 520,

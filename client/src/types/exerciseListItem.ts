@@ -4,9 +4,16 @@ type ExerciseListItem = {
   id: string;
   list_id: string;
   exercise_id: string;
+  name: string;
+  last_time_updated: string;
 };
 
 type GetExerciseListItemsDTO = RequiredUsernameParameter & {
+  id: string;
+};
+
+type GetExerciseListItemByIdDTO = RequiredUsernameParameter & {
+  list_id: string;
   id: string;
 };
 
@@ -22,7 +29,6 @@ type DeleteExerciseListItemDTO = RequiredUsernameParameter & {
 
 type ExerciseListItemState = {
   data: ExerciseListItem[];
-  currentList: ExerciseListItem | null;
 };
 
 export type {
@@ -30,5 +36,6 @@ export type {
   DeleteExerciseListItemDTO,
   ExerciseListItem,
   ExerciseListItemState,
+  GetExerciseListItemByIdDTO,
   GetExerciseListItemsDTO,
 };

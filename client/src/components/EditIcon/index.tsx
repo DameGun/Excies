@@ -1,11 +1,11 @@
-import { Pressable } from 'react-native';
+import { GestureResponderEvent, Pressable } from 'react-native';
 
 import { Feather } from '@expo/vector-icons';
 
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import { PressableProps } from '@/types/pressable';
 
-export function EditIcon({ onPress }: PressableProps) {
+export function EditIcon({ onPress }: PressableProps<GestureResponderEvent>) {
   const { colors } = useCustomTheme();
 
   return (

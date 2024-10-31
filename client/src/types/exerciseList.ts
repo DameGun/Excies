@@ -5,6 +5,7 @@ type ExerciseList = {
   user_id: string;
   name: string;
   description: string;
+  itemsCount?: number;
 };
 
 type CreateExerciseListDTO = RequiredUsernameParameter & {
@@ -24,7 +25,6 @@ type DeleteExerciseListDTO = RequiredUsernameParameter & {
 
 type ExerciseListState = {
   data: ExerciseList[];
-  currentList: ExerciseList | null;
 };
 
 export type {

@@ -5,26 +5,27 @@ import { Entypo } from '@expo/vector-icons';
 
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import { useStyles } from '@/hooks/useStyles';
-import { EntityWithIdAndName } from '@/types/common';
+import { EntityWithId } from '@/types/common';
 import { EntypoIconNames } from '@/types/icons';
 import { PressableProps } from '@/types/pressable';
+import { StyleProps } from '@/types/styles';
 
-import { getStyles } from './styles.js';
+import { getStyles } from './styles';
 
-type ListItemProps<T> = PressableProps &
-  PropsWithChildren & {
+type ListItemProps<T> = PressableProps<T> &
+  PropsWithChildren &
+  StyleProps<'title'> & {
     title: string;
-    titleStyle: object;
     item?: T;
-    iconName: EntypoIconNames;
+    iconName?: EntypoIconNames;
     iconSize?: number;
-    iconColor: string;
-    infoRight?: string;
+    iconColor?: string;
+    infoRight?: number | string;
     isLast: boolean;
     index: number;
   };
 
-export function ListItem<T extends EntityWithIdAndName>({
+export function ListItem<T extends EntityWithId>({
   title = 'Empty title',
   titleStyle,
   item,
@@ -41,7 +42,7 @@ export function ListItem<T extends EntityWithIdAndName>({
   const styles = useStyles(getStyles);
 
   const handlePress = () => {
-    onPress?.(item);
+    if (item) onPress?.(item);
   };
 
   return (
@@ -74,12 +75,12 @@ export function ListItem<T extends EntityWithIdAndName>({
               titleStyle,
             ]}
           >
-            {item?.name || title}
+            {title}
           </Text>
 
           <View style={styles.infoRightContainer}>
             {children}
-            {infoRight && <Text style={styles.infoRightText}>{infoRight}</Text>}
+            {infoRight !== undefined && <Text style={styles.infoRightText}>{infoRight}</Text>}
             <Entypo name='chevron-right' size={18} color={colors.grey} />
           </View>
         </View>

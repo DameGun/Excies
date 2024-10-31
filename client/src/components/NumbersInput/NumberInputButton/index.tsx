@@ -17,7 +17,7 @@ export function NumberInputButton({ type, number, showOperator, onPress }: Numbe
   const styles = useStyles(getStyles);
 
   const handlePress = () => {
-    onPress({ type, number });
+    onPress?.({ type, number });
   };
 
   return (
@@ -30,11 +30,23 @@ export function NumberInputButton({ type, number, showOperator, onPress }: Numbe
       ]}
       onPress={handlePress}
     >
-      <Text style={type == 'increase' ? styles.inputButtonNumber : styles.inputButtonText}>
-        {type == 'increase' ? number : showOperator && '-'}
+      <Text
+        style={
+          type === ItemValueOperationType.Increase
+            ? styles.inputButtonNumber
+            : styles.inputButtonText
+        }
+      >
+        {type === ItemValueOperationType.Increase ? number : showOperator && '-'}
       </Text>
-      <Text style={type == 'increase' ? styles.inputButtonText : styles.inputButtonNumber}>
-        {type == 'increase' ? showOperator && '+' : number}
+      <Text
+        style={
+          type === ItemValueOperationType.Increase
+            ? styles.inputButtonText
+            : styles.inputButtonNumber
+        }
+      >
+        {type === ItemValueOperationType.Increase ? showOperator && '+' : number}
       </Text>
     </Pressable>
   );

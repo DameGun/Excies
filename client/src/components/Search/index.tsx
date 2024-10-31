@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Button, Keyboard, TextInput, View } from 'react-native';
 
 import { Entypo, Feather } from '@expo/vector-icons';
@@ -7,14 +8,13 @@ import { useStyles } from '@/hooks/useStyles';
 import { getStyles } from './styles';
 
 type SearchProps = {
-  clicked: boolean;
   searchPhrase: string;
-  setClicked(value: boolean): void;
   setSearchPhrase(value: string): void;
 };
 
-export function Search({ clicked, searchPhrase, setSearchPhrase, setClicked }: SearchProps) {
+export function Search({ searchPhrase, setSearchPhrase }: SearchProps) {
   const styles = useStyles(getStyles);
+  const [clicked, setClicked] = useState(false);
 
   const handleFocus = () => {
     setClicked(true);

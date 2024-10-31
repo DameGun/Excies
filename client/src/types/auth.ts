@@ -14,7 +14,7 @@ type LoginDTO = {
 type RegisterDTO = {
   username: string;
   password: string;
-  email: string;
+  email?: string;
 };
 
 type AuthResponse = {

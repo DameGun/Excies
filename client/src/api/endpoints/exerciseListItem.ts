@@ -5,6 +5,7 @@ import {
   CreateExerciseListItemDTO,
   DeleteExerciseListItemDTO,
   ExerciseListItem,
+  GetExerciseListItemByIdDTO,
   GetExerciseListItemsDTO,
 } from '@/types/exerciseListItem';
 
@@ -17,6 +18,21 @@ export async function getExerciseListItems({
   try {
     const { data } = await axiosClient.get<ExerciseListItem[]>(
       `/${username}/exercise-lists/${id}/items`
+    );
+    return handleResult(data);
+  } catch (err) {
+    return handleError(err);
+  }
+}
+
+export async function getExerciseListItemById({
+  id,
+  username,
+  list_id,
+}: GetExerciseListItemByIdDTO): ApiResult<ExerciseListItem> {
+  try {
+    const { data } = await axiosClient.get<ExerciseListItem>(
+      `/${username}/exercise-lists/${list_id}/items/${id}`
     );
     return handleResult(data);
   } catch (err) {
@@ -51,6 +67,7 @@ export async function deleteExerciseListItem({
     await axiosClient.delete(`/${username}/exercise-lists/${list_id}/items/${list_item_id}`);
     return handleResult();
   } catch (err) {
+    console.log(err);
     return handleError(err);
   }
 }

@@ -11,7 +11,7 @@ import { CustomButton } from '../Button';
 type EmptyListProps = PressableProps & {
   primaryText: string;
   secondaryText: string;
-  buttonText: string;
+  buttonText?: string;
   IconComponent: ReactNode;
 };
 

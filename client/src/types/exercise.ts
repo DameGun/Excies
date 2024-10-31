@@ -9,4 +9,13 @@ type ExerciseState = {
   data: Exercise[];
 };
 
-export type { Exercise, ExerciseState };
+type GetExercisesDTO = {
+  listId: string;
+};
+
+type SpecifiedListExercises = {
+  listId: string;
+  exercises: Exercise[];
+};
+
+export type { Exercise, ExerciseState, GetExercisesDTO, SpecifiedListExercises };

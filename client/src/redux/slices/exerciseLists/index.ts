@@ -1,6 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
 
 import { ExerciseListState } from '@/types/exerciseList';
+import { RootState } from '@/types/redux';
 
 import {
   thunkCreateExerciseList,
@@ -9,36 +10,85 @@ import {
   thunkUpdateExerciseList,
 } from './thunks';
 
+import {
+  thunkCreateExerciseListItem,
+  thunkDeleteExerciseListItem,
+} from '../exerciseListItems/thunks';
+
 const initialState: ExerciseListState = {
   data: [],
-  currentList: null,
 };
 
 const exerciseListsSlice = createSlice({
   name: 'exerciseLists',
   initialState,
-  reducers: {
-    setCurrentList: (state, action) => {
-      state.currentList =
-        state.data.find((item) => item.id === action.payload) || state.currentList;
-    },
-  },
+  reducers: {},
   extraReducers(builder) {
     builder.addCase(thunkGetExerciseLists.fulfilled, (state, action) => {
       state.data = action.payload;
     });
     builder.addCase(thunkCreateExerciseList.fulfilled, (state, action) => {
-      state.currentList = action.payload;
+      state.data.push(action.payload);
     });
     builder.addCase(thunkUpdateExerciseList.fulfilled, (state, action) => {
-      state.currentList = action.payload;
+      const updatedList = action.payload;
+
+      state.data = state.data.map((list) => {
+        if (updatedList.id === list.id) {
+          return {
+            ...updatedList,
+            itemsCount: list.itemsCount,
+          };
+        }
+
+        return list;
+      });
     });
-    builder.addCase(thunkDeleteExerciseList.fulfilled, (state) => {
-      state.currentList = null;
+    builder.addCase(thunkDeleteExerciseList.fulfilled, (state, action) => {
+      const listId = action.meta.arg.id;
+
+      state.data = state.data.filter(({ id }) => id !== listId);
+    });
+    builder.addCase(thunkCreateExerciseListItem.fulfilled, (state, action) => {
+      const listId = action.meta.arg.list_id;
+
+      state.data = state.data.map((list) => {
+        if (list.id === listId) {
+          return {
+            ...list,
+            itemsCount: list.itemsCount !== undefined ? list.itemsCount + 1 : 0,
+          };
+        }
+
+        return list;
+      });
+    });
+    builder.addCase(thunkDeleteExerciseListItem.fulfilled, (state, action) => {
+      const listId = action.meta.arg.list_id;
+
+      state.data = state.data.map((list) => {
+        if (list.id === listId && list.itemsCount) {
+          return {
+            ...list,
+            itemsCount: list.itemsCount - 1,
+          };
+        }
+
+        return list;
+      });
     });
   },
 });
 
-export const { setCurrentList } = exerciseListsSlice.actions;
+const selectExerciseListId = (state: RootState, id?: string) => id;
+
+export const selectExerciseLists = (state: RootState) => state.exerciseLists.data;
+
+export const selectExerciseListById = createSelector(
+  [selectExerciseLists, selectExerciseListId],
+  (lists, id) => {
+    return lists.find((list) => list.id === id);
+  }
+);
 
 export default exerciseListsSlice.reducer;

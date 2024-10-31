@@ -1,16 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { ExerciseListItemState } from '@/types/exerciseListItem';
+import { RootState } from '@/types/redux';
 
 import {
   thunkCreateExerciseListItem,
   thunkDeleteExerciseListItem,
+  thunkGetExerciseListItemById,
   thunkGetExerciseListItems,
 } from './thunks';
 
 const initialState: ExerciseListItemState = {
   data: [],
-  currentList: null,
 };
 
 const exerciseListItemsSlice = createSlice({
@@ -30,7 +31,20 @@ const exerciseListItemsSlice = createSlice({
         state.data.splice(index, 1);
       }
     });
+    builder.addCase(thunkGetExerciseListItemById.fulfilled, (state, action) => {
+      const updatedListItem = action.payload;
+
+      state.data = state.data.map((listItem) => {
+        if (listItem.id === updatedListItem.id) {
+          return updatedListItem;
+        }
+
+        return listItem;
+      });
+    });
   },
 });
+
+export const selectExerciseListItems = (state: RootState) => state.exerciseListItems.data;
 
 export default exerciseListItemsSlice.reducer;

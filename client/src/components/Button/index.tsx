@@ -1,5 +1,5 @@
 import { PropsWithChildren, ReactNode } from 'react';
-import { Keyboard, Pressable, StyleProp, Text, TextStyle, View, ViewStyle } from 'react-native';
+import { Keyboard, Pressable, Text, View } from 'react-native';
 
 import { useStyles } from '@/hooks/useStyles';
 import { PressableProps } from '@/types/pressable';
@@ -30,7 +30,7 @@ export function CustomButton({
     if (type === 'submit') {
       Keyboard.dismiss();
     }
-    onPress();
+    onPress?.();
   };
 
   return (

@@ -8,8 +8,8 @@ type DetailedExerciseListItem = {
   date: string;
   rep: number;
   weight: number;
-  notes: string;
-  time: Date;
+  notes?: string;
+  time: string;
 };
 
 type DetailedExerciseListItemsGroup = {
@@ -22,12 +22,6 @@ type GetDetailedExerciseListItemsDTO = RequiredUsernameParameter & {
   list_item_id: string;
 };
 
-type DetailedExerciseListItemDTO = {
-  time: string;
-  rep: number;
-  weight: number;
-};
-
 type DetailedOperationType = {
   type: ItemValueOperationType;
   number: number;
@@ -36,14 +30,14 @@ type DetailedOperationType = {
 type CreateDetailedExerciseListItemDTO = RequiredUsernameParameter & {
   list_id: string;
   list_item_id: string;
-  detailed_exercise_list_item: DetailedExerciseListItemDTO;
+  detailed_exercise_list_item: Pick<DetailedExerciseListItem, 'time' | 'rep' | 'weight'>;
 };
 
 type UpdateDetailedExerciseListItemDTO = RequiredUsernameParameter & {
   list_id: string;
   list_item_id: string;
   id: string;
-  detailed_exercise_list_item: string;
+  detailed_exercise_list_item: Pick<DetailedExerciseListItem, 'rep' | 'weight' | 'notes'>;
 };
 
 type DeleteDetailedExerciseListItemDTO = RequiredUsernameParameter & {

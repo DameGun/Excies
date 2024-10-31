@@ -1,5 +1,12 @@
 import { Controller, ControllerProps, FieldValues, Path } from 'react-hook-form';
-import { Keyboard, Text, TextInput, TextInputProps, TouchableWithoutFeedback } from 'react-native';
+import {
+  Keyboard,
+  Text,
+  TextInput,
+  TextInputProps,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 
 import { useStyles } from '@/hooks/useStyles';
 
@@ -21,17 +28,19 @@ export function CustomTextInput<TFieldNames extends FieldValues, TName extends P
     <Controller
       {...props}
       render={({ field: { onChange, onBlur, value }, fieldState: { error } }) => (
-        <TouchableWithoutFeedback onPress={onPress} accessible={false}>
-          <TextInput
-            {...props}
-            style={[styles.input, props.style]}
-            placeholderTextColor={styles.placeholderColor.color}
-            onChangeText={onChange}
-            onBlur={onBlur}
-            value={value}
-          />
+        <View>
+          <TouchableWithoutFeedback onPress={onPress} accessible={false}>
+            <TextInput
+              {...props}
+              style={[styles.input, props.style]}
+              placeholderTextColor={styles.placeholderColor.color}
+              onChangeText={onChange}
+              onBlur={onBlur}
+              value={value}
+            />
+          </TouchableWithoutFeedback>
           <Text style={styles.error}>{error?.message}</Text>
-        </TouchableWithoutFeedback>
+        </View>
       )}
     />
   );

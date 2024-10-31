@@ -13,14 +13,15 @@ import { ResponseStatus } from '@/constants/api';
 import { thunkHandler } from '@/redux/thunkHandler';
 import { ApiError } from '@/types/api';
 import { LoginDTO, RegisterDTO } from '@/types/auth';
+import { TypedThunkApi } from '@/types/redux';
 
 import { onAuth, onLogout } from '.';
 
-export const thunkAppOpen = createAsyncThunk(
+export const thunkAppOpen = createAsyncThunk<void, void, TypedThunkApi>(
   'appOpen',
   async (_, { dispatch, rejectWithValue }) => {
     try {
-      await thunkHandler(checkToken);
+      await thunkHandler(dispatch, checkToken);
 
       const response = await getJwtPayload();
 
@@ -34,15 +35,15 @@ export const thunkAppOpen = createAsyncThunk(
   }
 );
 
-export const thunkLogin = createAsyncThunk<void, LoginDTO>(
+export const thunkLogin = createAsyncThunk<void, LoginDTO, TypedThunkApi>(
   'login',
   async (payload, { dispatch, rejectWithValue }) => {
     try {
-      const response = await thunkHandler(login, payload);
+      const response = await thunkHandler(dispatch, login, payload);
       const token = response.accessToken;
 
-      await thunkHandler(storeToken, token);
-      await thunkHandler(storeJwtPayload, {
+      await thunkHandler(dispatch, storeToken, token);
+      await thunkHandler(dispatch, storeJwtPayload, {
         username: response.username,
         user_id: response.user_id,
       });
@@ -54,15 +55,15 @@ export const thunkLogin = createAsyncThunk<void, LoginDTO>(
   }
 );
 
-export const thunkRegister = createAsyncThunk<void, RegisterDTO>(
+export const thunkRegister = createAsyncThunk<void, RegisterDTO, TypedThunkApi>(
   'register',
   async (payload, { dispatch, rejectWithValue }) => {
     try {
-      const response = await thunkHandler(register, payload);
+      const response = await thunkHandler(dispatch, register, payload);
       const token = response.accessToken;
 
-      await thunkHandler(storeToken, token);
-      await thunkHandler(storeJwtPayload, {
+      await thunkHandler(dispatch, storeToken, token);
+      await thunkHandler(dispatch, storeJwtPayload, {
         username: response.username,
         user_id: response.user_id,
       });
@@ -74,13 +75,16 @@ export const thunkRegister = createAsyncThunk<void, RegisterDTO>(
   }
 );
 
-export const thunkLogout = createAsyncThunk('logout', async (_, { dispatch, rejectWithValue }) => {
-  try {
-    await thunkHandler(removeToken);
-    await thunkHandler(removeJwtPayload);
-    dispatch(onLogout());
-  } catch (err) {
-    const { message } = err as ApiError;
-    return rejectWithValue(message);
+export const thunkLogout = createAsyncThunk<void, void, TypedThunkApi>(
+  'logout',
+  async (_, { dispatch, rejectWithValue }) => {
+    try {
+      await thunkHandler(dispatch, removeToken);
+      await thunkHandler(dispatch, removeJwtPayload);
+      dispatch(onLogout());
+    } catch (err) {
+      const { message } = err as ApiError;
+      return rejectWithValue(message);
+    }
   }
-});
+);

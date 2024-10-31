@@ -3,6 +3,7 @@ import { SafeAreaView, SectionList, View } from 'react-native';
 
 import { useStyles } from '@/hooks/useStyles';
 import { Exercise } from '@/types/exercise';
+import { ExerciseListItem } from '@/types/exerciseListItem';
 import { PressableProps } from '@/types/pressable';
 import { SectionListDataType, SectionListType } from '@/types/section';
 
@@ -11,13 +12,13 @@ import { getStyles } from './styles';
 
 import { SectionHeader } from '../List/SectionList/Header';
 
-type LargeListProps = PressableProps & {
-  sections: SectionListType<Exercise>;
+type LargeListProps = PressableProps<Exercise | ExerciseListItem> & {
+  sections: SectionListType<Exercise | ExerciseListItem>;
 };
 
 type RenderItemProps = {
-  item: Exercise;
-  section: SectionListDataType<Exercise>;
+  item: Exercise | ExerciseListItem;
+  section: SectionListDataType<Exercise | ExerciseListItem>;
 };
 
 type RenderItemFunc = (props: RenderItemProps) => ReactElement;

@@ -1,6 +1,8 @@
 import { StyleSheet } from 'react-native';
 
-export const getStyles = (props) =>
+import { ThemeColors } from '@/types/theme';
+
+export const getStyles = (colors: ThemeColors) =>
   StyleSheet.create({
     container: {
       flex: 1,
@@ -11,13 +13,15 @@ export const getStyles = (props) =>
       marginBottom: 20,
       marginTop: 5,
       height: 50,
-      backgroundColor: props.colors.greyBackground,
+      backgroundColor: colors.greyBackground,
     },
     addExerciseText: {
       fontWeight: 'bold',
       fontSize: 16,
     },
-    iconColor: props.colors.primary,
+    iconColor: {
+      color: colors.primary,
+    },
     shadow: {
       shadowColor: 'black',
       shadowOpacity: 1,

@@ -4,13 +4,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import { CustomButton, CustomTextInput } from '@/components';
 import { useAppDispatch } from '@/hooks/redux';
-import { thunkLogin } from '@/redux/slices/auth/thunks';
+import { thunkRegister } from '@/redux/slices/auth/thunks';
 
 import { AuthLayout } from './AuthLayout';
 import { styles } from './styles';
 import { registerSchema } from './validation';
 
-export default function RegisterScreen() {
+export function RegisterScreen() {
   const dispatch = useAppDispatch();
 
   const { control, handleSubmit } = useForm({
@@ -18,7 +18,7 @@ export default function RegisterScreen() {
     resolver: yupResolver(registerSchema),
   });
 
-  const onSubmit = handleSubmit((data) => dispatch(thunkLogin(data)));
+  const onSubmit = handleSubmit((data) => dispatch(thunkRegister(data)));
 
   return (
     <AuthLayout>
