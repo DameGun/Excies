@@ -1,12 +1,11 @@
 import exerciseListItemService from "../services/exerciseListItem.service.js";
-import ResponseObject from "../utilities/responseObject.js";
 
 async function findAll(req, res, next) {
   const list_id = req.params.list_id;
 
   try {
     const data = await exerciseListItemService.findAll(list_id);
-    res.status(200).json(new ResponseObject({ success: true, data: data }));
+    res.status(200).json(data);
   } catch (err) {
     next(err);
   }
@@ -17,7 +16,7 @@ async function findByPk(req, res, next) {
 
   try {
     const data = await exerciseListItemService.findByPk(item_id);
-    res.status(200).json(new ResponseObject({ success: true, data: data }));
+    res.status(200).json(data);
   } catch (err) {
     next(err);
   }
@@ -30,7 +29,7 @@ async function create(req, res, next) {
   try {
     const data = await exerciseListItemService.create(list_id, reqItem);
     const response = await exerciseListItemService.findByPk(data.id);
-    res.status(201).json(new ResponseObject({ success: true, data: response }));
+    res.status(201).json(response);
   } catch (err) {
     next(err);
   }
@@ -42,7 +41,7 @@ async function update(req, res, next) {
 
   try {
     const data = await exerciseListItemService.update(item_id, reqItem);
-    res.status(200).json(new ResponseObject({ success: true, data: data }));
+    res.status(200).json(data);
   } catch (err) {
     next(err);
   }
@@ -53,7 +52,7 @@ async function destroy(req, res, next) {
 
   try {
     await exerciseListItemService.destroy(item_id);
-    res.status(200).json(new ResponseObject({ success: true }));
+    res.sendStatus(200);
   } catch (err) {
     next(err);
   }

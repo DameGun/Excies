@@ -1,10 +1,9 @@
 import musclesService from "../services/muscles.service.js";
-import ResponseObject from "../utilities/responseObject.js";
 
 async function findAll(req, res, next) {
   try {
     const data = await musclesService.findAll();
-    res.status(200).json(new ResponseObject({ success: true, data: data }));
+    res.status(200).json(data);
   } catch (err) {
     next(err);
   }
@@ -15,7 +14,7 @@ async function findByPk(req, res, next) {
 
   try {
     const data = await musclesService.findByPk(id);
-    res.status(200).json(new ResponseObject({ success: true, data: data }));
+    res.status(200).json(data);
   } catch (err) {
     next(err);
   }
@@ -26,7 +25,7 @@ async function create(req, res, next) {
 
   try {
     const data = await musclesService.create(reqMuscles);
-    res.status(201).json(new ResponseObject({ success: true, data: data }));
+    res.status(201).json(data);
   } catch (err) {
     next(err);
   }
@@ -38,7 +37,7 @@ async function update(req, res, next) {
 
   try {
     const data = await musclesService.update(id, reqMuscles);
-    res.status(200).json(new ResponseObject({ success: true, data: data }));
+    res.status(200).json(data);
   } catch (err) {
     next(err);
   }
@@ -49,7 +48,7 @@ async function destroy(req, res, next) {
 
   try {
     await musclesService.destroy(id);
-    res.status(200).json(new ResponseObject({ success: true }));
+    res.status(200).json();
   } catch (err) {
     next(err);
   }
