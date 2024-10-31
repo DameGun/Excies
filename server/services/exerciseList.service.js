@@ -2,28 +2,39 @@ import { Sequelize } from "sequelize";
 import ExerciseList from "../models/exerciseList.model.js";
 import NotFoundError from "../utilities/errors/notFoundError.js";
 import userService from "./user.service.js";
-import ExerciseListItem from '../models/exerciseListItem.model.js';
+import ExerciseListItem from "../models/exerciseListItem.model.js";
 
 async function findAll(username) {
   const user = await userService.findOne(username);
   const entity = await ExerciseList.findAll({
     where: {
-      user_id: user.id
+      user_id: user.id,
     },
     include: {
       model: ExerciseListItem,
-      attributes: []
+      attributes: [],
     },
     attributes: {
-      include: [[Sequelize.fn('COUNT', Sequelize.col('exercise_list_items.id')), 'itemsCount']]
+      include: [
+        [
+          Sequelize.fn("COUNT", Sequelize.col("exercise_list_items.id")),
+          "itemsCount",
+        ],
+      ],
     },
-    group: ['exercise_list.id']
-  })
-  return entity;
+    group: ["exercise_list.id"],
+  });
+
+  const mappedEntity = entity.map((item) => {
+    item.dataValues.itemsCount = Number(item.dataValues.itemsCount);
+    return item;
+  });
+
+  return mappedEntity;
 }
 
 async function findByPk(id, withInclude) {
-  console.log(withInclude)
+  console.log(withInclude);
   const entity = await ExerciseList.findByPk(id, {
     include: withInclude,
   });
@@ -38,7 +49,10 @@ async function findByPk(id, withInclude) {
 async function create(username, data) {
   const user = await userService.findOne(username);
   data.user_id = user.id;
-  return await ExerciseList.create(data);
+
+  const entity = await ExerciseList.create(data);
+  entity.dataValues.itemsCount = 0;
+  return entity;
 }
 
 async function update(id, data) {

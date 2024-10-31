@@ -1,10 +1,9 @@
 import exerciseService from "../services/exercise.service.js";
-import ResponseObject from "../utilities/responseObject.js";
 
 async function findAll(req, res, next) {
   try {
     const data = await exerciseService.findAll();
-    res.status(200).json(new ResponseObject({ success: true, data: data }));
+    res.status(200).json(data);
   } catch (err) {
     next(err);
   }
@@ -15,7 +14,7 @@ async function findByPk(req, res, next) {
 
   try {
     const data = await exerciseService.findByPk(id);
-    res.status(200).json(new ResponseObject({ success: true, data: data }));
+    res.status(200).json(data);
   } catch (err) {
     next(err);
   }
@@ -26,7 +25,7 @@ async function create(req, res, next) {
 
   try {
     const data = await exerciseService.create(reqExercise);
-    res.status(201).json(new ResponseObject({ success: true, data: data }));
+    res.status(201).json(data);
   } catch (err) {
     next(err);
   }
@@ -38,7 +37,7 @@ async function update(req, res, next) {
 
   try {
     const data = await exerciseService.update(id, reqExercise);
-    res.status(200).json(new ResponseObject({ success: true, data: data }));
+    res.status(200).json(data);
   } catch (err) {
     next(err);
   }
@@ -49,7 +48,7 @@ async function destroy(req, res, next) {
 
   try {
     await exerciseService.destroy(id);
-    res.status(200).json(new ResponseObject({ success: true }));
+    res.status(200);
   } catch (err) {
     next(err);
   }

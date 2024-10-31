@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize";
 import Exercise from "../models/exercise.model.js";
 import ExerciseListItem from "../models/exerciseListItem.model.js";
-import DetailedExerciseListItem from '../models/detailedExerciseListItem.model.js';
+import DetailedExerciseListItem from "../models/detailedExerciseListItem.model.js";
 import NotFoundError from "../utilities/errors/notFoundError.js";
 
 async function findAll(list_id) {
@@ -14,23 +14,26 @@ async function findAll(list_id) {
 
   const entity = await ExerciseListItem.findAll({
     where: {
-      list_id: list_id
+      list_id: list_id,
     },
     include: [
       {
         model: Exercise,
-        attributes: []
+        attributes: [],
       },
       {
         model: DetailedExerciseListItem,
-        attributes: []
-      }
+        attributes: [],
+      },
     ],
     attributes: {
       include: [
-        [Sequelize.col('exercise.name'), 'name'],
-        [Sequelize.fn('calculate_date_interval', subQuery), 'last_time_updated'],
-      ]
+        [Sequelize.col("exercise.name"), "name"],
+        [
+          Sequelize.fn("calculate_date_interval", subQuery),
+          "last_time_updated",
+        ],
+      ],
     },
   });
 
@@ -38,17 +41,28 @@ async function findAll(list_id) {
 }
 
 async function findByPk(id) {
+  const subQuery = Sequelize.literal(`(
+    SELECT MIN(date)
+    FROM detailed_exercise_list_item
+    WHERE 
+      detailed_exercise_list_item.list_item_id = exercise_list_item.id
+  )`);
+
   const entity = await ExerciseListItem.findByPk(id, {
     include: [
       {
         model: Exercise,
-        attributes: []
-      }
+        attributes: [],
+      },
     ],
     attributes: {
       include: [
-        [Sequelize.col('exercise.name'), 'name'],
-      ]
+        [Sequelize.col("exercise.name"), "name"],
+        [
+          Sequelize.fn("calculate_date_interval", subQuery),
+          "last_time_updated",
+        ],
+      ],
     },
   });
 

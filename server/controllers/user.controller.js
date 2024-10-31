@@ -1,10 +1,9 @@
 import userService from "../services/user.service.js";
-import ResponseObject from "../utilities/responseObject.js";
 
 async function findAll(req, res, next) {
   try {
     const data = await userService.findAll();
-    res.status(200).json(new ResponseObject({ success: true, data: data }));
+    res.status(200).json(data);
   } catch (err) {
     next(err);
   }
@@ -15,7 +14,7 @@ async function findOne(req, res, next) {
 
   try {
     const data = await userService.findOne(reqUsername);
-    res.status(200).json(new ResponseObject({ success: true, data: data }));
+    res.status(200).json(data);
   } catch (err) {
     next(err);
   }
@@ -26,7 +25,7 @@ async function create(req, res, next) {
 
   try {
     const data = await userService.create(reqUser);
-    res.status(201).json(new ResponseObject({ success: true, data: data }));
+    res.status(201).json(data);
   } catch (err) {
     next(err);
   }
