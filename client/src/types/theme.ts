@@ -1,9 +1,6 @@
 import type { StylesOptions } from './styles';
 
 type BaseColors = {
-  grey: string;
-  greyDark: string;
-  greyBackground: string;
   greyPressed: string;
   primary: string;
   primaryPressed: string;
@@ -13,6 +10,9 @@ type BaseColors = {
 type ThemeColors = BaseColors & {
   background: string;
   text: string;
+  grey: string;
+  greyDark: string;
+  greyBackground: string;
 };
 
 type ThemeConstants = {

@@ -2,7 +2,7 @@ import { createStylesheet } from '@/helpers/createStylesheet';
 
 export const getStyles = createStylesheet(({ colors, constants }) => ({
   listItemContainer: ({ pressed }) => ({
-    backgroundColor: pressed ? colors.greyBackground : 'black',
+    backgroundColor: pressed ? colors.greyBackground : colors.background,
     height: constants.largeListItemHeight,
     paddingTop: constants.padding.md,
     paddingLeft: constants.padding.md,

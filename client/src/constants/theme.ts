@@ -1,9 +1,6 @@
 import type { BaseColors, CustomTheme, ThemeConstants } from '@/types/theme';
 
 const BASE_COLORS: BaseColors = {
-  grey: '#aeaeb2',
-  greyDark: '#171717',
-  greyBackground: '#434344',
   greyPressed: '#646466',
   primary: '#E77917',
   primaryPressed: '#AF5B11',
@@ -63,6 +60,9 @@ export const LIGHT_THEME: CustomTheme = {
   colors: {
     background: 'white',
     text: 'black',
+    greyBackground: '#dbdbdb',
+    grey: '#717175',
+    greyDark: '#ebebeb',
     ...BASE_COLORS,
   },
   constants: THEME_CONSTANTS,
@@ -73,6 +73,9 @@ export const DARK_THEME: CustomTheme = {
   colors: {
     background: 'black',
     text: 'white',
+    greyBackground: '#434344',
+    grey: '#aeaeb2',
+    greyDark: '#171717',
     ...BASE_COLORS,
   },
   constants: THEME_CONSTANTS,

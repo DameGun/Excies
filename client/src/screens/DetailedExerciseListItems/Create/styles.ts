@@ -39,10 +39,5 @@ export const getStyles = createStylesheet(({ colors, constants }) => ({
     fontSize: constants.fontSize.md,
     color: colors.primary,
   },
-  overlay: [
-    StyleSheet.absoluteFill,
-    {
-      backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    },
-  ],
+  overlay: StyleSheet.absoluteFill,
 }));

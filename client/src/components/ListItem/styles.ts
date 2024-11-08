@@ -27,6 +27,7 @@ export const getStyles = createStylesheet(({ colors, constants }) => ({
           borderTopWidth: constants.borderWidth.md,
           borderTopLeftRadius: constants.borderRadius.lg,
           borderTopRightRadius: constants.borderRadius.lg,
+          borderTopColor: 'transparent',
         });
       }
 
@@ -35,6 +36,7 @@ export const getStyles = createStylesheet(({ colors, constants }) => ({
           borderBottomWidth: constants.borderWidth.md,
           borderBottomLeftRadius: constants.borderRadius.lg,
           borderBottomRightRadius: constants.borderRadius.lg,
+          borderBottomColor: 'transparent',
         });
       }
 
