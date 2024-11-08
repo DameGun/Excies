@@ -5,7 +5,7 @@ import { ScreenNames } from '@/constants/navigation';
 import { useAppSelector } from '@/hooks/redux';
 import { useStyles } from '@/hooks/useStyles';
 import { selectUsername } from '@/redux/slices/auth';
-import { StackNavigationParams } from '@/types/navigation';
+import type { StackNavigationParams } from '@/types/navigation';
 import {
   getCommonHeaderScreenOptions,
   getCommonHeaderScreenStyles,

@@ -1,7 +1,7 @@
 import { handleError } from '@/helpers/errorHandler';
 import { handleResult } from '@/helpers/resultHandler';
-import { ApiResult } from '@/types/api';
-import {
+import type { ApiResult } from '@/types/api';
+import type {
   CreateExerciseListItemDTO,
   DeleteExerciseListItemDTO,
   ExerciseListItem,

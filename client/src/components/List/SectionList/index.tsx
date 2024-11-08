@@ -1,10 +1,12 @@
-import { ReactElement, useCallback } from 'react';
-import { SectionList, SectionListRenderItem, View } from 'react-native';
+import type { ReactElement } from 'react';
+import { useCallback } from 'react';
+import type { SectionListRenderItem } from 'react-native';
+import { SectionList, View } from 'react-native';
 
 import { useStyles } from '@/hooks/useStyles';
-import { EntityWithId } from '@/types/common';
-import { RenderItemProps } from '@/types/list';
-import { SectionListType } from '@/types/section';
+import type { EntityWithId } from '@/types/common';
+import type { RenderItemProps } from '@/types/list';
+import type { SectionListType } from '@/types/section';
 
 import { SectionHeader } from './Header';
 import { getStyles } from './styles';

@@ -1,5 +1,5 @@
-import { ExerciseListActionType } from '@/constants/exerciseList';
-import { ScreenNames } from '@/constants/navigation';
+import type { ExerciseListActionType } from '@/constants/exerciseList';
+import type { ScreenNames } from '@/constants/navigation';
 
 type SharedParams = {
   username: string;

@@ -1,7 +1,7 @@
 import { handleError } from '@/helpers/errorHandler';
 import { handleResult } from '@/helpers/resultHandler';
-import { ApiResult, RequiredUsernameParameter } from '@/types/api';
-import {
+import type { ApiResult, RequiredUsernameParameter } from '@/types/api';
+import type {
   CreateExerciseListDTO,
   DeleteExerciseListDTO,
   ExerciseList,

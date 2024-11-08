@@ -1,6 +1,7 @@
-import { Text, TextStyle } from 'react-native';
+import type { TextStyle } from 'react-native';
+import { Text } from 'react-native';
 
-import { SectionListDataType } from '@/types/section';
+import type { SectionListDataType } from '@/types/section';
 
 type SectionHeaderProps<T> = {
   section: SectionListDataType<T>;

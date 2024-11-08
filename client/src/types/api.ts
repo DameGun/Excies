@@ -1,6 +1,6 @@
-import { AxiosError } from 'axios';
+import type { AxiosError } from 'axios';
 
-import { ResponseStatus } from '@/constants/api';
+import type { ResponseStatus } from '@/constants/api';
 
 type RequiredUsernameParameter = {
   username: string;

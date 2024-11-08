@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { View } from 'react-native';
 
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { CustomFlatList, ListItem } from '@/components';
 import { ExerciseListActionType } from '@/constants/exerciseList';
@@ -9,8 +9,8 @@ import { ScreenNames } from '@/constants/navigation';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { selectExerciseLists } from '@/redux/slices/exerciseLists';
 import { thunkGetExerciseLists } from '@/redux/slices/exerciseLists/thunks';
-import { ExerciseList } from '@/types/exerciseList';
-import { StackNavigationParams } from '@/types/navigation';
+import type { ExerciseList } from '@/types/exerciseList';
+import type { StackNavigationParams } from '@/types/navigation';
 
 type ExerciseListsScreenProps = NativeStackScreenProps<
   StackNavigationParams,

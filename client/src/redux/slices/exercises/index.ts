@@ -1,7 +1,7 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit';
 
-import { ExerciseState } from '@/types/exercise';
-import { RootState } from '@/types/redux';
+import type { ExerciseState } from '@/types/exercise';
+import type { RootState } from '@/types/redux';
 
 import { thunkGetExercises } from './thunks';
 

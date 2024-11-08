@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { CreateStyleSheetFunc, MergeStylesType } from '@/types/styles';
+import type { CreateStyleSheetFunc, MergeStylesType } from '@/types/styles';
 
 import { useCustomTheme } from './useCustomTheme';
 

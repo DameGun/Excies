@@ -1,4 +1,4 @@
-import { BaseColors, CustomTheme, ThemeConstants } from '@/types/theme';
+import type { BaseColors, CustomTheme, ThemeConstants } from '@/types/theme';
 
 const BASE_COLORS: BaseColors = {
   grey: '#aeaeb2',

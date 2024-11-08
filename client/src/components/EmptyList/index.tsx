@@ -3,8 +3,8 @@ import { Text, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { useStyles } from '@/hooks/useStyles';
-import { IconNames } from '@/types/icons';
-import { PressableProps } from '@/types/pressable';
+import type { IconNames } from '@/types/icons';
+import type { PressableProps } from '@/types/pressable';
 
 import { getStyles } from './styles';
 

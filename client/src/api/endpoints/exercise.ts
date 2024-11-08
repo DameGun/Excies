@@ -1,7 +1,7 @@
 import { handleError } from '@/helpers/errorHandler';
 import { handleResult } from '@/helpers/resultHandler';
-import { ApiResult } from '@/types/api';
-import { Exercise } from '@/types/exercise';
+import type { ApiResult } from '@/types/api';
+import type { Exercise } from '@/types/exercise';
 
 import { axiosClient } from '..';
 

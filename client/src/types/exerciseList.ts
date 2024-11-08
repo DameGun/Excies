@@ -1,5 +1,5 @@
-import { RequiredUsernameParameter } from './api';
-import { BaseSliceWithDataArray } from './redux';
+import type { RequiredUsernameParameter } from './api';
+import type { BaseSliceWithDataArray } from './redux';
 
 type ExerciseList = {
   id: string;

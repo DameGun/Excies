@@ -1,6 +1,6 @@
-import { ButtonProps } from 'react-native';
+import type { ButtonProps } from 'react-native';
 
-import { NativeStackNavigationOptions } from '@react-navigation/native-stack';
+import type { NativeStackNavigationOptions } from '@react-navigation/native-stack';
 
 import { CustomHeaderButton } from '@/components/CustomHeaderButton';
 

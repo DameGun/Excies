@@ -1,7 +1,7 @@
-import { PressableStateCallbackType } from 'react-native';
+import type { PressableStateCallbackType } from 'react-native';
 
 import { createStylesheet } from '@/helpers/createStylesheet';
-import { StylesObjectTypes } from '@/types/styles';
+import type { StylesObjectTypes } from '@/types/styles';
 
 export const getStyles = createStylesheet(({ colors, constants }) => ({
   buttonContainer: (isHaveIcon: boolean) => ({

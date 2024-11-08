@@ -1,9 +1,11 @@
-import { ReactElement, useCallback } from 'react';
-import { FlatList, ListRenderItem, Text, View } from 'react-native';
+import type { ReactElement } from 'react';
+import { useCallback } from 'react';
+import type { ListRenderItem } from 'react-native';
+import { FlatList, Text, View } from 'react-native';
 
 import { useStyles } from '@/hooks/useStyles';
-import { EntityWithIdAndName } from '@/types/common';
-import { RenderItemProps } from '@/types/list';
+import type { EntityWithIdAndName } from '@/types/common';
+import type { RenderItemProps } from '@/types/list';
 
 import { getStyles } from './styles';
 

@@ -7,8 +7,8 @@ import {
   updateDetailedExerciseListItem,
 } from '@/api/endpoints/detailedExerciseListItem';
 import { thunkHandler } from '@/redux/thunkHandler';
-import { ApiError } from '@/types/api';
-import {
+import type { ApiError } from '@/types/api';
+import type {
   CreateDetailedExerciseListItemDTO,
   DeleteDetailedExerciseListItemDTO,
   DetailedExerciseListItem,
@@ -16,7 +16,7 @@ import {
   GetDetailedExerciseListItemsDTO,
   UpdateDetailedExerciseListItemDTO,
 } from '@/types/detailedExerciseListItem';
-import { TypedThunkApi } from '@/types/redux';
+import type { TypedThunkApi } from '@/types/redux';
 
 import { thunkGetExerciseListItemById } from '../exerciseListItems/thunks';
 

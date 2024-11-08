@@ -1,4 +1,4 @@
-import { StylesOptions } from './styles';
+import type { StylesOptions } from './styles';
 
 type BaseColors = {
   grey: string;

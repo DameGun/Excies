@@ -1,13 +1,14 @@
-import { ReactElement, useCallback } from 'react';
+import type { ReactElement } from 'react';
+import { useCallback } from 'react';
 import { SectionList } from 'react-native';
 
 import { INITIAL_NUM_TO_RENDER, MAX_TO_RENDER_PER_BATCH } from '@/constants/listOptimization';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import { useStyles } from '@/hooks/useStyles';
-import { Exercise } from '@/types/exercise';
-import { ExerciseListItem } from '@/types/exerciseListItem';
-import { PressableProps } from '@/types/pressable';
-import { SectionListDataType, SectionListType } from '@/types/section';
+import type { Exercise } from '@/types/exercise';
+import type { ExerciseListItem } from '@/types/exerciseListItem';
+import type { PressableProps } from '@/types/pressable';
+import type { SectionListDataType, SectionListType } from '@/types/section';
 
 import { LargeListItem } from './LargeListItem';
 import { getStyles } from './styles';

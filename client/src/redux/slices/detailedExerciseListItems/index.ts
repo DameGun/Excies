@@ -1,7 +1,7 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit';
 
-import { DetailedExerciseListItemState } from '@/types/detailedExerciseListItem';
-import { RootState } from '@/types/redux';
+import type { DetailedExerciseListItemState } from '@/types/detailedExerciseListItem';
+import type { RootState } from '@/types/redux';
 import { dateParser } from '@/utils/dateParser';
 
 import {

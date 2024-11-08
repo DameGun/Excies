@@ -11,9 +11,9 @@ import {
 } from '@/api/endpoints/token';
 import { ResponseStatus } from '@/constants/api';
 import { thunkHandler } from '@/redux/thunkHandler';
-import { ApiError } from '@/types/api';
-import { LoginDTO, RegisterDTO } from '@/types/auth';
-import { TypedThunkApi } from '@/types/redux';
+import type { ApiError } from '@/types/api';
+import type { LoginDTO, RegisterDTO } from '@/types/auth';
+import type { TypedThunkApi } from '@/types/redux';
 
 import { onAuth, onLogout } from '.';
 

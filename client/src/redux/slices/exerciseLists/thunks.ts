@@ -7,14 +7,14 @@ import {
   updateExerciseList,
 } from '@/api/endpoints/exerciseList';
 import { thunkHandler } from '@/redux/thunkHandler';
-import { ApiError, RequiredUsernameParameter } from '@/types/api';
-import {
+import type { ApiError, RequiredUsernameParameter } from '@/types/api';
+import type {
   CreateExerciseListDTO,
   DeleteExerciseListDTO,
   ExerciseList,
   UpdateExerciseListDTO,
 } from '@/types/exerciseList';
-import { TypedThunkApi } from '@/types/redux';
+import type { TypedThunkApi } from '@/types/redux';
 
 export const thunkGetExerciseLists = createAsyncThunk<
   ExerciseList[],

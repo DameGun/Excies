@@ -3,8 +3,8 @@ import * as SecureStore from 'expo-secure-store';
 import { ACCESS_TOKEN_KEY, TokenStorageKeys } from '@/constants/token';
 import { handleError } from '@/helpers/errorHandler';
 import { handleResult } from '@/helpers/resultHandler';
-import { ApiResult } from '@/types/api';
-import { JWTPayload } from '@/types/token';
+import type { ApiResult } from '@/types/api';
+import type { JWTPayload } from '@/types/token';
 
 import { axiosClient } from '..';
 

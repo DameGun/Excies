@@ -1,5 +1,5 @@
 import { useStyles } from '@/hooks/useStyles';
-import { PressableProps } from '@/types/pressable';
+import type { PressableProps } from '@/types/pressable';
 
 import { getStyles } from './styles';
 

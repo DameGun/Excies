@@ -1,7 +1,7 @@
 import { ResponseStatus } from '@/constants/api';
 import { LoadingState } from '@/constants/loading';
-import { ApiResult, BaseApiResponse } from '@/types/api';
-import { AppDispatch } from '@/types/redux';
+import type { ApiResult, BaseApiResponse } from '@/types/api';
+import type { AppDispatch } from '@/types/redux';
 
 import { setStatus } from './slices/loading';
 

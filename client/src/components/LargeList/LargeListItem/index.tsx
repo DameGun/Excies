@@ -4,16 +4,16 @@ import { Pressable, Text, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { useStyles } from '@/hooks/useStyles';
-import { Exercise } from '@/types/exercise';
-import { ExerciseListItem } from '@/types/exerciseListItem';
-import { IconNames } from '@/types/icons';
-import { PressableProps } from '@/types/pressable';
+import type { Exercise } from '@/types/exercise';
+import type { ExerciseListItem } from '@/types/exerciseListItem';
+import type { IconNames } from '@/types/icons';
+import type { PressableProps } from '@/types/pressable';
 
 import { getStyles } from './styles';
 
 type LargeListItemProps = PressableProps<Exercise | ExerciseListItem> & {
   item: Exercise | ExerciseListItem;
-  iconName: IconNames;
+  iconName?: IconNames;
 };
 
 export const LargeListItem = memo(({ item, iconName, onPress }: LargeListItemProps) => {

@@ -1,9 +1,9 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
-import { ParamListBase, Route, RouteProp } from '@react-navigation/native';
+import type { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
+import type { ParamListBase, Route, RouteProp } from '@react-navigation/native';
 
 import { createStylesheet } from '@/helpers/createStylesheet';
-import { IconNames } from '@/types/icons';
+import type { IconNames } from '@/types/icons';
 
 import { showBottomTab } from './showBottomTab';
 

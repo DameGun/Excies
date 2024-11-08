@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Text, View } from 'react-native';
 
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { CustomButton, CustomSectionList, EmptyList, ListItem } from '@/components';
 import { ScreenNames } from '@/constants/navigation';
@@ -9,11 +9,11 @@ import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { useStyles } from '@/hooks/useStyles';
 import { selectDetailedExerciseListItems } from '@/redux/slices/detailedExerciseListItems';
 import { thunkGetDetailedExerciseListItems } from '@/redux/slices/detailedExerciseListItems/thunks';
-import {
+import type {
   DetailedExerciseListItem,
   GetDetailedExerciseListItemsDTO,
 } from '@/types/detailedExerciseListItem';
-import { StackNavigationParams } from '@/types/navigation';
+import type { StackNavigationParams } from '@/types/navigation';
 
 import { getStyles } from './styles';
 

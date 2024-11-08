@@ -1,5 +1,5 @@
 import { ItemValueOperationType } from '@/constants/detailedExerciseListItem';
-import { DetailedOperationType } from '@/types/detailedExerciseListItem';
+import type { DetailedOperationType } from '@/types/detailedExerciseListItem';
 
 export const handleRepCount = (value: number, prevValue: number) =>
   value.toString().length <= 3 ? value : prevValue;
