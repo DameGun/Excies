@@ -7,12 +7,13 @@ import {
   MIN_REQUEST_WAITING_EXPIRE_TIME,
 } from '@/constants/loading';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
-import { setShowLoading, setStatus } from '@/redux/slices/loading';
+import { selectShowLoading, selectStatus, setShowLoading, setStatus } from '@/redux/slices/loading';
 
 import { CustomModal } from '../Modal';
 
 export function Loader() {
-  const { status, showLoading } = useAppSelector((state) => state.loading);
+  const status = useAppSelector(selectStatus);
+  const showLoading = useAppSelector(selectShowLoading);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -35,11 +36,11 @@ export function Loader() {
       clearTimeout(expireTimeout);
       clearTimeout(minTimeout);
     };
-  }, [status, dispatch]);
+  }, [status]);
 
   return (
     <CustomModal showModal={showLoading}>
-      <ActivityIndicator color='#999999' size='large' />
+      <ActivityIndicator size='large' />
     </CustomModal>
   );
 }

@@ -1,8 +1,8 @@
 import { SectionListData } from 'react-native';
 
-import { AntIconNames } from './icons';
+import { IconNames } from './icons';
 
-type SectionType = { iconName: AntIconNames; title: string };
+type SectionType = { iconName: IconNames; title: string };
 
 type SectionListDataType<T> = SectionListData<T, SectionType>;
 

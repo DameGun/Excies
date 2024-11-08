@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { View } from 'react-native';
 
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -6,7 +6,6 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { LargeList, Search } from '@/components';
 import { ScreenNames } from '@/constants/navigation';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
-import { useCustomTheme } from '@/hooks/useCustomTheme';
 import { selectExerciseListItems } from '@/redux/slices/exerciseListItems';
 import {
   thunkCreateExerciseListItem,
@@ -37,7 +36,6 @@ export function ExercisesModalScreen({ route, navigation }: ExercisesModalScreen
   const exercises = useAppSelector(selectExercisesDiffSelector);
   const listItems = useAppSelector(selectExerciseListItems);
   const currentList = useAppSelector((state) => selectExerciseListById(state, list_id));
-  const { colors } = useCustomTheme();
   const dispatch = useAppDispatch();
 
   const [searchPhrase, setSearchPhrase] = useState('');
@@ -47,14 +45,13 @@ export function ExercisesModalScreen({ route, navigation }: ExercisesModalScreen
 
     navigation.setOptions(
       getModalHeaderScreenOption({
-        color: colors.primary,
         title: `Add to "${currentList?.name}"`,
-        onPress: () => navigation.goBack(),
+        disableRightButton: true,
       })
     );
   }, []);
 
-  const handleExerciseButton = (item: Exercise | ExerciseListItem) => {
+  const handleExerciseButton = useCallback((item: Exercise | ExerciseListItem) => {
     if (isExerciseListItem(item)) {
       const payload: DeleteExerciseListItemDTO = {
         list_id,
@@ -72,7 +69,7 @@ export function ExercisesModalScreen({ route, navigation }: ExercisesModalScreen
 
       dispatch(thunkCreateExerciseListItem(payload));
     }
-  };
+  }, []);
 
   const filteredSections = useMemo<SectionListType<Exercise | ExerciseListItem>>(() => {
     const addedExercises = getExercisesWithSearch(listItems, searchPhrase);
@@ -82,12 +79,12 @@ export function ExercisesModalScreen({ route, navigation }: ExercisesModalScreen
       {
         title: 'Added Exercises',
         data: addedExercises,
-        iconName: 'checkcircle',
+        iconName: 'checkbox-marked-circle',
       },
       {
         title: 'All Exercises',
         data: allExercises,
-        iconName: 'pluscircleo',
+        iconName: 'plus-circle-outline',
       },
     ];
   }, [listItems, exercises, searchPhrase]);

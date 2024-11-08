@@ -1,7 +1,9 @@
-import { ReactNode } from 'react';
 import { Text, View } from 'react-native';
 
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
 import { useStyles } from '@/hooks/useStyles';
+import { IconNames } from '@/types/icons';
 import { PressableProps } from '@/types/pressable';
 
 import { getStyles } from './styles';
@@ -12,28 +14,24 @@ type EmptyListProps = PressableProps & {
   primaryText: string;
   secondaryText: string;
   buttonText?: string;
-  IconComponent: ReactNode;
+  iconName: IconNames;
 };
 
 export function EmptyList({
   primaryText,
   secondaryText,
   buttonText,
-  IconComponent,
+  iconName,
   onPress,
 }: EmptyListProps) {
   const styles = useStyles(getStyles);
 
   return (
     <View style={styles.container}>
-      {IconComponent}
+      <MaterialCommunityIcons name={iconName} style={styles.icon} />
       <Text style={styles.headerText}>{primaryText}</Text>
       <Text style={styles.commonText}>{secondaryText}</Text>
-      {buttonText && (
-        <CustomButton buttonStyle={styles.button} onPress={onPress}>
-          {buttonText}
-        </CustomButton>
-      )}
+      {buttonText && <CustomButton onPress={onPress}>{buttonText}</CustomButton>}
     </View>
   );
 }

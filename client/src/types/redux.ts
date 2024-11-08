@@ -1,8 +1,16 @@
 import store from '@/redux/store';
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
-export type TypedThunkApi = {
+type RootState = ReturnType<typeof store.getState>;
+
+type AppDispatch = typeof store.dispatch;
+
+type TypedThunkApi = {
   dispatch: AppDispatch;
   state: RootState;
 };
+
+type BaseSliceWithDataArray<T> = {
+  data: T[];
+};
+
+export type { AppDispatch, BaseSliceWithDataArray, RootState, TypedThunkApi };

@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { Pressable, View } from 'react-native';
 
-import { Feather } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { useStyles } from '@/hooks/useStyles';
 
@@ -28,16 +28,8 @@ export function NumbersInput({ onNumberPress, onRemove }: NumbersInputProps) {
     <View style={styles.container}>
       {numbers}
       <Number number={0} onPress={onNumberPress} />
-      <Pressable
-        style={({ pressed }) => [
-          {
-            opacity: pressed ? 0.6 : 1,
-          },
-          styles.itemContainer,
-        ]}
-        onPress={onRemove}
-      >
-        <Feather name='delete' size={22} style={styles.text} />
+      <Pressable style={styles.itemContainer} onPress={onRemove}>
+        <MaterialCommunityIcons name='delete-outline' style={styles.text} />
       </Pressable>
     </View>
   );

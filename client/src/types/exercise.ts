@@ -1,3 +1,5 @@
+import { BaseSliceWithDataArray } from './redux';
+
 type Exercise = {
   id: string;
   muscles_id: string;
@@ -5,9 +7,7 @@ type Exercise = {
   description: string;
 };
 
-type ExerciseState = {
-  data: Exercise[];
-};
+type ExerciseState = BaseSliceWithDataArray<Exercise>;
 
 type GetExercisesDTO = {
   listId: string;

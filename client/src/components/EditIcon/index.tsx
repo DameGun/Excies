@@ -1,17 +1,19 @@
 import { GestureResponderEvent, Pressable } from 'react-native';
 
-import { Feather } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import { useCustomTheme } from '@/hooks/useCustomTheme';
+import { useStyles } from '@/hooks/useStyles';
 import { PressableProps } from '@/types/pressable';
 
+import { getStyles } from './styles';
+
 export function EditIcon({ onPress }: PressableProps<GestureResponderEvent>) {
-  const { colors } = useCustomTheme();
+  const styles = useStyles(getStyles);
 
   return (
-    <Pressable onPress={onPress} style={{ marginRight: 20 }}>
+    <Pressable onPress={onPress} style={styles.editButton}>
       {({ pressed }) => (
-        <Feather name='edit' size={24} color={pressed ? colors.primaryPressed : colors.primary} />
+        <MaterialCommunityIcons name='playlist-edit' style={styles.editIcon(pressed)} />
       )}
     </Pressable>
   );

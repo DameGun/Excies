@@ -15,15 +15,7 @@ export function Number({ onPress, number }: NumberProps) {
   const handlePress = () => onPress?.(number);
 
   return (
-    <Pressable
-      style={({ pressed }) => [
-        {
-          opacity: pressed ? 0.6 : 1,
-        },
-        styles.itemContainer,
-      ]}
-      onPress={handlePress}
-    >
+    <Pressable style={styles.itemContainer} onPress={handlePress}>
       <Text style={styles.text}>{number}</Text>
     </Pressable>
   );

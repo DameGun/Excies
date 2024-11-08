@@ -1,8 +1,6 @@
 import { ExerciseListActionType } from '@/constants/exerciseList';
 import { ScreenNames } from '@/constants/navigation';
 
-import { DetailedExerciseListItem } from './detailedExerciseListItem';
-
 type SharedParams = {
   username: string;
 };
@@ -17,7 +15,7 @@ type DetailedExerciseListItemInfoModalScreenParams = SharedParams & {
   username: string;
   list_id: string;
   list_item_id: string;
-  item: DetailedExerciseListItem;
+  detailed_id: string;
 };
 
 type DetailedExerciseListItemsScreenParams = SharedParams & {

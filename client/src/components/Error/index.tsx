@@ -3,10 +3,11 @@ import { Alert } from 'react-native';
 
 import { LoadingState } from '@/constants/loading';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
-import { setStatus } from '@/redux/slices/loading';
+import { selectErrorMessage, selectStatus, setStatus } from '@/redux/slices/loading';
 
 export function Error() {
-  const { status, errorMessage } = useAppSelector((state) => state.loading);
+  const status = useAppSelector(selectStatus);
+  const errorMessage = useAppSelector(selectErrorMessage);
   const dispatch = useAppDispatch();
 
   useEffect(() => {

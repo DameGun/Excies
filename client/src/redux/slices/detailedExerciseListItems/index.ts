@@ -1,6 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
 
-import { DetailedExerciseListItemSliceState } from '@/types/detailedExerciseListItem';
+import { DetailedExerciseListItemState } from '@/types/detailedExerciseListItem';
 import { RootState } from '@/types/redux';
 import { dateParser } from '@/utils/dateParser';
 
@@ -11,7 +11,7 @@ import {
   thunkUpdateDetailedExerciseListItem,
 } from './thunks';
 
-const initialState: DetailedExerciseListItemSliceState = {
+const initialState: DetailedExerciseListItemState = {
   data: [],
 };
 
@@ -70,7 +70,23 @@ const detailedExerciseListItemsSlice = createSlice({
   reducers: {},
 });
 
+const selectDetailedExerciseListItemId = (state: RootState, id?: string) => id;
+
 export const selectDetailedExerciseListItems = (state: RootState) =>
   state.detailedExerciseListItems.data;
+
+export const selectDetailedExerciseListItemById = createSelector(
+  [selectDetailedExerciseListItems, selectDetailedExerciseListItemId],
+  (groups, id) => {
+    let searchableItem;
+
+    for (const group of groups) {
+      const buff = group.data.find((detailed) => detailed.id === id);
+      if (buff) searchableItem = buff;
+    }
+
+    return searchableItem;
+  }
+);
 
 export default detailedExerciseListItemsSlice.reducer;

@@ -1,13 +1,20 @@
 import { useMemo } from 'react';
 
-import { StyleSheetFunc } from '@/types/styles';
+import { CreateStyleSheetFunc, MergeStylesType } from '@/types/styles';
 
 import { useCustomTheme } from './useCustomTheme';
 
-export function useStyles<T>(getStyles: StyleSheetFunc<T>) {
-  const { colors, dark } = useCustomTheme();
+export function useStyles<T extends CreateStyleSheetFunc[]>(...styles: T) {
+  const theme = useCustomTheme();
 
-  const globalStyles = useMemo(() => getStyles(colors), [dark, colors, getStyles]);
+  const globalStyles = useMemo(() => {
+    const combinedStyles = styles.reduce(
+      (acc, getStyles) => Object.assign(acc, getStyles(theme)),
+      {}
+    );
+
+    return combinedStyles as MergeStylesType<T>;
+  }, [theme]);
 
   return globalStyles;
 }

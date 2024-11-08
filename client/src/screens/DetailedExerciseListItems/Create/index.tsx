@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useState } from 'react';
-import { Text, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
 
-import { FontAwesome6 } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { CustomButton, NumbersInput } from '@/components';
@@ -11,6 +11,7 @@ import { useAppDispatch } from '@/hooks/redux';
 import { useStyles } from '@/hooks/useStyles';
 import { thunkCreateDetailedExerciseListItem } from '@/redux/slices/detailedExerciseListItems/thunks';
 import { CreateDetailedExerciseListItemDTO } from '@/types/detailedExerciseListItem';
+import { IconNames } from '@/types/icons';
 import { StackNavigationParams } from '@/types/navigation';
 import {
   handleRemoveRepetitions,
@@ -19,9 +20,8 @@ import {
   handleWeightNumberPress,
 } from '@/utils/detailedExerciseListItemOperations';
 
-import { RepetitionsNumbers } from './RepetitionsNumbers';
+import { RepetitionsNumbers, WeightNumbers } from './Inputs';
 import { getStyles } from './styles';
-import { WeightNumbers } from './WeightNumbers';
 
 type CreateDetailedItemModalScreenProps = NativeStackScreenProps<
   StackNavigationParams,
@@ -40,9 +40,11 @@ export function CreateDetailedItemModalScreen({
   const [rep, setRep] = useState(0);
   const [weight, setWeight] = useState(0);
 
-  const currentIconName = useMemo(
+  const isValid = useMemo(() => rep > 0 && weight > 0, [rep, weight]);
+
+  const currentIconName = useMemo<IconNames>(
     () =>
-      active === CreateDetailedExerciseListItemParameterType.Weight ? 'weight-hanging' : 'repeat',
+      active === CreateDetailedExerciseListItemParameterType.Weight ? 'weight' : 'repeat-variant',
     [active]
   );
 
@@ -85,10 +87,12 @@ export function CreateDetailedItemModalScreen({
 
   return (
     <View style={{ flex: 1 }}>
-      <View style={{ flex: 1 }}></View>
+      <View style={{ flex: 1 }}>
+        <Pressable style={styles.overlay} onPress={navigation.goBack} />
+      </View>
       <View style={styles.container}>
         <View style={styles.headerContainer}>
-          <FontAwesome6 name={currentIconName} size={14} color={styles.primaryColor} />
+          <MaterialCommunityIcons name={currentIconName} style={styles.createTypeIcon} />
           <Text style={styles.header}>{active}</Text>
         </View>
         <View style={styles.inputsContainer}>
@@ -109,12 +113,11 @@ export function CreateDetailedItemModalScreen({
           textStyle={styles.submitButtonText}
           buttonStyle={styles.submitButton}
           onPress={handleSubmit}
+          disabled={!isValid}
         >
           Record Set
         </CustomButton>
-        <View style={styles.numberButtonsContainer}>
-          <NumbersInput onNumberPress={onNumberPress} onRemove={onRemove} />
-        </View>
+        <NumbersInput onNumberPress={onNumberPress} onRemove={onRemove} />
       </View>
     </View>
   );

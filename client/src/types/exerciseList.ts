@@ -1,4 +1,5 @@
 import { RequiredUsernameParameter } from './api';
+import { BaseSliceWithDataArray } from './redux';
 
 type ExerciseList = {
   id: string;
@@ -23,9 +24,7 @@ type DeleteExerciseListDTO = RequiredUsernameParameter & {
   id: string;
 };
 
-type ExerciseListState = {
-  data: ExerciseList[];
-};
+type ExerciseListState = BaseSliceWithDataArray<ExerciseList>;
 
 export type {
   CreateExerciseListDTO,

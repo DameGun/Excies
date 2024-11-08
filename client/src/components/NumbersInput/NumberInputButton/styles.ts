@@ -1,24 +1,27 @@
-import { ThemeColors } from '@/types/theme';
+import { PressableStateCallbackType } from 'react-native';
 
-export const getStyles = (colors: ThemeColors) => ({
-  inputButton: {
+import { createStylesheet } from '@/helpers/createStylesheet';
+
+export const getStyles = createStylesheet(({ colors, constants }) => ({
+  inputButton: ({ pressed }: PressableStateCallbackType) => ({
+    opacity: pressed ? constants.opacity.md : constants.opacity.lg,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 5,
-    padding: 2,
-    paddingVertical: 10,
-  },
+    gap: constants.gap.sm,
+    padding: constants.padding.xs,
+    paddingVertical: constants.padding.sm,
+  }),
   inputButtonText: {
     color: colors.text,
-    fontSize: 18,
+    fontSize: constants.fontSize.lg,
   },
   inputButtonNumber: {
     color: colors.text,
     backgroundColor: colors.greyPressed,
-    paddingVertical: 3,
-    paddingHorizontal: 10,
-    borderRadius: 8,
-    fontSize: 18,
+    paddingVertical: constants.padding.xs,
+    paddingHorizontal: constants.padding.sm,
+    borderRadius: constants.borderRadius.md,
+    fontSize: constants.fontSize.lg,
     overflow: 'hidden',
   },
-});
+}));

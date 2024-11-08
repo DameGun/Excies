@@ -4,14 +4,16 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import { CustomButton, CustomTextInput } from '@/components';
 import { useAppDispatch } from '@/hooks/redux';
+import { useStyles } from '@/hooks/useStyles';
 import { thunkLogin } from '@/redux/slices/auth/thunks';
 
 import { AuthLayout } from './AuthLayout';
-import { styles } from './styles';
+import { getStyles } from './styles';
 import { loginSchema } from './validation';
 
 export function LoginScreen() {
   const dispatch = useAppDispatch();
+  const styles = useStyles(getStyles);
 
   const { control, handleSubmit } = useForm({
     mode: 'onChange',
@@ -25,14 +27,12 @@ export function LoginScreen() {
       <CustomTextInput
         name='username'
         control={control}
-        style={styles.input}
         placeholder='Username'
         textContentType='username'
       />
       <CustomTextInput
         name='password'
         control={control}
-        style={styles.input}
         placeholder='Password'
         secureTextEntry={true}
         textContentType='password'
@@ -40,7 +40,7 @@ export function LoginScreen() {
       <CustomButton
         type='submit'
         textStyle={styles.buttonText}
-        buttonStyle={{ ...styles.button, width: styles.input.width }}
+        buttonStyle={styles.button}
         onPress={onSubmit}
       >
         Login

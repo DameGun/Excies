@@ -9,7 +9,7 @@ import { ScreenNames } from '@/constants/navigation';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { selectExerciseLists } from '@/redux/slices/exerciseLists';
 import { thunkGetExerciseLists } from '@/redux/slices/exerciseLists/thunks';
-import { ExerciseListItem } from '@/types/exerciseListItem';
+import { ExerciseList } from '@/types/exerciseList';
 import { StackNavigationParams } from '@/types/navigation';
 
 type ExerciseListsScreenProps = NativeStackScreenProps<
@@ -26,7 +26,7 @@ export function ExerciseListsScreen({ route, navigation }: ExerciseListsScreenPr
     dispatch(thunkGetExerciseLists({ username }));
   }, []);
 
-  const handleListClick = ({ id }: ExerciseListItem) => {
+  const handleListClick = ({ id }: ExerciseList) => {
     navigation.navigate(ScreenNames.ExerciseListItemsScreen, {
       list_id: id,
       username,
@@ -46,15 +46,13 @@ export function ExerciseListsScreen({ route, navigation }: ExerciseListsScreenPr
         <CustomFlatList
           title='Exercise lists'
           data={data}
-          renderItem={({ item, isLast, index }) => (
+          renderItem={(props) => (
             <ListItem
-              title={item.name}
-              item={item}
-              infoRight={item.itemsCount}
-              isLast={isLast}
+              {...props}
               onPress={handleListClick}
-              iconName='list'
-              index={index}
+              iconName='format-list-bulleted'
+              extractTitle={({ name }) => name}
+              extractInfo={({ itemsCount }) => itemsCount}
             />
           )}
           headerComponent={
@@ -63,7 +61,7 @@ export function ExerciseListsScreen({ route, navigation }: ExerciseListsScreenPr
                 title='New List...'
                 iconName='plus'
                 onPress={handleNewListClick}
-                index={0}
+                isFirst={true}
                 isLast={false}
               />
             </View>

@@ -36,7 +36,7 @@ export function CustomTextInput<TFieldNames extends FieldValues, TName extends P
               placeholderTextColor={styles.placeholderColor.color}
               onChangeText={onChange}
               onBlur={onBlur}
-              value={value}
+              value={value ? `${value}` : ''}
             />
           </TouchableWithoutFeedback>
           <Text style={styles.error}>{error?.message}</Text>

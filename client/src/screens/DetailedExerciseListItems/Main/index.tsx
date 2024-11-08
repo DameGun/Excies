@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { Text, View } from 'react-native';
 
-import { Entypo, Ionicons } from '@expo/vector-icons';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { CustomButton, CustomSectionList, EmptyList, ListItem } from '@/components';
@@ -59,7 +58,7 @@ export function DetailedExerciseListItemsScreen({
       username,
       list_id,
       list_item_id,
-      item,
+      detailed_id: item.id,
     });
   };
 
@@ -68,13 +67,12 @@ export function DetailedExerciseListItemsScreen({
       <View style={{ flex: 1 }}>
         <CustomSectionList
           sections={data}
-          renderItem={({ item, index, section: { data } }) => (
+          renderItem={({ item, ...props }) => (
             <ListItem
-              title={item.time}
+              {...props}
               item={item}
+              extractTitle={({ time }) => time}
               onPress={handleInfo}
-              isLast={index === data.length - 1}
-              index={index}
               titleStyle={styles.time}
             >
               <View style={styles.itemInfoMainContainer}>
@@ -93,7 +91,8 @@ export function DetailedExerciseListItemsScreen({
       </View>
       <View style={styles.addButtonContainer}>
         <CustomButton
-          iconComponent={<Entypo name='plus' size={50} color='black' />}
+          iconName='plus'
+          iconStyle={styles.icon}
           buttonStyle={styles.addButton}
           onPress={handleNavigate}
         />
@@ -104,11 +103,12 @@ export function DetailedExerciseListItemsScreen({
       <EmptyList
         primaryText='No Sets'
         secondaryText='Record your sets to track progress'
-        IconComponent={<Ionicons name='stats-chart' size={50} color='#aeaeb2' />}
+        iconName='chart-box-outline'
       />
       <View style={styles.addButtonContainer}>
         <CustomButton
-          iconComponent={<Entypo name='plus' size={50} color='black' />}
+          iconName='plus'
+          iconStyle={styles.icon}
           buttonStyle={styles.addButton}
           onPress={handleNavigate}
         />

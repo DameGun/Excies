@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import { Button, Keyboard, TextInput, View } from 'react-native';
+import { Keyboard, TextInput, View } from 'react-native';
 
-import { Entypo, Feather } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { useStyles } from '@/hooks/useStyles';
 
 import { getStyles } from './styles';
+
+import { CustomButton } from '../Button';
 
 type SearchProps = {
   searchPhrase: string;
@@ -31,29 +33,24 @@ export function Search({ searchPhrase, setSearchPhrase }: SearchProps) {
 
   return (
     <View style={styles.container}>
-      <View style={clicked ? styles.searchBar_clicked : styles.searchBar_unclicked}>
-        <Feather name='search' size={20} color='white' style={clicked && styles.iconLeft_clicked} />
+      <View style={[styles.searchBar, clicked && styles.searchBarClicked]}>
+        <MaterialCommunityIcons name='magnify' style={styles.searchIcon} />
         <TextInput
           placeholder='Search'
-          style={clicked ? styles.input_clicked : styles.input}
-          placeholderTextColor={styles.placeholderTextColor.color}
+          style={styles.input}
+          placeholderTextColor={styles.placeholder.color}
           value={searchPhrase}
           onChangeText={setSearchPhrase}
           onFocus={handleFocus}
+          onBlur={handleCancel}
         />
-        {clicked && (
-          <Entypo
-            name='cross'
-            size={20}
-            color='white'
-            style={styles.iconRight_clicked}
-            onPress={handleReset}
-          />
+        {clicked && searchPhrase.length > 0 && (
+          <MaterialCommunityIcons name='close' style={styles.clearIcon} onPress={handleReset} />
         )}
       </View>
       {clicked && (
         <View>
-          <Button title='Cancel' color={styles.buttonColor.color} onPress={handleCancel} />
+          <CustomButton onPress={handleCancel}>Cancel</CustomButton>
         </View>
       )}
     </View>

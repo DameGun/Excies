@@ -1,15 +1,27 @@
-import { Button, ButtonProps } from 'react-native';
+import { ButtonProps } from 'react-native';
 
 import { NativeStackNavigationOptions } from '@react-navigation/native-stack';
+
+import { CustomHeaderButton } from '@/components/CustomHeaderButton';
+
+type ModalHeaderScreenOptionsProps = Pick<ButtonProps, 'disabled' | 'onPress'> & {
+  title: string;
+  disableRightButton?: boolean;
+};
 
 export const getModalHeaderScreenOption = ({
   disabled,
   onPress,
   title,
-  color,
-}: ButtonProps): Partial<NativeStackNavigationOptions> => {
+  disableRightButton = false,
+}: ModalHeaderScreenOptionsProps): Partial<NativeStackNavigationOptions> => {
   return {
-    headerRight: () => <Button disabled={disabled} title='Done' color={color} onPress={onPress} />,
+    headerRight: () =>
+      !disableRightButton && (
+        <CustomHeaderButton disabled={disabled} onPress={onPress}>
+          Done
+        </CustomHeaderButton>
+      ),
     headerTitle: title,
     headerTitleAlign: 'center',
   };

@@ -1,22 +1,31 @@
-import { StyleSheet } from 'react-native';
+import { PressableStateCallbackType } from 'react-native';
 
-import { ThemeColors } from '@/types/theme';
+import { createStylesheet } from '@/helpers/createStylesheet';
+import { StylesObjectTypes } from '@/types/styles';
 
-export const getStyles = (colors: ThemeColors) =>
-  StyleSheet.create({
-    button: {
-      borderRadius: 8,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: colors.primary,
-    },
-    text: {
-      textAlign: 'center',
-      color: colors.text,
-    },
-    buttonContainer: {
-      gap: 5,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-  });
+export const getStyles = createStylesheet(({ colors, constants }) => ({
+  buttonContainer: (isHaveIcon: boolean) => ({
+    gap: constants.gap.sm,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: isHaveIcon ? 'row' : 'column',
+  }),
+  button:
+    (isDisabled?: boolean, ...extraStyles: StylesObjectTypes[]) =>
+    ({ pressed }: PressableStateCallbackType) => [
+      {
+        opacity: pressed ? constants.opacity.md : constants.opacity.lg,
+        borderRadius: constants.borderRadius.md,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: isDisabled ? colors.grey : colors.primary,
+        padding: constants.padding.sm,
+      },
+      extraStyles,
+    ],
+  text: {
+    textAlign: 'center',
+    color: colors.text,
+    fontWeight: 'bold',
+  },
+}));

@@ -1,6 +1,7 @@
 import { ItemValueOperationType } from '@/constants/detailedExerciseListItem';
 
 import { RequiredUsernameParameter } from './api';
+import { BaseSliceWithDataArray } from './redux';
 
 type DetailedExerciseListItem = {
   id: string;
@@ -46,16 +47,14 @@ type DeleteDetailedExerciseListItemDTO = RequiredUsernameParameter & {
   id: string;
 };
 
-type DetailedExerciseListItemSliceState = {
-  data: DetailedExerciseListItemsGroup[];
-};
+type DetailedExerciseListItemState = BaseSliceWithDataArray<DetailedExerciseListItemsGroup>;
 
 export type {
   CreateDetailedExerciseListItemDTO,
   DeleteDetailedExerciseListItemDTO,
   DetailedExerciseListItem,
   DetailedExerciseListItemsGroup,
-  DetailedExerciseListItemSliceState,
+  DetailedExerciseListItemState,
   DetailedOperationType,
   GetDetailedExerciseListItemsDTO,
   UpdateDetailedExerciseListItemDTO,

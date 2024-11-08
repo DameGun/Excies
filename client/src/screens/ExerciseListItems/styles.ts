@@ -1,30 +1,22 @@
-import { StyleSheet } from 'react-native';
+import { createStylesheet } from '@/helpers/createStylesheet';
 
-import { ThemeColors } from '@/types/theme';
-
-export const getStyles = (colors: ThemeColors) =>
-  StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'space-between',
-    },
-    addExerciseButton: {
-      marginHorizontal: 20,
-      marginBottom: 20,
-      marginTop: 5,
-      height: 50,
-      backgroundColor: colors.greyBackground,
-    },
-    addExerciseText: {
-      fontWeight: 'bold',
-      fontSize: 16,
-    },
-    iconColor: {
-      color: colors.primary,
-    },
-    shadow: {
-      shadowColor: 'black',
-      shadowOpacity: 1,
-      shadowRadius: 15,
-    },
-  });
+export const getStyles = createStylesheet(({ colors, constants }) => ({
+  container: {
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+  addExerciseButton: {
+    marginHorizontal: constants.margin.lg,
+    marginBottom: constants.margin.lg,
+    marginTop: constants.margin.sm,
+    backgroundColor: colors.greyBackground,
+  },
+  addExerciseText: {
+    fontWeight: 'bold',
+    fontSize: constants.fontSize.md,
+  },
+  addButtonIcon: {
+    color: colors.primary,
+    fontSize: constants.fontSize.xl2,
+  },
+}));

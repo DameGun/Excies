@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { Pressable, Text, View } from 'react-native';
 
 import { NumberInputButton } from '@/components';
@@ -27,13 +26,6 @@ export function WeightNumbers({
 }: WeightNumbersProps) {
   const styles = useStyles(getStyles);
 
-  const conditionalStyles = useMemo(
-    () => ({
-      borderColor: isActive ? styles.primaryColor.color : styles.greyColor.color,
-    }),
-    [isActive]
-  );
-
   const handleParameterType = () => {
     setParameterType(CreateDetailedExerciseListItemParameterType.Weight);
   };
@@ -43,7 +35,7 @@ export function WeightNumbers({
   };
 
   return (
-    <Pressable onPress={handleParameterType} style={[styles.input, conditionalStyles]}>
+    <Pressable onPress={handleParameterType} style={styles.input(isActive)}>
       <View style={styles.inputButtonsContainer}>
         <NumberInputButton
           type={ItemValueOperationType.Decrease}

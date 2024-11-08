@@ -1,6 +1,8 @@
 import { ReactElement, useCallback } from 'react';
-import { SafeAreaView, SectionList, View } from 'react-native';
+import { SectionList } from 'react-native';
 
+import { INITIAL_NUM_TO_RENDER, MAX_TO_RENDER_PER_BATCH } from '@/constants/listOptimization';
+import { useCustomTheme } from '@/hooks/useCustomTheme';
 import { useStyles } from '@/hooks/useStyles';
 import { Exercise } from '@/types/exercise';
 import { ExerciseListItem } from '@/types/exerciseListItem';
@@ -25,31 +27,31 @@ type RenderItemFunc = (props: RenderItemProps) => ReactElement;
 
 export function LargeList({ sections, onPress }: LargeListProps) {
   const styles = useStyles(getStyles);
+  const { constants } = useCustomTheme();
 
   const renderItem = useCallback<RenderItemFunc>(
     ({ item, section: { iconName } }) => (
       <LargeListItem item={item} iconName={iconName} onPress={onPress} />
     ),
-    [onPress]
+    []
   );
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.listsContainer}>
-        <SectionList
-          sections={sections}
-          keyExtractor={(item) => item.id}
-          renderItem={renderItem}
-          renderSectionHeader={SectionHeader(styles.header)}
-          ListFooterComponent={<View style={{ paddingVertical: 70 }}></View>}
-          getItemLayout={(data, index) => ({ length: 50, offset: 50 * index, index })}
-          initialNumToRender={20}
-          maxToRenderPerBatch={20}
-          windowSize={10}
-          removeClippedSubviews={true}
-          stickySectionHeadersEnabled={true}
-        />
-      </View>
-    </SafeAreaView>
+    <SectionList
+      style={styles.listsContainer}
+      sections={sections}
+      keyExtractor={(item) => item.id}
+      renderItem={renderItem}
+      renderSectionHeader={SectionHeader(styles.header)}
+      getItemLayout={(_, index) => ({
+        length: constants.largeListItemHeight,
+        offset: constants.largeListItemHeight * index,
+        index,
+      })}
+      initialNumToRender={INITIAL_NUM_TO_RENDER}
+      maxToRenderPerBatch={MAX_TO_RENDER_PER_BATCH}
+      removeClippedSubviews={true}
+      stickySectionHeadersEnabled={true}
+    />
   );
 }
