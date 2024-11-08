@@ -2,8 +2,8 @@ import { Pressable, Text } from 'react-native';
 
 import { ItemValueOperationType } from '@/constants/detailedExerciseListItem';
 import { useStyles } from '@/hooks/useStyles';
-import { DetailedOperationType } from '@/types/detailedExerciseListItem';
-import { PressableProps } from '@/types/pressable';
+import type { DetailedOperationType } from '@/types/detailedExerciseListItem';
+import type { PressableProps } from '@/types/pressable';
 
 import { getStyles } from './styles';
 

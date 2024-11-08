@@ -1,9 +1,9 @@
-import { PropsWithChildren, ReactNode } from 'react';
-import { TextStyle } from 'react-native';
+import type { PropsWithChildren, ReactNode } from 'react';
+import type { TextStyle } from 'react-native';
 
-import { IconNames } from './icons';
-import { PressableProps } from './pressable';
-import { StyledFields } from './styles';
+import type { IconNames } from './icons';
+import type { PressableProps } from './pressable';
+import type { StyledFields } from './styles';
 
 type RenderItemParameters = {
   isLast: boolean;

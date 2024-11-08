@@ -3,11 +3,11 @@ import { useForm } from 'react-hook-form';
 import { Text, View } from 'react-native';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { CustomTextInput } from '@/components';
 import { DeleteItemButton } from '@/components/DeleteItemButton';
-import { ScreenNames } from '@/constants/navigation';
+import type { ScreenNames } from '@/constants/navigation';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { useStyles } from '@/hooks/useStyles';
 import { selectDetailedExerciseListItemById } from '@/redux/slices/detailedExerciseListItems';
@@ -15,11 +15,11 @@ import {
   thunkDeleteDetailedExerciseListItem,
   thunkUpdateDetailedExerciseListItem,
 } from '@/redux/slices/detailedExerciseListItems/thunks';
-import {
+import type {
   DeleteDetailedExerciseListItemDTO,
   UpdateDetailedExerciseListItemDTO,
 } from '@/types/detailedExerciseListItem';
-import { StackNavigationParams } from '@/types/navigation';
+import type { StackNavigationParams } from '@/types/navigation';
 import { getInfoModalScreenStylesDefault } from '@/utils/getInfoModalScreenStylesDefault';
 import { getModalHeaderScreenOption } from '@/utils/getModalHeaderScreenOption';
 

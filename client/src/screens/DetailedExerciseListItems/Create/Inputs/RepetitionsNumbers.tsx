@@ -6,7 +6,7 @@ import {
   ItemValueOperationType,
 } from '@/constants/detailedExerciseListItem';
 import { useStyles } from '@/hooks/useStyles';
-import { DetailedOperationType } from '@/types/detailedExerciseListItem';
+import type { DetailedOperationType } from '@/types/detailedExerciseListItem';
 import { handleInputButtonForRepetitions } from '@/utils/detailedExerciseListItemOperations';
 
 import { getStyles } from './styles';

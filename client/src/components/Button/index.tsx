@@ -1,12 +1,12 @@
-import { PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 import { Keyboard, Pressable, Text, View } from 'react-native';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { useStyles } from '@/hooks/useStyles';
-import { IconNames } from '@/types/icons';
-import { PressableProps } from '@/types/pressable';
-import { StyleProps } from '@/types/styles';
+import type { IconNames } from '@/types/icons';
+import type { PressableProps } from '@/types/pressable';
+import type { StyleProps } from '@/types/styles';
 
 import { getStyles } from './styles';
 

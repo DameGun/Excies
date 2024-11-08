@@ -1,7 +1,7 @@
 import { isAxiosError } from 'axios';
 
 import { ResponseStatus } from '@/constants/api';
-import { ApiError, CustomApiError } from '@/types/api';
+import type { ApiError, CustomApiError } from '@/types/api';
 
 export function handleError(error: unknown): ApiError {
   if (isAxiosError(error)) {

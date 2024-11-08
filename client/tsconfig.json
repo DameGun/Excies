@@ -10,5 +10,5 @@
     "types": ["node"]
   },
   "extends": "expo/tsconfig.base",
-  "include": ["src", "."]
+  "include": ["src"]
 }

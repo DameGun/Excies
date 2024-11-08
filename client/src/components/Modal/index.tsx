@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 import { Modal, View } from 'react-native';
 
 import { useStyles } from '@/hooks/useStyles';

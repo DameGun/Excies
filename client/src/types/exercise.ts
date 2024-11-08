@@ -1,4 +1,4 @@
-import { BaseSliceWithDataArray } from './redux';
+import type { BaseSliceWithDataArray } from './redux';
 
 type Exercise = {
   id: string;

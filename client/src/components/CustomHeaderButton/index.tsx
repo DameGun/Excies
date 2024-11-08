@@ -1,8 +1,9 @@
-import { PropsWithChildren } from 'react';
-import { GestureResponderEvent, Pressable, Text } from 'react-native';
+import type { PropsWithChildren } from 'react';
+import type { GestureResponderEvent } from 'react-native';
+import { Pressable, Text } from 'react-native';
 
 import { useStyles } from '@/hooks/useStyles';
-import { PressableProps } from '@/types/pressable';
+import type { PressableProps } from '@/types/pressable';
 
 import { getStyles } from './styles';
 

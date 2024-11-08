@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { View } from 'react-native';
 
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { LargeList, Search } from '@/components';
-import { ScreenNames } from '@/constants/navigation';
+import type { ScreenNames } from '@/constants/navigation';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { selectExerciseListItems } from '@/redux/slices/exerciseListItems';
 import {
@@ -14,14 +14,14 @@ import {
 import { selectExerciseListById } from '@/redux/slices/exerciseLists';
 import { selectExercisesDiffSelector } from '@/redux/slices/exercises';
 import { thunkGetExercises } from '@/redux/slices/exercises/thunks';
-import { Exercise } from '@/types/exercise';
-import {
+import type { Exercise } from '@/types/exercise';
+import type {
   CreateExerciseListItemDTO,
   DeleteExerciseListItemDTO,
   ExerciseListItem,
 } from '@/types/exerciseListItem';
-import { StackNavigationParams } from '@/types/navigation';
-import { SectionListType } from '@/types/section';
+import type { StackNavigationParams } from '@/types/navigation';
+import type { SectionListType } from '@/types/section';
 import { getExercisesWithSearch } from '@/utils/exercises';
 import { getModalHeaderScreenOption } from '@/utils/getModalHeaderScreenOption';
 import { isExerciseListItem } from '@/utils/typePredicates';

@@ -1,7 +1,7 @@
 import { handleError } from '@/helpers/errorHandler';
 import { handleResult } from '@/helpers/resultHandler';
-import { ApiResult } from '@/types/api';
-import { AuthResponse, LoginDTO, RegisterDTO } from '@/types/auth';
+import type { ApiResult } from '@/types/api';
+import type { AuthResponse, LoginDTO, RegisterDTO } from '@/types/auth';
 
 import { axiosClient } from '..';
 

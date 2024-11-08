@@ -2,17 +2,17 @@ import { useCallback, useMemo, useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { CustomButton, NumbersInput } from '@/components';
 import { CreateDetailedExerciseListItemParameterType } from '@/constants/detailedExerciseListItem';
-import { ScreenNames } from '@/constants/navigation';
+import type { ScreenNames } from '@/constants/navigation';
 import { useAppDispatch } from '@/hooks/redux';
 import { useStyles } from '@/hooks/useStyles';
 import { thunkCreateDetailedExerciseListItem } from '@/redux/slices/detailedExerciseListItems/thunks';
-import { CreateDetailedExerciseListItemDTO } from '@/types/detailedExerciseListItem';
-import { IconNames } from '@/types/icons';
-import { StackNavigationParams } from '@/types/navigation';
+import type { CreateDetailedExerciseListItemDTO } from '@/types/detailedExerciseListItem';
+import type { IconNames } from '@/types/icons';
+import type { StackNavigationParams } from '@/types/navigation';
 import {
   handleRemoveRepetitions,
   handleRemoveWeight,

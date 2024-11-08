@@ -1,8 +1,9 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 import { LoadingState } from '@/constants/loading';
-import { LoadingSliceState, SetStatusPayload } from '@/types/loadingSlice';
-import { RootState } from '@/types/redux';
+import type { LoadingSliceState, SetStatusPayload } from '@/types/loadingSlice';
+import type { RootState } from '@/types/redux';
 
 const initialState: LoadingSliceState = {
   status: LoadingState.Idle,

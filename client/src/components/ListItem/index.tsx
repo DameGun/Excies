@@ -4,8 +4,8 @@ import { Pressable, Text, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { useStyles } from '@/hooks/useStyles';
-import { EntityWithId } from '@/types/common';
-import { ListItemProps } from '@/types/list';
+import type { EntityWithId } from '@/types/common';
+import type { ListItemProps } from '@/types/list';
 import { IsListItemTextPropsWithExtract } from '@/utils/typePredicates';
 
 import { getStyles } from './styles';

@@ -1,5 +1,5 @@
-import { ExerciseListItem } from '@/types/exerciseListItem';
-import { ListItemTextPropsLiterals, ListItemTextPropsWithExtract } from '@/types/list';
+import type { ExerciseListItem } from '@/types/exerciseListItem';
+import type { ListItemTextPropsLiterals, ListItemTextPropsWithExtract } from '@/types/list';
 
 export function isExerciseListItem(item: any): item is ExerciseListItem {
   return 'list_id' in item && 'exercise_id' in item && 'name' in item;

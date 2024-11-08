@@ -4,7 +4,7 @@ import { Text, View } from 'react-native';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { DeleteItemButton } from '@/components/DeleteItemButton';
 import { CustomTextInput } from '@/components/index';
@@ -18,8 +18,8 @@ import {
   thunkDeleteExerciseList,
   thunkUpdateExerciseList,
 } from '@/redux/slices/exerciseLists/thunks';
-import { UpdateExerciseListDTO } from '@/types/exerciseList';
-import { StackNavigationParams } from '@/types/navigation';
+import type { UpdateExerciseListDTO } from '@/types/exerciseList';
+import type { StackNavigationParams } from '@/types/navigation';
 import { getInfoModalScreenStylesDefault } from '@/utils/getInfoModalScreenStylesDefault';
 import { getModalHeaderScreenOption } from '@/utils/getModalHeaderScreenOption';
 

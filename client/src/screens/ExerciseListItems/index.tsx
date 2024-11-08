@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import {
   CustomButton,
@@ -18,8 +18,8 @@ import { useStyles } from '@/hooks/useStyles';
 import { selectExerciseListItems } from '@/redux/slices/exerciseListItems/index';
 import { thunkGetExerciseListItems } from '@/redux/slices/exerciseListItems/thunks';
 import { selectExerciseListById } from '@/redux/slices/exerciseLists';
-import { ExerciseListItem, GetExerciseListItemsDTO } from '@/types/exerciseListItem';
-import { StackNavigationParams } from '@/types/navigation';
+import type { ExerciseListItem, GetExerciseListItemsDTO } from '@/types/exerciseListItem';
+import type { StackNavigationParams } from '@/types/navigation';
 
 import { getStyles } from './styles';
 

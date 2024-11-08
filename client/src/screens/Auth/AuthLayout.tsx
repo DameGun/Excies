@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 import { Image, View } from 'react-native';
 
 import logoBlack from '@/assets/auth-logo-black.png';

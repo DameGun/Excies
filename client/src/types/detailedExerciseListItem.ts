@@ -1,7 +1,7 @@
-import { ItemValueOperationType } from '@/constants/detailedExerciseListItem';
+import type { ItemValueOperationType } from '@/constants/detailedExerciseListItem';
 
-import { RequiredUsernameParameter } from './api';
-import { BaseSliceWithDataArray } from './redux';
+import type { RequiredUsernameParameter } from './api';
+import type { BaseSliceWithDataArray } from './redux';
 
 type DetailedExerciseListItem = {
   id: string;

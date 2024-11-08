@@ -1,12 +1,7 @@
-import { Controller, ControllerProps, FieldValues, Path } from 'react-hook-form';
-import {
-  Keyboard,
-  Text,
-  TextInput,
-  TextInputProps,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
+import type { ControllerProps, FieldValues, Path } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
+import type { TextInputProps } from 'react-native';
+import { Keyboard, Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
 
 import { useStyles } from '@/hooks/useStyles';
 

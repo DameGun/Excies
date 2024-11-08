@@ -2,9 +2,9 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { getExercises } from '@/api/endpoints/exercise';
 import { thunkHandler } from '@/redux/thunkHandler';
-import { ApiError } from '@/types/api';
-import { Exercise, GetExercisesDTO } from '@/types/exercise';
-import { TypedThunkApi } from '@/types/redux';
+import type { ApiError } from '@/types/api';
+import type { Exercise, GetExercisesDTO } from '@/types/exercise';
+import type { TypedThunkApi } from '@/types/redux';
 
 export const thunkGetExercises = createAsyncThunk<Exercise[], GetExercisesDTO, TypedThunkApi>(
   'getExercises',

@@ -1,7 +1,7 @@
-import { ImageStyle, StyleProp, TextStyle, ViewStyle } from 'react-native';
+import type { ImageStyle, StyleProp, TextStyle, ViewStyle } from 'react-native';
 
-import { CustomTheme } from './theme';
-import { UnionToIntersection } from './utility';
+import type { CustomTheme } from './theme';
+import type { UnionToIntersection } from './utility';
 
 type StylesObjectTypes = StyleProp<ViewStyle | TextStyle | ImageStyle>;
 

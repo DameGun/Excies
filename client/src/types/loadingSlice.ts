@@ -1,4 +1,4 @@
-import { LoadingState } from '@/constants/loading';
+import type { LoadingState } from '@/constants/loading';
 
 type LoadingSliceState = {
   status: LoadingState;

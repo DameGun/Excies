@@ -1,7 +1,7 @@
-import { PressableStateCallbackType, ViewStyle } from 'react-native';
+import type { PressableStateCallbackType, ViewStyle } from 'react-native';
 
 import { createStylesheet } from '@/helpers/createStylesheet';
-import { StylesObjectTypes } from '@/types/styles';
+import type { StylesObjectTypes } from '@/types/styles';
 
 export const getStyles = createStylesheet(({ colors, constants }) => ({
   listItemTitle: (isWithExtract: boolean, ...extraStyles: StylesObjectTypes[]) => [

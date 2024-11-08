@@ -1,4 +1,4 @@
-import { PressableStateCallbackType } from 'react-native';
+import type { PressableStateCallbackType } from 'react-native';
 
 import { createStylesheet } from '@/helpers/createStylesheet';
 

@@ -1,5 +1,5 @@
-import { Exercise } from '@/types/exercise';
-import { ExerciseListItem } from '@/types/exerciseListItem';
+import type { Exercise } from '@/types/exercise';
+import type { ExerciseListItem } from '@/types/exerciseListItem';
 
 const formatSearchPhrase = (searchPhrase: string) =>
   searchPhrase.toUpperCase().trim().replace(/\s/g, '');

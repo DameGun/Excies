@@ -1,5 +1,5 @@
 import { ResponseStatus } from '@/constants/api';
-import { ApiResponse } from '@/types/api';
+import type { ApiResponse } from '@/types/api';
 
 export function handleResult<T = undefined>(data?: T): ApiResponse<T> {
   if (data === undefined) {
