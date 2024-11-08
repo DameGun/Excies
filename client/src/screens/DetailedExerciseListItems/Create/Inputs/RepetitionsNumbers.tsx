@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { Pressable, Text } from 'react-native';
 
 import { NumberInputButton } from '@/components';
@@ -27,13 +26,6 @@ export function RepetitionsNumbers({
 }: RepetitionsNumbersProps) {
   const styles = useStyles(getStyles);
 
-  const conditionalStyles = useMemo(
-    () => ({
-      borderColor: isActive ? styles.primaryColor.color : styles.greyColor.color,
-    }),
-    [isActive]
-  );
-
   const handleParameterType = () => {
     setParameterType(CreateDetailedExerciseListItemParameterType.Repetitions);
   };
@@ -43,7 +35,7 @@ export function RepetitionsNumbers({
   };
 
   return (
-    <Pressable onPress={handleParameterType} style={[styles.input, conditionalStyles]}>
+    <Pressable onPress={handleParameterType} style={styles.input(isActive)}>
       <NumberInputButton
         type={ItemValueOperationType.Decrease}
         number={1}

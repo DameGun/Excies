@@ -1,48 +1,78 @@
-import { StyleSheet } from 'react-native';
+import { PressableStateCallbackType, ViewStyle } from 'react-native';
 
-import { ThemeColors } from '@/types/theme';
+import { createStylesheet } from '@/helpers/createStylesheet';
+import { StylesObjectTypes } from '@/types/styles';
 
-export const getStyles = (colors: ThemeColors) =>
-  StyleSheet.create({
-    container: {
-      flexDirection: 'row',
-      alignItems: 'center',
-    },
-    text: {
+export const getStyles = createStylesheet(({ colors, constants }) => ({
+  listItemTitle: (isWithExtract: boolean, ...extraStyles: StylesObjectTypes[]) => [
+    {
+      color: isWithExtract ? colors.text : colors.primary,
       flex: 1,
-      fontSize: 18,
+      fontSize: constants.fontSize.lg,
     },
-    itemFirstStyle: {
-      borderTopWidth: 1,
-      borderTopLeftRadius: 15,
-      borderTopRightRadius: 15,
+    ...extraStyles,
+  ],
+  listItem:
+    (isLast: boolean, isFirst: boolean) =>
+    ({ pressed }: PressableStateCallbackType) => {
+      const commonStyles: ViewStyle = {
+        opacity: pressed ? constants.opacity.md : constants.opacity.lg,
+        backgroundColor: colors.greyBackground,
+      };
+
+      const styles = [commonStyles];
+
+      if (isFirst) {
+        styles.push({
+          borderTopWidth: constants.borderWidth.md,
+          borderTopLeftRadius: constants.borderRadius.lg,
+          borderTopRightRadius: constants.borderRadius.lg,
+        });
+      }
+
+      if (isLast) {
+        styles.push({
+          borderBottomWidth: constants.borderWidth.md,
+          borderBottomLeftRadius: constants.borderRadius.lg,
+          borderBottomRightRadius: constants.borderRadius.lg,
+        });
+      }
+
+      return styles;
     },
-    itemLastStyle: {
-      borderBottomWidth: 1,
-      borderBottomLeftRadius: 15,
-      borderBottomRightRadius: 15,
-    },
-    icon: {
-      paddingHorizontal: 10,
-    },
-    borderContainer: {
-      flex: 1,
-      flexDirection: 'row',
-      alignItems: 'center',
-      paddingVertical: 12,
-    },
-    border: {
-      borderBottomWidth: 1,
-      borderBottomColor: colors.grey,
-    },
-    infoRightContainer: {
-      flexDirection: 'row',
-      paddingRight: 10,
-      gap: 5,
-      alignItems: 'center',
-    },
-    infoRightText: {
-      fontSize: 18,
-      color: colors.grey,
-    },
-  });
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  leftIconContainer: {
+    paddingHorizontal: constants.padding.sm,
+  },
+  leftIcon: {
+    fontSize: constants.fontSize.xl,
+    color: colors.primary,
+  },
+  rightIcon: {
+    fontSize: constants.fontSize.xl,
+    color: colors.grey,
+  },
+  borderContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: constants.padding.sm,
+  },
+  border: {
+    borderBottomWidth: constants.borderWidth.md,
+    borderBottomColor: colors.grey,
+  },
+  infoRightContainer: {
+    flexDirection: 'row',
+    paddingRight: constants.padding.sm,
+    gap: constants.gap.sm,
+    alignItems: 'center',
+  },
+  infoRightText: {
+    fontSize: constants.fontSize.lg,
+    color: colors.grey,
+  },
+}));

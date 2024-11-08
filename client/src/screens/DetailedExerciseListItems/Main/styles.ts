@@ -1,60 +1,56 @@
-import { StyleSheet } from 'react-native';
+import { createStylesheet } from '@/helpers/createStylesheet';
 
-import { ThemeColors } from '@/types/theme';
-
-export const getStyles = (colors: ThemeColors) =>
-  StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'space-between',
-    },
-    addButtonContainer: {
-      position: 'absolute',
-      alignItems: 'center',
-      justifyContent: 'center',
-      height: 80,
-      width: 80,
-      alignSelf: 'center',
-      bottom: 10,
-    },
-    addButton: {
-      width: 80,
-      height: 80,
-      borderRadius: 40,
-    },
-    itemInfoMainContainer: {
-      flexDirection: 'row',
-      gap: 30,
-    },
-    time: {
-      fontSize: 14,
-      color: colors.grey,
-    },
-    itemInfoSubContainer: {
-      flexDirection: 'row',
-      alignItems: 'flex-end',
-      justifyContent: 'center',
-    },
-    itemInfoNumberLeft: {
-      color: colors.primary,
-      fontWeight: 'bold',
-      fontSize: 18,
-    },
-    itemInfoTextLeft: {
-      color: colors.primary,
-      fontSize: 12,
-      paddingLeft: 2,
-      paddingBottom: 2,
-    },
-    itemInfoNumberRight: {
-      color: colors.primary,
-      fontWeight: 'bold',
-      fontSize: 18,
-    },
-    itemInfoTextRight: {
-      color: colors.primary,
-      fontSize: 12,
-      paddingLeft: 2,
-      paddingBottom: 2,
-    },
-  });
+export const getStyles = createStylesheet(({ colors, constants }) => ({
+  container: {
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+  addButtonContainer: {
+    position: 'absolute',
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    bottom: constants.margin.md,
+  },
+  addButton: {
+    borderRadius: constants.borderRadius.xl,
+  },
+  icon: {
+    fontSize: constants.fontSize.xl2,
+  },
+  itemInfoMainContainer: {
+    flexDirection: 'row',
+    gap: constants.gap.xl,
+  },
+  time: {
+    fontSize: constants.fontSize.md,
+    color: colors.grey,
+  },
+  itemInfoSubContainer: {
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+  },
+  itemInfoNumberLeft: {
+    color: colors.primary,
+    fontWeight: 'bold',
+    fontSize: constants.fontSize.lg,
+  },
+  itemInfoTextLeft: {
+    color: colors.primary,
+    fontSize: constants.fontSize.sm,
+    paddingLeft: constants.padding.xs,
+    paddingBottom: constants.padding.xs,
+  },
+  itemInfoNumberRight: {
+    color: colors.primary,
+    fontWeight: 'bold',
+    fontSize: constants.fontSize.lg,
+  },
+  itemInfoTextRight: {
+    color: colors.primary,
+    fontSize: constants.fontSize.sm,
+    paddingLeft: constants.padding.xs,
+    paddingBottom: constants.padding.xs,
+  },
+}));

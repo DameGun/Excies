@@ -1,17 +1,16 @@
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Text, View } from 'react-native';
 
-import { Entypo } from '@expo/vector-icons';
-import { FontAwesome } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-import { CustomButton, CustomTextInput } from '@/components/index';
+import { DeleteItemButton } from '@/components/DeleteItemButton';
+import { CustomTextInput } from '@/components/index';
 import { ExerciseListActionType } from '@/constants/exerciseList';
 import { ScreenNames } from '@/constants/navigation';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
-import { useCustomTheme } from '@/hooks/useCustomTheme';
 import { useStyles } from '@/hooks/useStyles';
 import { selectExerciseListById } from '@/redux/slices/exerciseLists';
 import {
@@ -21,9 +20,9 @@ import {
 } from '@/redux/slices/exerciseLists/thunks';
 import { UpdateExerciseListDTO } from '@/types/exerciseList';
 import { StackNavigationParams } from '@/types/navigation';
+import { getInfoModalScreenStylesDefault } from '@/utils/getInfoModalScreenStylesDefault';
 import { getModalHeaderScreenOption } from '@/utils/getModalHeaderScreenOption';
 
-import { getStyles } from './styles';
 import { exerciseListSchema } from './validation';
 
 type ListInfoModalScreenProps = NativeStackScreenProps<
@@ -33,8 +32,7 @@ type ListInfoModalScreenProps = NativeStackScreenProps<
 
 export function ListInfoModalScreen({ route, navigation }: ListInfoModalScreenProps) {
   const { actionType, username, list_id } = route.params;
-  const { colors } = useCustomTheme();
-  const styles = useStyles(getStyles);
+  const styles = useStyles(getInfoModalScreenStylesDefault);
   const currentList = useAppSelector((state) => selectExerciseListById(state, list_id));
   const dispatch = useAppDispatch();
 
@@ -81,7 +79,6 @@ export function ListInfoModalScreen({ route, navigation }: ListInfoModalScreenPr
   useEffect(() => {
     navigation.setOptions(
       getModalHeaderScreenOption({
-        color: colors.primary,
         disabled: !isValid,
         onPress: onSubmit,
         title: actionType === ExerciseListActionType.Edit ? 'List Info' : 'New List',
@@ -91,35 +88,24 @@ export function ListInfoModalScreen({ route, navigation }: ListInfoModalScreenPr
 
   return (
     <View style={styles.container}>
-      <Entypo name='list' size={70} color={colors.primary} style={styles.icon} />
-      <View style={styles.inputContainer}>
+      <MaterialCommunityIcons name='format-list-bulleted' style={styles.icon} />
+      <View>
         <Text style={styles.text}>Name</Text>
         <CustomTextInput
           name='name'
           control={control}
           placeholder='Monday List, Upper Body, Best Training...'
-          style={styles.input}
         />
       </View>
-      <View style={{ ...styles.inputContainer, marginTop: 10 }}>
+      <View>
         <Text style={styles.text}>Description</Text>
         <CustomTextInput
           name='description'
           control={control}
           placeholder='Set a decription for list (optional)'
-          style={styles.input}
         />
       </View>
-      {actionType === ExerciseListActionType.Edit && (
-        <CustomButton
-          textStyle={styles.deleteButtonText}
-          buttonStyle={styles.deleteButton}
-          iconComponent={<FontAwesome name='trash-o' size={20} color='red' />}
-          onPress={handleDelete}
-        >
-          Delete
-        </CustomButton>
-      )}
+      {actionType === ExerciseListActionType.Edit && <DeleteItemButton onPress={handleDelete} />}
     </View>
   );
 }

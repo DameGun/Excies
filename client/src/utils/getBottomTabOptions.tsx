@@ -1,50 +1,44 @@
-import { ReactNode } from 'react';
-import { TextStyle } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
+import { ParamListBase, Route, RouteProp } from '@react-navigation/native';
 
-import { AntDesign, Entypo } from '@expo/vector-icons';
-import { ParamListBase, RouteProp } from '@react-navigation/native';
-
-import { IconParams } from '@/types/icons';
-import { ThemeColors } from '@/types/theme';
+import { createStylesheet } from '@/helpers/createStylesheet';
+import { IconNames } from '@/types/icons';
 
 import { showBottomTab } from './showBottomTab';
 
-type GetBottomTabOptionsProps<
-  ParamList extends ParamListBase,
-  RouteName extends keyof ParamList,
-> = {
-  icon: IconParams;
-  route?: RouteProp<ParamList, RouteName>;
+type BottomTabOptionProps<T extends string> = {
+  route: RouteProp<ParamListBase, T>;
+  navigation: any;
 };
 
-type TabBarIconPops = {
-  focused: boolean;
-};
+export const getBottomTabStyles = createStylesheet(({ colors, constants }) => ({
+  tabBarIcon: (focused: boolean) => ({
+    color: focused ? colors.primary : colors.grey,
+    fontSize: constants.fontSize.xl,
+  }),
+  tabBarLabelStyle: {
+    fontWeight: 'bold',
+    fontSize: constants.fontSize.sm,
+  },
+  tabBarStyle: (route?: Partial<Route<string>>) => ({
+    backgroundColor: showBottomTab(route) ? colors.background : colors.greyDark,
+    borderColor: showBottomTab(route) ? colors.background : colors.greyDark,
+  }),
+}));
 
-type StyleReturnType = {
-  tabBarIcon: (props: TabBarIconPops) => ReactNode;
-  tabBarLabelStyle: TextStyle;
-  tabBarStyle: TextStyle;
-};
-
-export const getBottomTabOptions = (colors: ThemeColors) => {
-  return <ParamList extends ParamListBase, RouteName extends keyof ParamList>({
-    icon: { type, name },
-    route,
-  }: GetBottomTabOptionsProps<ParamList, RouteName>): StyleReturnType => ({
-    tabBarIcon: ({ focused }: TabBarIconPops) => {
-      if (type === 'AntDesign') {
-        return <AntDesign name={name} size={20} color={focused ? colors.primary : colors.grey} />;
-      }
-      return <Entypo name={name} size={20} color={focused ? colors.primary : colors.grey} />;
-    },
-    tabBarLabelStyle: {
-      fontWeight: 'bold',
-      fontSize: 12,
-    },
-    tabBarStyle: {
-      backgroundColor: showBottomTab(route) ? colors.background : colors.greyDark,
-      borderColor: showBottomTab(route) ? colors.background : colors.greyDark,
-    },
+export function getBottomTabOptions(
+  styles: ReturnType<typeof getBottomTabStyles>,
+  iconName: IconNames
+) {
+  return <T extends string>({ route }: BottomTabOptionProps<T>): BottomTabNavigationOptions => ({
+    ...styles,
+    headerShown: false,
+    tabBarHideOnKeyboard: true,
+    tabBarStyle: styles.tabBarStyle(route),
+    tabBarLabelStyle: styles.tabBarLabelStyle,
+    tabBarIcon: ({ focused }) => (
+      <MaterialCommunityIcons name={iconName} style={styles.tabBarIcon(focused)} />
+    ),
   });
-};
+}

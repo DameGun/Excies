@@ -1,7 +1,12 @@
 import { Image } from 'react-native';
 
 import iconImage from '@/assets/icon.png';
+import { useStyles } from '@/hooks/useStyles';
+
+import { getStyles } from './styles';
 
 export function Logo() {
-  return <Image source={iconImage} style={{ height: 40, width: 40, marginRight: 20 }} />;
+  const styles = useStyles(getStyles);
+
+  return <Image source={iconImage} style={styles.logo} />;
 }

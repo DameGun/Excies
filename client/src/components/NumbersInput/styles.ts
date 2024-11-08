@@ -1,26 +1,25 @@
-import { StyleSheet } from 'react-native';
+import { PressableStateCallbackType } from 'react-native';
 
-import { ThemeColors } from '@/types/theme';
+import { createStylesheet } from '@/helpers/createStylesheet';
 
-export const getStyles = (colors: ThemeColors) =>
-  StyleSheet.create({
-    container: {
-      flex: 1,
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      alignContent: 'center',
-    },
-    itemContainer: {
-      flexGrow: 1,
-      height: 50,
-      width: 100,
-      justifyContent: 'center',
-      alignItems: 'center',
-      borderWidth: 0.5,
-      borderColor: colors.greyBackground,
-    },
-    text: {
-      color: colors.text,
-      fontSize: 22,
-    },
-  });
+export const getStyles = createStylesheet(({ colors, constants }) => ({
+  itemContainer: ({ pressed }: PressableStateCallbackType) => ({
+    opacity: pressed ? constants.opacity.md : constants.opacity.lg,
+    flexGrow: 1,
+    height: 50,
+    width: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: constants.borderWidth.sm,
+    borderColor: colors.greyBackground,
+  }),
+  container: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignContent: 'center',
+  },
+  text: {
+    color: colors.text,
+    fontSize: constants.fontSize.xl,
+  },
+}));

@@ -4,7 +4,7 @@ import { StatusBar, useColorScheme } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 
 import { Error, Loader } from '@/components';
-import { DARK_THEME, LIGHT_THEME } from '@/constants/colors';
+import { DARK_THEME, LIGHT_THEME } from '@/constants/theme';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { selectIsLoggedIn } from '@/redux/slices/auth';
 import { thunkAppOpen } from '@/redux/slices/auth/thunks';

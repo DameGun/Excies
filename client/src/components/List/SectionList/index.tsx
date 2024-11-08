@@ -1,36 +1,45 @@
-import { useCallback } from 'react';
+import { ReactElement, useCallback } from 'react';
 import { SectionList, SectionListRenderItem, View } from 'react-native';
 
 import { useStyles } from '@/hooks/useStyles';
 import { EntityWithId } from '@/types/common';
+import { RenderItemProps } from '@/types/list';
 import { SectionListType } from '@/types/section';
 
 import { SectionHeader } from './Header';
+import { getStyles } from './styles';
 
-import { getStyles } from '../styles';
+import { getCommonStyles } from '../styles';
 
 type CustomSectionListProps<T> = {
   sections: SectionListType<T>;
-  renderItem: SectionListRenderItem<T>;
+  renderItem(props: RenderItemProps<T>): ReactElement;
 };
 
 export function CustomSectionList<T extends EntityWithId>({
   sections,
   renderItem,
 }: CustomSectionListProps<T>) {
-  const styles = useStyles(getStyles);
+  const styles = useStyles(getCommonStyles, getStyles);
 
-  const sectionSeparator = useCallback(() => <View style={styles.separator} />, [styles.separator]);
+  const renderItemWithProps = useCallback<SectionListRenderItem<T>>(
+    ({ index, item, section: { data } }) => {
+      const isLast = index === data.length - 1;
+      const isFirst = index === 0;
+
+      return renderItem({ isFirst, isLast, item });
+    },
+    [renderItem]
+  );
 
   return (
     <View style={styles.container}>
       <SectionList
         sections={sections}
         keyExtractor={(item) => item.id}
-        renderSectionFooter={sectionSeparator}
         renderSectionHeader={SectionHeader(styles.headerRegular)}
-        renderItem={renderItem}
-        ListFooterComponent={<View style={{ paddingVertical: 20 }}></View>}
+        renderItem={renderItemWithProps}
+        ListFooterComponent={<View style={styles.separator}></View>}
       />
     </View>
   );

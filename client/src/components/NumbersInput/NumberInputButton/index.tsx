@@ -21,15 +21,7 @@ export function NumberInputButton({ type, number, showOperator, onPress }: Numbe
   };
 
   return (
-    <Pressable
-      style={({ pressed }) => [
-        {
-          opacity: pressed ? 0.6 : 1,
-        },
-        styles.inputButton,
-      ]}
-      onPress={handlePress}
-    >
+    <Pressable style={styles.inputButton} onPress={handlePress}>
       <Text
         style={
           type === ItemValueOperationType.Increase

@@ -1,30 +1,24 @@
-import { StyleSheet } from 'react-native';
+import { createStylesheet } from '@/helpers/createStylesheet';
 
-export const styles = StyleSheet.create({
+export const getStyles = createStylesheet(({ constants }) => ({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
+    marginHorizontal: constants.margin.lg,
+    gap: constants.gap.xl,
   },
-  input: {
-    height: 40,
-    width: 250,
-    marginTop: 15,
+  innerContainer: {
+    paddingHorizontal: constants.padding.xl,
   },
   buttonText: {
-    fontSize: 16,
+    fontSize: constants.fontSize.md,
   },
   button: {
-    marginTop: 15,
-    padding: 10,
-  },
-  error: {
-    color: 'red',
-    marginTop: 10,
+    marginTop: constants.margin.sm,
   },
   logo: {
-    height: 110,
+    height: '15%',
+    width: 'auto',
     resizeMode: 'contain',
-    marginBottom: 20,
   },
-});
+}));

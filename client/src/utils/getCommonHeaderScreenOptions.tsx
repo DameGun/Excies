@@ -1,15 +1,19 @@
 import { Logo } from '@/components';
-import { ThemeColors } from '@/types/theme';
+import { createStylesheet } from '@/helpers/createStylesheet';
 
-export const getCommonHeaderScreenOptions = (colors: ThemeColors) => {
-  return {
-    headerStyle: {
-      backgroundColor: colors.background,
-    },
-    tabBarStyle: {
-      backgroundColor: colors.background,
-    },
-    headerTitle: '',
-    headerRight: () => <Logo />,
-  };
-};
+export const getCommonHeaderScreenStyles = createStylesheet(({ colors }) => ({
+  headerStyle: {
+    backgroundColor: colors.background,
+  },
+  tabBarStyle: {
+    backgroundColor: colors.background,
+  },
+}));
+
+export const getCommonHeaderScreenOptions = (
+  styles: ReturnType<typeof getCommonHeaderScreenStyles>
+) => ({
+  ...styles,
+  headerTitle: '',
+  headerRight: () => <Logo />,
+});

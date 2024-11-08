@@ -1,17 +1,20 @@
-import { PropsWithChildren, ReactNode } from 'react';
+import { PropsWithChildren } from 'react';
 import { Keyboard, Pressable, Text, View } from 'react-native';
 
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
 import { useStyles } from '@/hooks/useStyles';
+import { IconNames } from '@/types/icons';
 import { PressableProps } from '@/types/pressable';
 import { StyleProps } from '@/types/styles';
 
 import { getStyles } from './styles';
 
-type CustomButtonProps = StyleProps<'text' | 'button'> &
+type CustomButtonProps = StyleProps<'text' | 'button' | 'icon'> &
   PropsWithChildren &
   PressableProps & {
     type?: 'submit';
-    iconComponent?: ReactNode;
+    iconName?: IconNames;
     disabled?: boolean;
   };
 
@@ -21,10 +24,11 @@ export function CustomButton({
   textStyle,
   buttonStyle,
   onPress,
-  iconComponent,
+  iconName,
+  iconStyle,
   disabled,
 }: CustomButtonProps) {
-  const customStyles = useStyles(getStyles);
+  const styles = useStyles(getStyles);
 
   const handlePress = () => {
     if (type === 'submit') {
@@ -35,21 +39,13 @@ export function CustomButton({
 
   return (
     <Pressable
-      style={({ pressed }) => [
-        {
-          opacity: pressed ? 0.8 : 1,
-        },
-        customStyles.button,
-        buttonStyle,
-      ]}
+      style={styles.button(disabled, buttonStyle)}
       onPress={handlePress}
       disabled={disabled}
     >
-      <View
-        style={{ ...customStyles.buttonContainer, flexDirection: iconComponent ? 'row' : 'column' }}
-      >
-        {iconComponent}
-        {children && <Text style={[customStyles.text, textStyle]}>{children}</Text>}
+      <View style={styles.buttonContainer(Boolean(iconName))}>
+        {iconName && <MaterialCommunityIcons name={iconName} style={iconStyle} />}
+        {children && <Text style={[styles.text, textStyle]}>{children}</Text>}
       </View>
     </Pressable>
   );

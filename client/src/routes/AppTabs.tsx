@@ -1,30 +1,25 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { useStyles } from '@/hooks/useStyles';
-import { getBottomTabOptions } from '@/utils/getBottomTabOptions';
-import { getCommonHeaderScreenOptions } from '@/utils/getCommonHeaderScreenOptions';
+import { getBottomTabOptions, getBottomTabStyles } from '@/utils/getBottomTabOptions';
+import {
+  getCommonHeaderScreenOptions,
+  getCommonHeaderScreenStyles,
+} from '@/utils/getCommonHeaderScreenOptions';
 
 import { ExerciseListStack } from './ExerciseListStack';
 
 const Tab = createBottomTabNavigator();
 
 export function AppTabs() {
-  const commonScreenOptions = useStyles(getCommonHeaderScreenOptions);
-  const bottomTabOptions = useStyles(getBottomTabOptions);
+  const styles = useStyles(getCommonHeaderScreenStyles, getBottomTabStyles);
 
   return (
-    <Tab.Navigator screenOptions={commonScreenOptions}>
+    <Tab.Navigator screenOptions={getCommonHeaderScreenOptions(styles)}>
       <Tab.Screen
         name='Home'
         component={ExerciseListStack}
-        options={({ route }) => ({
-          headerShown: false,
-          tabBarHideOnKeyboard: true,
-          ...bottomTabOptions({
-            icon: { type: 'AntDesign', name: 'home' },
-            route,
-          }),
-        })}
+        options={getBottomTabOptions(styles, 'home')}
       />
     </Tab.Navigator>
   );

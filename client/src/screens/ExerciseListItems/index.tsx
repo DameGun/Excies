@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 
-import { Entypo, FontAwesome6 } from '@expo/vector-icons';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import {
@@ -83,24 +82,23 @@ export function ExerciseListItemsScreen({ route, navigation }: ExerciseListItems
         <Search searchPhrase={searchPhrase} setSearchPhrase={setSearchPhrase} />
         <CustomFlatList
           data={data}
-          renderItem={({ item, isLast, index }) => (
+          renderItem={(props) => (
             <ListItem
-              title={item.name}
-              item={item}
-              infoRight={item.last_time_updated}
-              isLast={isLast}
+              {...props}
+              extractTitle={({ name }) => name}
+              extractInfo={({ last_time_updated }) => last_time_updated}
               onPress={handleClick}
-              index={index}
             />
           )}
           searchPhrase={searchPhrase}
         />
       </View>
-      <View style={styles.shadow}>
+      <View>
         <CustomButton
           buttonStyle={styles.addExerciseButton}
           textStyle={styles.addExerciseText}
-          iconComponent={<Entypo name='plus' size={24} color={styles.iconColor.color} />}
+          iconName='plus'
+          iconStyle={styles.addButtonIcon}
           onPress={handleAddExercise}
         >
           Add Exercises
@@ -112,7 +110,7 @@ export function ExerciseListItemsScreen({ route, navigation }: ExerciseListItems
       primaryText='No Exercises'
       secondaryText='Build your first list!'
       buttonText='Add Exercise'
-      IconComponent={<FontAwesome6 name='dumbbell' size={50} color='#aeaeb2' />}
+      iconName='dumbbell'
       onPress={handleAddExercise}
     />
   );
