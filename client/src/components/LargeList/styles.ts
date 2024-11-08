@@ -1,9 +1,6 @@
 import { createStylesheet } from '@/helpers/createStylesheet';
 
 export const getStyles = createStylesheet(({ colors, constants }) => ({
-  container: {
-    marginTop: constants.margin.md,
-  },
   listsContainer: {
     marginTop: constants.margin.lg,
   },

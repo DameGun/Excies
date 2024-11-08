@@ -20,10 +20,17 @@ export function ListItem<T extends EntityWithId>({
 }: ListItemProps<T>) {
   const styles = useStyles(getStyles);
 
-  const listItemTitle = useMemo(
-    () => (IsListItemTextPropsWithExtract(props) ? props.extractTitle(props.item) : props.title),
-    [props]
-  );
+  const listItemTitle = useMemo(() => {
+    const titleText = IsListItemTextPropsWithExtract(props)
+      ? props.extractTitle(props.item)
+      : props.title;
+
+    return (
+      <Text style={styles.listItemTitle(IsListItemTextPropsWithExtract(props), titleStyle)}>
+        {titleText}
+      </Text>
+    );
+  }, [props]);
 
   const listItemInfo = useMemo(() => {
     const infoText = IsListItemTextPropsWithExtract(props)
@@ -54,9 +61,7 @@ export function ListItem<T extends EntityWithId>({
           {iconName && <MaterialCommunityIcons name={iconName} style={styles.leftIcon} />}
         </View>
         <View style={[styles.borderContainer, !isLast && styles.border]}>
-          <Text style={styles.listItemTitle(IsListItemTextPropsWithExtract(props), titleStyle)}>
-            {listItemTitle}
-          </Text>
+          {listItemTitle}
           <View style={styles.infoRightContainer}>
             {children}
             {listItemInfo}

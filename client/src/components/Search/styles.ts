@@ -4,7 +4,7 @@ export const getStyles = createStylesheet(({ colors, constants }) => ({
   input: {
     flex: 1,
     paddingLeft: constants.padding.sm,
-    color: 'white',
+    color: colors.text,
   },
   searchIcon: {
     color: colors.grey,
