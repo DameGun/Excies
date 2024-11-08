@@ -29,6 +29,4 @@ type AuthSliceState = {
   user_id: string | null;
 };
 
-type OnAuthPayload = Omit<AuthResponse, 'accessToken'>;
-
-export type { AuthResponse, AuthSliceState, LoginDTO, OnAuthPayload, RegisterDTO, User };
+export type { AuthResponse, AuthSliceState, LoginDTO, RegisterDTO, User };
