@@ -49,10 +49,10 @@ export const getStyles = createStylesheet(({ colors, constants }) => ({
   leftIconContainer: {
     paddingHorizontal: constants.padding.sm,
   },
-  leftIcon: {
+  leftIcon: (isHidden?: boolean) => ({
     fontSize: constants.fontSize.xl,
-    color: colors.primary,
-  },
+    color: isHidden ? 'transparent' : colors.primary,
+  }),
   rightIcon: {
     fontSize: constants.fontSize.xl,
     color: colors.grey,

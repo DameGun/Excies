@@ -1,4 +1,4 @@
-export enum ScreenNames {
+export enum HomeScreenNames {
   ExerciseListsScreen = 'ExerciseListsScreen',
   ExerciseListItemsScreen = 'ExerciseListItemsScreen',
   DetailedExerciseListItemsScreen = 'DetailedExerciseListItemsScreen',
@@ -6,4 +6,9 @@ export enum ScreenNames {
   CreateDetailedItemModalScreen = 'CreateDetailedItemModalScreen',
   DetailedExerciseListItemInfoModalScreen = 'DetailedExerciseListItemInfoModalScreen',
   ExercisesModalScreen = 'ExercisesModalScreen',
+}
+
+export enum SettingsScreenNames {
+  SettingsScreen = 'SettingsScreen',
+  LanguageScreen = 'LanguageScreen',
 }

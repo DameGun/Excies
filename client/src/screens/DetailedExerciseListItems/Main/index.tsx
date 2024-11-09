@@ -5,7 +5,7 @@ import { Text, View } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { CustomButton, CustomSectionList, EmptyList, ListItem } from '@/components';
-import { ScreenNames } from '@/constants/navigation';
+import { HomeScreenNames } from '@/constants/navigation';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { useStyles } from '@/hooks/useStyles';
 import { selectDetailedExerciseListItems } from '@/redux/slices/detailedExerciseListItems';
@@ -14,13 +14,13 @@ import type {
   DetailedExerciseListItem,
   GetDetailedExerciseListItemsDTO,
 } from '@/types/detailedExerciseListItem';
-import type { StackNavigationParams } from '@/types/navigation';
+import type { HomeStackNavigationParams } from '@/types/homeStackNavigation';
 
 import { getStyles } from './styles';
 
 type DetailedExerciseListItemsScreenProps = NativeStackScreenProps<
-  StackNavigationParams,
-  ScreenNames.DetailedExerciseListItemsScreen
+  HomeStackNavigationParams,
+  HomeScreenNames.DetailedExerciseListItemsScreen
 >;
 
 export function DetailedExerciseListItemsScreen({
@@ -47,7 +47,7 @@ export function DetailedExerciseListItemsScreen({
   }, []);
 
   const handleNavigate = () => {
-    navigation.navigate(ScreenNames.CreateDetailedItemModalScreen, {
+    navigation.navigate(HomeScreenNames.CreateDetailedItemModalScreen, {
       username,
       list_id,
       list_item_id,
@@ -55,7 +55,7 @@ export function DetailedExerciseListItemsScreen({
   };
 
   const handleInfo = (item: DetailedExerciseListItem) => {
-    navigation.navigate(ScreenNames.DetailedExerciseListItemInfoModalScreen, {
+    navigation.navigate(HomeScreenNames.DetailedExerciseListItemInfoModalScreen, {
       username,
       list_id,
       list_item_id,

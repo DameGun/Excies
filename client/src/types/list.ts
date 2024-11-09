@@ -16,6 +16,7 @@ type RenderItemProps<T> = {
 
 type ListItemsIconProps = {
   iconName: IconNames;
+  iconHidden: boolean;
 };
 
 type ListItemBaseProps = PropsWithChildren &

@@ -5,7 +5,7 @@ import { View } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { LargeList, Search } from '@/components';
-import type { ScreenNames } from '@/constants/navigation';
+import type { HomeScreenNames } from '@/constants/navigation';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { selectExerciseListItems } from '@/redux/slices/exerciseListItems';
 import {
@@ -21,15 +21,15 @@ import type {
   DeleteExerciseListItemDTO,
   ExerciseListItem,
 } from '@/types/exerciseListItem';
-import type { StackNavigationParams } from '@/types/navigation';
+import type { HomeStackNavigationParams } from '@/types/homeStackNavigation';
 import type { SectionListType } from '@/types/section';
 import { getExercisesWithSearch } from '@/utils/exercises';
 import { getModalHeaderScreenOption } from '@/utils/getModalHeaderScreenOption';
 import { isExerciseListItem } from '@/utils/typePredicates';
 
 type ExercisesModalScreenProps = NativeStackScreenProps<
-  StackNavigationParams,
-  ScreenNames.ExercisesModalScreen
+  HomeStackNavigationParams,
+  HomeScreenNames.ExercisesModalScreen
 >;
 
 export function ExercisesModalScreen({ route, navigation }: ExercisesModalScreenProps) {

@@ -8,7 +8,7 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { CustomTextInput } from '@/components';
 import { DeleteItemButton } from '@/components/DeleteItemButton';
-import type { ScreenNames } from '@/constants/navigation';
+import type { HomeScreenNames } from '@/constants/navigation';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { useStyles } from '@/hooks/useStyles';
 import { selectDetailedExerciseListItemById } from '@/redux/slices/detailedExerciseListItems';
@@ -20,15 +20,15 @@ import type {
   DeleteDetailedExerciseListItemDTO,
   UpdateDetailedExerciseListItemDTO,
 } from '@/types/detailedExerciseListItem';
-import type { StackNavigationParams } from '@/types/navigation';
+import type { HomeStackNavigationParams } from '@/types/homeStackNavigation';
 import { getInfoModalScreenStylesDefault } from '@/utils/getInfoModalScreenStylesDefault';
 import { getModalHeaderScreenOption } from '@/utils/getModalHeaderScreenOption';
 
 import { detailedExerciseListItemSchema } from './validation';
 
 type DetailedExerciseListItemInfoModalScreenProps = NativeStackScreenProps<
-  StackNavigationParams,
-  ScreenNames.DetailedExerciseListItemInfoModalScreen
+  HomeStackNavigationParams,
+  HomeScreenNames.DetailedExerciseListItemInfoModalScreen
 >;
 
 export function DetailedExerciseListItemInfoModalScreen({

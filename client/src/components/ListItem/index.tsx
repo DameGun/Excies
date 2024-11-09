@@ -13,6 +13,7 @@ import { getStyles } from './styles';
 export function ListItem<T extends EntityWithId>({
   titleStyle,
   iconName,
+  iconHidden,
   isLast,
   isFirst,
   children,
@@ -58,7 +59,9 @@ export function ListItem<T extends EntityWithId>({
     <Pressable style={styles.listItem(isLast, isFirst)} onPress={handlePress}>
       <View style={styles.container}>
         <View style={styles.leftIconContainer}>
-          {iconName && <MaterialCommunityIcons name={iconName} style={styles.leftIcon} />}
+          {iconName && (
+            <MaterialCommunityIcons name={iconName} style={styles.leftIcon(iconHidden)} />
+          )}
         </View>
         <View style={[styles.borderContainer, !isLast && styles.border]}>
           {listItemTitle}

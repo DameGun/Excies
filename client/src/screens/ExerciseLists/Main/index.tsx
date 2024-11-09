@@ -6,16 +6,16 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { CustomFlatList, ListItem } from '@/components';
 import { ExerciseListActionType } from '@/constants/exerciseList';
-import { ScreenNames } from '@/constants/navigation';
+import { HomeScreenNames } from '@/constants/navigation';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { selectExerciseLists } from '@/redux/slices/exerciseLists';
 import { thunkGetExerciseLists } from '@/redux/slices/exerciseLists/thunks';
 import type { ExerciseList } from '@/types/exerciseList';
-import type { StackNavigationParams } from '@/types/navigation';
+import type { HomeStackNavigationParams } from '@/types/homeStackNavigation';
 
 type ExerciseListsScreenProps = NativeStackScreenProps<
-  StackNavigationParams,
-  ScreenNames.ExerciseListsScreen
+  HomeStackNavigationParams,
+  HomeScreenNames.ExerciseListsScreen
 >;
 
 export function ExerciseListsScreen({ route, navigation }: ExerciseListsScreenProps) {
@@ -29,14 +29,14 @@ export function ExerciseListsScreen({ route, navigation }: ExerciseListsScreenPr
   }, []);
 
   const handleListClick = ({ id }: ExerciseList) => {
-    navigation.navigate(ScreenNames.ExerciseListItemsScreen, {
+    navigation.navigate(HomeScreenNames.ExerciseListItemsScreen, {
       list_id: id,
       username,
     });
   };
 
   const handleNewListClick = () => {
-    navigation.navigate(ScreenNames.ListInfoModalScreen, {
+    navigation.navigate(HomeScreenNames.ListInfoModalScreen, {
       actionType: ExerciseListActionType.Create,
       username,
     });

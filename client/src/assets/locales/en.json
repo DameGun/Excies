@@ -2,7 +2,8 @@
   "tabs": {
     "login": "Login",
     "register": "Register",
-    "home": "Home"
+    "home": "Home",
+    "settings": "Settings"
   },
   "search": {
     "placeholder": "Search",
@@ -20,8 +21,7 @@
       "confirmPassword": "Confirm password"
     },
     "loginButton": "Login",
-    "registerButton": "Register",
-    "logoutButton": "Log out"
+    "registerButton": "Register"
   },
   "exerciseLists": {
     "title": "Exercise Lists",
@@ -79,5 +79,9 @@
         "placeholder": "Weight"
       }
     }
+  },
+  "settings": {
+    "language": "Language",
+    "logout": "Logout"
   }
 }

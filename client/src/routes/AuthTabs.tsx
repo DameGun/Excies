@@ -5,19 +5,15 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useStyles } from '@/hooks/useStyles';
 import { LoginScreen, RegisterScreen } from '@/screens';
 import { getBottomTabOptions, getBottomTabStyles } from '@/utils/getBottomTabOptions';
-import {
-  getCommonHeaderScreenOptions,
-  getCommonHeaderScreenStyles,
-} from '@/utils/getCommonHeaderScreenOptions';
 
 const Tab = createBottomTabNavigator();
 
 export function AuthTabs() {
-  const styles = useStyles(getCommonHeaderScreenStyles, getBottomTabStyles);
+  const styles = useStyles(getBottomTabStyles);
   const { t } = useTranslation();
 
   return (
-    <Tab.Navigator screenOptions={getCommonHeaderScreenOptions(styles)}>
+    <Tab.Navigator>
       <Tab.Screen
         name={t('tabs.login')}
         component={LoginScreen}

@@ -2,7 +2,8 @@
   "tabs": {
     "login": "Войти",
     "register": "Регистрация",
-    "home": "Главная"
+    "home": "Главная",
+    "settings": "Настройки"
   },
   "search": {
     "placeholder": "Поиск",
@@ -20,8 +21,7 @@
       "confirmPassword": "Подтвердить пароль"
     },
     "loginButton": "Войти",
-    "registerButton": "Зарегестрироваться",
-    "logoutButton": "Выйти"
+    "registerButton": "Зарегестрироваться"
   },
   "exerciseLists": {
     "title": "Списки упражнений",
@@ -78,5 +78,9 @@
         "placeholder": "Вес"
       }
     }
+  },
+  "settings": {
+    "language": "Язык",
+    "logout": "Выйти"
   }
 }

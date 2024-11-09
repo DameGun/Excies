@@ -10,7 +10,7 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { DeleteItemButton } from '@/components/DeleteItemButton';
 import { CustomTextInput } from '@/components/index';
 import { ExerciseListActionType } from '@/constants/exerciseList';
-import { ScreenNames } from '@/constants/navigation';
+import { HomeScreenNames } from '@/constants/navigation';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { useStyles } from '@/hooks/useStyles';
 import { selectExerciseListById } from '@/redux/slices/exerciseLists';
@@ -20,15 +20,15 @@ import {
   thunkUpdateExerciseList,
 } from '@/redux/slices/exerciseLists/thunks';
 import type { UpdateExerciseListDTO } from '@/types/exerciseList';
-import type { StackNavigationParams } from '@/types/navigation';
+import type { HomeStackNavigationParams } from '@/types/homeStackNavigation';
 import { getInfoModalScreenStylesDefault } from '@/utils/getInfoModalScreenStylesDefault';
 import { getModalHeaderScreenOption } from '@/utils/getModalHeaderScreenOption';
 
 import { exerciseListSchema } from './validation';
 
 type ListInfoModalScreenProps = NativeStackScreenProps<
-  StackNavigationParams,
-  ScreenNames.ListInfoModalScreen
+  HomeStackNavigationParams,
+  HomeScreenNames.ListInfoModalScreen
 >;
 
 export function ListInfoModalScreen({ route, navigation }: ListInfoModalScreenProps) {
@@ -54,7 +54,7 @@ export function ListInfoModalScreen({ route, navigation }: ListInfoModalScreenPr
   const handleDelete = () => {
     if (actionType === ExerciseListActionType.Edit) {
       dispatch(thunkDeleteExerciseList({ id: list_id, username }));
-      navigation.navigate(ScreenNames.ExerciseListsScreen, { username });
+      navigation.navigate(HomeScreenNames.ExerciseListsScreen, { username });
     }
   };
 

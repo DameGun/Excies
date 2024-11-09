@@ -13,20 +13,20 @@ import {
   Search,
 } from '@/components/index';
 import { ExerciseListActionType } from '@/constants/exerciseList';
-import { ScreenNames } from '@/constants/navigation';
+import { HomeScreenNames } from '@/constants/navigation';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { useStyles } from '@/hooks/useStyles';
 import { selectExerciseListItems } from '@/redux/slices/exerciseListItems/index';
 import { thunkGetExerciseListItems } from '@/redux/slices/exerciseListItems/thunks';
 import { selectExerciseListById } from '@/redux/slices/exerciseLists';
 import type { ExerciseListItem, GetExerciseListItemsDTO } from '@/types/exerciseListItem';
-import type { StackNavigationParams } from '@/types/navigation';
+import type { HomeStackNavigationParams } from '@/types/homeStackNavigation';
 
 import { getStyles } from './styles';
 
 type ExerciseListItemsScreenProps = NativeStackScreenProps<
-  StackNavigationParams,
-  ScreenNames.ExerciseListItemsScreen
+  HomeStackNavigationParams,
+  HomeScreenNames.ExerciseListItemsScreen
 >;
 
 export function ExerciseListItemsScreen({ route, navigation }: ExerciseListItemsScreenProps) {
@@ -54,7 +54,7 @@ export function ExerciseListItemsScreen({ route, navigation }: ExerciseListItems
       headerRight: () => (
         <EditIcon
           onPress={() => {
-            navigation.navigate(ScreenNames.ListInfoModalScreen, {
+            navigation.navigate(HomeScreenNames.ListInfoModalScreen, {
               actionType: ExerciseListActionType.Edit,
               username,
               list_id,
@@ -66,11 +66,11 @@ export function ExerciseListItemsScreen({ route, navigation }: ExerciseListItems
   }, [currentList]);
 
   function handleAddExercise() {
-    navigation.navigate(ScreenNames.ExercisesModalScreen, { list_id, username });
+    navigation.navigate(HomeScreenNames.ExercisesModalScreen, { list_id, username });
   }
 
   function handleClick(item: ExerciseListItem) {
-    navigation.navigate(ScreenNames.DetailedExerciseListItemsScreen, {
+    navigation.navigate(HomeScreenNames.DetailedExerciseListItemsScreen, {
       username,
       list_id,
       list_item_id: item.id,

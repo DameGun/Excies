@@ -7,13 +7,13 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { CustomButton, NumbersInput } from '@/components';
 import { CreateDetailedExerciseListItemParameterType } from '@/constants/detailedExerciseListItem';
-import type { ScreenNames } from '@/constants/navigation';
+import type { HomeScreenNames } from '@/constants/navigation';
 import { useAppDispatch } from '@/hooks/redux';
 import { useStyles } from '@/hooks/useStyles';
 import { thunkCreateDetailedExerciseListItem } from '@/redux/slices/detailedExerciseListItems/thunks';
 import type { CreateDetailedExerciseListItemDTO } from '@/types/detailedExerciseListItem';
+import type { HomeStackNavigationParams } from '@/types/homeStackNavigation';
 import type { IconNames } from '@/types/icons';
-import type { StackNavigationParams } from '@/types/navigation';
 import {
   handleRemoveRepetitions,
   handleRemoveWeight,
@@ -25,8 +25,8 @@ import { RepetitionsNumbers, WeightNumbers } from './Inputs';
 import { getStyles } from './styles';
 
 type CreateDetailedItemModalScreenProps = NativeStackScreenProps<
-  StackNavigationParams,
-  ScreenNames.CreateDetailedItemModalScreen
+  HomeStackNavigationParams,
+  HomeScreenNames.CreateDetailedItemModalScreen
 >;
 
 export function CreateDetailedItemModalScreen({
