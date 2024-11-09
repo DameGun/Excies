@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Pressable, Text, View } from 'react-native';
 
 import { NumberInputButton } from '@/components';
@@ -25,6 +26,7 @@ export function WeightNumbers({
   weight,
 }: WeightNumbersProps) {
   const styles = useStyles(getStyles);
+  const { t } = useTranslation();
 
   const handleParameterType = () => {
     setParameterType(CreateDetailedExerciseListItemParameterType.Weight);
@@ -50,7 +52,9 @@ export function WeightNumbers({
           onPress={handleWeightInputButtonClick}
         />
       </View>
-      <Text style={styles.inputTitle}>{weight} kg</Text>
+      <Text style={styles.inputTitle}>
+        {t('detailedExerciseListItems.weightBadge', { value: weight })}
+      </Text>
       <View style={styles.inputButtonsContainer}>
         <NumberInputButton
           type={ItemValueOperationType.Increase}

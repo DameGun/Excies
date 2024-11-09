@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Pressable, Text } from 'react-native';
 
 import { NumberInputButton } from '@/components';
@@ -25,6 +26,7 @@ export function RepetitionsNumbers({
   rep,
 }: RepetitionsNumbersProps) {
   const styles = useStyles(getStyles);
+  const { t } = useTranslation();
 
   const handleParameterType = () => {
     setParameterType(CreateDetailedExerciseListItemParameterType.Repetitions);
@@ -42,7 +44,9 @@ export function RepetitionsNumbers({
         showOperator={true}
         onPress={handleRepetitionsInputButtonClick}
       />
-      <Text style={styles.inputTitle}>{rep} rep</Text>
+      <Text style={styles.inputTitle}>
+        {t('detailedExerciseListItems.repetitionsBadge', { value: rep })}
+      </Text>
       <NumberInputButton
         type={ItemValueOperationType.Increase}
         number={1}

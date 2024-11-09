@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -21,6 +22,7 @@ export function ExerciseListsScreen({ route, navigation }: ExerciseListsScreenPr
   const { username } = route.params;
   const data = useAppSelector(selectExerciseLists);
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   useEffect(() => {
     dispatch(thunkGetExerciseLists({ username }));
@@ -44,7 +46,7 @@ export function ExerciseListsScreen({ route, navigation }: ExerciseListsScreenPr
     <View style={{ flex: 1 }}>
       {data && (
         <CustomFlatList
-          title='Exercise lists'
+          title={t('exerciseLists.title')}
           data={data}
           renderItem={(props) => (
             <ListItem
@@ -58,7 +60,7 @@ export function ExerciseListsScreen({ route, navigation }: ExerciseListsScreenPr
           headerComponent={
             <View>
               <ListItem
-                title='New List...'
+                title={t('exerciseLists.newList')}
                 iconName='plus'
                 onPress={handleNewListClick}
                 isFirst={true}

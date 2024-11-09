@@ -1,8 +1,8 @@
 import type { PropsWithChildren } from 'react';
 import { Image, View } from 'react-native';
 
-import logoBlack from '@/assets/auth-logo-black.png';
-import logoWhite from '@/assets/auth-logo-white.png';
+import logoBlack from '@/assets/images/auth-logo-black.png';
+import logoWhite from '@/assets/images/auth-logo-white.png';
 import { useCustomTheme } from '@/hooks/useCustomTheme';
 import { useStyles } from '@/hooks/useStyles';
 

@@ -12,6 +12,8 @@ import { thunkAppOpen } from '@/redux/slices/auth/thunks';
 import { AppTabs } from './AppTabs';
 import { AuthTabs } from './AuthTabs';
 
+import '@/i18n';
+
 export function Router() {
   const theme = useColorScheme() === 'dark' ? DARK_THEME : LIGHT_THEME;
   const isLoggedIn = useAppSelector(selectIsLoggedIn);

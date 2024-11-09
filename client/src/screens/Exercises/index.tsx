@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -37,6 +38,7 @@ export function ExercisesModalScreen({ route, navigation }: ExercisesModalScreen
   const listItems = useAppSelector(selectExerciseListItems);
   const currentList = useAppSelector((state) => selectExerciseListById(state, list_id));
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   const [searchPhrase, setSearchPhrase] = useState('');
 
@@ -45,7 +47,7 @@ export function ExercisesModalScreen({ route, navigation }: ExercisesModalScreen
 
     navigation.setOptions(
       getModalHeaderScreenOption({
-        title: `Add to "${currentList?.name}"`,
+        title: t('exercises.title', { listName: currentList?.name }),
         disableRightButton: true,
       })
     );
@@ -77,12 +79,12 @@ export function ExercisesModalScreen({ route, navigation }: ExercisesModalScreen
 
     return [
       {
-        title: 'Added Exercises',
+        title: t('exercises.addedSectionTitle'),
         data: addedExercises,
         iconName: 'checkbox-marked-circle',
       },
       {
-        title: 'All Exercises',
+        title: t('exercises.allSectionTitle'),
         data: allExercises,
         iconName: 'plus-circle-outline',
       },

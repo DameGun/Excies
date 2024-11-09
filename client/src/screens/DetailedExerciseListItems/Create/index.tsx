@@ -1,4 +1,5 @@
 import { useCallback, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Pressable, Text, View } from 'react-native';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -35,6 +36,7 @@ export function CreateDetailedItemModalScreen({
   const { username, list_id, list_item_id } = route.params;
   const styles = useStyles(getStyles);
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   const [active, setActive] = useState(CreateDetailedExerciseListItemParameterType.Repetitions);
   const [rep, setRep] = useState(0);
@@ -84,6 +86,7 @@ export function CreateDetailedItemModalScreen({
       navigation.goBack();
     }
   }
+  console.log(active);
 
   return (
     <View style={{ flex: 1 }}>
@@ -93,7 +96,7 @@ export function CreateDetailedItemModalScreen({
       <View style={styles.container}>
         <View style={styles.headerContainer}>
           <MaterialCommunityIcons name={currentIconName} style={styles.createTypeIcon} />
-          <Text style={styles.header}>{active}</Text>
+          <Text style={styles.header}>{t(`detailedExerciseListItems.create.${active}Label`)}</Text>
         </View>
         <View style={styles.inputsContainer}>
           <RepetitionsNumbers
@@ -115,7 +118,7 @@ export function CreateDetailedItemModalScreen({
           onPress={handleSubmit}
           disabled={!isValid}
         >
-          Record Set
+          {t('detailedExerciseListItems.create.submitButton')}
         </CustomButton>
         <NumbersInput onNumberPress={onNumberPress} onRemove={onRemove} />
       </View>

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Keyboard, TextInput, View } from 'react-native';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -17,6 +18,7 @@ type SearchProps = {
 export function Search({ searchPhrase, setSearchPhrase }: SearchProps) {
   const styles = useStyles(getStyles);
   const [clicked, setClicked] = useState(false);
+  const { t } = useTranslation();
 
   const handleFocus = () => {
     setClicked(true);
@@ -36,7 +38,7 @@ export function Search({ searchPhrase, setSearchPhrase }: SearchProps) {
       <View style={[styles.searchBar, clicked && styles.searchBarClicked]}>
         <MaterialCommunityIcons name='magnify' style={styles.searchIcon} />
         <TextInput
-          placeholder='Search'
+          placeholder={t('search.placeholder')}
           style={styles.input}
           placeholderTextColor={styles.placeholder.color}
           value={searchPhrase}
@@ -50,7 +52,7 @@ export function Search({ searchPhrase, setSearchPhrase }: SearchProps) {
       </View>
       {clicked && (
         <View>
-          <CustomButton onPress={handleCancel}>Cancel</CustomButton>
+          <CustomButton onPress={handleCancel}>{t('search.cancel')}</CustomButton>
         </View>
       )}
     </View>

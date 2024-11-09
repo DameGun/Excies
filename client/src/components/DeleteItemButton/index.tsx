@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { useStyles } from '@/hooks/useStyles';
 import type { PressableProps } from '@/types/pressable';
 
@@ -7,6 +9,7 @@ import { CustomButton } from '../Button';
 
 export function DeleteItemButton({ onPress }: PressableProps) {
   const styles = useStyles(getStyles);
+  const { t } = useTranslation();
 
   return (
     <CustomButton
@@ -16,7 +19,7 @@ export function DeleteItemButton({ onPress }: PressableProps) {
       iconStyle={styles.icon}
       onPress={onPress}
     >
-      Delete
+      {t('modal.deleteButton')}
     </CustomButton>
   );
 }

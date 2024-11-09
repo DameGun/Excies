@@ -53,6 +53,7 @@ export function ExerciseListStack() {
         screenOptions={{
           presentation: 'modal',
           ...TransitionPresets.ModalPresentationIOS,
+          headerTitleAlign: 'center',
         }}
       >
         <Stack.Screen name={ScreenNames.ListInfoModalScreen} component={ListInfoModalScreen} />

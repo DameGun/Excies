@@ -16,4 +16,5 @@ export const getCommonHeaderScreenOptions = (
   ...styles,
   headerTitle: '',
   headerRight: () => <Logo />,
+  headerBackTitleVisible: false,
 });

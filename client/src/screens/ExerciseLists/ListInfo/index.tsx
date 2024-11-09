@@ -1,5 +1,6 @@
 import { useCallback, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { Text, View } from 'react-native';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -35,6 +36,7 @@ export function ListInfoModalScreen({ route, navigation }: ListInfoModalScreenPr
   const styles = useStyles(getInfoModalScreenStylesDefault);
   const currentList = useAppSelector((state) => selectExerciseListById(state, list_id));
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   const {
     control,
@@ -81,7 +83,10 @@ export function ListInfoModalScreen({ route, navigation }: ListInfoModalScreenPr
       getModalHeaderScreenOption({
         disabled: !isValid,
         onPress: onSubmit,
-        title: actionType === ExerciseListActionType.Edit ? 'List Info' : 'New List',
+        title:
+          actionType === ExerciseListActionType.Edit
+            ? t('exerciseLists.modal.editTitle')
+            : t('exerciseLists.modal.createTitle'),
       })
     );
   }, [isValid, onSubmit]);
@@ -90,19 +95,19 @@ export function ListInfoModalScreen({ route, navigation }: ListInfoModalScreenPr
     <View style={styles.container}>
       <MaterialCommunityIcons name='format-list-bulleted' style={styles.icon} />
       <View>
-        <Text style={styles.text}>Name</Text>
+        <Text style={styles.text}>{t('exerciseLists.modal.name.label')}</Text>
         <CustomTextInput
           name='name'
           control={control}
-          placeholder='Monday List, Upper Body, Best Training...'
+          placeholder={t('exerciseLists.modal.name.placeholder')}
         />
       </View>
       <View>
-        <Text style={styles.text}>Description</Text>
+        <Text style={styles.text}>{t('exerciseLists.modal.description.label')}</Text>
         <CustomTextInput
           name='description'
           control={control}
-          placeholder='Set a decription for list (optional)'
+          placeholder={t('exerciseLists.modal.description.placeholder')}
         />
       </View>
       {actionType === ExerciseListActionType.Edit && <DeleteItemButton onPress={handleDelete} />}

@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Text, View } from 'react-native';
 
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -28,9 +29,9 @@ export function DetailedExerciseListItemsScreen({
 }: DetailedExerciseListItemsScreenProps) {
   const { list_id, list_item_id, name, username } = route.params;
   const data = useAppSelector(selectDetailedExerciseListItems);
-
   const dispatch = useAppDispatch();
   const styles = useStyles(getStyles);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const payload: GetDetailedExerciseListItemsDTO = {
@@ -78,11 +79,15 @@ export function DetailedExerciseListItemsScreen({
               <View style={styles.itemInfoMainContainer}>
                 <View style={styles.itemInfoSubContainer}>
                   <Text style={styles.itemInfoNumberLeft}>{item.rep}</Text>
-                  <Text style={styles.itemInfoTextLeft}>rep</Text>
+                  <Text style={styles.itemInfoTextLeft}>
+                    {t('detailedExerciseListItems.repetitionsBadge', { value: '' })}
+                  </Text>
                 </View>
                 <View style={styles.itemInfoSubContainer}>
                   <Text style={styles.itemInfoNumberRight}>{item.weight}</Text>
-                  <Text style={styles.itemInfoTextRight}>kg</Text>
+                  <Text style={styles.itemInfoTextRight}>
+                    {t('detailedExerciseListItems.weightBadge', { value: '' })}
+                  </Text>
                 </View>
               </View>
             </ListItem>
@@ -101,8 +106,8 @@ export function DetailedExerciseListItemsScreen({
   ) : (
     <View style={{ flex: 1 }}>
       <EmptyList
-        primaryText='No Sets'
-        secondaryText='Record your sets to track progress'
+        primaryText={t('detailedExerciseListItems.empty.mainText')}
+        secondaryText={t('detailedExerciseListItems.empty.secondaryText')}
         iconName='chart-box-outline'
       />
       <View style={styles.addButtonContainer}>

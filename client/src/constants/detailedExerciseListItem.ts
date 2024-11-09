@@ -7,8 +7,8 @@ export const WEIGHT_MIN_CONSTRAINT = 1;
 export const NOTEX_MAX_CONSTRAINT = 100;
 
 export enum CreateDetailedExerciseListItemParameterType {
-  Repetitions = 'Repetitions',
-  Weight = 'Weight',
+  Repetitions = 'repetitions',
+  Weight = 'weight',
 }
 
 export enum ItemValueOperationType {

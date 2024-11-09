@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { useStyles } from '@/hooks/useStyles';
@@ -13,11 +15,12 @@ const Tab = createBottomTabNavigator();
 
 export function AppTabs() {
   const styles = useStyles(getCommonHeaderScreenStyles, getBottomTabStyles);
+  const { t } = useTranslation();
 
   return (
     <Tab.Navigator screenOptions={getCommonHeaderScreenOptions(styles)}>
       <Tab.Screen
-        name='Home'
+        name={t('tabs.home')}
         component={ExerciseListStack}
         options={getBottomTabOptions(styles, 'home')}
       />

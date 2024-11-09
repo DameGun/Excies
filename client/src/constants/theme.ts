@@ -40,6 +40,7 @@ const THEME_CONSTANTS: ThemeConstants = {
   },
   padding: {
     xs: 2,
+    xs2: 5,
     sm: 10,
     md: 20,
     lg: 30,

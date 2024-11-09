@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -35,6 +36,7 @@ export function ExerciseListItemsScreen({ route, navigation }: ExerciseListItems
 
   const dispatch = useAppDispatch();
   const styles = useStyles(getStyles);
+  const { t } = useTranslation();
 
   const [searchPhrase, setSearchPhrase] = useState('');
 
@@ -101,15 +103,15 @@ export function ExerciseListItemsScreen({ route, navigation }: ExerciseListItems
           iconStyle={styles.addButtonIcon}
           onPress={handleAddExercise}
         >
-          Add Exercises
+          {t('exerciseListItems.addExercises')}
         </CustomButton>
       </View>
     </View>
   ) : (
     <EmptyList
-      primaryText='No Exercises'
-      secondaryText='Build your first list!'
-      buttonText='Add Exercise'
+      primaryText={t('exerciseListItems.empty.mainText')}
+      secondaryText={t('exerciseListItems.empty.secondaryText')}
+      buttonText={t('exerciseListItems.addExercises')}
       iconName='dumbbell'
       onPress={handleAddExercise}
     />
