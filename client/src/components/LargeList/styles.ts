@@ -12,7 +12,4 @@ export const getStyles = createStylesheet(({ colors, constants }) => ({
     paddingVertical: constants.padding.xs,
     fontSize: constants.fontSize.md,
   },
-  separator: {
-    paddingVertical: constants.padding.xl,
-  },
 }));
