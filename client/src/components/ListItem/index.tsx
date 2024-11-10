@@ -27,11 +27,7 @@ export function ListItem<T extends EntityWithId>({
       ? props.extractTitle(props.item)
       : props.title;
 
-    return (
-      <Text style={styles.listItemTitle(IsListItemTextPropsWithExtract(props), titleStyle)}>
-        {titleText}
-      </Text>
-    );
+    return <Text style={styles.listItemTitle(titleStyle)}>{titleText}</Text>;
   }, [props]);
 
   const listItemInfo = useMemo(() => {

@@ -81,6 +81,11 @@
   },
   "settings": {
     "language": "Язык",
-    "logout": "Выйти"
+    "logout": "Выйти",
+    "darkMode": {
+      "title": "Темная тема",
+      "dark": "Включена",
+      "light": "Отключена"
+    }
   }
 }

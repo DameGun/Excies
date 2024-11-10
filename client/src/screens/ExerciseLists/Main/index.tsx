@@ -9,10 +9,13 @@ import { ExerciseListActionType } from '@/constants/exerciseList';
 import { Icons } from '@/constants/icons';
 import { HomeScreenNames } from '@/constants/navigation';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
+import { useStyles } from '@/hooks/useStyles';
 import { selectExerciseLists } from '@/redux/slices/exerciseLists';
 import { thunkGetExerciseLists } from '@/redux/slices/exerciseLists/thunks';
 import type { ExerciseList } from '@/types/exerciseList';
 import type { HomeStackNavigationParams } from '@/types/homeStackNavigation';
+
+import { getStyles } from './styles';
 
 type ExerciseListsScreenProps = NativeStackScreenProps<
   HomeStackNavigationParams,
@@ -21,6 +24,7 @@ type ExerciseListsScreenProps = NativeStackScreenProps<
 
 export function ExerciseListsScreen({ route, navigation }: ExerciseListsScreenProps) {
   const { username } = route.params;
+  const styles = useStyles(getStyles);
   const data = useAppSelector(selectExerciseLists);
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
@@ -62,6 +66,7 @@ export function ExerciseListsScreen({ route, navigation }: ExerciseListsScreenPr
             <View>
               <ListItem
                 title={t('exerciseLists.newList')}
+                titleStyle={styles.newList}
                 iconName={Icons.Plus}
                 onPress={handleNewListClick}
                 isFirst={true}

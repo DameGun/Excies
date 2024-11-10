@@ -82,6 +82,11 @@
   },
   "settings": {
     "language": "Language",
-    "logout": "Logout"
+    "logout": "Logout",
+    "darkMode": {
+      "title": "Dark Mode",
+      "dark": "Enabled",
+      "light": "Disabled"
+    }
   }
 }

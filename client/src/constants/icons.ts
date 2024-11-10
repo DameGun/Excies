@@ -19,4 +19,5 @@ export const Icons = {
   Settings: 'tune',
   Login: 'login',
   Register: 'account-plus',
+  DarkMode: 'theme-light-dark',
 } as const;

@@ -1,3 +1,5 @@
+import type { ColorSchemeName } from 'react-native';
+
 import type { StylesOptions } from './styles';
 
 type BaseColors = {
@@ -33,4 +35,8 @@ type CustomTheme = {
   constants: ThemeConstants;
 };
 
-export type { BaseColors, CustomTheme, ThemeColors, ThemeConstants };
+type ThemeState = {
+  mode: NonNullable<ColorSchemeName>;
+};
+
+export type { BaseColors, CustomTheme, ThemeColors, ThemeConstants, ThemeState };
