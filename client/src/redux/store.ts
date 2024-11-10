@@ -14,7 +14,7 @@ import themeSlice from './slices/theme';
 const persistConfig = {
   storage: AsyncStorage,
   key: 'root',
-  whiteList: ['theme'],
+  whitelist: ['theme'],
 };
 
 const rootReducer = combineReducers({

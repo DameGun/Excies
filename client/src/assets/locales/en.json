@@ -7,7 +7,9 @@
   },
   "search": {
     "placeholder": "Search",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "mainText": "Nothing found with search: \"{{searchPhrase}}\"",
+    "secondaryText": "Try again with another search phrase"
   },
   "modal": {
     "headerRightButton": "Done",

@@ -7,7 +7,9 @@
   },
   "search": {
     "placeholder": "Поиск",
-    "cancel": "Отменить"
+    "cancel": "Отменить",
+    "mainText": "Ничего не найдено по поиску: \"{{searchPhrase}}\"",
+    "secondaryText": "Попробуйте еще раз с другой фразой"
   },
   "modal": {
     "headerRightButton": "Готово",

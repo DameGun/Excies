@@ -18,5 +18,6 @@ export const getCommonHeaderScreenOptions = (
   ...styles,
   headerTitleAlign: 'center',
   headerBackTitleVisible: false,
+  headerShadowVisible: false,
   headerRight: () => <Logo />,
 });
