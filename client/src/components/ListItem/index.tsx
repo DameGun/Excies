@@ -3,6 +3,7 @@ import { Pressable, Text, View } from 'react-native';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
+import { Icons } from '@/constants/icons';
 import { useStyles } from '@/hooks/useStyles';
 import type { EntityWithId } from '@/types/common';
 import type { ListItemProps } from '@/types/list';
@@ -68,7 +69,7 @@ export function ListItem<T extends EntityWithId>({
           <View style={styles.infoRightContainer}>
             {children}
             {listItemInfo}
-            <MaterialCommunityIcons name='chevron-right' style={styles.rightIcon} />
+            <MaterialCommunityIcons name={Icons.ArrowRight} style={styles.rightIcon} />
           </View>
         </View>
       </View>

@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { CustomFlatList, ListItem } from '@/components';
 import { LANGUAGE_STORAGE_KEY } from '@/constants/i18n';
+import { Icons } from '@/constants/icons';
 import { LanguagesData } from '@/constants/language';
 import { useStyles } from '@/hooks/useStyles';
 import type { LanguageDataType } from '@/types/i18n';
@@ -27,7 +28,7 @@ export function LanguageScreen() {
         <ListItem
           {...rest}
           item={item}
-          iconName='check'
+          iconName={Icons.Checkbox}
           iconHidden={item.code !== i18n.language}
           onPress={handlePress}
           extractTitle={({ name, originName }) => (

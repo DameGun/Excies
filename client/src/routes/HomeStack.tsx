@@ -51,8 +51,8 @@ export function HomeStack() {
       <Stack.Group
         screenOptions={{
           presentation: 'modal',
-          ...TransitionPresets.ModalPresentationIOS,
           headerTitleAlign: 'center',
+          ...TransitionPresets.ModalPresentationIOS,
         }}
       >
         <Stack.Screen name={HomeScreenNames.ListInfoModalScreen} component={ListInfoModalScreen} />

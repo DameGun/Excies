@@ -5,6 +5,7 @@ import { View } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { LargeList, Search } from '@/components';
+import { Icons } from '@/constants/icons';
 import type { HomeScreenNames } from '@/constants/navigation';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { selectExerciseListItems } from '@/redux/slices/exerciseListItems';
@@ -81,12 +82,12 @@ export function ExercisesModalScreen({ route, navigation }: ExercisesModalScreen
       {
         title: t('exercises.addedSectionTitle'),
         data: addedExercises,
-        iconName: 'checkbox-marked-circle',
+        iconName: Icons.CheckboxCircle,
       },
       {
         title: t('exercises.allSectionTitle'),
         data: allExercises,
-        iconName: 'plus-circle-outline',
+        iconName: Icons.PlusCircleOutline,
       },
     ];
   }, [listItems, exercises, searchPhrase]);

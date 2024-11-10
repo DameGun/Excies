@@ -10,6 +10,7 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { DeleteItemButton } from '@/components/DeleteItemButton';
 import { CustomTextInput } from '@/components/index';
 import { ExerciseListActionType } from '@/constants/exerciseList';
+import { Icons } from '@/constants/icons';
 import { HomeScreenNames } from '@/constants/navigation';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { useStyles } from '@/hooks/useStyles';
@@ -93,7 +94,7 @@ export function ListInfoModalScreen({ route, navigation }: ListInfoModalScreenPr
 
   return (
     <View style={styles.container}>
-      <MaterialCommunityIcons name='format-list-bulleted' style={styles.icon} />
+      <MaterialCommunityIcons name={Icons.List} style={styles.icon} />
       <View>
         <Text style={styles.text}>{t('exerciseLists.modal.name.label')}</Text>
         <CustomTextInput

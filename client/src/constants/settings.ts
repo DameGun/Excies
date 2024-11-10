@@ -5,6 +5,7 @@ import type { IconNames } from '@/types/icons';
 import type { AppDispatch } from '@/types/redux';
 import type { SettingsStackNavigationParams } from '@/types/settingsStackNavigation';
 
+import { Icons } from './icons';
 import { SettingsScreenNames } from './navigation';
 
 export enum SettingsItems {
@@ -33,6 +34,6 @@ export const settingsItemsData = (
 ];
 
 export const SettingsItemsIcons: Record<SettingsItems, IconNames> = {
-  [SettingsItems.Language]: 'earth',
-  [SettingsItems.Logout]: 'logout',
+  [SettingsItems.Language]: Icons.Earth,
+  [SettingsItems.Logout]: Icons.Logout,
 };

@@ -13,6 +13,7 @@ import {
   Search,
 } from '@/components/index';
 import { ExerciseListActionType } from '@/constants/exerciseList';
+import { Icons } from '@/constants/icons';
 import { HomeScreenNames } from '@/constants/navigation';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { useStyles } from '@/hooks/useStyles';
@@ -99,7 +100,7 @@ export function ExerciseListItemsScreen({ route, navigation }: ExerciseListItems
         <CustomButton
           buttonStyle={styles.addExerciseButton}
           textStyle={styles.addExerciseText}
-          iconName='plus'
+          iconName={Icons.Plus}
           iconStyle={styles.addButtonIcon}
           onPress={handleAddExercise}
         >
@@ -112,7 +113,7 @@ export function ExerciseListItemsScreen({ route, navigation }: ExerciseListItems
       primaryText={t('exerciseListItems.empty.mainText')}
       secondaryText={t('exerciseListItems.empty.secondaryText')}
       buttonText={t('exerciseListItems.addExercises')}
-      iconName='dumbbell'
+      iconName={Icons.Dumbell}
       onPress={handleAddExercise}
     />
   );

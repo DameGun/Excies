@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+import { Icons } from '@/constants/icons';
 import { useStyles } from '@/hooks/useStyles';
 import { getBottomTabOptions, getBottomTabStyles } from '@/utils/getBottomTabOptions';
 
@@ -19,12 +20,12 @@ export function AppTabs() {
       <Tab.Screen
         name={t('tabs.home')}
         component={HomeStack}
-        options={getBottomTabOptions(styles, 'home')}
+        options={getBottomTabOptions(styles, Icons.Home)}
       />
       <Tab.Screen
         name={t('tabs.settings')}
         component={SettingsStack}
-        options={getBottomTabOptions(styles, 'tune')}
+        options={getBottomTabOptions(styles, Icons.Settings)}
       />
     </Tab.Navigator>
   );

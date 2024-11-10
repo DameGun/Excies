@@ -6,14 +6,16 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { CustomButton, NumbersInput } from '@/components';
-import { CreateDetailedExerciseListItemParameterType } from '@/constants/detailedExerciseListItem';
+import {
+  CreateDetailedExerciseListItemParameterType,
+  CreationActiveIcon,
+} from '@/constants/detailedExerciseListItem';
 import type { HomeScreenNames } from '@/constants/navigation';
 import { useAppDispatch } from '@/hooks/redux';
 import { useStyles } from '@/hooks/useStyles';
 import { thunkCreateDetailedExerciseListItem } from '@/redux/slices/detailedExerciseListItems/thunks';
 import type { CreateDetailedExerciseListItemDTO } from '@/types/detailedExerciseListItem';
 import type { HomeStackNavigationParams } from '@/types/homeStackNavigation';
-import type { IconNames } from '@/types/icons';
 import {
   handleRemoveRepetitions,
   handleRemoveWeight,
@@ -43,12 +45,6 @@ export function CreateDetailedItemModalScreen({
   const [weight, setWeight] = useState(0);
 
   const isValid = useMemo(() => rep > 0 && weight > 0, [rep, weight]);
-
-  const currentIconName = useMemo<IconNames>(
-    () =>
-      active === CreateDetailedExerciseListItemParameterType.Weight ? 'weight' : 'repeat-variant',
-    [active]
-  );
 
   const onNumberPress = useCallback(
     (number: number) => {
@@ -86,7 +82,6 @@ export function CreateDetailedItemModalScreen({
       navigation.goBack();
     }
   }
-  console.log(active);
 
   return (
     <View style={{ flex: 1 }}>
@@ -95,7 +90,7 @@ export function CreateDetailedItemModalScreen({
       </View>
       <View style={styles.container}>
         <View style={styles.headerContainer}>
-          <MaterialCommunityIcons name={currentIconName} style={styles.createTypeIcon} />
+          <MaterialCommunityIcons name={CreationActiveIcon[active]} style={styles.createTypeIcon} />
           <Text style={styles.header}>{t(`detailedExerciseListItems.create.${active}Label`)}</Text>
         </View>
         <View style={styles.inputsContainer}>

@@ -5,6 +5,7 @@ import { Text, View } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { CustomButton, CustomSectionList, EmptyList, ListItem } from '@/components';
+import { Icons } from '@/constants/icons';
 import { HomeScreenNames } from '@/constants/navigation';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { useStyles } from '@/hooks/useStyles';
@@ -96,7 +97,7 @@ export function DetailedExerciseListItemsScreen({
       </View>
       <View style={styles.addButtonContainer}>
         <CustomButton
-          iconName='plus'
+          iconName={Icons.Plus}
           iconStyle={styles.icon}
           buttonStyle={styles.addButton}
           onPress={handleNavigate}

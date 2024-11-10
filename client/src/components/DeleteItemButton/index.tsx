@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
+import { Icons } from '@/constants/icons';
 import { useStyles } from '@/hooks/useStyles';
 import type { PressableProps } from '@/types/pressable';
 
@@ -15,7 +16,7 @@ export function DeleteItemButton({ onPress }: PressableProps) {
     <CustomButton
       textStyle={styles.deleteButtonText}
       buttonStyle={styles.deleteButton}
-      iconName='trash-can-outline'
+      iconName={Icons.Delete}
       iconStyle={styles.icon}
       onPress={onPress}
     >

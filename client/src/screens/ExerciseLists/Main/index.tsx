@@ -6,6 +6,7 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { CustomFlatList, ListItem } from '@/components';
 import { ExerciseListActionType } from '@/constants/exerciseList';
+import { Icons } from '@/constants/icons';
 import { HomeScreenNames } from '@/constants/navigation';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { selectExerciseLists } from '@/redux/slices/exerciseLists';
@@ -52,7 +53,7 @@ export function ExerciseListsScreen({ route, navigation }: ExerciseListsScreenPr
             <ListItem
               {...props}
               onPress={handleListClick}
-              iconName='format-list-bulleted'
+              iconName={Icons.List}
               extractTitle={({ name }) => name}
               extractInfo={({ itemsCount }) => itemsCount}
             />
@@ -61,7 +62,7 @@ export function ExerciseListsScreen({ route, navigation }: ExerciseListsScreenPr
             <View>
               <ListItem
                 title={t('exerciseLists.newList')}
-                iconName='plus'
+                iconName={Icons.Plus}
                 onPress={handleNewListClick}
                 isFirst={true}
                 isLast={false}

@@ -3,6 +3,7 @@ import { Pressable, View } from 'react-native';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
+import { Icons } from '@/constants/icons';
 import { useStyles } from '@/hooks/useStyles';
 
 import { Number } from './Number';
@@ -29,7 +30,7 @@ export function NumbersInput({ onNumberPress, onRemove }: NumbersInputProps) {
       {numbers}
       <Number number={0} onPress={onNumberPress} />
       <Pressable style={styles.itemContainer} onPress={onRemove}>
-        <MaterialCommunityIcons name='delete-outline' style={styles.text} />
+        <MaterialCommunityIcons name={Icons.DeleteOutline} style={styles.text} />
       </Pressable>
     </View>
   );
