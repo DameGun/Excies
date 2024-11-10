@@ -1,6 +1,6 @@
 import { Image } from 'react-native';
 
-import iconImage from '@/assets/icon.png';
+import iconImage from '@/assets/images/icon.png';
 import { useStyles } from '@/hooks/useStyles';
 
 import { getStyles } from './styles';

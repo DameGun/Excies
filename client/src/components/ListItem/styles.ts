@@ -4,9 +4,9 @@ import { createStylesheet } from '@/helpers/createStylesheet';
 import type { StylesObjectTypes } from '@/types/styles';
 
 export const getStyles = createStylesheet(({ colors, constants }) => ({
-  listItemTitle: (isWithExtract: boolean, ...extraStyles: StylesObjectTypes[]) => [
+  listItemTitle: (...extraStyles: StylesObjectTypes[]) => [
     {
-      color: isWithExtract ? colors.text : colors.primary,
+      color: colors.text,
       flex: 1,
       fontSize: constants.fontSize.lg,
     },
@@ -49,10 +49,10 @@ export const getStyles = createStylesheet(({ colors, constants }) => ({
   leftIconContainer: {
     paddingHorizontal: constants.padding.sm,
   },
-  leftIcon: {
+  leftIcon: (isHidden?: boolean) => ({
     fontSize: constants.fontSize.xl,
-    color: colors.primary,
-  },
+    color: isHidden ? 'transparent' : colors.primary,
+  }),
   rightIcon: {
     fontSize: constants.fontSize.xl,
     color: colors.grey,

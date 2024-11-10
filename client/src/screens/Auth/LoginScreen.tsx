@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -14,6 +15,7 @@ import { loginSchema } from './validation';
 export function LoginScreen() {
   const dispatch = useAppDispatch();
   const styles = useStyles(getStyles);
+  const { t } = useTranslation();
 
   const { control, handleSubmit } = useForm({
     mode: 'onChange',
@@ -27,13 +29,13 @@ export function LoginScreen() {
       <CustomTextInput
         name='username'
         control={control}
-        placeholder='Username'
+        placeholder={t('auth.inputs.username')}
         textContentType='username'
       />
       <CustomTextInput
         name='password'
         control={control}
-        placeholder='Password'
+        placeholder={t('auth.inputs.password')}
         secureTextEntry={true}
         textContentType='password'
       />
@@ -43,7 +45,7 @@ export function LoginScreen() {
         buttonStyle={styles.button}
         onPress={onSubmit}
       >
-        Login
+        {t('auth.loginButton')}
       </CustomButton>
     </AuthLayout>
   );

@@ -1,3 +1,5 @@
+import type { ColorSchemeName } from 'react-native';
+
 import type { StylesOptions } from './styles';
 
 type BaseColors = {
@@ -21,7 +23,7 @@ type ThemeConstants = {
   fontSize: StylesOptions<'xl' | 'xl2' | 'xl3'>;
   gap: StylesOptions<'xl'>;
   borderWidth: StylesOptions;
-  padding: StylesOptions<'xs' | 'xl'>;
+  padding: StylesOptions<'xs' | 'xs2' | 'xl'>;
   margin: StylesOptions<'xs'>;
   headerLogoSize: number;
   largeListItemHeight: number;
@@ -33,4 +35,8 @@ type CustomTheme = {
   constants: ThemeConstants;
 };
 
-export type { BaseColors, CustomTheme, ThemeColors, ThemeConstants };
+type ThemeState = {
+  mode: NonNullable<ColorSchemeName>;
+};
+
+export type { BaseColors, CustomTheme, ThemeColors, ThemeConstants, ThemeState };

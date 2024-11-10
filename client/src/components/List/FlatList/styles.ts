@@ -11,4 +11,19 @@ export const getStyles = createStylesheet(({ colors, constants }) => ({
     marginLeft: constants.margin.md,
     fontWeight: 'bold',
   },
+  emptyContainer: {
+    display: 'flex',
+    flex: 1,
+    gap: constants.gap.md,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  mainEmptyText: {
+    color: colors.text,
+    fontWeight: 'bold',
+    fontSize: constants.fontSize.md,
+  },
+  secondaryEmptyText: {
+    color: colors.grey,
+  },
 }));

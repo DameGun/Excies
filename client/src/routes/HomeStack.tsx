@@ -1,11 +1,10 @@
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 
-import { LogoutButton } from '@/components/LogoutButton';
-import { ScreenNames } from '@/constants/navigation';
+import { HomeScreenNames } from '@/constants/navigation';
 import { useAppSelector } from '@/hooks/redux';
 import { useStyles } from '@/hooks/useStyles';
 import { selectUsername } from '@/redux/slices/auth';
-import type { StackNavigationParams } from '@/types/navigation';
+import type { HomeStackNavigationParams } from '@/types/homeStackNavigation';
 import {
   getCommonHeaderScreenOptions,
   getCommonHeaderScreenStyles,
@@ -21,9 +20,9 @@ import {
   ListInfoModalScreen,
 } from '../screens';
 
-const Stack = createStackNavigator<StackNavigationParams>();
+const Stack = createStackNavigator<HomeStackNavigationParams>();
 
-export function ExerciseListStack() {
+export function HomeStack() {
   const commonScreenStyles = useStyles(getCommonHeaderScreenStyles);
   const username = useAppSelector(selectUsername) as NonNullable<string>;
 
@@ -31,34 +30,38 @@ export function ExerciseListStack() {
     <Stack.Navigator screenOptions={getCommonHeaderScreenOptions(commonScreenStyles)}>
       <Stack.Group>
         <Stack.Screen
-          name={ScreenNames.ExerciseListsScreen}
+          name={HomeScreenNames.ExerciseListsScreen}
           component={ExerciseListsScreen}
           options={{
-            headerLeft: () => <LogoutButton />,
+            headerTitle: 'Excies',
           }}
           initialParams={{
             username,
           }}
         />
         <Stack.Screen
-          name={ScreenNames.ExerciseListItemsScreen}
+          name={HomeScreenNames.ExerciseListItemsScreen}
           component={ExerciseListItemsScreen}
         />
         <Stack.Screen
-          name={ScreenNames.DetailedExerciseListItemsScreen}
+          name={HomeScreenNames.DetailedExerciseListItemsScreen}
           component={DetailedExerciseListItemsScreen}
         />
       </Stack.Group>
       <Stack.Group
         screenOptions={{
           presentation: 'modal',
+          headerTitleAlign: 'center',
           ...TransitionPresets.ModalPresentationIOS,
         }}
       >
-        <Stack.Screen name={ScreenNames.ListInfoModalScreen} component={ListInfoModalScreen} />
-        <Stack.Screen name={ScreenNames.ExercisesModalScreen} component={ExercisesModalScreen} />
+        <Stack.Screen name={HomeScreenNames.ListInfoModalScreen} component={ListInfoModalScreen} />
         <Stack.Screen
-          name={ScreenNames.CreateDetailedItemModalScreen}
+          name={HomeScreenNames.ExercisesModalScreen}
+          component={ExercisesModalScreen}
+        />
+        <Stack.Screen
+          name={HomeScreenNames.CreateDetailedItemModalScreen}
           component={CreateDetailedItemModalScreen}
           options={{
             presentation: 'transparentModal',
@@ -67,7 +70,7 @@ export function ExerciseListStack() {
           }}
         />
         <Stack.Screen
-          name={ScreenNames.DetailedExerciseListItemInfoModalScreen}
+          name={HomeScreenNames.DetailedExerciseListItemInfoModalScreen}
           component={DetailedExerciseListItemInfoModalScreen}
         />
       </Stack.Group>

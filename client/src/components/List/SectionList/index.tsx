@@ -40,8 +40,8 @@ export function CustomSectionList<T extends EntityWithId>({
         sections={sections}
         keyExtractor={(item) => item.id}
         renderSectionHeader={SectionHeader(styles.headerRegular)}
+        renderSectionFooter={() => <View style={styles.separator} />}
         renderItem={renderItemWithProps}
-        ListFooterComponent={<View style={styles.separator}></View>}
       />
     </View>
   );

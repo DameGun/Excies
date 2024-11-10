@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { ListRenderItem } from 'react-native';
 import { FlatList, Text, View } from 'react-native';
 
@@ -27,21 +28,22 @@ export function CustomFlatList<T extends EntityWithIdAndName>({
   searchPhrase = '',
 }: ListProps<T>) {
   const styles = useStyles(getCommonStyles, getStyles);
+  const { t } = useTranslation();
+
+  const filteredData = useMemo(
+    () =>
+      searchPhrase.length > 0
+        ? data.filter(({ name }) =>
+            name.toUpperCase().includes(searchPhrase.toUpperCase().trim().replace(/\s/g, ''))
+          )
+        : data,
+    [searchPhrase, data]
+  );
 
   const renderItemWithSearch = useCallback<ListRenderItem<T>>(
     ({ item, index }) => {
-      const isLast = index === data.length - 1;
+      const isLast = index === filteredData.length - 1;
       const isFirst = index === 0 && !headerComponent;
-
-      if (searchPhrase) {
-        const isInSearch = item.name
-          .toUpperCase()
-          .includes(searchPhrase.toUpperCase().trim().replace(/\s/g, ''));
-
-        if (!isInSearch) {
-          return null;
-        }
-      }
 
       return renderItem({ item, isLast, isFirst });
     },
@@ -51,13 +53,20 @@ export function CustomFlatList<T extends EntityWithIdAndName>({
   return (
     <View style={styles.container}>
       {title && <Text style={styles.headerBold}>{title}</Text>}
-      <FlatList
-        ListHeaderComponent={headerComponent}
-        contentContainerStyle={styles.listContainer}
-        data={data}
-        renderItem={renderItemWithSearch}
-        keyExtractor={(item) => item.id}
-      />
+      {searchPhrase.length > 0 && filteredData.length === 0 ? (
+        <View style={styles.emptyContainer}>
+          <Text style={styles.mainEmptyText}>{t('search.mainText', { searchPhrase })}</Text>
+          <Text style={styles.secondaryEmptyText}>{t('search.secondaryText')}</Text>
+        </View>
+      ) : (
+        <FlatList
+          ListHeaderComponent={headerComponent}
+          contentContainerStyle={styles.listContainer}
+          data={filteredData}
+          renderItem={renderItemWithSearch}
+          keyExtractor={(item) => item.id}
+        />
+      )}
     </View>
   );
 }

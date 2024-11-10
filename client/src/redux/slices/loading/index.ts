@@ -8,7 +8,6 @@ import type { RootState } from '@/types/redux';
 const initialState: LoadingSliceState = {
   status: LoadingState.Idle,
   errorMessage: undefined,
-  showLoading: false,
 };
 
 const loadingSlice = createSlice({
@@ -19,21 +18,13 @@ const loadingSlice = createSlice({
       const { status, errorMessage } = action.payload;
       state.status = status;
       state.errorMessage = errorMessage;
-
-      if (status === LoadingState.Failed || status === LoadingState.Idle) {
-        state.showLoading = false;
-      }
-    },
-    setShowLoading: (state, action: PayloadAction<boolean>) => {
-      state.showLoading = action.payload;
     },
   },
 });
 
-export const { setStatus, setShowLoading } = loadingSlice.actions;
+export const { setStatus } = loadingSlice.actions;
 
 export const selectStatus = (state: RootState) => state.loading.status;
-export const selectShowLoading = (state: RootState) => state.loading.showLoading;
 export const selectErrorMessage = (state: RootState) => state.loading.errorMessage;
 
 export default loadingSlice.reducer;

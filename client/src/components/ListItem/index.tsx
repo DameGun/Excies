@@ -3,6 +3,7 @@ import { Pressable, Text, View } from 'react-native';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
+import { Icons } from '@/constants/icons';
 import { useStyles } from '@/hooks/useStyles';
 import type { EntityWithId } from '@/types/common';
 import type { ListItemProps } from '@/types/list';
@@ -13,6 +14,7 @@ import { getStyles } from './styles';
 export function ListItem<T extends EntityWithId>({
   titleStyle,
   iconName,
+  iconHidden,
   isLast,
   isFirst,
   children,
@@ -25,11 +27,7 @@ export function ListItem<T extends EntityWithId>({
       ? props.extractTitle(props.item)
       : props.title;
 
-    return (
-      <Text style={styles.listItemTitle(IsListItemTextPropsWithExtract(props), titleStyle)}>
-        {titleText}
-      </Text>
-    );
+    return <Text style={styles.listItemTitle(titleStyle)}>{titleText}</Text>;
   }, [props]);
 
   const listItemInfo = useMemo(() => {
@@ -58,14 +56,16 @@ export function ListItem<T extends EntityWithId>({
     <Pressable style={styles.listItem(isLast, isFirst)} onPress={handlePress}>
       <View style={styles.container}>
         <View style={styles.leftIconContainer}>
-          {iconName && <MaterialCommunityIcons name={iconName} style={styles.leftIcon} />}
+          {iconName && (
+            <MaterialCommunityIcons name={iconName} style={styles.leftIcon(iconHidden)} />
+          )}
         </View>
         <View style={[styles.borderContainer, !isLast && styles.border]}>
           {listItemTitle}
           <View style={styles.infoRightContainer}>
             {children}
             {listItemInfo}
-            <MaterialCommunityIcons name='chevron-right' style={styles.rightIcon} />
+            <MaterialCommunityIcons name={Icons.ArrowRight} style={styles.rightIcon} />
           </View>
         </View>
       </View>

@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -14,6 +15,7 @@ import { registerSchema } from './validation';
 export function RegisterScreen() {
   const dispatch = useAppDispatch();
   const styles = useStyles(getStyles);
+  const { t } = useTranslation();
 
   const { control, handleSubmit } = useForm({
     mode: 'onChange',
@@ -27,26 +29,26 @@ export function RegisterScreen() {
       <CustomTextInput
         control={control}
         name='username'
-        placeholder='Username'
+        placeholder={t('auth.inputs.username')}
         textContentType='username'
       />
       <CustomTextInput
         control={control}
         name='email'
-        placeholder='Email (Optional)'
+        placeholder={t('auth.inputs.email')}
         textContentType='emailAddress'
       />
       <CustomTextInput
         control={control}
         name='password'
-        placeholder='Password'
+        placeholder={t('auth.inputs.password')}
         secureTextEntry={true}
         textContentType='password'
       />
       <CustomTextInput
         control={control}
         name='confirmPassword'
-        placeholder='Confirm password'
+        placeholder={t('auth.inputs.confirmPassword')}
         secureTextEntry={true}
       />
       <CustomButton
@@ -55,7 +57,7 @@ export function RegisterScreen() {
         buttonStyle={styles.button}
         onPress={onSubmit}
       >
-        Register
+        {t('auth.registerButton')}
       </CustomButton>
     </AuthLayout>
   );

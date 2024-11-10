@@ -1,5 +1,5 @@
 import type { ExerciseListActionType } from '@/constants/exerciseList';
-import type { ScreenNames } from '@/constants/navigation';
+import type { HomeScreenNames } from '@/constants/navigation';
 
 type SharedParams = {
   username: string;
@@ -44,14 +44,14 @@ type ExercisesModalScreenParams = SharedParams & {
   list_id: string;
 };
 
-type StackNavigationParams = {
-  [ScreenNames.ExerciseListsScreen]: SharedParams;
-  [ScreenNames.CreateDetailedItemModalScreen]: CreateDetailedItemModalScreenParams;
-  [ScreenNames.DetailedExerciseListItemInfoModalScreen]: DetailedExerciseListItemInfoModalScreenParams;
-  [ScreenNames.DetailedExerciseListItemsScreen]: DetailedExerciseListItemsScreenParams;
-  [ScreenNames.ExerciseListItemsScreen]: ExerciseListItemsScreenParams;
-  [ScreenNames.ListInfoModalScreen]: ListInfoModalScreenParams;
-  [ScreenNames.ExercisesModalScreen]: ExercisesModalScreenParams;
+type HomeStackNavigationParams = {
+  [HomeScreenNames.ExerciseListsScreen]: SharedParams;
+  [HomeScreenNames.CreateDetailedItemModalScreen]: CreateDetailedItemModalScreenParams;
+  [HomeScreenNames.DetailedExerciseListItemInfoModalScreen]: DetailedExerciseListItemInfoModalScreenParams;
+  [HomeScreenNames.DetailedExerciseListItemsScreen]: DetailedExerciseListItemsScreenParams;
+  [HomeScreenNames.ExerciseListItemsScreen]: ExerciseListItemsScreenParams;
+  [HomeScreenNames.ListInfoModalScreen]: ListInfoModalScreenParams;
+  [HomeScreenNames.ExercisesModalScreen]: ExercisesModalScreenParams;
 };
 
-export type { StackNavigationParams };
+export type { HomeStackNavigationParams };

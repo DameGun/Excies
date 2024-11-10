@@ -1,3 +1,5 @@
+import type { StackNavigationOptions } from '@react-navigation/stack';
+
 import { Logo } from '@/components';
 import { createStylesheet } from '@/helpers/createStylesheet';
 
@@ -12,8 +14,10 @@ export const getCommonHeaderScreenStyles = createStylesheet(({ colors }) => ({
 
 export const getCommonHeaderScreenOptions = (
   styles: ReturnType<typeof getCommonHeaderScreenStyles>
-) => ({
+): StackNavigationOptions => ({
   ...styles,
-  headerTitle: '',
+  headerTitleAlign: 'center',
+  headerBackTitleVisible: false,
+  headerShadowVisible: false,
   headerRight: () => <Logo />,
 });

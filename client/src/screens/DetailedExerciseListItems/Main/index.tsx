@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Text, View } from 'react-native';
 
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { CustomButton, CustomSectionList, EmptyList, ListItem } from '@/components';
-import { ScreenNames } from '@/constants/navigation';
+import { Icons } from '@/constants/icons';
+import { HomeScreenNames } from '@/constants/navigation';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { useStyles } from '@/hooks/useStyles';
 import { selectDetailedExerciseListItems } from '@/redux/slices/detailedExerciseListItems';
@@ -13,13 +15,13 @@ import type {
   DetailedExerciseListItem,
   GetDetailedExerciseListItemsDTO,
 } from '@/types/detailedExerciseListItem';
-import type { StackNavigationParams } from '@/types/navigation';
+import type { HomeStackNavigationParams } from '@/types/homeStackNavigation';
 
 import { getStyles } from './styles';
 
 type DetailedExerciseListItemsScreenProps = NativeStackScreenProps<
-  StackNavigationParams,
-  ScreenNames.DetailedExerciseListItemsScreen
+  HomeStackNavigationParams,
+  HomeScreenNames.DetailedExerciseListItemsScreen
 >;
 
 export function DetailedExerciseListItemsScreen({
@@ -28,9 +30,9 @@ export function DetailedExerciseListItemsScreen({
 }: DetailedExerciseListItemsScreenProps) {
   const { list_id, list_item_id, name, username } = route.params;
   const data = useAppSelector(selectDetailedExerciseListItems);
-
   const dispatch = useAppDispatch();
   const styles = useStyles(getStyles);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const payload: GetDetailedExerciseListItemsDTO = {
@@ -46,7 +48,7 @@ export function DetailedExerciseListItemsScreen({
   }, []);
 
   const handleNavigate = () => {
-    navigation.navigate(ScreenNames.CreateDetailedItemModalScreen, {
+    navigation.navigate(HomeScreenNames.CreateDetailedItemModalScreen, {
       username,
       list_id,
       list_item_id,
@@ -54,7 +56,7 @@ export function DetailedExerciseListItemsScreen({
   };
 
   const handleInfo = (item: DetailedExerciseListItem) => {
-    navigation.navigate(ScreenNames.DetailedExerciseListItemInfoModalScreen, {
+    navigation.navigate(HomeScreenNames.DetailedExerciseListItemInfoModalScreen, {
       username,
       list_id,
       list_item_id,
@@ -78,11 +80,15 @@ export function DetailedExerciseListItemsScreen({
               <View style={styles.itemInfoMainContainer}>
                 <View style={styles.itemInfoSubContainer}>
                   <Text style={styles.itemInfoNumberLeft}>{item.rep}</Text>
-                  <Text style={styles.itemInfoTextLeft}>rep</Text>
+                  <Text style={styles.itemInfoTextLeft}>
+                    {t('detailedExerciseListItems.repetitionsBadge', { value: '' })}
+                  </Text>
                 </View>
                 <View style={styles.itemInfoSubContainer}>
                   <Text style={styles.itemInfoNumberRight}>{item.weight}</Text>
-                  <Text style={styles.itemInfoTextRight}>kg</Text>
+                  <Text style={styles.itemInfoTextRight}>
+                    {t('detailedExerciseListItems.weightBadge', { value: '' })}
+                  </Text>
                 </View>
               </View>
             </ListItem>
@@ -91,7 +97,7 @@ export function DetailedExerciseListItemsScreen({
       </View>
       <View style={styles.addButtonContainer}>
         <CustomButton
-          iconName='plus'
+          iconName={Icons.Plus}
           iconStyle={styles.icon}
           buttonStyle={styles.addButton}
           onPress={handleNavigate}
@@ -101,8 +107,8 @@ export function DetailedExerciseListItemsScreen({
   ) : (
     <View style={{ flex: 1 }}>
       <EmptyList
-        primaryText='No Sets'
-        secondaryText='Record your sets to track progress'
+        primaryText={t('detailedExerciseListItems.empty.mainText')}
+        secondaryText={t('detailedExerciseListItems.empty.secondaryText')}
         iconName='chart-box-outline'
       />
       <View style={styles.addButtonContainer}>

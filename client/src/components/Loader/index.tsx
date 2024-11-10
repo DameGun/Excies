@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
 
 import {
@@ -7,13 +7,13 @@ import {
   MIN_REQUEST_WAITING_EXPIRE_TIME,
 } from '@/constants/loading';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
-import { selectShowLoading, selectStatus, setShowLoading, setStatus } from '@/redux/slices/loading';
+import { selectStatus, setStatus } from '@/redux/slices/loading';
 
 import { CustomModal } from '../Modal';
 
 export function Loader() {
+  const [showLoading, setShowLoading] = useState(false);
   const status = useAppSelector(selectStatus);
-  const showLoading = useAppSelector(selectShowLoading);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -22,14 +22,17 @@ export function Loader() {
 
     if (status === LoadingState.Loading) {
       expireTimeout = setTimeout(() => {
+        setShowLoading(false);
         dispatch(
           setStatus({ status: LoadingState.Failed, errorMessage: 'Request waiting time exceeded' })
         );
       }, MAX_REQUEST_WAITING_EXPIRE_TIME);
 
       minTimeout = setTimeout(() => {
-        dispatch(setShowLoading(true));
+        setShowLoading(true);
       }, MIN_REQUEST_WAITING_EXPIRE_TIME);
+    } else {
+      setShowLoading(false);
     }
 
     return () => {

@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { Text, View } from 'react-native';
 
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -7,7 +8,7 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { CustomTextInput } from '@/components';
 import { DeleteItemButton } from '@/components/DeleteItemButton';
-import type { ScreenNames } from '@/constants/navigation';
+import type { HomeScreenNames } from '@/constants/navigation';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { useStyles } from '@/hooks/useStyles';
 import { selectDetailedExerciseListItemById } from '@/redux/slices/detailedExerciseListItems';
@@ -19,15 +20,15 @@ import type {
   DeleteDetailedExerciseListItemDTO,
   UpdateDetailedExerciseListItemDTO,
 } from '@/types/detailedExerciseListItem';
-import type { StackNavigationParams } from '@/types/navigation';
+import type { HomeStackNavigationParams } from '@/types/homeStackNavigation';
 import { getInfoModalScreenStylesDefault } from '@/utils/getInfoModalScreenStylesDefault';
 import { getModalHeaderScreenOption } from '@/utils/getModalHeaderScreenOption';
 
 import { detailedExerciseListItemSchema } from './validation';
 
 type DetailedExerciseListItemInfoModalScreenProps = NativeStackScreenProps<
-  StackNavigationParams,
-  ScreenNames.DetailedExerciseListItemInfoModalScreen
+  HomeStackNavigationParams,
+  HomeScreenNames.DetailedExerciseListItemInfoModalScreen
 >;
 
 export function DetailedExerciseListItemInfoModalScreen({
@@ -38,6 +39,7 @@ export function DetailedExerciseListItemInfoModalScreen({
   const item = useAppSelector((state) => selectDetailedExerciseListItemById(state, detailed_id));
   const styles = useStyles(getInfoModalScreenStylesDefault);
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   const {
     control,
@@ -57,7 +59,7 @@ export function DetailedExerciseListItemInfoModalScreen({
     navigation.setOptions(
       getModalHeaderScreenOption({
         onPress: onSubmit,
-        title: 'Edit Set',
+        title: t('detailedExerciseListItems.edit.title'),
         disabled: !isValid,
       })
     );
@@ -91,27 +93,31 @@ export function DetailedExerciseListItemInfoModalScreen({
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.text}>Notes</Text>
-        <CustomTextInput name='notes' control={control} placeholder='Comment' />
+        <Text style={styles.text}>{t('detailedExerciseListItems.edit.notes.label')}</Text>
+        <CustomTextInput
+          name='notes'
+          control={control}
+          placeholder={t('detailedExerciseListItems.edit.notes.placeholder')}
+        />
       </View>
       <View>
-        <Text style={styles.text}>Repetitions</Text>
+        <Text style={styles.text}>{t('detailedExerciseListItems.edit.repetitions.label')}</Text>
         <CustomTextInput
           name='rep'
           control={control}
           keyboardType='number-pad'
           inputMode='numeric'
-          placeholder='Repetitions'
+          placeholder={t('detailedExerciseListItems.edit.repetitions.placeholder')}
         />
       </View>
       <View>
-        <Text style={styles.text}>Weight (kg)</Text>
+        <Text style={styles.text}>{t('detailedExerciseListItems.edit.weight.label')}</Text>
         <CustomTextInput
           name='weight'
           control={control}
           keyboardType='number-pad'
           inputMode='decimal'
-          placeholder='Weight'
+          placeholder={t('detailedExerciseListItems.edit.weight.placeholder')}
         />
         <DeleteItemButton onPress={handleDelete} />
       </View>

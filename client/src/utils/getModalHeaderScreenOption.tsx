@@ -6,6 +6,7 @@ import { CustomHeaderButton } from '@/components/CustomHeaderButton';
 
 type ModalHeaderScreenOptionsProps = Pick<ButtonProps, 'disabled' | 'onPress'> & {
   title: string;
+  buttonText?: string;
   disableRightButton?: boolean;
 };
 
@@ -13,16 +14,16 @@ export const getModalHeaderScreenOption = ({
   disabled,
   onPress,
   title,
+  buttonText,
   disableRightButton = false,
 }: ModalHeaderScreenOptionsProps): Partial<NativeStackNavigationOptions> => {
   return {
     headerRight: () =>
       !disableRightButton && (
         <CustomHeaderButton disabled={disabled} onPress={onPress}>
-          Done
+          {buttonText}
         </CustomHeaderButton>
       ),
     headerTitle: title,
-    headerTitleAlign: 'center',
   };
 };

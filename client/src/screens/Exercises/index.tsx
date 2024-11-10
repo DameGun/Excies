@@ -1,10 +1,12 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { LargeList, Search } from '@/components';
-import type { ScreenNames } from '@/constants/navigation';
+import { Icons } from '@/constants/icons';
+import type { HomeScreenNames } from '@/constants/navigation';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { selectExerciseListItems } from '@/redux/slices/exerciseListItems';
 import {
@@ -20,15 +22,15 @@ import type {
   DeleteExerciseListItemDTO,
   ExerciseListItem,
 } from '@/types/exerciseListItem';
-import type { StackNavigationParams } from '@/types/navigation';
+import type { HomeStackNavigationParams } from '@/types/homeStackNavigation';
 import type { SectionListType } from '@/types/section';
 import { getExercisesWithSearch } from '@/utils/exercises';
 import { getModalHeaderScreenOption } from '@/utils/getModalHeaderScreenOption';
 import { isExerciseListItem } from '@/utils/typePredicates';
 
 type ExercisesModalScreenProps = NativeStackScreenProps<
-  StackNavigationParams,
-  ScreenNames.ExercisesModalScreen
+  HomeStackNavigationParams,
+  HomeScreenNames.ExercisesModalScreen
 >;
 
 export function ExercisesModalScreen({ route, navigation }: ExercisesModalScreenProps) {
@@ -37,6 +39,7 @@ export function ExercisesModalScreen({ route, navigation }: ExercisesModalScreen
   const listItems = useAppSelector(selectExerciseListItems);
   const currentList = useAppSelector((state) => selectExerciseListById(state, list_id));
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   const [searchPhrase, setSearchPhrase] = useState('');
 
@@ -45,7 +48,7 @@ export function ExercisesModalScreen({ route, navigation }: ExercisesModalScreen
 
     navigation.setOptions(
       getModalHeaderScreenOption({
-        title: `Add to "${currentList?.name}"`,
+        title: t('exercises.title', { listName: currentList?.name }),
         disableRightButton: true,
       })
     );
@@ -77,14 +80,14 @@ export function ExercisesModalScreen({ route, navigation }: ExercisesModalScreen
 
     return [
       {
-        title: 'Added Exercises',
+        title: t('exercises.addedSectionTitle'),
         data: addedExercises,
-        iconName: 'checkbox-marked-circle',
+        iconName: Icons.CheckboxCircle,
       },
       {
-        title: 'All Exercises',
+        title: t('exercises.allSectionTitle'),
         data: allExercises,
-        iconName: 'plus-circle-outline',
+        iconName: Icons.PlusCircleOutline,
       },
     ];
   }, [listItems, exercises, searchPhrase]);
