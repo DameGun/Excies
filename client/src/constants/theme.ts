@@ -61,7 +61,7 @@ export const LIGHT_THEME: CustomTheme = {
   colors: {
     background: 'white',
     text: 'black',
-    greyBackground: '#dbdbdb',
+    greyBackground: '#f0f0f0',
     grey: '#717175',
     greyDark: '#ebebeb',
     ...BASE_COLORS,
