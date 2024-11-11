@@ -1,0 +1,26 @@
+services:
+  excies_postgres:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_DB=${DB_NAME}
+    ports:
+      - ${PG_LOCAL_PORT}:${PG_DOCKER_PORT}
+    volumes:
+      - excies_volume:/var/lib/postgresql/data
+  excies_server:
+    image: excies-server
+    environment:
+      - DB_HOST=excies_postgres
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_PORT=${PG_DOCKER_PORT}
+      - DB_NAME=${DB_NAME}
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_LIFETIME=${JWT_LIFETIME}
+    ports:
+      - 5000:8080
+volumes:
+  excies_volume:
+    external: true
