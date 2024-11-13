@@ -16,13 +16,8 @@ const authSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers(builder) {
-    builder.addCase(thunkLogout.fulfilled, (state) => {
-      state.isLoggedIn = false;
-      state.user_id = null;
-      state.username = null;
-    });
-    builder.addMatcher(isRejected, (state, action) => {
-      if (action.error.code === '401') {
+    builder.addMatcher(isAnyOf(isRejected, thunkLogout.fulfilled), (state, action) => {
+      if (action.payload === '401' || action.meta.requestStatus === 'fulfilled') {
         state.isLoggedIn = false;
         state.user_id = null;
         state.username = null;

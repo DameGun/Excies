@@ -90,5 +90,10 @@
       "dark": "Enabled",
       "light": "Disabled"
     }
+  },
+  "errors": {
+    "title": "Error",
+    "button": "Cancel",
+    "requestWaitingTime": "Request waiting time exceeded"
   }
 }
