@@ -4,6 +4,7 @@ import type { ApiResult, BaseApiResponse } from '@/types/api';
 import type { AppDispatch } from '@/types/redux';
 
 import { setStatus } from './slices/loading';
+import { AxiosError } from 'axios';
 
 type ThunkHandlerReturnType<TReturn> = Promise<
   TReturn extends undefined ? BaseApiResponse : TReturn
@@ -48,6 +49,6 @@ export async function thunkHandler<TParams, TReturn>(
       })
     );
 
-    throw new Error(response.message);
+    throw new Error(response.status?.toString());
   }
 }

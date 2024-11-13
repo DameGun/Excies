@@ -31,7 +31,7 @@ export function Router() {
         barStyle={theme === DARK_THEME ? 'light-content' : 'dark-content'}
         backgroundColor={theme === DARK_THEME ? 'black' : 'white'}
       />
-      {!isLoggedIn ? <AuthTabs /> : <AppTabs />}
+      {isLoggedIn ? <AppTabs /> : <AuthTabs />}
       <Loader />
       <Error />
     </NavigationContainer>
