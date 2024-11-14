@@ -11,20 +11,22 @@
       "resizeMode": "contain",
       "backgroundColor": "#000000"
     },
+    "newArchEnabled": true,
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "config": {
-        "usesNonExemptEncryption": false
-      },
-      "bundleIdentifier": "excies.dev"
+      "bundleIdentifier": "excies.dev",
+      "runtimeVersion": {
+        "policy": "appVersion"
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "excies.dev"
+      "package": "excies.dev",
+      "runtimeVersion": "1.0.0"
     },
     "web": {
       "favicon": "./src/assets/images/favicon.png"
@@ -34,6 +36,9 @@
       "eas": {
         "projectId": "4893ac3e-8b0a-4b8e-bc04-15dc49ced702"
       }
+    },
+    "updates": {
+      "url": "https://u.expo.dev/4893ac3e-8b0a-4b8e-bc04-15dc49ced702"
     }
   }
 }
