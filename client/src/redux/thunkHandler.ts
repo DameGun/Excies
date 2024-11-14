@@ -31,8 +31,6 @@ export async function thunkHandler<TParams, TReturn>(
 
   const response = payload !== undefined ? await apiCall(payload) : await apiCall();
 
-  console.log(apiCall.name, response.status);
-
   if (response.status === ResponseStatus.Fullfiled) {
     dispatch(setStatus({ status: LoadingState.Idle }));
 
