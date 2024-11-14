@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from 'react';
-import { Modal, View } from 'react-native';
+import { View } from 'react-native';
 
 import { useStyles } from '@/hooks/useStyles';
 
@@ -12,11 +12,13 @@ type ModalProps = PropsWithChildren & {
 export function CustomModal({ showModal, children }: ModalProps) {
   const styles = useStyles(getStyles);
 
-  return (
-    <Modal animationType='fade' transparent={true} visible={showModal}>
+  if (showModal) {
+    return (
       <View style={styles.centeredView}>
         <View style={styles.modalView}>{children}</View>
       </View>
-    </Modal>
-  );
+    );
+  }
+
+  return null;
 }
