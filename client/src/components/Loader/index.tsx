@@ -24,17 +24,17 @@ export function Loader() {
     if (status === LoadingState.Loading) {
       minTimeout.current = setTimeout(() => {
         setShowLoading(true);
-
-        expireTimeout.current = setTimeout(() => {
-          setShowLoading(false);
-          dispatch(
-            setStatus({
-              status: LoadingState.Failed,
-              errorMessage: t('errors.requestWaitingTime'),
-            })
-          );
-        }, MAX_REQUEST_WAITING_EXPIRE_TIME);
       }, MIN_REQUEST_WAITING_EXPIRE_TIME);
+
+      expireTimeout.current = setTimeout(() => {
+        setShowLoading(false);
+        dispatch(
+          setStatus({
+            status: LoadingState.Failed,
+            errorMessage: t('errors.requestWaitingTime'),
+          })
+        );
+      }, MAX_REQUEST_WAITING_EXPIRE_TIME);
     } else {
       setShowLoading(false);
     }

@@ -1,18 +1,21 @@
 import { createStylesheet } from '@/helpers/createStylesheet';
 
-export const getStyles = createStylesheet(({ constants }) => ({
+export const getStyles = createStylesheet(({ colors, constants }) => ({
   centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    position: 'absolute',
+    height: '100%',
+    width: '100%',
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
   },
   modalView: {
-    margin: constants.margin.lg,
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
     borderRadius: constants.borderRadius.xl,
     padding: constants.padding.lg,
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.9)',
+    backgroundColor: colors.background,
     borderWidth: constants.borderWidth.md,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: colors.greyDark,
   },
 }));
