@@ -7,19 +7,25 @@
       "developmentClient": true,
       "distribution": "internal",
       "env": {
-        "EXPO_PUBLIC_DEV_API_URL_HOME": "http://192.168.100.4:8080/api"
-      }
+        "EXPO_PUBLIC_API_URL_HOME": "https://excies-production.up.railway.app/api"
+      },
+      "channel": "development"
     },
     "preview": {
       "distribution": "internal",
       "env": {
-        "EXPO_PUBLIC_DEV_API_URL_HOME": "http://192.168.100.4:8080/api"
-      }
+        "EXPO_PUBLIC_API_URL_HOME": "https://excies-production.up.railway.app/api"
+      },
+      "ios": {
+        "simulator": true
+      },
+      "channel": "preview"
     },
     "production": {
       "env": {
-        "EXPO_PUBLIC_DEV_API_URL_HOME": "http://192.168.100.4:8080/api"
-      }
+        "EXPO_PUBLIC_API_URL_HOME": "https://excies-production.up.railway.app/api"
+      },
+      "channel": "production"
     }
   },
   "submit": {

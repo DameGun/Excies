@@ -35,10 +35,11 @@ export function Loader() {
           );
         }, MAX_REQUEST_WAITING_EXPIRE_TIME);
       }, MIN_REQUEST_WAITING_EXPIRE_TIME);
+    } else {
+      setShowLoading(false);
     }
 
     return () => {
-      setShowLoading(false);
       clearTimeout(minTimeout.current);
       clearTimeout(expireTimeout.current);
     };
