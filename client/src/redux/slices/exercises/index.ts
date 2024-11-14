@@ -6,9 +6,11 @@ import type { RootState } from '@/types/redux';
 import { thunkGetExercises } from './thunks';
 
 import { selectExerciseListItems } from '../exerciseListItems';
+import { REHYDRATE } from 'redux-persist';
 
 const initialState: ExerciseState = {
   data: [],
+  expiresAt: 0,
 };
 
 const exercisesSlice = createSlice({
@@ -17,7 +19,12 @@ const exercisesSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder.addCase(thunkGetExercises.fulfilled, (state, action) => {
-      if (state.data.length === 0) state.data = action.payload;
+      const { type } = action.payload;
+
+      if (type === REHYDRATE) {
+        state.data = action.payload.data;
+        state.expiresAt = action.payload.expiresAt;
+      }
     });
   },
 });

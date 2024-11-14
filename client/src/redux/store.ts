@@ -17,12 +17,17 @@ const persistConfig = {
   whitelist: ['theme'],
 };
 
+const exercisesPersistConfig = {
+  storage: AsyncStorage,
+  key: 'exercises',
+};
+
 const rootReducer = combineReducers({
   auth: authSlice,
   loading: loadingSlice,
   exerciseLists: exerciseListsSlice,
   exerciseListItems: exerciseListItemsSlice,
-  exercises: exercisesSlice,
+  exercises: persistReducer(exercisesPersistConfig, exercisesSlice),
   detailedExerciseListItems: detailedExerciseListItemsSlice,
   theme: themeSlice,
 });
