@@ -3,6 +3,7 @@ import cors from "cors";
 import { connectDb } from "./config/connectDb.js";
 import errorHandlerMiddleware from "./middleware/error.middleware.js";
 
+import exercisesTranslated from "./routes/exerciseTranslated.router.js";
 import exercises from "./routes/exercise.router.js";
 import muscles from "./routes/muscles.router.js";
 import users from "./routes/user.router.js";
@@ -24,6 +25,7 @@ app.use(cors());
 
 app.use("/api", auth);
 app.use("/api/exercises", exercises);
+app.use("/api/exercisesTranslated", exercisesTranslated);
 app.use("/api/muscles", muscles);
 app.use("/api", verifyToken, users);
 app.use("/api/:username/exercise-lists", verifyToken, exerciseLists);
