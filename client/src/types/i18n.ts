@@ -1,3 +1,5 @@
+import { SupportedLanguageCodes } from "@/constants/i18n";
+
 type LanguageDataType = {
   id: string;
   code: string;
@@ -5,4 +7,8 @@ type LanguageDataType = {
   originName: string;
 };
 
-export type { LanguageDataType };
+type LanguageParameter = {
+  language: SupportedLanguageCodes
+}
+
+export type { LanguageDataType, LanguageParameter };

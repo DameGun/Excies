@@ -1,4 +1,5 @@
 import type { RequiredUsernameParameter } from './api';
+import { LanguageParameter } from './i18n';
 import type { BaseSliceWithDataArray } from './redux';
 
 type ExerciseListItem = {
@@ -9,16 +10,16 @@ type ExerciseListItem = {
   last_time_updated: string;
 };
 
-type GetExerciseListItemsDTO = RequiredUsernameParameter & {
+type GetExerciseListItemsDTO = RequiredUsernameParameter & LanguageParameter & {
   id: string;
 };
 
-type GetExerciseListItemByIdDTO = RequiredUsernameParameter & {
+type GetExerciseListItemByIdDTO = RequiredUsernameParameter & LanguageParameter & {
   list_id: string;
   id: string;
 };
 
-type CreateExerciseListItemDTO = RequiredUsernameParameter & {
+type CreateExerciseListItemDTO = RequiredUsernameParameter & LanguageParameter & {
   list_id: string;
   exercise_id: string;
 };
