@@ -14,6 +14,7 @@ import { AppTabs } from './AppTabs';
 import { AuthTabs } from './AuthTabs';
 
 import '@/i18n';
+import { persistor } from '@/redux/store';
 
 export function Router() {
   const colorMode = useAppSelector(selectCurrentColorMode);
