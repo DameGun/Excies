@@ -27,10 +27,11 @@ async function findByPk(req, res, next) {
 async function create(req, res, next) {
   const list_id = req.params.list_id;
   const reqItem = req.body;
+  const language = req.query.language;
 
   try {
     const data = await exerciseListItemService.create(list_id, reqItem);
-    const response = await exerciseListItemService.findByPk(data.id);
+    const response = await exerciseListItemService.findByPk(data.id, language);
     res.status(201).json(response);
   } catch (err) {
     next(err);
