@@ -45,9 +45,9 @@ export function ExercisesModalScreen({ route, navigation }: ExercisesModalScreen
   const [searchPhrase, setSearchPhrase] = useState('');
 
   useEffect(() => {
-    const typedLanguage = i18n.language as SupportedLanguageCodes;
+    const language = i18n.language as SupportedLanguageCodes;
 
-    dispatch(thunkGetExercises({ language: typedLanguage }));
+    dispatch(thunkGetExercises({ language }));
   }, [i18n]);
 
   useEffect(() => {
@@ -69,10 +69,12 @@ export function ExercisesModalScreen({ route, navigation }: ExercisesModalScreen
 
       dispatch(thunkDeleteExerciseListItem(payload));
     } else {
+      const language = i18n.language as SupportedLanguageCodes;
       const payload: CreateExerciseListItemDTO = {
         list_id,
         username,
         exercise_id: item.exercise_id,
+        language,
       };
 
       dispatch(thunkCreateExerciseListItem(payload));

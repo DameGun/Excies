@@ -25,6 +25,7 @@ import { getInfoModalScreenStylesDefault } from '@/utils/getInfoModalScreenStyle
 import { getModalHeaderScreenOption } from '@/utils/getModalHeaderScreenOption';
 
 import { detailedExerciseListItemSchema } from './validation';
+import { SupportedLanguageCodes } from '@/constants/i18n';
 
 type DetailedExerciseListItemInfoModalScreenProps = NativeStackScreenProps<
   HomeStackNavigationParams,
@@ -39,7 +40,7 @@ export function DetailedExerciseListItemInfoModalScreen({
   const item = useAppSelector((state) => selectDetailedExerciseListItemById(state, detailed_id));
   const styles = useStyles(getInfoModalScreenStylesDefault);
   const dispatch = useAppDispatch();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const {
     control,
@@ -79,11 +80,13 @@ export function DetailedExerciseListItemInfoModalScreen({
   });
 
   function handleDelete() {
+    const language = i18n.language as SupportedLanguageCodes;
     const payload: DeleteDetailedExerciseListItemDTO = {
       username,
       list_id,
       list_item_id,
       id: detailed_id,
+      language,
     };
 
     dispatch(thunkDeleteDetailedExerciseListItem(payload));

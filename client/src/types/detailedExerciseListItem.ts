@@ -2,6 +2,7 @@ import type { ItemValueOperationType } from '@/constants/detailedExerciseListIte
 
 import type { RequiredUsernameParameter } from './api';
 import type { BaseSliceWithDataArray } from './redux';
+import { LanguageParameter } from './i18n';
 
 type DetailedExerciseListItem = {
   id: string;
@@ -28,7 +29,7 @@ type DetailedOperationType = {
   number: number;
 };
 
-type CreateDetailedExerciseListItemDTO = RequiredUsernameParameter & {
+type CreateDetailedExerciseListItemDTO = RequiredUsernameParameter & LanguageParameter & {
   list_id: string;
   list_item_id: string;
   detailed_exercise_list_item: Pick<DetailedExerciseListItem, 'time' | 'rep' | 'weight'>;
@@ -41,7 +42,7 @@ type UpdateDetailedExerciseListItemDTO = RequiredUsernameParameter & {
   detailed_exercise_list_item: Pick<DetailedExerciseListItem, 'rep' | 'weight' | 'notes'>;
 };
 
-type DeleteDetailedExerciseListItemDTO = RequiredUsernameParameter & {
+type DeleteDetailedExerciseListItemDTO = RequiredUsernameParameter & LanguageParameter & {
   list_id: string;
   list_item_id: string;
   id: string;
