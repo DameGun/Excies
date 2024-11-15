@@ -1,15 +1,16 @@
 import { PERSIST, REHYDRATE } from 'redux-persist';
 import type { BaseSliceWithDataArray } from './redux';
+import { SupportedLanguageCodes } from '@/constants/i18n';
 
 type Exercise = {
   id: string;
-  muscles_id: string;
   name: string;
-  description: string;
+  exercise_id: string;
 };
 
 type ExerciseState = BaseSliceWithDataArray<Exercise> & {
   expiresAt: number;
+  language: SupportedLanguageCodes;
 };
 
 type ExercisePersist =
@@ -17,6 +18,7 @@ type ExercisePersist =
       type: typeof REHYDRATE;
       data: Exercise[];
       expiresAt: number;
+      language: SupportedLanguageCodes;
     }
   | {
       type: typeof PERSIST;
@@ -24,7 +26,12 @@ type ExercisePersist =
     };
 
 type GetExercisesDTO = {
-  listId: string;
+  language: SupportedLanguageCodes;
+};
+
+type ExercisesLocalized = {
+  language: SupportedLanguageCodes;
+  data: Exercise[];
 };
 
 type SpecifiedListExercises = {
@@ -32,4 +39,11 @@ type SpecifiedListExercises = {
   exercises: Exercise[];
 };
 
-export type { Exercise, ExerciseState, GetExercisesDTO, SpecifiedListExercises, ExercisePersist };
+export type {
+  Exercise,
+  ExerciseState,
+  GetExercisesDTO,
+  SpecifiedListExercises,
+  ExercisePersist,
+  ExercisesLocalized,
+};

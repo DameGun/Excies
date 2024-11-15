@@ -1,7 +1,7 @@
 import exerciseTranslatedService from "../services/exerciseTranslated.service.js";
 
 async function findAll(req, res, next) {
-  const language = req.params.language;
+  const language = req.query.language;
 
   try {
     const data = await exerciseTranslatedService.findAll(language);
