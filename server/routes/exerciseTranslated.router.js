@@ -5,7 +5,7 @@ import { paramValidator } from "../utilities/validators/exercise.validator.js";
 
 const router = Router();
 
-router.route("/:language").get(exerciseTranslatedController.findAll);
+router.route("/").get(exerciseTranslatedController.findAll);
 router
   .route("/details/:id")
   .get(
