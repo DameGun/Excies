@@ -22,7 +22,7 @@ async function initI18n() {
 
   i18n.use(initReactI18next).init({
     compatibilityJSON: 'v3',
-    lng: 'ru',
+    lng: savedLanguage,
     fallbackLng: FALLBACK_LNG,
     resources,
     interpolation: {
