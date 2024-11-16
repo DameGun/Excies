@@ -2,9 +2,10 @@ import exerciseListItemService from "../services/exerciseListItem.service.js";
 
 async function findAll(req, res, next) {
   const list_id = req.params.list_id;
+  const language = req.query.language;
 
   try {
-    const data = await exerciseListItemService.findAll(list_id);
+    const data = await exerciseListItemService.findAll(list_id, language);
     res.status(200).json(data);
   } catch (err) {
     next(err);
@@ -13,9 +14,10 @@ async function findAll(req, res, next) {
 
 async function findByPk(req, res, next) {
   const item_id = req.params.item_id;
+  const language = req.query.language;
 
   try {
-    const data = await exerciseListItemService.findByPk(item_id);
+    const data = await exerciseListItemService.findByPk(item_id, language);
     res.status(200).json(data);
   } catch (err) {
     next(err);
@@ -25,10 +27,11 @@ async function findByPk(req, res, next) {
 async function create(req, res, next) {
   const list_id = req.params.list_id;
   const reqItem = req.body;
+  const language = req.query.language;
 
   try {
     const data = await exerciseListItemService.create(list_id, reqItem);
-    const response = await exerciseListItemService.findByPk(data.id);
+    const response = await exerciseListItemService.findByPk(data.id, language);
     res.status(201).json(response);
   } catch (err) {
     next(err);

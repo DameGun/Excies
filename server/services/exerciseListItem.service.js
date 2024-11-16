@@ -3,8 +3,9 @@ import Exercise from "../models/exercise.model.js";
 import ExerciseListItem from "../models/exerciseListItem.model.js";
 import DetailedExerciseListItem from "../models/detailedExerciseListItem.model.js";
 import NotFoundError from "../utilities/errors/notFoundError.js";
+import ExerciseTranslated from "../models/exerciseTranslated.model.js";
 
-async function findAll(list_id) {
+async function findAll(list_id, language) {
   const subQuery = Sequelize.literal(`(
     SELECT MIN(date)
     FROM detailed_exercise_list_item
@@ -19,7 +20,12 @@ async function findAll(list_id) {
     include: [
       {
         model: Exercise,
-        attributes: [],
+        attributes: ["id"],
+        include: {
+          model: ExerciseTranslated,
+          attributes: ["name"],
+          where: { language },
+        },
       },
       {
         model: DetailedExerciseListItem,
@@ -28,7 +34,7 @@ async function findAll(list_id) {
     ],
     attributes: {
       include: [
-        [Sequelize.col("exercise.name"), "name"],
+        [Sequelize.col("exercise.exercise_translations.name"), "name"],
         [
           Sequelize.fn("calculate_date_interval", subQuery),
           "last_time_updated",
@@ -37,10 +43,15 @@ async function findAll(list_id) {
     },
   });
 
-  return entity;
+  const mappedEntity = entity.map((item) => {
+    const { exercise, ...rest } = item.get();
+    return rest;
+  });
+
+  return mappedEntity;
 }
 
-async function findByPk(id) {
+async function findByPk(id, language) {
   const subQuery = Sequelize.literal(`(
     SELECT MIN(date)
     FROM detailed_exercise_list_item
@@ -52,12 +63,17 @@ async function findByPk(id) {
     include: [
       {
         model: Exercise,
-        attributes: [],
+        attributes: ["id"],
+        include: {
+          model: ExerciseTranslated,
+          attributes: ["name"],
+          where: { language },
+        },
       },
     ],
     attributes: {
       include: [
-        [Sequelize.col("exercise.name"), "name"],
+        [Sequelize.col("exercise.exercise_translations.name"), "name"],
         [
           Sequelize.fn("calculate_date_interval", subQuery),
           "last_time_updated",
@@ -70,7 +86,9 @@ async function findByPk(id) {
     throw new NotFoundError("exerciseListItem", id);
   }
 
-  return entity;
+  const { exercise, ...rest } = entity.get();
+
+  return rest;
 }
 
 async function create(list_id, data) {

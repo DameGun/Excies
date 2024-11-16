@@ -3,28 +3,29 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getExercises } from '@/api/endpoints/exercise';
 import { thunkHandler } from '@/redux/thunkHandler';
 import type { ApiError } from '@/types/api';
-import type { ExercisePersist, GetExercisesDTO } from '@/types/exercise';
+import type { ExercisePersist } from '@/types/exercise';
+import type { LanguageParameter } from '@/types/i18n';
 import type { TypedThunkApi } from '@/types/redux';
 import { ITEM_PERSIST_LIFETIME } from '@/constants/persist';
 import { PERSIST, REHYDRATE } from 'redux-persist';
 
-export const thunkGetExercises = createAsyncThunk<ExercisePersist, GetExercisesDTO, TypedThunkApi>(
+export const thunkGetExercises = createAsyncThunk<ExercisePersist, LanguageParameter, TypedThunkApi>(
   'getExercises',
-  async (_, { dispatch, rejectWithValue, getState }) => {
+  async (payload, { dispatch, rejectWithValue, getState }) => {
     try {
       const {
-        exercises: { data, expiresAt },
+        exercises: { data, expiresAt, language },
       } = getState();
 
       const currentDate = Date.now();
       const isExpired = Math.abs(expiresAt - currentDate) >= ITEM_PERSIST_LIFETIME;
 
-      if (isExpired || data.length === 0) {
-        const response = await thunkHandler(dispatch, getExercises);
+      if (isExpired || data.length === 0 || payload.language !== language) {
+        const response = await thunkHandler(dispatch, getExercises, payload);
         return {
           type: REHYDRATE,
-          data: response,
           expiresAt: currentDate + ITEM_PERSIST_LIFETIME,
+          ...response,
         };
       }
 

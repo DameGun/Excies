@@ -25,6 +25,7 @@ import {
 
 import { RepetitionsNumbers, WeightNumbers } from './Inputs';
 import { getStyles } from './styles';
+import { SupportedLanguageCodes } from '@/constants/i18n';
 
 type CreateDetailedItemModalScreenProps = NativeStackScreenProps<
   HomeStackNavigationParams,
@@ -38,7 +39,7 @@ export function CreateDetailedItemModalScreen({
   const { username, list_id, list_item_id } = route.params;
   const styles = useStyles(getStyles);
   const dispatch = useAppDispatch();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const [active, setActive] = useState(CreateDetailedExerciseListItemParameterType.Repetitions);
   const [rep, setRep] = useState(0);
@@ -67,6 +68,7 @@ export function CreateDetailedItemModalScreen({
 
   function handleSubmit() {
     if (rep && weight) {
+      const language = i18n.language as SupportedLanguageCodes;
       const payload: CreateDetailedExerciseListItemDTO = {
         username,
         list_id,
@@ -76,6 +78,7 @@ export function CreateDetailedItemModalScreen({
           rep,
           weight,
         },
+        language,
       };
 
       dispatch(thunkCreateDetailedExerciseListItem(payload));

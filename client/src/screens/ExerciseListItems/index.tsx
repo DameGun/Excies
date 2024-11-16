@@ -24,6 +24,7 @@ import type { ExerciseListItem, GetExerciseListItemsDTO } from '@/types/exercise
 import type { HomeStackNavigationParams } from '@/types/homeStackNavigation';
 
 import { getStyles } from './styles';
+import { SupportedLanguageCodes } from '@/constants/i18n';
 
 type ExerciseListItemsScreenProps = NativeStackScreenProps<
   HomeStackNavigationParams,
@@ -37,17 +38,20 @@ export function ExerciseListItemsScreen({ route, navigation }: ExerciseListItems
 
   const dispatch = useAppDispatch();
   const styles = useStyles(getStyles);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const [searchPhrase, setSearchPhrase] = useState('');
 
   useEffect(() => {
+    const language = i18n.language as SupportedLanguageCodes;
+
     const payload: GetExerciseListItemsDTO = {
       id: list_id,
       username,
+      language,
     };
     dispatch(thunkGetExerciseListItems(payload));
-  }, []);
+  }, [i18n]);
 
   useEffect(() => {
     navigation.setOptions({

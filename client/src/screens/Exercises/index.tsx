@@ -27,6 +27,7 @@ import type { SectionListType } from '@/types/section';
 import { getExercisesWithSearch } from '@/utils/exercises';
 import { getModalHeaderScreenOption } from '@/utils/getModalHeaderScreenOption';
 import { isExerciseListItem } from '@/utils/typePredicates';
+import { SupportedLanguageCodes } from '@/constants/i18n';
 
 type ExercisesModalScreenProps = NativeStackScreenProps<
   HomeStackNavigationParams,
@@ -39,13 +40,17 @@ export function ExercisesModalScreen({ route, navigation }: ExercisesModalScreen
   const listItems = useAppSelector(selectExerciseListItems);
   const currentList = useAppSelector((state) => selectExerciseListById(state, list_id));
   const dispatch = useAppDispatch();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const [searchPhrase, setSearchPhrase] = useState('');
 
   useEffect(() => {
-    dispatch(thunkGetExercises({ listId: list_id }));
+    const language = i18n.language as SupportedLanguageCodes;
 
+    dispatch(thunkGetExercises({ language }));
+  }, [i18n]);
+
+  useEffect(() => {
     navigation.setOptions(
       getModalHeaderScreenOption({
         title: t('exercises.title', { listName: currentList?.name }),
@@ -64,10 +69,12 @@ export function ExercisesModalScreen({ route, navigation }: ExercisesModalScreen
 
       dispatch(thunkDeleteExerciseListItem(payload));
     } else {
+      const language = i18n.language as SupportedLanguageCodes;
       const payload: CreateExerciseListItemDTO = {
         list_id,
         username,
-        exercise_id: item.id,
+        exercise_id: item.exercise_id,
+        language,
       };
 
       dispatch(thunkCreateExerciseListItem(payload));
