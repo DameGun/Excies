@@ -1,4 +1,4 @@
-import { SupportedLanguageCodes } from "@/constants/i18n";
+import { SupportedLanguageCodes } from '@/constants/i18n';
 
 type LanguageDataType = {
   id: string;
@@ -8,7 +8,7 @@ type LanguageDataType = {
 };
 
 type LanguageParameter = {
-  language: SupportedLanguageCodes
-}
+  language: SupportedLanguageCodes;
+};
 
 export type { LanguageDataType, LanguageParameter };

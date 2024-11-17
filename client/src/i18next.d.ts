@@ -1,4 +1,4 @@
-import type ns1En from '@/assets/locales/en.json';
+import ns1En from '@/assets/locales/en.json';
 
 declare module 'i18next' {
   interface CustomTypeOptions {

@@ -11,6 +11,8 @@ import { thunkRegister } from '@/redux/slices/auth/thunks';
 import { AuthLayout } from './AuthLayout';
 import { getStyles } from './styles';
 import { registerSchema } from './validation';
+import { RegisterDTO } from '@/types/auth';
+import { getUserLocales } from '@/utils/getUserLocale';
 
 export function RegisterScreen() {
   const dispatch = useAppDispatch();
@@ -22,7 +24,13 @@ export function RegisterScreen() {
     resolver: yupResolver(registerSchema),
   });
 
-  const onSubmit = handleSubmit((data) => dispatch(thunkRegister(data)));
+  const onSubmit = handleSubmit((data) => {
+    const payload: RegisterDTO = {
+      ...data,
+      is_metric_system_choosed: getUserLocales().measurementSystem === 'metric',
+    };
+    dispatch(thunkRegister(payload));
+  });
 
   return (
     <AuthLayout>

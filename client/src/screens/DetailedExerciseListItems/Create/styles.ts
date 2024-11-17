@@ -10,17 +10,6 @@ export const getStyles = createStylesheet(({ colors, constants }) => ({
     padding: constants.padding.md,
     gap: constants.gap.md,
   },
-  headerContainer: {
-    flexDirection: 'row',
-    gap: constants.gap.sm,
-    alignItems: 'center',
-    marginLeft: constants.margin.md,
-  },
-  header: {
-    color: colors.grey,
-    textTransform: 'uppercase',
-    fontSize: constants.fontSize.sm,
-  },
   inputsContainer: {
     gap: constants.gap.md,
   },
@@ -34,10 +23,6 @@ export const getStyles = createStylesheet(({ colors, constants }) => ({
   },
   numberButtonsContainer: {
     marginTop: constants.margin.lg,
-  },
-  createTypeIcon: {
-    fontSize: constants.fontSize.md,
-    color: colors.primary,
   },
   overlay: StyleSheet.absoluteFill,
 }));

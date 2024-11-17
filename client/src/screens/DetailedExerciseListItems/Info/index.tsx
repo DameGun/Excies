@@ -26,6 +26,8 @@ import { getModalHeaderScreenOption } from '@/utils/getModalHeaderScreenOption';
 
 import { detailedExerciseListItemSchema } from './validation';
 import { SupportedLanguageCodes } from '@/constants/i18n';
+import { convertLbsToKg, weightMeasurementSystem, weightValueFormat } from '@/utils/weightMeasure';
+import { selectIsUserChoosedMetricSystem } from '@/redux/slices/user';
 
 type DetailedExerciseListItemInfoModalScreenProps = NativeStackScreenProps<
   HomeStackNavigationParams,
@@ -38,6 +40,7 @@ export function DetailedExerciseListItemInfoModalScreen({
 }: DetailedExerciseListItemInfoModalScreenProps) {
   const { username, list_id, list_item_id, detailed_id } = route.params;
   const item = useAppSelector((state) => selectDetailedExerciseListItemById(state, detailed_id));
+  const isMetricSystemChoosed = useAppSelector(selectIsUserChoosedMetricSystem);
   const styles = useStyles(getInfoModalScreenStylesDefault);
   const dispatch = useAppDispatch();
   const { t, i18n } = useTranslation();
@@ -50,7 +53,7 @@ export function DetailedExerciseListItemInfoModalScreen({
     mode: 'onChange',
     defaultValues: {
       rep: item?.rep,
-      weight: item?.weight,
+      weight: weightValueFormat(item!.weight, isMetricSystemChoosed),
       notes: item?.notes ?? '',
     },
     resolver: yupResolver(detailedExerciseListItemSchema),
@@ -67,12 +70,13 @@ export function DetailedExerciseListItemInfoModalScreen({
   }, [isValid]);
 
   const onSubmit = handleSubmit(({ rep, weight, notes }) => {
+    const convertedWeight = isMetricSystemChoosed ? weight : convertLbsToKg(weight);
     const payload: UpdateDetailedExerciseListItemDTO = {
       username,
       list_id,
       list_item_id,
       id: detailed_id,
-      detailed_exercise_list_item: { rep, weight, notes },
+      detailed_exercise_list_item: { rep, weight: convertedWeight, notes },
     };
 
     dispatch(thunkUpdateDetailedExerciseListItem(payload));
@@ -114,7 +118,11 @@ export function DetailedExerciseListItemInfoModalScreen({
         />
       </View>
       <View>
-        <Text style={styles.text}>{t('detailedExerciseListItems.edit.weight.label')}</Text>
+        <Text style={styles.text}>
+          {t(
+            `detailedExerciseListItems.edit.weight.label.${weightMeasurementSystem(isMetricSystemChoosed)}`
+          )}
+        </Text>
         <CustomTextInput
           name='weight'
           control={control}

@@ -1,11 +1,3 @@
-type User = {
-  id: string;
-  username: string;
-  password: string;
-  email: string;
-  role_id: string;
-};
-
 type LoginDTO = {
   username: string;
   password: string;
@@ -14,6 +6,7 @@ type LoginDTO = {
 type RegisterDTO = {
   username: string;
   password: string;
+  is_metric_system_choosed: boolean;
   email?: string;
 };
 
@@ -21,6 +14,7 @@ type AuthResponse = {
   accessToken: string;
   username: string;
   user_id: string;
+  is_metric_system_choosed: boolean;
 };
 
 type AuthSliceState = {
@@ -29,4 +23,4 @@ type AuthSliceState = {
   user_id: string | null;
 };
 
-export type { AuthResponse, AuthSliceState, LoginDTO, RegisterDTO, User };
+export type { AuthResponse, AuthSliceState, LoginDTO, RegisterDTO };

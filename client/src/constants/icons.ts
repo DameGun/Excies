@@ -20,4 +20,6 @@ export const Icons = {
   Login: 'login',
   Register: 'account-plus',
   DarkMode: 'theme-light-dark',
+  WeightKg: 'weight-kilogram',
+  WeightLbs: 'weight-pound',
 } as const;

@@ -59,13 +59,19 @@
       "secondaryText": "Record your sets to track progress"
     },
     "repetitionsBadge": "{{value}} rep",
-    "weightBadge": "{{value}} kg",
+    "weightBadgePlain": {
+      "kg": "kg",
+      "lbs": "lbs"
+    },
+    "weightBadge": {
+      "kg": "{{value}} kg",
+      "lbs": "{{value}} lbs"
+    },
     "create": {
       "repetitionsLabel": "Repetitions",
       "weightLabel": "Weight",
       "submitButton": "Record set"
     },
-
     "edit": {
       "title": "Edit Set",
       "notes": {
@@ -77,7 +83,10 @@
         "placeholder": "Repetitions"
       },
       "weight": {
-        "label": "Weight (kg)",
+        "label": {
+          "kg": "Weight (kg)",
+          "lbs": "Weight (lbs)"
+        },
         "placeholder": "Weight"
       }
     }
@@ -89,7 +98,8 @@
       "title": "Dark Mode",
       "dark": "Enabled",
       "light": "Disabled"
-    }
+    },
+    "weight": "Weight system"
   },
   "errors": {
     "title": "Error",

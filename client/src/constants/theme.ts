@@ -1,4 +1,5 @@
 import type { BaseColors, CustomTheme, ThemeConstants } from '@/types/theme';
+import { StatusBarStyle } from 'react-native';
 
 const BASE_COLORS: BaseColors = {
   greyPressed: '#646466',
@@ -81,3 +82,18 @@ export const DARK_THEME: CustomTheme = {
   },
   constants: THEME_CONSTANTS,
 };
+
+export enum ColorMode {
+  Light = 'light',
+  Dark = 'dark',
+}
+
+export const Theme = {
+  [ColorMode.Dark]: DARK_THEME,
+  [ColorMode.Light]: LIGHT_THEME,
+} as const;
+
+export const StatusBarColor: Record<ColorMode, StatusBarStyle> = {
+  [ColorMode.Dark]: 'light-content',
+  [ColorMode.Light]: 'dark-content',
+} as const;

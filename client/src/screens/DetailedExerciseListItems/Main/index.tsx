@@ -18,6 +18,8 @@ import type {
 import type { HomeStackNavigationParams } from '@/types/homeStackNavigation';
 
 import { getStyles } from './styles';
+import { selectIsUserChoosedMetricSystem } from '@/redux/slices/user';
+import { weightMeasurementSystem, weightValueFormat } from '@/utils/weightMeasure';
 
 type DetailedExerciseListItemsScreenProps = NativeStackScreenProps<
   HomeStackNavigationParams,
@@ -30,6 +32,7 @@ export function DetailedExerciseListItemsScreen({
 }: DetailedExerciseListItemsScreenProps) {
   const { list_id, list_item_id, name, username } = route.params;
   const data = useAppSelector(selectDetailedExerciseListItems);
+  const isMetricSystemChoosed = useAppSelector(selectIsUserChoosedMetricSystem);
   const dispatch = useAppDispatch();
   const styles = useStyles(getStyles);
   const { t } = useTranslation();
@@ -85,9 +88,13 @@ export function DetailedExerciseListItemsScreen({
                   </Text>
                 </View>
                 <View style={styles.itemInfoSubContainer}>
-                  <Text style={styles.itemInfoNumberRight}>{item.weight}</Text>
+                  <Text style={styles.itemInfoNumberRight}>
+                    {weightValueFormat(item.weight, isMetricSystemChoosed)}
+                  </Text>
                   <Text style={styles.itemInfoTextRight}>
-                    {t('detailedExerciseListItems.weightBadge', { value: '' })}
+                    {t(
+                      `detailedExerciseListItems.weightBadgePlain.${weightMeasurementSystem(isMetricSystemChoosed)}`
+                    )}
                   </Text>
                 </View>
               </View>

@@ -46,10 +46,22 @@ async function create(data) {
   return entity;
 }
 
+async function update(username, data) {
+  const entity = await findByUsername(username);
+
+  if (entity === null) {
+    throw new NotFoundError("user", username);
+  }
+
+  await entity.set(data);
+  return await entity.save();
+}
+
 export default {
   findAll,
   findOne,
   create,
   findByEmail,
   findByUsername,
+  update,
 };

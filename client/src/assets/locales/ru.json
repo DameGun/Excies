@@ -59,7 +59,14 @@
       "secondaryText": "Записывайте свои сеты, чтобы отслеживать прогресс"
     },
     "repetitionsBadge": "{{value}} повт",
-    "weightBadge": "{{value}} кг",
+    "weightBadgePlain": {
+      "kg": "кг",
+      "lbs": "фунт"
+    },
+    "weightBadge": {
+      "kg": "{{value}} кг",
+      "lbs": "{{value}} фунт"
+    },
     "create": {
       "repetitionsLabel": "Повторения",
       "weightLabel": "Вес",
@@ -76,7 +83,10 @@
         "placeholder": "Повторения"
       },
       "weight": {
-        "label": "Вес (кг)",
+        "label": {
+          "kg": "Вес (кг)",
+          "lbs": "Вес (фунт)"
+        },
         "placeholder": "Вес"
       }
     }
@@ -88,7 +98,8 @@
       "title": "Темная тема",
       "dark": "Включена",
       "light": "Отключена"
-    }
+    },
+    "weight": "Система измерения веса"
   },
   "errors": {
     "title": "Ошибка",

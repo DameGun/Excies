@@ -1,6 +1,5 @@
-import type { ColorSchemeName } from 'react-native';
-
 import type { StylesOptions } from './styles';
+import { ColorMode } from '@/constants/theme';
 
 type BaseColors = {
   greyPressed: string;
@@ -36,7 +35,7 @@ type CustomTheme = {
 };
 
 type ThemeState = {
-  mode: NonNullable<ColorSchemeName>;
+  mode: ColorMode;
 };
 
 export type { BaseColors, CustomTheme, ThemeColors, ThemeConstants, ThemeState };

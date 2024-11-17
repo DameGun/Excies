@@ -29,11 +29,12 @@ type DetailedOperationType = {
   number: number;
 };
 
-type CreateDetailedExerciseListItemDTO = RequiredUsernameParameter & LanguageParameter & {
-  list_id: string;
-  list_item_id: string;
-  detailed_exercise_list_item: Pick<DetailedExerciseListItem, 'time' | 'rep' | 'weight'>;
-};
+type CreateDetailedExerciseListItemDTO = RequiredUsernameParameter &
+  LanguageParameter & {
+    list_id: string;
+    list_item_id: string;
+    detailed_exercise_list_item: Pick<DetailedExerciseListItem, 'time' | 'rep' | 'weight'>;
+  };
 
 type UpdateDetailedExerciseListItemDTO = RequiredUsernameParameter & {
   list_id: string;
@@ -42,11 +43,12 @@ type UpdateDetailedExerciseListItemDTO = RequiredUsernameParameter & {
   detailed_exercise_list_item: Pick<DetailedExerciseListItem, 'rep' | 'weight' | 'notes'>;
 };
 
-type DeleteDetailedExerciseListItemDTO = RequiredUsernameParameter & LanguageParameter & {
-  list_id: string;
-  list_item_id: string;
-  id: string;
-};
+type DeleteDetailedExerciseListItemDTO = RequiredUsernameParameter &
+  LanguageParameter & {
+    list_id: string;
+    list_item_id: string;
+    id: string;
+  };
 
 type DetailedExerciseListItemState = BaseSliceWithDataArray<DetailedExerciseListItemsGroup>;
 

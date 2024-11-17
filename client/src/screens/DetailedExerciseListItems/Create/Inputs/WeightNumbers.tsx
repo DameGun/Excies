@@ -5,6 +5,7 @@ import { NumberInputButton } from '@/components';
 import {
   CreateDetailedExerciseListItemParameterType,
   ItemValueOperationType,
+  WeightMeasurementSystemType,
 } from '@/constants/detailedExerciseListItem';
 import { useStyles } from '@/hooks/useStyles';
 import type { DetailedOperationType } from '@/types/detailedExerciseListItem';
@@ -17,6 +18,7 @@ type WeightNumbersProps = {
   setParameterType(type: CreateDetailedExerciseListItemParameterType): void;
   handleWeight(weight: number): void;
   weight: number;
+  activeWeightSystem: WeightMeasurementSystemType;
 };
 
 export function WeightNumbers({
@@ -24,6 +26,7 @@ export function WeightNumbers({
   setParameterType,
   handleWeight,
   weight,
+  activeWeightSystem,
 }: WeightNumbersProps) {
   const styles = useStyles(getStyles);
   const { t } = useTranslation();
@@ -53,7 +56,7 @@ export function WeightNumbers({
         />
       </View>
       <Text style={styles.inputTitle}>
-        {t('detailedExerciseListItems.weightBadge', { value: weight })}
+        {t(`detailedExerciseListItems.weightBadge.${activeWeightSystem}`, { value: weight })}
       </Text>
       <View style={styles.inputButtonsContainer}>
         <NumberInputButton
