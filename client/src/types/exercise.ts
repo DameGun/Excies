@@ -15,15 +15,15 @@ type ExerciseState = BaseSliceWithDataArray<Exercise> & {
 
 type ExercisePersist =
   | {
-    type: typeof REHYDRATE;
-    data: Exercise[];
-    expiresAt: number;
-    language: SupportedLanguageCodes;
-  }
+      type: typeof REHYDRATE;
+      data: Exercise[];
+      expiresAt: number;
+      language: SupportedLanguageCodes;
+    }
   | {
-    type: typeof PERSIST;
-    data: Exercise[];
-  };
+      type: typeof PERSIST;
+      data: Exercise[];
+    };
 
 type ExercisesLocalized = {
   language: SupportedLanguageCodes;

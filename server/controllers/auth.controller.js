@@ -11,6 +11,7 @@ async function register(req, res, next) {
       accessToken: jwt,
       user_id: data.id,
       username: data.username,
+      is_metric_system_choosed: data.is_metric_system_choosed,
     });
   } catch (err) {
     next(err);
@@ -26,7 +27,12 @@ async function login(req, res, next) {
 
     res
       .status(200)
-      .json({ accessToken: jwt, user_id: data.id, username: data.username });
+      .json({
+        accessToken: jwt,
+        user_id: data.id,
+        username: data.username,
+        is_metric_system_choosed: data.is_metric_system_choosed,
+      });
   } catch (err) {
     next(err);
   }

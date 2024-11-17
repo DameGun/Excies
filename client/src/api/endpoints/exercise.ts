@@ -8,7 +8,9 @@ import { LanguageParameter } from '@/types/i18n';
 
 export async function getExercises({ language }: LanguageParameter): ApiResult<ExercisesLocalized> {
   try {
-    const { data } = await axiosClient.get<ExercisesLocalized>('/exercisesTranslated', { params: { language } });
+    const { data } = await axiosClient.get<ExercisesLocalized>('/exercisesTranslated', {
+      params: { language },
+    });
     return handleResult(data);
   } catch (err) {
     return handleError(err);

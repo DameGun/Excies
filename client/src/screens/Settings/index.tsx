@@ -13,6 +13,10 @@ import { changeTheme, selectCurrentColorMode } from '@/redux/slices/theme';
 import type { SettingsStackNavigationParams } from '@/types/settingsStackNavigation';
 
 import { getStyles } from './styles';
+import { selectIsUserChoosedMetricSystem } from '@/redux/slices/user';
+import { weightMeasurementSystem } from '@/utils/weightMeasure';
+import { thunkUpdateUserWeightPreference } from '@/redux/slices/user/thunks';
+import { selectUsername } from '@/redux/slices/auth';
 
 type SettingsScreenProps = NativeStackScreenProps<
   SettingsStackNavigationParams,
@@ -24,6 +28,17 @@ export function SettingsScreen({ navigation }: SettingsScreenProps) {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const colorMode = useAppSelector(selectCurrentColorMode);
+  const isMetricSystemChoosed = useAppSelector(selectIsUserChoosedMetricSystem);
+  const username = useAppSelector(selectUsername)!;
+
+  const handleWeightSystem = () => {
+    dispatch(
+      thunkUpdateUserWeightPreference({
+        username,
+        is_metric_system_choosed: !isMetricSystemChoosed,
+      })
+    );
+  };
 
   const handleTheme = () => {
     dispatch(changeTheme());
@@ -41,6 +56,16 @@ export function SettingsScreen({ navigation }: SettingsScreenProps) {
     <View style={styles.container}>
       <ListItem
         isFirst={true}
+        isLast={false}
+        iconName={isMetricSystemChoosed ? Icons.WeightKg : Icons.WeightLbs}
+        title={t(`settings.weight`)}
+        info={t(
+          `detailedExerciseListItems.weightBadgePlain.${weightMeasurementSystem(isMetricSystemChoosed)}`
+        )}
+        onPress={handleWeightSystem}
+      />
+      <ListItem
+        isFirst={false}
         isLast={false}
         iconName={Icons.DarkMode}
         title={t(`settings.darkMode.title`)}

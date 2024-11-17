@@ -31,8 +31,21 @@ async function create(req, res, next) {
   }
 }
 
+async function update(req, res, next) {
+  const username = req.params.username;
+  const updateData = req.body;
+
+  try {
+    const data = await userService.update(username, updateData);
+    res.status(200).json(data);
+  } catch (err) {
+    next(err);
+  }
+}
+
 export default {
   findAll,
   findOne,
   create,
+  update,
 };

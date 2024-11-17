@@ -14,7 +14,7 @@ import { axiosClient } from '..';
 export async function getExerciseListItems({
   id,
   username,
-  language
+  language,
 }: GetExerciseListItemsDTO): ApiResult<ExerciseListItem[]> {
   try {
     const { data } = await axiosClient.get<ExerciseListItem[]>(
@@ -31,7 +31,7 @@ export async function getExerciseListItemById({
   id,
   username,
   list_id,
-  language
+  language,
 }: GetExerciseListItemByIdDTO): ApiResult<ExerciseListItem> {
   try {
     const { data } = await axiosClient.get<ExerciseListItem>(
@@ -48,7 +48,7 @@ export async function createExerciseListItem({
   list_id,
   username,
   exercise_id,
-  language
+  language,
 }: CreateExerciseListItemDTO): ApiResult<ExerciseListItem> {
   try {
     const { data } = await axiosClient.post<ExerciseListItem>(

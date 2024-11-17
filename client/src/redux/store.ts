@@ -10,6 +10,7 @@ import exerciseListsSlice from './slices/exerciseLists';
 import exercisesSlice from './slices/exercises';
 import loadingSlice from './slices/loading';
 import themeSlice from './slices/theme';
+import userSlice from './slices/user';
 
 const persistConfig = {
   storage: AsyncStorage,
@@ -30,6 +31,7 @@ const rootReducer = combineReducers({
   exercises: persistReducer(exercisesPersistConfig, exercisesSlice),
   detailedExerciseListItems: detailedExerciseListItemsSlice,
   theme: themeSlice,
+  user: userSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

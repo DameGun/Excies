@@ -2,9 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import type { RootState } from '@/types/redux';
 import type { ThemeState } from '@/types/theme';
+import { ColorMode } from '@/constants/theme';
 
 const initialState: ThemeState = {
-  mode: 'dark',
+  mode: ColorMode.Dark,
 };
 
 const themeSlice = createSlice({
@@ -12,7 +13,7 @@ const themeSlice = createSlice({
   initialState,
   reducers: {
     changeTheme: (state) => {
-      state.mode = state.mode === 'dark' ? 'light' : 'dark';
+      state.mode = state.mode === ColorMode.Dark ? ColorMode.Light : ColorMode.Dark;
     },
   },
 });

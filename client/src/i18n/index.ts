@@ -1,12 +1,12 @@
 import { initReactI18next } from 'react-i18next';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { getLocales } from 'expo-localization';
 import i18n from 'i18next';
 
 import translationEn from '@/assets/locales/en.json';
 import translationRu from '@/assets/locales/ru.json';
 import { FALLBACK_LNG, LANGUAGE_STORAGE_KEY, SupportedLanguageCodes } from '@/constants/i18n';
+import { getUserLocales } from '@/utils/getUserLocale';
 
 const resources = {
   [SupportedLanguageCodes.English]: { translation: translationEn },
@@ -17,7 +17,7 @@ async function initI18n() {
   let savedLanguage = await AsyncStorage.getItem(LANGUAGE_STORAGE_KEY);
 
   if (!savedLanguage) {
-    savedLanguage = getLocales()[0].languageCode!;
+    savedLanguage = getUserLocales().languageCode!;
   }
 
   i18n.use(initReactI18next).init({

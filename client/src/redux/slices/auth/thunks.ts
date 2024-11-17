@@ -39,10 +39,7 @@ export const thunkLogin = createAsyncThunk<JWTPayload, LoginDTO, TypedThunkApi>(
       const token = response.accessToken;
 
       await thunkHandler(dispatch, storeToken, token);
-      await thunkHandler(dispatch, storeJwtPayload, {
-        username: response.username,
-        user_id: response.user_id,
-      });
+      await thunkHandler(dispatch, storeJwtPayload, response);
 
       return response;
     } catch (err) {
@@ -60,10 +57,7 @@ export const thunkRegister = createAsyncThunk<JWTPayload, RegisterDTO, TypedThun
       const token = response.accessToken;
 
       await thunkHandler(dispatch, storeToken, token);
-      await thunkHandler(dispatch, storeJwtPayload, {
-        username: response.username,
-        user_id: response.user_id,
-      });
+      await thunkHandler(dispatch, storeJwtPayload, response);
 
       return response;
     } catch (err) {

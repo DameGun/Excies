@@ -1,17 +1,16 @@
 import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Pressable, Text, View } from 'react-native';
+import { Pressable, View } from 'react-native';
 
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { CustomButton, NumbersInput } from '@/components';
 import {
   CreateDetailedExerciseListItemParameterType,
-  CreationActiveIcon,
+  WeightMeasurementSystemType,
 } from '@/constants/detailedExerciseListItem';
 import type { HomeScreenNames } from '@/constants/navigation';
-import { useAppDispatch } from '@/hooks/redux';
+import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { useStyles } from '@/hooks/useStyles';
 import { thunkCreateDetailedExerciseListItem } from '@/redux/slices/detailedExerciseListItems/thunks';
 import type { CreateDetailedExerciseListItemDTO } from '@/types/detailedExerciseListItem';
@@ -26,6 +25,9 @@ import {
 import { RepetitionsNumbers, WeightNumbers } from './Inputs';
 import { getStyles } from './styles';
 import { SupportedLanguageCodes } from '@/constants/i18n';
+import { CreateDetailedExerciseListItemHeader } from './Header';
+import { selectIsUserChoosedMetricSystem } from '@/redux/slices/user';
+import { convertKgToLbs, convertLbsToKg } from '@/utils/weightMeasure';
 
 type CreateDetailedItemModalScreenProps = NativeStackScreenProps<
   HomeStackNavigationParams,
@@ -39,9 +41,15 @@ export function CreateDetailedItemModalScreen({
   const { username, list_id, list_item_id } = route.params;
   const styles = useStyles(getStyles);
   const dispatch = useAppDispatch();
+  const isMetricSystemChoosed = useAppSelector(selectIsUserChoosedMetricSystem);
   const { t, i18n } = useTranslation();
 
-  const [active, setActive] = useState(CreateDetailedExerciseListItemParameterType.Repetitions);
+  const [activeParameter, setActiveParameter] = useState(
+    CreateDetailedExerciseListItemParameterType.Repetitions
+  );
+  const [activeWeightSystem, setActiveWeightSystem] = useState(
+    isMetricSystemChoosed ? WeightMeasurementSystemType.Kg : WeightMeasurementSystemType.Lbs
+  );
   const [rep, setRep] = useState(0);
   const [weight, setWeight] = useState(0);
 
@@ -49,41 +57,50 @@ export function CreateDetailedItemModalScreen({
 
   const onNumberPress = useCallback(
     (number: number) => {
-      if (active === CreateDetailedExerciseListItemParameterType.Repetitions) {
+      if (activeParameter === CreateDetailedExerciseListItemParameterType.Repetitions) {
         setRep(handleRepetitonsNumberPress(number, rep));
       } else {
         setWeight(handleWeightNumberPress(number, weight));
       }
     },
-    [active, rep, weight]
+    [activeParameter, rep, weight]
   );
 
   const onRemove = useCallback(() => {
-    if (active === CreateDetailedExerciseListItemParameterType.Repetitions) {
+    if (activeParameter === CreateDetailedExerciseListItemParameterType.Repetitions) {
       setRep(handleRemoveRepetitions(rep));
     } else {
       setWeight(handleRemoveWeight(weight));
     }
-  }, [active, rep, weight]);
+  }, [activeParameter, rep, weight]);
+
+  const handleActiveWeightSystem = (value: WeightMeasurementSystemType) => {
+    setActiveWeightSystem(value);
+
+    const convertedWeight =
+      value === WeightMeasurementSystemType.Kg ? convertLbsToKg(weight) : convertKgToLbs(weight);
+    setWeight(convertedWeight);
+  };
 
   function handleSubmit() {
-    if (rep && weight) {
-      const language = i18n.language as SupportedLanguageCodes;
-      const payload: CreateDetailedExerciseListItemDTO = {
-        username,
-        list_id,
-        list_item_id,
-        detailed_exercise_list_item: {
-          time: new Date().toISOString(),
-          rep,
-          weight,
-        },
-        language,
-      };
+    const language = i18n.language as SupportedLanguageCodes;
+    const convertedWeight =
+      activeWeightSystem === WeightMeasurementSystemType.Lbs ? convertLbsToKg(weight) : weight;
 
-      dispatch(thunkCreateDetailedExerciseListItem(payload));
-      navigation.goBack();
-    }
+    const payload: CreateDetailedExerciseListItemDTO = {
+      username,
+      list_id,
+      list_item_id,
+      detailed_exercise_list_item: {
+        time: new Date().toISOString(),
+        rep,
+        weight: convertedWeight,
+      },
+      language,
+    };
+
+    dispatch(thunkCreateDetailedExerciseListItem(payload));
+    navigation.goBack();
   }
 
   return (
@@ -92,22 +109,24 @@ export function CreateDetailedItemModalScreen({
         <Pressable style={styles.overlay} onPress={navigation.goBack} />
       </View>
       <View style={styles.container}>
-        <View style={styles.headerContainer}>
-          <MaterialCommunityIcons name={CreationActiveIcon[active]} style={styles.createTypeIcon} />
-          <Text style={styles.header}>{t(`detailedExerciseListItems.create.${active}Label`)}</Text>
-        </View>
+        <CreateDetailedExerciseListItemHeader
+          activeParameter={activeParameter}
+          activeWeightSystem={activeWeightSystem}
+          onWeightSystemClick={handleActiveWeightSystem}
+        />
         <View style={styles.inputsContainer}>
           <RepetitionsNumbers
-            isActive={active === CreateDetailedExerciseListItemParameterType.Repetitions}
+            isActive={activeParameter === CreateDetailedExerciseListItemParameterType.Repetitions}
             handleRepetitions={setRep}
             rep={rep}
-            setParameterType={setActive}
+            setParameterType={setActiveParameter}
           />
           <WeightNumbers
-            isActive={active === CreateDetailedExerciseListItemParameterType.Weight}
+            isActive={activeParameter === CreateDetailedExerciseListItemParameterType.Weight}
+            activeWeightSystem={activeWeightSystem}
             handleWeight={setWeight}
             weight={weight}
-            setParameterType={setActive}
+            setParameterType={setActiveParameter}
           />
         </View>
         <CustomButton

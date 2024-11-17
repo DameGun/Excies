@@ -7,26 +7,33 @@ import type { ApiResult } from '@/types/api';
 import type { JWTPayload } from '@/types/token';
 
 import { axiosClient } from '..';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export async function getJwtPayload(): ApiResult<JWTPayload> {
   try {
-    const username = await SecureStore.getItemAsync(TokenStorageKeys.USERNAME);
-    const user_id = await SecureStore.getItemAsync(TokenStorageKeys.USERID);
+    const username = await SecureStore.getItemAsync(TokenStorageKeys.Username);
+    const user_id = await SecureStore.getItemAsync(TokenStorageKeys.UserId);
+    const is_metric_system_choosed = await getIsMetricSystemChoosed();
 
     if (!username || !user_id) {
       return handleError(new Error('Storage doesnt have user credentials'));
     }
 
-    return handleResult({ username, user_id });
+    return handleResult({ username, user_id, is_metric_system_choosed });
   } catch (err) {
     return handleError(err);
   }
 }
 
-export async function storeJwtPayload({ username, user_id }: JWTPayload): ApiResult {
+export async function storeJwtPayload({
+  username,
+  user_id,
+  is_metric_system_choosed,
+}: JWTPayload): ApiResult {
   try {
-    await SecureStore.setItemAsync(TokenStorageKeys.USERNAME, username);
-    await SecureStore.setItemAsync(TokenStorageKeys.USERID, user_id);
+    await SecureStore.setItemAsync(TokenStorageKeys.Username, username);
+    await SecureStore.setItemAsync(TokenStorageKeys.UserId, user_id);
+    await setIsMetricSystemChoosed(is_metric_system_choosed);
 
     return handleResult();
   } catch (err) {
@@ -36,8 +43,9 @@ export async function storeJwtPayload({ username, user_id }: JWTPayload): ApiRes
 
 export async function removeJwtPayload(): ApiResult {
   try {
-    await SecureStore.deleteItemAsync(TokenStorageKeys.USERNAME);
-    await SecureStore.deleteItemAsync(TokenStorageKeys.USERID);
+    await SecureStore.deleteItemAsync(TokenStorageKeys.Username);
+    await SecureStore.deleteItemAsync(TokenStorageKeys.UserId);
+    await AsyncStorage.removeItem(TokenStorageKeys.isMetricSystemChoosed);
 
     return handleResult();
   } catch (err) {
@@ -80,4 +88,13 @@ export async function removeToken(): ApiResult {
   } catch (err) {
     return handleError(err);
   }
+}
+
+async function getIsMetricSystemChoosed() {
+  const value = await AsyncStorage.getItem(TokenStorageKeys.isMetricSystemChoosed);
+  return /true/i.test(value!);
+}
+
+export async function setIsMetricSystemChoosed(is_metric_system_choosed: boolean) {
+  await AsyncStorage.setItem(TokenStorageKeys.isMetricSystemChoosed, `${is_metric_system_choosed}`);
 }
