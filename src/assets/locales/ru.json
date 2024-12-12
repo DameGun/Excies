@@ -1,0 +1,109 @@
+{
+  "tabs": {
+    "login": "Войти",
+    "register": "Регистрация",
+    "home": "Главная",
+    "settings": "Настройки"
+  },
+  "search": {
+    "placeholder": "Поиск",
+    "cancel": "Отменить",
+    "mainText": "Ничего не найдено по поиску: \"{{searchPhrase}}\"",
+    "secondaryText": "Попробуйте еще раз с другой фразой"
+  },
+  "modal": {
+    "headerRightButton": "Готово",
+    "deleteButton": "Удалить"
+  },
+  "auth": {
+    "inputs": {
+      "username": "Имя пользователя",
+      "password": "Пароль",
+      "email": "Электронная почта (необязательно)",
+      "confirmPassword": "Подтвердить пароль"
+    },
+    "loginButton": "Войти",
+    "registerButton": "Зарегестрироваться"
+  },
+  "exerciseLists": {
+    "title": "Списки упражнений",
+    "newList": "Новый список...",
+    "modal": {
+      "createTitle": "Новый список",
+      "editTitle": "Информация о списке",
+      "name": {
+        "label": "Название",
+        "placeholder": "Понедельник, Грудь, Спина + бицепс..."
+      },
+      "description": {
+        "label": "Описание",
+        "placeholder": "Задайте описание списка (необязательно)"
+      }
+    }
+  },
+  "exerciseListItems": {
+    "addExercises": "Добавить упражнения",
+    "empty": {
+      "mainText": "Нет упражнений",
+      "secondaryText": "Составьте свой первый список!"
+    }
+  },
+  "exercises": {
+    "addedSectionTitle": "Добавленные упражнения",
+    "allSectionTitle": "Все упражнения",
+    "title": "Добавить в \"{{listName}}\""
+  },
+  "detailedExerciseListItems": {
+    "empty": {
+      "mainText": "Нет записей",
+      "secondaryText": "Записывайте свои сеты, чтобы отслеживать прогресс"
+    },
+    "repetitionsBadge": "{{value}} повт",
+    "weightBadgePlain": {
+      "kg": "кг",
+      "lbs": "фунт"
+    },
+    "weightBadge": {
+      "kg": "{{value}} кг",
+      "lbs": "{{value}} фунт"
+    },
+    "create": {
+      "repetitionsLabel": "Повторения",
+      "weightLabel": "Вес",
+      "submitButton": "Записать подход"
+    },
+    "edit": {
+      "title": "Изменить подход",
+      "notes": {
+        "label": "Примечания",
+        "placeholder": "Запишите ваши комментарии и ощущения"
+      },
+      "repetitions": {
+        "label": "Повторения",
+        "placeholder": "Повторения"
+      },
+      "weight": {
+        "label": {
+          "kg": "Вес (кг)",
+          "lbs": "Вес (фунт)"
+        },
+        "placeholder": "Вес"
+      }
+    }
+  },
+  "settings": {
+    "language": "Язык",
+    "logout": "Выйти",
+    "darkMode": {
+      "title": "Темная тема",
+      "dark": "Включена",
+      "light": "Отключена"
+    },
+    "weight": "Система измерения веса"
+  },
+  "errors": {
+    "title": "Ошибка",
+    "button": "Закрыть",
+    "requestWaitingTime": "Время ожидания запроса слишком велико"
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "tabs": {
+    "login": "Login",
+    "register": "Register",
+    "home": "Home",
+    "settings": "Settings"
+  },
+  "search": {
+    "placeholder": "Search",
+    "cancel": "Cancel",
+    "mainText": "Nothing found with search: \"{{searchPhrase}}\"",
+    "secondaryText": "Try again with another search phrase"
+  },
+  "modal": {
+    "headerRightButton": "Done",
+    "deleteButton": "Delete"
+  },
+  "auth": {
+    "inputs": {
+      "username": "Username",
+      "password": "Password",
+      "email": "Email (Optional)",
+      "confirmPassword": "Confirm password"
+    },
+    "loginButton": "Login",
+    "registerButton": "Register"
+  },
+  "exerciseLists": {
+    "title": "Exercise Lists",
+    "newList": "New List...",
+    "modal": {
+      "createTitle": "New List",
+      "editTitle": "List Info",
+      "name": {
+        "label": "Name",
+        "placeholder": "Monday List, Upper Body, Best Training..."
+      },
+      "description": {
+        "label": "Description",
+        "placeholder": "Set a description for list (optional)"
+      }
+    }
+  },
+  "exerciseListItems": {
+    "addExercises": "Add Exercises",
+    "empty": {
+      "mainText": "No exercises",
+      "secondaryText": "Build your first list!"
+    }
+  },
+  "exercises": {
+    "addedSectionTitle": "Added Exercises",
+    "allSectionTitle": "All Exercises",
+    "title": "Add to \"{{listName}}\""
+  },
+  "detailedExerciseListItems": {
+    "empty": {
+      "mainText": "No Sets",
+      "secondaryText": "Record your sets to track progress"
+    },
+    "repetitionsBadge": "{{value}} rep",
+    "weightBadgePlain": {
+      "kg": "kg",
+      "lbs": "lbs"
+    },
+    "weightBadge": {
+      "kg": "{{value}} kg",
+      "lbs": "{{value}} lbs"
+    },
+    "create": {
+      "repetitionsLabel": "Repetitions",
+      "weightLabel": "Weight",
+      "submitButton": "Record set"
+    },
+    "edit": {
+      "title": "Edit Set",
+      "notes": {
+        "label": "Notes",
+        "placeholder": "Write down your comments and feelings"
+      },
+      "repetitions": {
+        "label": "Repetitions",
+        "placeholder": "Repetitions"
+      },
+      "weight": {
+        "label": {
+          "kg": "Weight (kg)",
+          "lbs": "Weight (lbs)"
+        },
+        "placeholder": "Weight"
+      }
+    }
+  },
+  "settings": {
+    "language": "Language",
+    "logout": "Logout",
+    "darkMode": {
+      "title": "Dark Mode",
+      "dark": "Enabled",
+      "light": "Disabled"
+    },
+    "weight": "Weight system"
+  },
+  "errors": {
+    "title": "Error",
+    "button": "Cancel",
+    "requestWaitingTime": "Request waiting time exceeded"
+  }
+}
