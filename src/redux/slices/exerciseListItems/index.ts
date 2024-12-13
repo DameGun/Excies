@@ -26,7 +26,7 @@ const exerciseListItemsSlice = createSlice({
       state.data.push(action.payload);
     });
     builder.addCase(thunkDeleteExerciseListItem.fulfilled, (state, action) => {
-      const index = state.data.findIndex((item) => item.id === action.meta.arg.list_item_id);
+      const index = state.data.findIndex((item) => item.id === action.meta.arg.listItemId);
       if (index !== -1) {
         state.data.splice(index, 1);
       }

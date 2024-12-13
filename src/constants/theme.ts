@@ -1,5 +1,6 @@
+import type { StatusBarStyle } from 'react-native';
+
 import type { BaseColors, CustomTheme, ThemeConstants } from '@/types/theme';
-import { StatusBarStyle } from 'expo-status-bar';
 
 const BASE_COLORS: BaseColors = {
   greyPressed: '#646466',
@@ -94,6 +95,6 @@ export const Theme = {
 } as const;
 
 export const StatusBarColor: Record<ColorMode, StatusBarStyle> = {
-  [ColorMode.Dark]: 'light',
-  [ColorMode.Light]: 'dark',
+  [ColorMode.Dark]: 'light-content',
+  [ColorMode.Light]: 'dark-content',
 } as const;

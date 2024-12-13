@@ -33,9 +33,9 @@ type ListInfoModalScreenProps = NativeStackScreenProps<
 >;
 
 export function ListInfoModalScreen({ route, navigation }: ListInfoModalScreenProps) {
-  const { actionType, username, list_id } = route.params;
+  const { actionType, listId } = route.params;
   const styles = useStyles(getInfoModalScreenStylesDefault);
-  const currentList = useAppSelector((state) => selectExerciseListById(state, list_id));
+  const currentList = useAppSelector((state) => selectExerciseListById(state, listId));
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
 
@@ -54,19 +54,18 @@ export function ListInfoModalScreen({ route, navigation }: ListInfoModalScreenPr
 
   const handleDelete = () => {
     if (actionType === ExerciseListActionType.Edit) {
-      dispatch(thunkDeleteExerciseList({ id: list_id, username }));
-      navigation.navigate(HomeScreenNames.ExerciseListsScreen, { username });
+      dispatch(thunkDeleteExerciseList({ id: listId }));
+      navigation.navigate(HomeScreenNames.ExerciseListsScreen);
     }
   };
 
   const onSubmit = useCallback(
     handleSubmit(({ name, description }) => {
       if (actionType === ExerciseListActionType.Create) {
-        dispatch(thunkCreateExerciseList({ name, description, username }));
+        dispatch(thunkCreateExerciseList({ name, description }));
       } else {
         const payload: UpdateExerciseListDTO = {
-          username,
-          id: list_id,
+          id: listId,
           name,
           description,
         };
@@ -76,7 +75,7 @@ export function ListInfoModalScreen({ route, navigation }: ListInfoModalScreenPr
 
       navigation.goBack();
     }),
-    [actionType, username, currentList]
+    [actionType, currentList]
   );
 
   useEffect(() => {

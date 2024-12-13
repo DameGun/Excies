@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ActivityIndicator } from 'react-native';
 
 import {
@@ -10,7 +11,6 @@ import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { selectStatus, setStatus } from '@/redux/slices/loading';
 
 import { CustomModal } from '../Modal';
-import { useTranslation } from 'react-i18next';
 
 export function Loader() {
   const { t } = useTranslation();

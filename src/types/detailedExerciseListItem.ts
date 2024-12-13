@@ -1,12 +1,11 @@
 import type { ItemValueOperationType } from '@/constants/detailedExerciseListItem';
 
-import type { RequiredUsernameParameter } from './api';
+import type { LanguageParameter } from './i18n';
 import type { BaseSliceWithDataArray } from './redux';
-import { LanguageParameter } from './i18n';
 
 type DetailedExerciseListItem = {
   id: string;
-  list_item_id: string;
+  listItemId: string;
   date: string;
   rep: number;
   weight: number;
@@ -19,9 +18,9 @@ type DetailedExerciseListItemsGroup = {
   data: DetailedExerciseListItem[];
 };
 
-type GetDetailedExerciseListItemsDTO = RequiredUsernameParameter & {
-  list_id: string;
-  list_item_id: string;
+type GetDetailedExerciseListItemsDTO = {
+  listId: string;
+  listItemId: string;
 };
 
 type DetailedOperationType = {
@@ -29,26 +28,24 @@ type DetailedOperationType = {
   number: number;
 };
 
-type CreateDetailedExerciseListItemDTO = RequiredUsernameParameter &
-  LanguageParameter & {
-    list_id: string;
-    list_item_id: string;
-    detailed_exercise_list_item: Pick<DetailedExerciseListItem, 'time' | 'rep' | 'weight'>;
-  };
-
-type UpdateDetailedExerciseListItemDTO = RequiredUsernameParameter & {
-  list_id: string;
-  list_item_id: string;
-  id: string;
-  detailed_exercise_list_item: Pick<DetailedExerciseListItem, 'rep' | 'weight' | 'notes'>;
+type CreateDetailedExerciseListItemDTO = LanguageParameter & {
+  listId: string;
+  listItemId: string;
+  detailedExerciseListItem: Pick<DetailedExerciseListItem, 'date' | 'time' | 'rep' | 'weight'>;
 };
 
-type DeleteDetailedExerciseListItemDTO = RequiredUsernameParameter &
-  LanguageParameter & {
-    list_id: string;
-    list_item_id: string;
-    id: string;
-  };
+type UpdateDetailedExerciseListItemDTO = {
+  listId: string;
+  listItemId: string;
+  id: string;
+  detailedExerciseListItem: Pick<DetailedExerciseListItem, 'rep' | 'weight' | 'notes'>;
+};
+
+type DeleteDetailedExerciseListItemDTO = LanguageParameter & {
+  listId: string;
+  listItemId: string;
+  id: string;
+};
 
 type DetailedExerciseListItemState = BaseSliceWithDataArray<DetailedExerciseListItemsGroup>;
 

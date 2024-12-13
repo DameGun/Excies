@@ -5,6 +5,7 @@ export const getStyles = createStylesheet(({ colors, constants }) => ({
     flex: 1,
     paddingLeft: constants.padding.sm,
     color: colors.text,
+    outlineWidth: 0,
   },
   searchIcon: {
     color: colors.grey,

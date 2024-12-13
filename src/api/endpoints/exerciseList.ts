@@ -1,6 +1,6 @@
 import { handleError } from '@/helpers/errorHandler';
 import { handleResult } from '@/helpers/resultHandler';
-import type { ApiResult, RequiredUsernameParameter } from '@/types/api';
+import type { ApiResult } from '@/types/api';
 import type {
   CreateExerciseListDTO,
   DeleteExerciseListDTO,
@@ -10,11 +10,9 @@ import type {
 
 import { axiosClient } from '..';
 
-export async function getExerciseLists({
-  username,
-}: RequiredUsernameParameter): ApiResult<ExerciseList[]> {
+export async function getExerciseLists(): ApiResult<ExerciseList[]> {
   try {
-    const { data } = await axiosClient.get<ExerciseList[]>(`/${username}/exercise-lists`);
+    const { data } = await axiosClient.get<ExerciseList[]>(`/exercise-lists`);
     return handleResult(data);
   } catch (err) {
     return handleError(err);
@@ -22,12 +20,11 @@ export async function getExerciseLists({
 }
 
 export async function createExerciseList({
-  username,
   name,
   description,
 }: CreateExerciseListDTO): ApiResult<ExerciseList> {
   try {
-    const { data } = await axiosClient.post<ExerciseList>(`/${username}/exercise-lists`, {
+    const { data } = await axiosClient.post<ExerciseList>(`/exercise-lists`, {
       name,
       description,
     });
@@ -38,13 +35,12 @@ export async function createExerciseList({
 }
 
 export async function updateExerciseList({
-  username,
   id,
   name,
   description,
 }: UpdateExerciseListDTO): ApiResult<ExerciseList> {
   try {
-    const { data } = await axiosClient.patch<ExerciseList>(`/${username}/exercise-lists/${id}`, {
+    const { data } = await axiosClient.patch<ExerciseList>(`/exercise-lists/${id}`, {
       name,
       description,
     });
@@ -54,9 +50,9 @@ export async function updateExerciseList({
   }
 }
 
-export async function deleteExerciseList({ username, id }: DeleteExerciseListDTO): ApiResult {
+export async function deleteExerciseList({ id }: DeleteExerciseListDTO): ApiResult {
   try {
-    await axiosClient.delete(`/${username}/exercise-lists/${id}`);
+    await axiosClient.delete(`/exercise-lists/${id}`);
     return handleResult();
   } catch (err) {
     return handleError(err);

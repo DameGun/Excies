@@ -1,26 +1,25 @@
-import type { RequiredUsernameParameter } from './api';
 import type { BaseSliceWithDataArray } from './redux';
 
 type ExerciseList = {
   id: string;
-  user_id: string;
+  userId: string;
   name: string;
   description: string;
   itemsCount?: number;
 };
 
-type CreateExerciseListDTO = RequiredUsernameParameter & {
+type CreateExerciseListDTO = {
   name: string;
   description?: string;
 };
 
-type UpdateExerciseListDTO = RequiredUsernameParameter & {
+type UpdateExerciseListDTO = {
   id: string;
   name?: string;
   description?: string;
 };
 
-type DeleteExerciseListDTO = RequiredUsernameParameter & {
+type DeleteExerciseListDTO = {
   id: string;
 };
 

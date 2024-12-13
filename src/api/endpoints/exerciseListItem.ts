@@ -13,14 +13,12 @@ import { axiosClient } from '..';
 
 export async function getExerciseListItems({
   id,
-  username,
   language,
 }: GetExerciseListItemsDTO): ApiResult<ExerciseListItem[]> {
   try {
-    const { data } = await axiosClient.get<ExerciseListItem[]>(
-      `/${username}/exercise-lists/${id}/items`,
-      { params: { language } }
-    );
+    const { data } = await axiosClient.get<ExerciseListItem[]>(`/exercise-lists/${id}/items`, {
+      params: { language },
+    });
     return handleResult(data);
   } catch (err) {
     return handleError(err);
@@ -29,13 +27,12 @@ export async function getExerciseListItems({
 
 export async function getExerciseListItemById({
   id,
-  username,
-  list_id,
+  listId,
   language,
 }: GetExerciseListItemByIdDTO): ApiResult<ExerciseListItem> {
   try {
     const { data } = await axiosClient.get<ExerciseListItem>(
-      `/${username}/exercise-lists/${list_id}/items/${id}`,
+      `/exercise-lists/${listId}/items/${id}`,
       { params: { language } }
     );
     return handleResult(data);
@@ -45,16 +42,15 @@ export async function getExerciseListItemById({
 }
 
 export async function createExerciseListItem({
-  list_id,
-  username,
-  exercise_id,
+  listId,
+  exerciseId,
   language,
 }: CreateExerciseListItemDTO): ApiResult<ExerciseListItem> {
   try {
     const { data } = await axiosClient.post<ExerciseListItem>(
-      `/${username}/exercise-lists/${list_id}/items`,
+      `/exercise-lists/${listId}/items`,
       {
-        exercise_id,
+        exerciseId,
       },
       { params: { language } }
     );
@@ -65,15 +61,13 @@ export async function createExerciseListItem({
 }
 
 export async function deleteExerciseListItem({
-  list_id,
-  username,
-  list_item_id,
+  listId,
+  listItemId,
 }: DeleteExerciseListItemDTO): ApiResult {
   try {
-    await axiosClient.delete(`/${username}/exercise-lists/${list_id}/items/${list_item_id}`);
+    await axiosClient.delete(`/exercise-lists/${listId}/items/${listItemId}`);
     return handleResult();
   } catch (err) {
-    console.log(err);
     return handleError(err);
   }
 }

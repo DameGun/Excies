@@ -1,17 +1,17 @@
 import { handleError } from '@/helpers/errorHandler';
 import { handleResult } from '@/helpers/resultHandler';
 import type { ApiResult } from '@/types/api';
-import type { ExercisesLocalized } from '@/types/exercise';
+import type { Exercise, ExercisesLocalized } from '@/types/exercise';
+import type { LanguageParameter } from '@/types/i18n';
 
 import { axiosClient } from '..';
-import { LanguageParameter } from '@/types/i18n';
 
 export async function getExercises({ language }: LanguageParameter): ApiResult<ExercisesLocalized> {
   try {
-    const { data } = await axiosClient.get<ExercisesLocalized>('/exercisesTranslated', {
+    const { data } = await axiosClient.get<Exercise[]>('/exercises', {
       params: { language },
     });
-    return handleResult(data);
+    return handleResult({ data, language });
   } catch (err) {
     return handleError(err);
   }

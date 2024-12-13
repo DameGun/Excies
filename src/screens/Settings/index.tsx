@@ -10,13 +10,12 @@ import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { useStyles } from '@/hooks/useStyles';
 import { thunkLogout } from '@/redux/slices/auth/thunks';
 import { changeTheme, selectCurrentColorMode } from '@/redux/slices/theme';
+import { selectIsUserChoosedMetricSystem } from '@/redux/slices/user';
+import { thunkUpdateUserWeightPreference } from '@/redux/slices/user/thunks';
 import type { SettingsStackNavigationParams } from '@/types/settingsStackNavigation';
+import { weightMeasurementSystem } from '@/utils/weightMeasure';
 
 import { getStyles } from './styles';
-import { selectIsUserChoosedMetricSystem } from '@/redux/slices/user';
-import { weightMeasurementSystem } from '@/utils/weightMeasure';
-import { thunkUpdateUserWeightPreference } from '@/redux/slices/user/thunks';
-import { selectUsername } from '@/redux/slices/auth';
 
 type SettingsScreenProps = NativeStackScreenProps<
   SettingsStackNavigationParams,
@@ -29,13 +28,13 @@ export function SettingsScreen({ navigation }: SettingsScreenProps) {
   const { t } = useTranslation();
   const colorMode = useAppSelector(selectCurrentColorMode);
   const isMetricSystemChoosed = useAppSelector(selectIsUserChoosedMetricSystem);
-  const username = useAppSelector(selectUsername)!;
+  const userId = useAppSelector(({ user }) => user.userId);
 
   const handleWeightSystem = () => {
     dispatch(
       thunkUpdateUserWeightPreference({
-        username,
-        is_metric_system_choosed: !isMetricSystemChoosed,
+        userId,
+        isMetricSystemChoosed: !isMetricSystemChoosed,
       })
     );
   };

@@ -9,10 +9,12 @@ import {
   CreateDetailedExerciseListItemParameterType,
   WeightMeasurementSystemType,
 } from '@/constants/detailedExerciseListItem';
+import type { SupportedLanguageCodes } from '@/constants/i18n';
 import type { HomeScreenNames } from '@/constants/navigation';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { useStyles } from '@/hooks/useStyles';
 import { thunkCreateDetailedExerciseListItem } from '@/redux/slices/detailedExerciseListItems/thunks';
+import { selectIsUserChoosedMetricSystem } from '@/redux/slices/user';
 import type { CreateDetailedExerciseListItemDTO } from '@/types/detailedExerciseListItem';
 import type { HomeStackNavigationParams } from '@/types/homeStackNavigation';
 import {
@@ -21,13 +23,11 @@ import {
   handleRepetitonsNumberPress,
   handleWeightNumberPress,
 } from '@/utils/detailedExerciseListItemOperations';
+import { convertKgToLbs, convertLbsToKg } from '@/utils/weightMeasure';
 
+import { CreateDetailedExerciseListItemHeader } from './Header';
 import { RepetitionsNumbers, WeightNumbers } from './Inputs';
 import { getStyles } from './styles';
-import { SupportedLanguageCodes } from '@/constants/i18n';
-import { CreateDetailedExerciseListItemHeader } from './Header';
-import { selectIsUserChoosedMetricSystem } from '@/redux/slices/user';
-import { convertKgToLbs, convertLbsToKg } from '@/utils/weightMeasure';
 
 type CreateDetailedItemModalScreenProps = NativeStackScreenProps<
   HomeStackNavigationParams,
@@ -38,7 +38,7 @@ export function CreateDetailedItemModalScreen({
   route,
   navigation,
 }: CreateDetailedItemModalScreenProps) {
-  const { username, list_id, list_item_id } = route.params;
+  const { listId, listItemId } = route.params;
   const styles = useStyles(getStyles);
   const dispatch = useAppDispatch();
   const isMetricSystemChoosed = useAppSelector(selectIsUserChoosedMetricSystem);
@@ -87,12 +87,16 @@ export function CreateDetailedItemModalScreen({
     const convertedWeight =
       activeWeightSystem === WeightMeasurementSystemType.Lbs ? convertLbsToKg(weight) : weight;
 
+    const currentDate = new Date();
+    const time = currentDate.toTimeString().split(' ')[0];
+    const date = currentDate.toISOString().split('T')[0];
+
     const payload: CreateDetailedExerciseListItemDTO = {
-      username,
-      list_id,
-      list_item_id,
-      detailed_exercise_list_item: {
-        time: new Date().toISOString(),
+      listId,
+      listItemId,
+      detailedExerciseListItem: {
+        date,
+        time,
         rep,
         weight: convertedWeight,
       },

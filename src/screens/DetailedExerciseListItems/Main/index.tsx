@@ -11,15 +11,15 @@ import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { useStyles } from '@/hooks/useStyles';
 import { selectDetailedExerciseListItems } from '@/redux/slices/detailedExerciseListItems';
 import { thunkGetDetailedExerciseListItems } from '@/redux/slices/detailedExerciseListItems/thunks';
+import { selectIsUserChoosedMetricSystem } from '@/redux/slices/user';
 import type {
   DetailedExerciseListItem,
   GetDetailedExerciseListItemsDTO,
 } from '@/types/detailedExerciseListItem';
 import type { HomeStackNavigationParams } from '@/types/homeStackNavigation';
+import { weightMeasurementSystem, weightValueFormat } from '@/utils/weightMeasure';
 
 import { getStyles } from './styles';
-import { selectIsUserChoosedMetricSystem } from '@/redux/slices/user';
-import { weightMeasurementSystem, weightValueFormat } from '@/utils/weightMeasure';
 
 type DetailedExerciseListItemsScreenProps = NativeStackScreenProps<
   HomeStackNavigationParams,
@@ -30,7 +30,7 @@ export function DetailedExerciseListItemsScreen({
   route,
   navigation,
 }: DetailedExerciseListItemsScreenProps) {
-  const { list_id, list_item_id, name, username } = route.params;
+  const { listId, listItemId, name } = route.params;
   const data = useAppSelector(selectDetailedExerciseListItems);
   const isMetricSystemChoosed = useAppSelector(selectIsUserChoosedMetricSystem);
   const dispatch = useAppDispatch();
@@ -39,9 +39,8 @@ export function DetailedExerciseListItemsScreen({
 
   useEffect(() => {
     const payload: GetDetailedExerciseListItemsDTO = {
-      username,
-      list_id,
-      list_item_id,
+      listId,
+      listItemId,
     };
     dispatch(thunkGetDetailedExerciseListItems(payload));
 
@@ -52,18 +51,16 @@ export function DetailedExerciseListItemsScreen({
 
   const handleNavigate = () => {
     navigation.navigate(HomeScreenNames.CreateDetailedItemModalScreen, {
-      username,
-      list_id,
-      list_item_id,
+      listId,
+      listItemId,
     });
   };
 
   const handleInfo = (item: DetailedExerciseListItem) => {
     navigation.navigate(HomeScreenNames.DetailedExerciseListItemInfoModalScreen, {
-      username,
-      list_id,
-      list_item_id,
-      detailed_id: item.id,
+      listId,
+      listItemId,
+      detailedId: item.id,
     });
   };
 

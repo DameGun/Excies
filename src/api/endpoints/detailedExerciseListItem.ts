@@ -13,13 +13,12 @@ import type {
 import { axiosClient } from '..';
 
 export async function getDetailedExerciseListItems({
-  username,
-  list_id,
-  list_item_id,
+  listId,
+  listItemId,
 }: GetDetailedExerciseListItemsDTO): ApiResult<DetailedExerciseListItemsGroup[]> {
   try {
     const { data } = await axiosClient.get<DetailedExerciseListItemsGroup[]>(
-      `/${username}/exercise-lists/${list_id}/items/${list_item_id}/details`
+      `/exercise-lists/${listId}/items/${listItemId}/detailed`
     );
     return handleResult(data);
   } catch (err) {
@@ -28,15 +27,14 @@ export async function getDetailedExerciseListItems({
 }
 
 export async function createDetailedExerciseListItem({
-  username,
-  list_id,
-  list_item_id,
-  detailed_exercise_list_item,
+  listId,
+  listItemId,
+  detailedExerciseListItem,
 }: CreateDetailedExerciseListItemDTO): ApiResult<DetailedExerciseListItem> {
   try {
     const { data } = await axiosClient.post<DetailedExerciseListItem>(
-      `/${username}/exercise-lists/${list_id}/items/${list_item_id}/details`,
-      detailed_exercise_list_item
+      `/exercise-lists/${listId}/items/${listItemId}/detailed`,
+      detailedExerciseListItem
     );
     return handleResult(data);
   } catch (err) {
@@ -45,16 +43,15 @@ export async function createDetailedExerciseListItem({
 }
 
 export async function updateDetailedExerciseListItem({
-  username,
-  list_id,
-  list_item_id,
+  listId,
+  listItemId,
   id,
-  detailed_exercise_list_item,
+  detailedExerciseListItem,
 }: UpdateDetailedExerciseListItemDTO): ApiResult<DetailedExerciseListItem> {
   try {
     const { data } = await axiosClient.patch<DetailedExerciseListItem>(
-      `/${username}/exercise-lists/${list_id}/items/${list_item_id}/details/${id}`,
-      detailed_exercise_list_item
+      `/exercise-lists/${listId}/items/${listItemId}/detailed/${id}`,
+      detailedExerciseListItem
     );
     return handleResult(data);
   } catch (err) {
@@ -63,15 +60,12 @@ export async function updateDetailedExerciseListItem({
 }
 
 export async function deleteDetailedExerciseListItem({
-  username,
-  list_id,
-  list_item_id,
+  listId,
+  listItemId,
   id,
 }: DeleteDetailedExerciseListItemDTO): ApiResult {
   try {
-    await axiosClient.delete(
-      `/${username}/exercise-lists/${list_id}/items/${list_item_id}/details/${id}`
-    );
+    await axiosClient.delete(`/exercise-lists/${listId}/items/${listItemId}/detailed/${id}`);
     return handleResult();
   } catch (err) {
     return handleError(err);

@@ -1,7 +1,10 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Platform } from 'react-native';
+
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { FLUSH, PAUSE, PERSIST, persistReducer, PURGE, REGISTER, REHYDRATE } from 'redux-persist';
 import persistStore from 'redux-persist/es/persistStore';
+import webStorage from 'redux-persist/lib/storage';
+import createSecureStore from 'redux-persist-expo-securestore';
 
 import authSlice from './slices/auth';
 import detailedExerciseListItemsSlice from './slices/detailedExerciseListItems';
@@ -12,14 +15,18 @@ import loadingSlice from './slices/loading';
 import themeSlice from './slices/theme';
 import userSlice from './slices/user';
 
+const secureStore = createSecureStore();
+
+const persistStorageStrategy = Platform.OS === 'web' ? webStorage : secureStore;
+
 const persistConfig = {
-  storage: AsyncStorage,
+  storage: persistStorageStrategy,
   key: 'root',
   whitelist: ['theme'],
 };
 
 const exercisesPersistConfig = {
-  storage: AsyncStorage,
+  storage: persistStorageStrategy,
   key: 'exercises',
 };
 

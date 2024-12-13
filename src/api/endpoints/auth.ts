@@ -7,7 +7,7 @@ import { axiosClient } from '..';
 
 export async function login(loginData: LoginDTO): ApiResult<AuthResponse> {
   try {
-    const { data } = await axiosClient.post<AuthResponse>('/login', loginData);
+    const { data } = await axiosClient.post<AuthResponse>('/auth/login', loginData);
     return handleResult(data);
   } catch (err) {
     return handleError(err);
@@ -16,7 +16,7 @@ export async function login(loginData: LoginDTO): ApiResult<AuthResponse> {
 
 export async function register(registerData: RegisterDTO): ApiResult<AuthResponse> {
   try {
-    const { data } = await axiosClient.post<AuthResponse>('/register', registerData);
+    const { data } = await axiosClient.post<AuthResponse>('/auth/register', registerData);
     return handleResult(data);
   } catch (err) {
     return handleError(err);

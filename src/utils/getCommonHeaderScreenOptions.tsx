@@ -10,6 +10,12 @@ export const getCommonHeaderScreenStyles = createStylesheet(({ colors }) => ({
   tabBarStyle: {
     backgroundColor: colors.background,
   },
+  cardStyle: {
+    backgroundColor: colors.background,
+  },
+  headerTitleStyle: {
+    color: colors.text,
+  },
 }));
 
 export const getCommonHeaderScreenOptions = (
@@ -17,7 +23,6 @@ export const getCommonHeaderScreenOptions = (
 ): StackNavigationOptions => ({
   ...styles,
   headerTitleAlign: 'center',
-  headerBackTitleVisible: false,
   headerShadowVisible: false,
   headerRight: () => <Logo />,
 });

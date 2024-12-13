@@ -1,13 +1,13 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit';
+import { REHYDRATE } from 'redux-persist';
 
+import { FALLBACK_LNG } from '@/constants/i18n';
 import type { ExerciseState } from '@/types/exercise';
 import type { RootState } from '@/types/redux';
 
 import { thunkGetExercises } from './thunks';
 
 import { selectExerciseListItems } from '../exerciseListItems';
-import { REHYDRATE } from 'redux-persist';
-import { FALLBACK_LNG } from '@/constants/i18n';
 
 const initialState: ExerciseState = {
   language: FALLBACK_LNG,
@@ -37,7 +37,7 @@ export const selectExercisesDiffSelector = createSelector(
   [selectExerciseListItems, selectExercises],
   (listItems, exercises) => {
     return exercises.filter(
-      ({ exercise_id: id }) => !listItems.some(({ exercise_id }) => id === exercise_id)
+      ({ exerciseId: id }) => !listItems.some(({ exerciseId }) => id === exerciseId)
     );
   }
 );

@@ -22,28 +22,25 @@ type ExerciseListsScreenProps = NativeStackScreenProps<
   HomeScreenNames.ExerciseListsScreen
 >;
 
-export function ExerciseListsScreen({ route, navigation }: ExerciseListsScreenProps) {
-  const { username } = route.params;
+export function ExerciseListsScreen({ navigation }: ExerciseListsScreenProps) {
   const styles = useStyles(getStyles);
   const data = useAppSelector(selectExerciseLists);
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
 
   useEffect(() => {
-    dispatch(thunkGetExerciseLists({ username }));
+    dispatch(thunkGetExerciseLists());
   }, []);
 
   const handleListClick = ({ id }: ExerciseList) => {
     navigation.navigate(HomeScreenNames.ExerciseListItemsScreen, {
-      list_id: id,
-      username,
+      listId: id,
     });
   };
 
   const handleNewListClick = () => {
     navigation.navigate(HomeScreenNames.ListInfoModalScreen, {
       actionType: ExerciseListActionType.Create,
-      username,
     });
   };
 

@@ -1,12 +1,15 @@
+import { useTranslation } from 'react-i18next';
+import { Pressable, Text, View } from 'react-native';
+
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
+import type { CreateDetailedExerciseListItemParameterType } from '@/constants/detailedExerciseListItem';
 import {
-  CreateDetailedExerciseListItemParameterType,
   CreationActiveIcon,
   WeightMeasurementSystemType,
 } from '@/constants/detailedExerciseListItem';
 import { useStyles } from '@/hooks/useStyles';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { useTranslation } from 'react-i18next';
-import { View, Pressable, Text } from 'react-native';
+
 import { getStyles } from './styles';
 
 type CreateDetailedExerciseListItemHeaderParams = {

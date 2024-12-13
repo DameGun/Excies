@@ -1,14 +1,13 @@
 import { useTranslation } from 'react-i18next';
 import { Text, View } from 'react-native';
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
 import { CustomFlatList, ListItem } from '@/components';
-import { LANGUAGE_STORAGE_KEY } from '@/constants/i18n';
 import { Icons } from '@/constants/icons';
 import { LanguagesData } from '@/constants/language';
+import { StorageItemsKeys } from '@/constants/token';
 import { useStyles } from '@/hooks/useStyles';
 import type { LanguageDataType } from '@/types/i18n';
+import { setStorageItem } from '@/utils/storage';
 
 import { getStyles } from './styles';
 
@@ -17,7 +16,7 @@ export function LanguageScreen() {
   const styles = useStyles(getStyles);
 
   const handlePress = async ({ code }: LanguageDataType) => {
-    await AsyncStorage.setItem(LANGUAGE_STORAGE_KEY, code);
+    await setStorageItem(StorageItemsKeys.Language, code);
     i18n.changeLanguage(code);
   };
 

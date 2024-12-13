@@ -6,6 +6,7 @@ export const getStyles = createStylesheet(({ colors, constants }) => ({
     borderRadius: constants.borderRadius.md,
     padding: constants.padding.sm,
     borderColor: colors.greyBackground,
+    outlineWidth: 0,
     color: colors.text,
   },
   placeholderColor: {
@@ -15,5 +16,6 @@ export const getStyles = createStylesheet(({ colors, constants }) => ({
     color: 'red',
     marginVertical: constants.margin.xs,
     fontSize: constants.fontSize.sm,
+    height: constants.gap.lg,
   },
 }));

@@ -3,14 +3,13 @@ import { useTranslation } from 'react-i18next';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { Icons } from '@/constants/icons';
-import { useStyles } from '@/hooks/useStyles';
+import { useGetBottomTabOptions } from '@/hooks/useGetBottomTabOptions';
 import { LoginScreen, RegisterScreen } from '@/screens';
-import { getBottomTabOptions, getBottomTabStyles } from '@/utils/getBottomTabOptions';
 
 const Tab = createBottomTabNavigator();
 
 export function AuthTabs() {
-  const styles = useStyles(getBottomTabStyles);
+  const bottomTabOptions = useGetBottomTabOptions();
   const { t } = useTranslation();
 
   return (
@@ -18,12 +17,12 @@ export function AuthTabs() {
       <Tab.Screen
         name={t('tabs.login')}
         component={LoginScreen}
-        options={getBottomTabOptions(styles, Icons.Login)}
+        options={bottomTabOptions(t('tabs.login'), Icons.Login)}
       />
       <Tab.Screen
         name={t('tabs.register')}
         component={RegisterScreen}
-        options={getBottomTabOptions(styles, Icons.Register)}
+        options={bottomTabOptions(t('tabs.register'), Icons.Register)}
       />
     </Tab.Navigator>
   );

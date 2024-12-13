@@ -1,9 +1,9 @@
-import { useStyles } from "./useStyles";
-import { getBottomTabOptions, getBottomTabStyles } from "@/utils/getBottomTabOptions";
-import { IconNames } from "@/types/icons";
+import { getBottomTabOptions, getBottomTabStyles } from '@/utils/getBottomTabOptions';
+
+import { useStyles } from './useStyles';
 
 export function useGetBottomTabOptions() {
-    const styles = useStyles(getBottomTabStyles);
+  const styles = useStyles(getBottomTabStyles);
 
-    return (title: string, iconName: IconNames) => getBottomTabOptions(styles, title, iconName);
+  return getBottomTabOptions(styles);
 }

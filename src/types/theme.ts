@@ -1,5 +1,6 @@
+import type { ColorMode } from '@/constants/theme';
+
 import type { StylesOptions } from './styles';
-import { ColorMode } from '@/constants/theme';
 
 type BaseColors = {
   greyPressed: string;

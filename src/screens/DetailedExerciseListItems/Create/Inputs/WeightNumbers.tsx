@@ -2,10 +2,10 @@ import { useTranslation } from 'react-i18next';
 import { Pressable, Text, View } from 'react-native';
 
 import { NumberInputButton } from '@/components';
+import type { WeightMeasurementSystemType } from '@/constants/detailedExerciseListItem';
 import {
   CreateDetailedExerciseListItemParameterType,
   ItemValueOperationType,
-  WeightMeasurementSystemType,
 } from '@/constants/detailedExerciseListItem';
 import { useStyles } from '@/hooks/useStyles';
 import type { DetailedOperationType } from '@/types/detailedExerciseListItem';

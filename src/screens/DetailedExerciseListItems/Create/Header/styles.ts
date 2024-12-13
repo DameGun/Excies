@@ -17,7 +17,7 @@ export const getStyles = createStylesheet(({ colors, constants }) => ({
   },
   weightSystemButton: (placement: 'left' | 'right', isActive: boolean) => [
     {
-      backgroundColor: isActive ? colors.greyDark : colors.primary,
+      backgroundColor: isActive ? colors.primary : colors.greyDark,
       paddingHorizontal: constants.padding.sm,
       paddingVertical: constants.padding.xs,
       borderWidth: constants.borderWidth.md,

@@ -17,8 +17,8 @@ export function handleError(error: unknown): ApiError {
   console.log(error);
 
   return {
-    message: 'Unknown error',
-    code: 520,
+    message: 'Unauthorized',
+    code: 401,
     status: ResponseStatus.Rejected,
   };
 }

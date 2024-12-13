@@ -50,7 +50,7 @@ const exerciseListsSlice = createSlice({
       state.data = state.data.filter(({ id }) => id !== listId);
     });
     builder.addCase(thunkCreateExerciseListItem.fulfilled, (state, action) => {
-      const listId = action.meta.arg.list_id;
+      const listId = action.meta.arg.listId;
 
       state.data = state.data.map((list) => {
         if (list.id === listId) {
@@ -64,7 +64,7 @@ const exerciseListsSlice = createSlice({
       });
     });
     builder.addCase(thunkDeleteExerciseListItem.fulfilled, (state, action) => {
-      const listId = action.meta.arg.list_id;
+      const listId = action.meta.arg.listId;
 
       state.data = state.data.map((list) => {
         if (list.id === listId && list.itemsCount) {

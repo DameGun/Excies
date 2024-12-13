@@ -7,12 +7,12 @@ import { CustomButton, CustomTextInput } from '@/components';
 import { useAppDispatch } from '@/hooks/redux';
 import { useStyles } from '@/hooks/useStyles';
 import { thunkRegister } from '@/redux/slices/auth/thunks';
+import type { RegisterDTO } from '@/types/auth';
+import { getUserLocales } from '@/utils/getUserLocale';
 
 import { AuthLayout } from './AuthLayout';
 import { getStyles } from './styles';
 import { registerSchema } from './validation';
-import { RegisterDTO } from '@/types/auth';
-import { getUserLocales } from '@/utils/getUserLocale';
 
 export function RegisterScreen() {
   const dispatch = useAppDispatch();
@@ -27,7 +27,7 @@ export function RegisterScreen() {
   const onSubmit = handleSubmit((data) => {
     const payload: RegisterDTO = {
       ...data,
-      is_metric_system_choosed: getUserLocales().measurementSystem === 'metric',
+      isMetricSystemChoosed: getUserLocales().measurementSystem === 'metric',
     };
     dispatch(thunkRegister(payload));
   });

@@ -55,7 +55,9 @@ export function CustomFlatList<T extends EntityWithIdAndName>({
       {title && <Text style={styles.headerBold}>{title}</Text>}
       {searchPhrase.length > 0 && filteredData.length === 0 ? (
         <View style={styles.emptyContainer}>
-          <Text style={styles.mainEmptyText}>{t('search.mainText', { searchPhrase })}</Text>
+          <Text style={styles.mainEmptyText} ellipsizeMode='tail' numberOfLines={3}>
+            {t('search.mainText', { searchPhrase })}
+          </Text>
           <Text style={styles.secondaryEmptyText}>{t('search.secondaryText')}</Text>
         </View>
       ) : (

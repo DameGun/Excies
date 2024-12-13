@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import { ColorMode } from '@/constants/theme';
 import type { RootState } from '@/types/redux';
 import type { ThemeState } from '@/types/theme';
-import { ColorMode } from '@/constants/theme';
 
 const initialState: ThemeState = {
   mode: ColorMode.Dark,

@@ -7,7 +7,7 @@ import {
   updateExerciseList,
 } from '@/api/endpoints/exerciseList';
 import { thunkHandler } from '@/redux/thunkHandler';
-import type { ApiError, RequiredUsernameParameter } from '@/types/api';
+import type { ApiError } from '@/types/api';
 import type {
   CreateExerciseListDTO,
   DeleteExerciseListDTO,
@@ -16,19 +16,18 @@ import type {
 } from '@/types/exerciseList';
 import type { TypedThunkApi } from '@/types/redux';
 
-export const thunkGetExerciseLists = createAsyncThunk<
-  ExerciseList[],
-  RequiredUsernameParameter,
-  TypedThunkApi
->('getExerciseLists', async (payload, { dispatch, rejectWithValue }) => {
-  try {
-    const response = await thunkHandler(dispatch, getExerciseLists, payload);
-    return response;
-  } catch (err) {
-    const { message } = err as ApiError;
-    return rejectWithValue(message);
+export const thunkGetExerciseLists = createAsyncThunk<ExerciseList[], void, TypedThunkApi>(
+  'getExerciseLists',
+  async (payload, { dispatch, rejectWithValue }) => {
+    try {
+      const response = await thunkHandler(dispatch, getExerciseLists, payload);
+      return response;
+    } catch (err) {
+      const { message } = err as ApiError;
+      return rejectWithValue(message);
+    }
   }
-});
+);
 
 export const thunkCreateExerciseList = createAsyncThunk<
   ExerciseList,

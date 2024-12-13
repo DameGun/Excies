@@ -1,10 +1,11 @@
 import { createStylesheet } from '@/helpers/createStylesheet';
 
-export const getStyles = createStylesheet(({ constants }) => ({
+export const getStyles = createStylesheet(({ colors, constants }) => ({
   container: {
     flex: 1,
+    backgroundColor: colors.background,
     justifyContent: 'center',
-    marginHorizontal: constants.margin.lg,
+    paddingHorizontal: constants.margin.lg,
     gap: constants.gap.xl,
   },
   innerContainer: {

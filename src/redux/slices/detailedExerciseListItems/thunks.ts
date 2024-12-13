@@ -42,7 +42,7 @@ export const thunkCreateDetailedExerciseListItem = createAsyncThunk<
   try {
     const response = await thunkHandler(dispatch, createDetailedExerciseListItem, payload);
 
-    await dispatch(thunkGetExerciseListItemById({ ...payload, id: payload.list_item_id }));
+    await dispatch(thunkGetExerciseListItemById({ ...payload, id: payload.listItemId }));
 
     return response;
   } catch (err) {
@@ -73,7 +73,7 @@ export const thunkDeleteDetailedExerciseListItem = createAsyncThunk<
   try {
     await thunkHandler(dispatch, deleteDetailedExerciseListItem, payload);
 
-    await dispatch(thunkGetExerciseListItemById({ ...payload, id: payload.list_item_id }));
+    await dispatch(thunkGetExerciseListItemById({ ...payload, id: payload.listItemId }));
   } catch (err) {
     const { message } = err as ApiError;
     return rejectWithValue(message);

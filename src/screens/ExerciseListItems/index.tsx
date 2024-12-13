@@ -13,6 +13,7 @@ import {
   Search,
 } from '@/components/index';
 import { ExerciseListActionType } from '@/constants/exerciseList';
+import type { SupportedLanguageCodes } from '@/constants/i18n';
 import { Icons } from '@/constants/icons';
 import { HomeScreenNames } from '@/constants/navigation';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
@@ -22,9 +23,9 @@ import { thunkGetExerciseListItems } from '@/redux/slices/exerciseListItems/thun
 import { selectExerciseListById } from '@/redux/slices/exerciseLists';
 import type { ExerciseListItem, GetExerciseListItemsDTO } from '@/types/exerciseListItem';
 import type { HomeStackNavigationParams } from '@/types/homeStackNavigation';
+import { formatLastTimeUpdatedDate } from '@/utils/dateParser';
 
 import { getStyles } from './styles';
-import { SupportedLanguageCodes } from '@/constants/i18n';
 
 type ExerciseListItemsScreenProps = NativeStackScreenProps<
   HomeStackNavigationParams,
@@ -32,9 +33,9 @@ type ExerciseListItemsScreenProps = NativeStackScreenProps<
 >;
 
 export function ExerciseListItemsScreen({ route, navigation }: ExerciseListItemsScreenProps) {
-  const { list_id, username } = route.params;
+  const { listId } = route.params;
   const data = useAppSelector(selectExerciseListItems);
-  const currentList = useAppSelector((state) => selectExerciseListById(state, list_id));
+  const currentList = useAppSelector((state) => selectExerciseListById(state, listId));
 
   const dispatch = useAppDispatch();
   const styles = useStyles(getStyles);
@@ -46,8 +47,7 @@ export function ExerciseListItemsScreen({ route, navigation }: ExerciseListItems
     const language = i18n.language as SupportedLanguageCodes;
 
     const payload: GetExerciseListItemsDTO = {
-      id: list_id,
-      username,
+      id: listId,
       language,
     };
     dispatch(thunkGetExerciseListItems(payload));
@@ -61,8 +61,7 @@ export function ExerciseListItemsScreen({ route, navigation }: ExerciseListItems
           onPress={() => {
             navigation.navigate(HomeScreenNames.ListInfoModalScreen, {
               actionType: ExerciseListActionType.Edit,
-              username,
-              list_id,
+              listId,
             });
           }}
         />
@@ -71,14 +70,13 @@ export function ExerciseListItemsScreen({ route, navigation }: ExerciseListItems
   }, [currentList]);
 
   function handleAddExercise() {
-    navigation.navigate(HomeScreenNames.ExercisesModalScreen, { list_id, username });
+    navigation.navigate(HomeScreenNames.ExercisesModalScreen, { listId });
   }
 
   function handleClick(item: ExerciseListItem) {
     navigation.navigate(HomeScreenNames.DetailedExerciseListItemsScreen, {
-      username,
-      list_id,
-      list_item_id: item.id,
+      listId,
+      listItemId: item.id,
       name: item.name,
     });
   }
@@ -93,7 +91,7 @@ export function ExerciseListItemsScreen({ route, navigation }: ExerciseListItems
             <ListItem
               {...props}
               extractTitle={({ name }) => name}
-              extractInfo={({ last_time_updated }) => last_time_updated}
+              extractInfo={({ lastTimeUpdated }) => formatLastTimeUpdatedDate(lastTimeUpdated)}
               onPress={handleClick}
             />
           )}

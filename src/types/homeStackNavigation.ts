@@ -1,51 +1,43 @@
 import type { ExerciseListActionType } from '@/constants/exerciseList';
 import type { HomeScreenNames } from '@/constants/navigation';
 
-type SharedParams = {
-  username: string;
+type CreateDetailedItemModalScreenParams = {
+  listId: string;
+  listItemId: string;
 };
 
-type CreateDetailedItemModalScreenParams = SharedParams & {
-  username: string;
-  list_id: string;
-  list_item_id: string;
+type DetailedExerciseListItemInfoModalScreenParams = {
+  listId: string;
+  listItemId: string;
+  detailedId: string;
 };
 
-type DetailedExerciseListItemInfoModalScreenParams = SharedParams & {
-  username: string;
-  list_id: string;
-  list_item_id: string;
-  detailed_id: string;
-};
-
-type DetailedExerciseListItemsScreenParams = SharedParams & {
-  list_id: string;
-  list_item_id: string;
+type DetailedExerciseListItemsScreenParams = {
+  listId: string;
+  listItemId: string;
   name: string;
 };
 
-type ExerciseListItemsScreenParams = SharedParams & {
-  list_id: string;
+type ExerciseListItemsScreenParams = {
+  listId: string;
 };
 
-type ListInfoModalScreenParams = SharedParams &
-  (
-    | {
-        actionType: ExerciseListActionType.Create;
-        list_id?: never;
-      }
-    | {
-        actionType: ExerciseListActionType.Edit;
-        list_id: string;
-      }
-  );
+type ListInfoModalScreenParams =
+  | {
+      actionType: ExerciseListActionType.Create;
+      listId?: never;
+    }
+  | {
+      actionType: ExerciseListActionType.Edit;
+      listId: string;
+    };
 
-type ExercisesModalScreenParams = SharedParams & {
-  list_id: string;
+type ExercisesModalScreenParams = {
+  listId: string;
 };
 
 type HomeStackNavigationParams = {
-  [HomeScreenNames.ExerciseListsScreen]: SharedParams;
+  [HomeScreenNames.ExerciseListsScreen]: undefined;
   [HomeScreenNames.CreateDetailedItemModalScreen]: CreateDetailedItemModalScreenParams;
   [HomeScreenNames.DetailedExerciseListItemInfoModalScreen]: DetailedExerciseListItemInfoModalScreenParams;
   [HomeScreenNames.DetailedExerciseListItemsScreen]: DetailedExerciseListItemsScreenParams;

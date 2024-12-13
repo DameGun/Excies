@@ -2,7 +2,7 @@ import type { ExerciseListItem } from '@/types/exerciseListItem';
 import type { ListItemTextPropsLiterals, ListItemTextPropsWithExtract } from '@/types/list';
 
 export function isExerciseListItem(item: any): item is ExerciseListItem {
-  return 'list_id' in item && 'exercise_id' in item && 'name' in item;
+  return 'customName' in item && 'lastTimeUpdated' in item;
 }
 
 export function IsListItemTextPropsWithExtract<T>(

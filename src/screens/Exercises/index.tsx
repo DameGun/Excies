@@ -5,6 +5,7 @@ import { View } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { LargeList, Search } from '@/components';
+import type { SupportedLanguageCodes } from '@/constants/i18n';
 import { Icons } from '@/constants/icons';
 import type { HomeScreenNames } from '@/constants/navigation';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
@@ -27,7 +28,6 @@ import type { SectionListType } from '@/types/section';
 import { getExercisesWithSearch } from '@/utils/exercises';
 import { getModalHeaderScreenOption } from '@/utils/getModalHeaderScreenOption';
 import { isExerciseListItem } from '@/utils/typePredicates';
-import { SupportedLanguageCodes } from '@/constants/i18n';
 
 type ExercisesModalScreenProps = NativeStackScreenProps<
   HomeStackNavigationParams,
@@ -35,10 +35,10 @@ type ExercisesModalScreenProps = NativeStackScreenProps<
 >;
 
 export function ExercisesModalScreen({ route, navigation }: ExercisesModalScreenProps) {
-  const { list_id, username } = route.params;
+  const { listId } = route.params;
   const exercises = useAppSelector(selectExercisesDiffSelector);
   const listItems = useAppSelector(selectExerciseListItems);
-  const currentList = useAppSelector((state) => selectExerciseListById(state, list_id));
+  const currentList = useAppSelector((state) => selectExerciseListById(state, listId));
   const dispatch = useAppDispatch();
   const { t, i18n } = useTranslation();
 
@@ -62,18 +62,16 @@ export function ExercisesModalScreen({ route, navigation }: ExercisesModalScreen
   const handleExerciseButton = useCallback((item: Exercise | ExerciseListItem) => {
     if (isExerciseListItem(item)) {
       const payload: DeleteExerciseListItemDTO = {
-        list_id,
-        username,
-        list_item_id: item.id,
+        listId,
+        listItemId: item.id,
       };
 
       dispatch(thunkDeleteExerciseListItem(payload));
     } else {
       const language = i18n.language as SupportedLanguageCodes;
       const payload: CreateExerciseListItemDTO = {
-        list_id,
-        username,
-        exercise_id: item.exercise_id,
+        listId,
+        exerciseId: item.exerciseId,
         language,
       };
 

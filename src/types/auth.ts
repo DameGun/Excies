@@ -6,21 +6,20 @@ type LoginDTO = {
 type RegisterDTO = {
   username: string;
   password: string;
-  is_metric_system_choosed: boolean;
+  isMetricSystemChoosed: boolean;
   email?: string;
 };
 
 type AuthResponse = {
   accessToken: string;
   username: string;
-  user_id: string;
-  is_metric_system_choosed: boolean;
+  userId: string;
+  isMetricSystemChoosed: boolean;
 };
 
 type AuthSliceState = {
   isLoggedIn: boolean;
-  username: string | null;
-  user_id: string | null;
+  userId: string | null;
 };
 
 export type { AuthResponse, AuthSliceState, LoginDTO, RegisterDTO };

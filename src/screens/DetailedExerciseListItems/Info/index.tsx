@@ -8,6 +8,7 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { CustomTextInput } from '@/components';
 import { DeleteItemButton } from '@/components/DeleteItemButton';
+import type { SupportedLanguageCodes } from '@/constants/i18n';
 import type { HomeScreenNames } from '@/constants/navigation';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { useStyles } from '@/hooks/useStyles';
@@ -16,6 +17,7 @@ import {
   thunkDeleteDetailedExerciseListItem,
   thunkUpdateDetailedExerciseListItem,
 } from '@/redux/slices/detailedExerciseListItems/thunks';
+import { selectIsUserChoosedMetricSystem } from '@/redux/slices/user';
 import type {
   DeleteDetailedExerciseListItemDTO,
   UpdateDetailedExerciseListItemDTO,
@@ -23,11 +25,9 @@ import type {
 import type { HomeStackNavigationParams } from '@/types/homeStackNavigation';
 import { getInfoModalScreenStylesDefault } from '@/utils/getInfoModalScreenStylesDefault';
 import { getModalHeaderScreenOption } from '@/utils/getModalHeaderScreenOption';
+import { convertLbsToKg, weightMeasurementSystem, weightValueFormat } from '@/utils/weightMeasure';
 
 import { detailedExerciseListItemSchema } from './validation';
-import { SupportedLanguageCodes } from '@/constants/i18n';
-import { convertLbsToKg, weightMeasurementSystem, weightValueFormat } from '@/utils/weightMeasure';
-import { selectIsUserChoosedMetricSystem } from '@/redux/slices/user';
 
 type DetailedExerciseListItemInfoModalScreenProps = NativeStackScreenProps<
   HomeStackNavigationParams,
@@ -38,8 +38,8 @@ export function DetailedExerciseListItemInfoModalScreen({
   route,
   navigation,
 }: DetailedExerciseListItemInfoModalScreenProps) {
-  const { username, list_id, list_item_id, detailed_id } = route.params;
-  const item = useAppSelector((state) => selectDetailedExerciseListItemById(state, detailed_id));
+  const { listId, listItemId, detailedId } = route.params;
+  const item = useAppSelector((state) => selectDetailedExerciseListItemById(state, detailedId));
   const isMetricSystemChoosed = useAppSelector(selectIsUserChoosedMetricSystem);
   const styles = useStyles(getInfoModalScreenStylesDefault);
   const dispatch = useAppDispatch();
@@ -72,11 +72,10 @@ export function DetailedExerciseListItemInfoModalScreen({
   const onSubmit = handleSubmit(({ rep, weight, notes }) => {
     const convertedWeight = isMetricSystemChoosed ? weight : convertLbsToKg(weight);
     const payload: UpdateDetailedExerciseListItemDTO = {
-      username,
-      list_id,
-      list_item_id,
-      id: detailed_id,
-      detailed_exercise_list_item: { rep, weight: convertedWeight, notes },
+      listId,
+      listItemId,
+      id: detailedId,
+      detailedExerciseListItem: { rep, weight: convertedWeight, notes },
     };
 
     dispatch(thunkUpdateDetailedExerciseListItem(payload));
@@ -86,10 +85,9 @@ export function DetailedExerciseListItemInfoModalScreen({
   function handleDelete() {
     const language = i18n.language as SupportedLanguageCodes;
     const payload: DeleteDetailedExerciseListItemDTO = {
-      username,
-      list_id,
-      list_item_id,
-      id: detailed_id,
+      listId,
+      listItemId,
+      id: detailedId,
       language,
     };
 

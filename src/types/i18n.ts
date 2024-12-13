@@ -1,4 +1,4 @@
-import { SupportedLanguageCodes } from '@/constants/i18n';
+import type { SupportedLanguageCodes } from '@/constants/i18n';
 
 type LanguageDataType = {
   id: string;

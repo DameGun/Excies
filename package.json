@@ -1,6 +1,6 @@
 {
   "name": "expo-client-v2",
-  "main": "expo-router/entry",
+  "main": "src/App.tsx",
   "version": "1.0.0",
   "scripts": {
     "start": "expo start",
@@ -9,15 +9,18 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "test": "jest --watchAll",
-    "lint": "expo lint"
+    "lint": "eslint . --fix",
+    "format": "prettier . --write"
   },
   "jest": {
     "preset": "jest-expo"
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.2",
+    "@hookform/resolvers": "^3.9.1",
     "@react-navigation/bottom-tabs": "^7.0.0",
     "@react-navigation/native": "^7.0.0",
+    "@react-navigation/stack": "^7.1.0",
     "@reduxjs/toolkit": "^2.5.0",
     "axios": "^1.7.9",
     "expo": "~52.0.18",
@@ -37,6 +40,7 @@
     "i18next": "^24.1.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
+    "react-hook-form": "^7.54.0",
     "react-i18next": "^15.1.4",
     "react-native": "0.76.5",
     "react-native-gesture-handler": "~2.20.2",
@@ -47,7 +51,8 @@
     "react-native-webview": "13.12.5",
     "react-redux": "^9.2.0",
     "redux-persist": "^6.0.0",
-    "redux-persist-expo-securestore": "^2.0.0"
+    "redux-persist-expo-securestore": "^2.0.0",
+    "yup": "^1.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

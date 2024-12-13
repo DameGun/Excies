@@ -3,8 +3,8 @@ import { useCallback } from 'react';
 import { SectionList } from 'react-native';
 
 import { INITIAL_NUM_TO_RENDER, MAX_TO_RENDER_PER_BATCH } from '@/constants/listOptimization';
-import { useCustomTheme } from '@/hooks/useTheme';
 import { useStyles } from '@/hooks/useStyles';
+import { useTheme } from '@/hooks/useTheme';
 import type { Exercise } from '@/types/exercise';
 import type { ExerciseListItem } from '@/types/exerciseListItem';
 import type { PressableProps } from '@/types/pressable';
@@ -28,7 +28,7 @@ type RenderItemFunc = (props: RenderItemProps) => ReactElement;
 
 export function LargeList({ sections, onPress }: LargeListProps) {
   const styles = useStyles(getStyles);
-  const { constants } = useCustomTheme();
+  const { constants } = useTheme();
 
   const renderItem = useCallback<RenderItemFunc>(
     ({ item, section: { iconName } }) => (

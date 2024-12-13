@@ -1,13 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { PERSIST, REHYDRATE } from 'redux-persist';
 
 import { getExercises } from '@/api/endpoints/exercise';
+import { ITEM_PERSIST_LIFETIME } from '@/constants/persist';
 import { thunkHandler } from '@/redux/thunkHandler';
 import type { ApiError } from '@/types/api';
 import type { ExercisePersist } from '@/types/exercise';
 import type { LanguageParameter } from '@/types/i18n';
 import type { TypedThunkApi } from '@/types/redux';
-import { ITEM_PERSIST_LIFETIME } from '@/constants/persist';
-import { PERSIST, REHYDRATE } from 'redux-persist';
 
 export const thunkGetExercises = createAsyncThunk<
   ExercisePersist,

@@ -1,10 +1,14 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { thunkAppOpen, thunkLogin, thunkRegister } from '../auth/thunks';
-import { UserSliceState } from '@/types/user';
-import { RootState } from '@/types/redux';
+
+import type { RootState } from '@/types/redux';
+import type { UserSliceState } from '@/types/user';
+
 import { thunkUpdateUserWeightPreference } from './thunks';
 
+import { thunkAppOpen, thunkLogin, thunkRegister } from '../auth/thunks';
+
 const initialState: UserSliceState = {
+  userId: '',
   isMetricSystemChoosed: false,
 };
 
@@ -21,7 +25,15 @@ const userSlice = createSlice({
         thunkUpdateUserWeightPreference.fulfilled
       ),
       (state, action) => {
-        state.isMetricSystemChoosed = action.payload.is_metric_system_choosed;
+        const payload = action.payload;
+
+        if ('id' in payload) {
+          state.userId = payload.id;
+        } else {
+          state.userId = payload.userId;
+        }
+
+        state.isMetricSystemChoosed = payload.isMetricSystemChoosed;
       }
     );
   },

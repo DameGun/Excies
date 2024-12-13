@@ -2,10 +2,6 @@ import type { AxiosError } from 'axios';
 
 import type { ResponseStatus } from '@/constants/api';
 
-type RequiredUsernameParameter = {
-  username: string;
-};
-
 type CustomApiError = {
   message: string;
   code: number;
@@ -33,5 +29,4 @@ export type {
   ApiResult,
   BaseApiResponse,
   CustomApiError,
-  RequiredUsernameParameter,
 };

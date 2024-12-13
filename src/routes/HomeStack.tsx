@@ -1,9 +1,7 @@
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 
 import { HomeScreenNames } from '@/constants/navigation';
-import { useAppSelector } from '@/hooks/redux';
 import { useStyles } from '@/hooks/useStyles';
-import { selectUsername } from '@/redux/slices/auth';
 import type { HomeStackNavigationParams } from '@/types/homeStackNavigation';
 import {
   getCommonHeaderScreenOptions,
@@ -24,7 +22,6 @@ const Stack = createStackNavigator<HomeStackNavigationParams>();
 
 export function HomeStack() {
   const commonScreenStyles = useStyles(getCommonHeaderScreenStyles);
-  const username = useAppSelector(selectUsername) as NonNullable<string>;
 
   return (
     <Stack.Navigator screenOptions={getCommonHeaderScreenOptions(commonScreenStyles)}>
@@ -34,9 +31,6 @@ export function HomeStack() {
           component={ExerciseListsScreen}
           options={{
             headerTitle: 'Excies',
-          }}
-          initialParams={{
-            username,
           }}
         />
         <Stack.Screen
@@ -50,7 +44,7 @@ export function HomeStack() {
       </Stack.Group>
       <Stack.Group
         screenOptions={{
-          presentation: 'modal',
+          presentation: 'transparentModal',
           headerTitleAlign: 'center',
           ...TransitionPresets.ModalPresentationIOS,
         }}
@@ -66,6 +60,7 @@ export function HomeStack() {
           options={{
             presentation: 'transparentModal',
             cardOverlayEnabled: true,
+            cardStyle: { backgroundColor: 'transparent' },
             headerShown: false,
           }}
         />

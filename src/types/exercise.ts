@@ -1,11 +1,13 @@
-import { PERSIST, REHYDRATE } from 'redux-persist';
+import type { PERSIST, REHYDRATE } from 'redux-persist';
+
+import type { SupportedLanguageCodes } from '@/constants/i18n';
+
 import type { BaseSliceWithDataArray } from './redux';
-import { SupportedLanguageCodes } from '@/constants/i18n';
 
 type Exercise = {
   id: string;
   name: string;
-  exercise_id: string;
+  exerciseId: string;
 };
 
 type ExerciseState = BaseSliceWithDataArray<Exercise> & {
@@ -37,8 +39,8 @@ type SpecifiedListExercises = {
 
 export type {
   Exercise,
-  ExerciseState,
-  SpecifiedListExercises,
   ExercisePersist,
   ExercisesLocalized,
+  ExerciseState,
+  SpecifiedListExercises,
 };

@@ -1,23 +1,23 @@
-import { TokenStorageKeys } from '@/constants/token';
+import { StorageItemsKeys } from '@/constants/token';
 import { handleError } from '@/helpers/errorHandler';
 import { handleResult } from '@/helpers/resultHandler';
 import type { ApiResult } from '@/types/api';
 import type { JWTPayload } from '@/types/token';
+import { getStorageItem, removeStorageItem, setStorageItem } from '@/utils/storage';
 
 import { axiosClient } from '..';
-import { getStorageItem, removeStorageItem, setStorageItem } from '@/utils/storage';
 
 export async function getJwtPayload(): ApiResult<JWTPayload> {
   try {
-    const username = await getStorageItem(TokenStorageKeys.Username);
-    const user_id = await getStorageItem(TokenStorageKeys.UserId);
-    const is_metric_system_choosed = await getIsMetricSystemChoosed();
+    const username = await getStorageItem(StorageItemsKeys.Username);
+    const userId = await getStorageItem(StorageItemsKeys.UserId);
+    const isMetricSystemChoosed = await getIsMetricSystemChoosed();
 
-    if (!username || !user_id) {
+    if (!username || !userId) {
       return handleError(new Error('Storage doesnt have user credentials'));
     }
 
-    return handleResult({ username, user_id, is_metric_system_choosed });
+    return handleResult({ username, userId, isMetricSystemChoosed });
   } catch (err) {
     return handleError(err);
   }
@@ -25,13 +25,13 @@ export async function getJwtPayload(): ApiResult<JWTPayload> {
 
 export async function storeJwtPayload({
   username,
-  user_id,
-  is_metric_system_choosed,
+  userId,
+  isMetricSystemChoosed,
 }: JWTPayload): ApiResult {
   try {
-    await setStorageItem(TokenStorageKeys.Username, username);
-    await setStorageItem(TokenStorageKeys.UserId, user_id);
-    await setStorageItem(TokenStorageKeys.IsMetricSystemChoosed, String(is_metric_system_choosed));
+    await setStorageItem(StorageItemsKeys.Username, username);
+    await setStorageItem(StorageItemsKeys.UserId, userId);
+    await setStorageItem(StorageItemsKeys.IsMetricSystemChoosed, String(isMetricSystemChoosed));
 
     return handleResult();
   } catch (err) {
@@ -41,9 +41,9 @@ export async function storeJwtPayload({
 
 export async function removeJwtPayload(): ApiResult {
   try {
-    await removeStorageItem(TokenStorageKeys.Username);
-    await removeStorageItem(TokenStorageKeys.UserId);
-    await removeStorageItem(TokenStorageKeys.IsMetricSystemChoosed);
+    await removeStorageItem(StorageItemsKeys.Username);
+    await removeStorageItem(StorageItemsKeys.UserId);
+    await removeStorageItem(StorageItemsKeys.IsMetricSystemChoosed);
 
     return handleResult();
   } catch (err) {
@@ -53,7 +53,7 @@ export async function removeJwtPayload(): ApiResult {
 
 export async function checkToken(): ApiResult {
   try {
-    const token = await getStorageItem(TokenStorageKeys.AccessToken)
+    const token = await getStorageItem(StorageItemsKeys.AccessToken);
 
     if (token) {
       axiosClient.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -68,7 +68,7 @@ export async function checkToken(): ApiResult {
 
 export async function storeToken(token: string): ApiResult {
   try {
-    await setStorageItem(TokenStorageKeys.AccessToken, token);
+    await setStorageItem(StorageItemsKeys.AccessToken, token);
 
     axiosClient.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
@@ -80,7 +80,7 @@ export async function storeToken(token: string): ApiResult {
 
 export async function removeToken(): ApiResult {
   try {
-    await removeStorageItem(TokenStorageKeys.AccessToken);
+    await removeStorageItem(StorageItemsKeys.AccessToken);
     axiosClient.defaults.headers.common['Authorization'] = '';
 
     return handleResult();
@@ -90,6 +90,6 @@ export async function removeToken(): ApiResult {
 }
 
 async function getIsMetricSystemChoosed() {
-  const value = await getStorageItem(TokenStorageKeys.IsMetricSystemChoosed);
+  const value = await getStorageItem(StorageItemsKeys.IsMetricSystemChoosed);
   return /true/i.test(value!);
 }
