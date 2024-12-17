@@ -1,6 +1,7 @@
 import type { StatusBarStyle } from 'react-native';
 
 import type { BaseColors, CustomTheme, ThemeConstants } from '@/types/theme';
+import { DefaultTheme } from '@react-navigation/native';
 
 const BASE_COLORS: BaseColors = {
   greyPressed: '#646466',
@@ -59,8 +60,10 @@ const THEME_CONSTANTS: ThemeConstants = {
 };
 
 export const LIGHT_THEME: CustomTheme = {
+  ...DefaultTheme,
   dark: false,
   colors: {
+    ...DefaultTheme.colors,
     background: 'white',
     text: 'black',
     greyBackground: '#f0f0f0',
@@ -72,8 +75,10 @@ export const LIGHT_THEME: CustomTheme = {
 };
 
 export const DARK_THEME: CustomTheme = {
+  ...DefaultTheme,
   dark: true,
   colors: {
+    ...DefaultTheme.colors,
     background: 'black',
     text: 'white',
     greyBackground: '#434344',

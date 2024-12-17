@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { StatusBar } from 'react-native';
 
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, Theme as RNTheme } from '@react-navigation/native';
 
 import { Error, Loader } from '@/components';
 import { StatusBarColor, Theme } from '@/constants/theme';
@@ -25,7 +25,7 @@ export function Router() {
   }, []);
 
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={Theme[colorMode] as unknown as RNTheme}>
       <StatusBar
         barStyle={StatusBarColor[colorMode]}
         backgroundColor={Theme[colorMode].colors.background}

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "expo-client-v2",
-    "slug": "expo-client-v2",
+    "name": "excies-client",
+    "slug": "excies-client",
     "version": "1.0.0",
     "orientation": "portrait",
     "scheme": "myapp",
